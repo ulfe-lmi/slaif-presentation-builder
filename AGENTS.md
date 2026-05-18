@@ -17,6 +17,14 @@ agent. Commands are triggered by messages that begin with `presentation-builder`
 
 ---
 
+## README protection
+
+The logo block at the top of `README.md` is untouchable. Any change to
+`README.md` must preserve both the top logo and its link exactly as they are,
+including their position at the beginning of the file.
+
+---
+
 ## Command trigger
 
 Treat a user message as a presentation-builder command when it starts with:
@@ -41,7 +49,8 @@ Rules:
 
 - Parse the first token after `presentation-builder` as the command name.
 - Treat any remaining tokens as optional parameters for that command.
-- If the complete user message is `help`, run `presentation-builder help`.
+- If the complete user message is `help`, run `presentation-builder help`; the
+  printed output must be byte-for-byte identical to `presentation-builder help`.
 - If the command is unknown, print the help output.
 - If no command is supplied, print the help output.
 - For command outputs specified as exact text in this file, print the exact text
@@ -70,6 +79,11 @@ Print all available presentation-builder commands.
 Exact output:
 
 ```text
+========================================
+SLAIF Presentation Builder
+(C) SLAIF 2026
+========================================
+
 presentation-builder commands
 
 Usage:
