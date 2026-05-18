@@ -25,6 +25,12 @@ Treat a user message as a presentation-builder command when it starts with:
 presentation-builder
 ```
 
+Also treat the user message `help` exactly the same as:
+
+```text
+presentation-builder help
+```
+
 Command format:
 
 ```text
@@ -35,6 +41,7 @@ Rules:
 
 - Parse the first token after `presentation-builder` as the command name.
 - Treat any remaining tokens as optional parameters for that command.
+- If the complete user message is `help`, run `presentation-builder help`.
 - If the command is unknown, print the help output.
 - If no command is supplied, print the help output.
 - For command outputs specified as exact text in this file, print the exact text
@@ -48,6 +55,7 @@ The currently implemented commands are:
 
 - `presentation-builder help`
 - `presentation-builder requirements`
+- `presentation-builder verify`
 
 Future commands must be added to both this list and the `help` command output.
 
@@ -75,6 +83,10 @@ Commands:
       Print the local software required for PowerPoint-template inspection,
       LibreOffice rendering, PDF/image conversion, visual comparison, and text
       extraction.
+
+  verify
+      Check whether the required local tools and Python packages are available.
+      Run this after installing requirements.
 ```
 
 ---
@@ -236,12 +248,131 @@ Recommended verification commands:
   latexmk --version
   rg --version
   jq --version
+
+After installing these requirements, run:
+  presentation-builder verify
+```
+
+---
+
+## Command: `presentation-builder verify`
+
+Purpose:
+
+Verify that the required local command-line tools and Python packages are
+available for the PowerPoint-template reconstruction workflow.
+
+Behavior:
+
+- This command is dynamic; do not print a fixed prewritten output block.
+- Run the verification locally and report the actual status of the current
+  environment.
+- If the repository-local virtual environment exists at `.venv`, activate it
+  before checking Python packages.
+- If `.venv` does not exist, check Python packages with the currently available
+  `python3`.
+- Check required system commands with `command -v`.
+- Check required Python packages with `importlib.util.find_spec`.
+- Treat `magick` as optional when `identify` and `compare` are available,
+  because Ubuntu ImageMagick 6 commonly provides classic ImageMagick commands
+  without the ImageMagick 7 `magick` wrapper.
+- End with a clear summary:
+  - `READY` if every required command and Python package is present.
+  - `NOT READY` if any required command or Python package is missing.
+- If the environment is not ready, list the missing commands and Python
+  packages and instruct the user to install requirements before continuing.
+
+Verification command template:
+
+```bash
+if [ -d .venv ]; then
+  . .venv/bin/activate
+fi
+
+missing_commands=()
+
+required_commands=(
+  bash cp mv rm mkdir sort uniq wc realpath find xargs sed gawk grep rg file
+  unzip zip jq bc python3 pip3 libreoffice soffice pdfinfo pdftoppm pdftotext
+  identify convert montage compare qpdf gs tesseract fc-list latexmk
+)
+
+for command_name in "${required_commands[@]}"; do
+  if command -v "${command_name}" >/dev/null 2>&1; then
+    printf '%-24s OK (%s)\n' "${command_name}" "$(command -v "${command_name}")"
+  else
+    printf '%-24s MISSING\n' "${command_name}"
+    missing_commands+=("${command_name}")
+  fi
+done
+
+if command -v magick >/dev/null 2>&1; then
+  printf '%-24s OK (%s)\n' "magick" "$(command -v magick)"
+else
+  printf '%-24s OPTIONAL (identify/compare satisfy ImageMagick requirement)\n' "magick"
+fi
+
+mapfile -t missing_python_packages < <(python3 - <<'PY'
+import importlib.util
+
+packages = {
+    "pptx": "python-pptx",
+    "lxml": "lxml",
+    "PIL": "Pillow",
+    "numpy": "numpy",
+    "cv2": "opencv-python",
+    "fitz": "PyMuPDF",
+    "pypdf": "pypdf",
+    "pdf2image": "pdf2image",
+    "fontTools": "fonttools",
+}
+
+for module_name, package_name in packages.items():
+    if importlib.util.find_spec(module_name) is None:
+        print(package_name)
+PY
+)
+
+echo
+echo "Python packages:"
+for package_name in python-pptx lxml Pillow numpy opencv-python PyMuPDF pypdf pdf2image fonttools; do
+  missing_package=0
+  for missing_name in "${missing_python_packages[@]}"; do
+    if [ "${missing_name}" = "${package_name}" ]; then
+      missing_package=1
+      break
+    fi
+  done
+
+  if [ "${missing_package}" -eq 1 ]; then
+    printf '%-24s MISSING\n' "${package_name}"
+  else
+    printf '%-24s OK\n' "${package_name}"
+  fi
+done
+
+echo
+if [ "${#missing_commands[@]}" -eq 0 ] && [ "${#missing_python_packages[@]}" -eq 0 ]; then
+  echo "READY"
+else
+  echo "NOT READY"
+
+  if [ "${#missing_commands[@]}" -gt 0 ]; then
+    printf 'Missing commands: %s\n' "${missing_commands[*]}"
+  fi
+
+  if [ "${#missing_python_packages[@]}" -gt 0 ]; then
+    printf 'Missing Python packages: %s\n' "${missing_python_packages[*]}"
+  fi
+
+  echo "Install requirements, then run: presentation-builder verify"
+fi
 ```
 
 ---
 
 ## Current scope
 
-Only the command interface and the two commands above are defined at this stage.
+Only the command interface and the three commands above are defined at this stage.
 Do not assume that PowerPoint reconstruction, rendering, comparison, or deck
 generation commands exist until they are explicitly added to this file.
