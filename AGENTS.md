@@ -1,316 +1,247 @@
 ## Purpose
 
-You are a coding agent that creates Beamer presentations from user-provided source material.
+This repository defines a command-oriented workflow for a coding agent that builds
+presentations from existing PowerPoint templates.
 
-Your job is to take source inputs such as LaTeX, PDF, DOCX/Word documents, plain text, images, or mixed materials, analyze them, extract the relevant structure and visual content, and build a new Beamer presentation based on the presentation example found in the repository root.
+The agent is not limited to a prepared Beamer template. The intended workflow is:
 
-The repository example is the visual and structural reference for the presentation framework. You must preserve its template-related parts and only change presentation content.
+1. Inspect an existing PowerPoint template with local Python tooling.
+2. Render the template through LibreOffice.
+3. Analyze the rendered slides as visual targets.
+4. Reconstruct a presentation system that can reproduce the imported PowerPoint
+   template as closely as possible.
+5. Build new presentation content using that reconstructed visual system.
 
----
-
-## Core responsibilities
-
-1. Read and understand the source material.
-2. Dissect the source material into sections and subsections.
-3. Infer structure from:
-   - explicit user instructions,
-   - document headings,
-   - table of contents,
-   - visible document structure,
-   - semantic grouping of the material.
-4. Identify the source fragments that should become:
-   - slide titles,
-   - bullet points,
-   - equations,
-   - tables,
-   - figures,
-   - cropped document/image inserts.
-5. When instructed or useful, extract page images from PDFs or other documents.
-6. When instructed, locate relevant pages, regions, figures, or excerpts that should appear in the presentation.
-7. Build a new Beamer presentation from the repository example without altering its template logic.
-8. Compile the presentation locally in the container.
-9. Review the output and iteratively fix layout, overflow, cropping, scaling, and rendering issues.
-10. Repeat until the presentation renders correctly and matches the user’s instructions.
+The interaction model is a lightweight command-line interface inside the coding
+agent. Commands are triggered by messages that begin with `presentation-builder`.
 
 ---
 
-## Inputs
+## Command trigger
 
-The agent may receive any combination of:
+Treat a user message as a presentation-builder command when it starts with:
 
-- PDF files
-- Word / DOCX documents
-- existing LaTeX
-- plain text notes
-- screenshots
-- scanned pages
-- images
-- user-written outlines
-- references to specific sections, pages, or figures
-- instructions about what to include or omit
+```text
+presentation-builder
+```
 
-Treat all of these as source material to be analyzed and converted into a presentation.
+Command format:
 
----
+```text
+presentation-builder <command> [optional parameters]
+```
 
-## Required workflow
+Rules:
 
-### 1. Inspect source material first
-
-Before editing or generating slides:
-
-- identify all relevant input files,
-- inspect their structure,
-- determine whether they contain a table of contents,
-- identify major sections and subsections,
-- identify important figures, diagrams, tables, formulas, and page regions,
-- identify which elements are likely useful in slides.
-
-For PDFs and similar source files, use available tools to inspect page content carefully. If user instructions specify page extraction or image extraction, perform that work explicitly.
-
-### 2. Propose or infer presentation structure
-
-Create a working outline of:
-
-- title / opening slides as needed,
-- sections,
-- subsections,
-- slide sequence,
-- where images or cropped excerpts should be inserted.
-
-Prefer the user’s requested structure whenever it exists. Otherwise infer a reasonable structure from the source material.
-
-### 3. Reuse the repository example safely
-
-There is an example presentation in the root of the repository, made of two files: lsipresentation.tex and lsipresentation.sty.
-
-You must use it as the basis for new presentations, but:
-
-- do not modify the original example file in place unless explicitly instructed,
-- do not alter template, theme, branding, styling, macros, layout framework, or other template-like parts,
-- do not refactor visual infrastructure unless the user explicitly requests that,
-- only change the presentation content layer.
-
-Create a new presentation by copying or deriving from the example and editing only content-bearing parts.
-
-### 4. Insert text and visual material
-
-When building slides:
-
-- include only relevant text,
-- condense long source passages into slide-appropriate content,
-- preserve technical correctness,
-- keep slide density reasonable,
-- split overloaded slides into multiple slides when needed,
-- insert figures, tables, formulas, or cropped source excerpts as requested,
-- prefer cropped inserts over full-page screenshots when the user wants a specific region.
-
-If the user identifies a page region, figure, paragraph, or table to include, extract that region cleanly and place it in the slide.
-
-### 5. Image and page extraction
-
-When needed, or when instructed:
-
-- extract page images from PDF pages,
-- generate JPEG page images if requested,
-- crop relevant regions from pages or images,
-- save extracted assets in a clean, predictable structure,
-- ensure inserted images are readable in the presentation.
-
-Do not use low-quality screenshots when a better crop or rendering method is available.
-
-### 6. Compile every time
-
-A presentation is not complete until it compiles successfully.
-
-You must compile the Beamer presentation in the container using the available LaTeX toolchain.
-
-Use a reproducible compile command such as `latexmk -pdf` unless the project clearly requires a different engine or build process.
-
-### 7. Review the rendered output
-
-After compiling, inspect the resulting PDF and verify at minimum:
-
-- no slide text runs outside the visible frame,
-- no image is cropped incorrectly,
-- no figure or table extends beyond slide boundaries,
-- no slide title overlaps body content,
-- font sizes remain readable,
-- equations fit,
-- bullet lists are not overfull,
-- captions and labels are visible,
-- inserted crops are large enough to read,
-- the visual style remains consistent with the repository example.
-
-### 8. Iterate until correct
-
-If any issue is found, fix it and compile again.
-
-Typical fixes include:
-
-- splitting a slide into multiple slides,
-- shortening text,
-- resizing images,
-- adjusting crop bounds,
-- changing layout arrangement,
-- using columns more carefully,
-- reducing visual clutter,
-- moving dense material into an appendix slide if appropriate.
-
-Do not stop after the first successful compile if the output is visibly flawed. The job is finished only when the presentation both compiles and renders correctly.
+- Parse the first token after `presentation-builder` as the command name.
+- Treat any remaining tokens as optional parameters for that command.
+- If the command is unknown, print the help output.
+- If no command is supplied, print the help output.
+- For command outputs specified as exact text in this file, print the exact text
+  and do not add commentary before or after it.
 
 ---
 
-## Non-negotiable constraints
+## Implemented commands
 
-### Preserve the template
+The currently implemented commands are:
 
-The most important structural rule:
+- `presentation-builder help`
+- `presentation-builder requirements`
 
-- never modify template-like or visual-framework parts of the example presentation unless the user explicitly asks for that,
-- only manipulate presentation content.
-
-This includes avoiding unnecessary edits to:
-
-- theme selection,
-- color definitions,
-- font configuration,
-- reusable style macros,
-- logo/header/footer infrastructure,
-- layout-defining template code,
-- global spacing systems,
-- slide master style equivalents.
-
-If content must be adapted, do so within the content area of slides, not by redesigning the template.
-
-### Iterate on the final result
-
-The most important execution rule:
-
-- always compile,
-- always inspect,
-- always fix problems,
-- always recompile until done.
-
-A first-pass presentation is not enough.
+Future commands must be added to both this list and the `help` command output.
 
 ---
 
-## Content transformation rules
+## Command: `presentation-builder help`
 
-When converting source material into slides:
+Purpose:
 
-- prefer concise, high-information wording,
-- preserve technical meaning,
-- do not silently introduce unsupported claims,
-- keep terminology consistent with the source,
-- retain important qualifiers, assumptions, and caveats,
-- preserve equations, variable names, and symbols accurately,
-- avoid copying long paragraphs verbatim when slide summarization is more appropriate,
-- keep the level of detail aligned with the user’s intended audience.
+Print all available presentation-builder commands.
 
-If the user wants slides closely following the original wording, preserve wording more literally. If the user wants a distilled talk deck, summarize more aggressively.
+Exact output:
 
----
+```text
+presentation-builder commands
 
-## Handling PDFs and Word documents
+Usage:
+  presentation-builder <command> [optional parameters]
 
-For PDFs and Word documents, you should:
+Commands:
+  help
+      Print this command list.
 
-1. identify document structure,
-2. identify useful headings and subsections,
-3. identify visual material worth reusing,
-4. identify exact pages or regions relevant to the requested narrative,
-5. extract or crop only the relevant content,
-6. convert it into readable slides.
-
-If a table of contents exists, use it as a strong structural hint, but verify against actual content.
+  requirements
+      Print the local software required for PowerPoint-template inspection,
+      LibreOffice rendering, PDF/image conversion, visual comparison, and text
+      extraction.
+```
 
 ---
 
-## Asset handling
+## Command: `presentation-builder requirements`
 
-Store generated assets cleanly and predictably.
+Purpose:
 
-Recommended practice:
+Print the local software that must be installed before the PowerPoint-template
+reconstruction workflow can run reliably.
 
-- place generated images/crops in a dedicated assets directory,
-- use descriptive filenames,
-- avoid overwriting unrelated files,
-- keep paths portable within the repository.
+Exact output:
 
-If multiple alternative crops are tested, keep the final selected assets clear and remove obvious dead intermediate clutter where practical.
+```text
+presentation-builder local requirements
+
+Required system tools:
+  bash
+      POSIX-compatible shell used to run repeatable inspection and build steps.
+
+  coreutils
+      Provides standard commands such as cp, mv, rm, mkdir, sort, uniq, wc, and
+      realpath.
+
+  findutils
+      Provides find and xargs for locating template files and generated assets.
+
+  sed
+      Required for small deterministic text transformations.
+
+  gawk
+      Required for structured command-line text processing.
+
+  grep
+      Required baseline text search tool.
+
+  ripgrep
+      Required fast recursive text search tool; executable name: rg.
+
+  file
+      Required for detecting file types and MIME-like metadata.
+
+  unzip
+      Required for inspecting PPTX, DOCX, and other OOXML zip containers.
+
+  zip
+      Required for rebuilding OOXML containers when needed.
+
+  jq
+      Required for reading and writing JSON inspection manifests.
+
+  bc
+      Required for deterministic numeric calculations in shell scripts.
+
+Required Python runtime:
+  python3 >= 3.10
+      Required runtime for template inspection, geometry extraction, image
+      analysis, and asset generation.
+
+  python3-venv
+      Required for isolated project environments.
+
+  pip
+      Required for installing Python packages.
+
+Required Python packages:
+  python-pptx
+      Inspect PPTX slide masters, layouts, placeholders, theme references,
+      shapes, text runs, and media relationships.
+
+  lxml
+      Parse and inspect raw OOXML parts that python-pptx does not expose.
+
+  Pillow
+      Read, crop, resize, and compare raster images.
+
+  numpy
+      Numeric image and geometry processing.
+
+  opencv-python
+      Pixel-level image comparison, feature detection, edge detection, and
+      crop/region analysis.
+
+  PyMuPDF
+      Render, inspect, and crop PDF pages from Python; import name: fitz.
+
+  pypdf
+      Inspect and manipulate PDF structure when raster rendering is not enough.
+
+  pdf2image
+      Python wrapper around Poppler PDF-to-image conversion.
+
+  fonttools
+      Inspect font metadata and map PowerPoint font references to local fonts.
+
+Required office tooling:
+  LibreOffice
+      Required for importing and rendering PowerPoint files. The command-line
+      executable must be available as libreoffice or soffice.
+
+  LibreOffice Impress
+      Required LibreOffice component for PPTX/PPT/POTX/POT rendering.
+
+Required PDF and image tooling:
+  poppler-utils
+      Required for pdfinfo and pdftoppm. Used for PDF metadata inspection and
+      PDF-to-PNG conversion.
+
+  ImageMagick
+      Required for identify, convert or magick, montage, and compare during
+      image inspection and visual-difference checks.
+
+  qpdf
+      Required for validating and normalizing PDFs.
+
+  ghostscript
+      Required by parts of the PDF/image toolchain and for PDF repair or
+      conversion fallback.
+
+Required OCR/text extraction tooling:
+  tesseract-ocr
+      Required for OCR on scanned slides, screenshots, and rendered template
+      images when embedded text cannot be extracted directly.
+
+  poppler-utils
+      Provides pdftotext for text extraction from rendered or source PDFs.
+
+Required font tooling:
+  fontconfig
+      Required for fc-list, fc-match, and font cache management.
+
+  Template fonts
+      Every font used by the PowerPoint template must be installed locally.
+      Exact visual reproduction is not possible when LibreOffice substitutes
+      missing fonts.
+
+Required LaTeX tooling for generated Beamer output:
+  TeX Live or another complete LaTeX distribution
+      Required when the reconstructed presentation system emits Beamer or other
+      LaTeX output.
+
+  latexmk
+      Required for repeatable LaTeX compilation.
+
+Recommended verification commands:
+  python3 --version
+  python3 -m pip --version
+  libreoffice --version
+  soffice --version
+  pdfinfo -v
+  pdftoppm -v
+  magick -version
+  identify -version
+  compare -version
+  qpdf --version
+  gs --version
+  tesseract --version
+  fc-list --version
+  latexmk --version
+  rg --version
+  jq --version
+```
 
 ---
 
-## Failure handling
+## Current scope
 
-If compilation fails:
-
-1. read the LaTeX error carefully,
-2. fix the actual cause rather than patching blindly,
-3. recompile,
-4. repeat until successful.
-
-If the source material is ambiguous, make the best grounded interpretation from the available files and user instructions.
-
-Do not block progress unnecessarily when a reasonable inference is possible.
-
-If something truly cannot be determined, leave a clear placeholder or brief note in the generated content rather than inventing facts.
-
----
-
-## Quality bar
-
-A good result is one where:
-
-- the slide structure is coherent,
-- the sectioning reflects the source material,
-- chosen figures and crops are relevant,
-- slides are readable,
-- no content is visibly broken,
-- the deck follows the repository example visually,
-- the PDF compiles cleanly,
-- the output is presentation-ready, not just draft-like.
-
----
-
-## Default operating principles
-
-- Be conservative with template changes.
-- Be aggressive about fixing layout defects.
-- Prefer clarity over density.
-- Prefer clean crops over raw screenshots.
-- Prefer multiple readable slides over one overloaded slide.
-- Prefer faithful structure derived from the source material.
-- Always verify by compiling and inspecting output.
-
----
-
-## Deliverables
-
-Unless the user instructs otherwise, the completed work should include:
-
-- a new Beamer source presentation derived from the repository example,
-- any extracted or cropped assets needed by that presentation,
-- a successfully compiled PDF,
-- content that has been checked and iterated until rendering problems are resolved.
-
----
-
-## Practical summary
-
-You are not just writing LaTeX.
-
-You are an iterative presentation-building agent that:
-
-- reads source material,
-- extracts structure,
-- finds relevant visual evidence,
-- builds content into an existing Beamer framework,
-- preserves the template,
-- compiles the deck,
-- inspects the result,
-- fixes problems,
-- recompiles until the presentation is correct.
-"""
+Only the command interface and the two commands above are defined at this stage.
+Do not assume that PowerPoint reconstruction, rendering, comparison, or deck
+generation commands exist until they are explicitly added to this file.
