@@ -37,9 +37,12 @@ This workflow favors evidence over assumption:
 - Do not classify an image as manipulated merely because it has text over it.
   Text is reproducible in Beamer and should remain live text.
 - Do not classify an image as manipulated merely because simple rectangles,
-  rules, rounded rectangles, or ellipses are placed over it. These should be
-  reproduced as native Beamer/TikZ shapes when practical, or extracted as
-  separate shape assets if fidelity requires.
+  rules, rounded rectangles, pills, badges, table bands, bars, or ellipses are
+  placed over it. These should be reproduced separately from the image.
+- Card-like UI containers must be reconstructed as native Beamer/TikZ shapes,
+  not as rendered slide crops. This includes cards, panels, rounded rectangles,
+  metric/stat boxes, status pills, table row bands, header bands, progress bars,
+  callout boxes, and dividers. Their text must remain live Beamer text.
 - Do not use cropped rendered text as an admissible final Beamer solution.
   Rendered text crops may be used only as a validation experiment to isolate
   geometry/asset problems from font/text-layout problems.
@@ -233,9 +236,12 @@ Refinement rules:
 - For images with non-reproducible image effects, crop the affected visual
   region from the rendered reference slide and save it as a rendered image
   asset.
-- For simple shapes that need exact visual fidelity, prefer native TikZ
-  reconstruction. If extracting assets first, crop each simple shape region from
-  the rendered slide and record its bbox in `crop-review.tsv`.
+- For simple decorative or structural shapes, record geometry and style for
+  native TikZ reconstruction. Cropped shape assets may be used only as temporary
+  measurement/review aids or for genuinely non-reproducible effects.
+- For card-like containers, do not put the rendered card crop in the final
+  refined asset set. Record the card bbox, fill, border, radius, opacity,
+  z-order, and contained live text so the Beamer generator can draw it natively.
 - Do not crop rendered text into final refined assets, except for temporary
   validation experiments.
 
@@ -308,7 +314,11 @@ The admissible Beamer target should be editable and reproducible:
 - Original images are included as images.
 - PowerPoint crop metadata is reproduced as clipping/pre-cropped image
   placement, not as a rendered slide crop containing text.
-- Simple rectangles/round-rectangles/ellipses are preferably native TikZ shapes.
+- Simple rectangles/round-rectangles/ellipses are native TikZ shapes.
+- Card-like containers are native TikZ shapes. Do not use rendered crops for
+  cards or panels, because masking baked text creates artifacts and makes the
+  layout non-editable. Draw the card geometry with TikZ, then place all card
+  labels, numbers, body copy, badges, and captions as live text.
 - Text is live Beamer text.
 - Rendered image crops are used only for non-reproducible image effects or
   approved shape assets.
@@ -330,6 +340,20 @@ reference aspect ratio:
 \setbeamertemplate{footline}{}
 \setbeamersize{text margin left=0pt,text margin right=0pt}
 ```
+
+Native card reconstruction checklist:
+
+- Use the reference PNG to identify the card bbox, corner radius, fill color,
+  border color, border width, opacity, and stacking order.
+- Draw cards with TikZ primitives such as `\path[rounded corners=..., fill=...]`
+  and `draw=...` rather than `\includegraphics`.
+- Place contained text with absolute text boxes or TikZ nodes, preserving
+  paragraph breaks and alignment from the PPTX where available.
+- Check for visual defects on each rendered slide: no masked text remnants, no
+  white scars outside rounded corners, no text-object overlap, and no collapsed
+  spacing between numbers, labels, and descriptions.
+- Use rendered card crops only for temporary analysis or side-by-side review,
+  never as the final Beamer representation of an editable card.
 
 Important LaTeX details:
 
@@ -447,6 +471,8 @@ The workflow is successful when:
 - All media parts have been extracted with `python-pptx`.
 - The refined asset set contains all reusable original images and necessary
   non-text rendered assets.
+- Card-like containers and simple panel shapes are reconstructed as native
+  TikZ geometry with live text, not as rendered crops.
 - `refined-assets.tsv` has one row per slide.
 - Structure Markdown documents assets, positions, and visible text.
 - The admissible Beamer deck compiles with XeLaTeX.
@@ -465,10 +491,12 @@ The workflow is successful when:
   use correct paths relative to the `.tex` file.
 - **Baked text in image assets**: caused by cropping rendered slide regions for
   images with text overlays. Keep original images and render text live.
+- **Rendered card crops used as final assets**: causes uneditable cards, baked
+  text, masking scars, and poor spacing. Rebuild cards as TikZ shapes with live
+  text.
 - **Over-classifying cropped images as manipulated**: `a:srcRect` is usually
   placement metadata, not a reason to use rendered slide crops.
 - **Invisible placeholder prompts in structure docs**: filter out PowerPoint
   editor prompts from masters/layouts.
 - **Footer/date mismatch**: LibreOffice may update or resolve placeholders at
   render time differently from raw PPTX XML.
-
