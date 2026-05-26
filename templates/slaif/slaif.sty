@@ -55,6 +55,15 @@
   \end{tikzpicture}%
 }
 
+\newcommand{\placeimagerounded}[6]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \begin{scope}[shift={([xshift=#1bp,yshift=-#2bp]current page.north west)}]
+      \clip[rounded corners=#5bp] (0,0) rectangle (#3bp,-#4bp);
+      \node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=#3bp,height=#4bp]{assets/#6}};
+    \end{scope}
+  \end{tikzpicture}%
+}
+
 \newcommand{\placetextbox}[8]{%
   \begin{textblock*}{#3bp}(#1bp,#2bp)
     \begingroup\color{#8}\fontsize{#5pt}{#6pt}\selectfont #7\endgroup
@@ -138,5 +147,224 @@
     \placetextbox{388.706}{308.400}{505.294}{32.000}{16.000}{18.400}{{\RobotoCondensed{}\itshape \parbox{505.294bp}{\raggedright \SlaifTitleEventLine}}}{SlaifWhite}
     \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifTitleDate}}{SlaifWhite}
   \end{frame}%
+}
+
+\newcommand{\SlaifMotivationReset}{%
+  \let\SlaifMotivationTitle\@empty
+  \let\SlaifMotivationBody\@empty
+  \let\SlaifMotivationVisual\@empty
+  \let\SlaifMotivationDate\@empty
+  \let\SlaifMotivationFooter\@empty
+  \let\SlaifMotivationSlideNumber\@empty
+}
+
+\pgfkeys{
+  /SlaifMotivationSlide/.is family,
+  /SlaifMotivationSlide,
+  title/.store in=\SlaifMotivationTitle,
+  body/.store in=\SlaifMotivationBody,
+  visual/.store in=\SlaifMotivationVisual,
+  date/.store in=\SlaifMotivationDate,
+  footer/.store in=\SlaifMotivationFooter,
+  slideNumber/.store in=\SlaifMotivationSlideNumber,
+}
+
+\newcommand{\SlaifMotivationSlide}[1]{%
+  \SlaifMotivationReset
+  \pgfkeys{/SlaifMotivationSlide,#1}%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]\fill[SlaifWhite] (current page.south west) rectangle (current page.north east);\end{tikzpicture}
+    \placeimage{0.000}{0.000}{960.000}{540.000}{image3.png}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placeimage{44.369}{122.125}{292.767}{219.778}{image4.png}
+    \placetextbox{381.506}{139.625}{512.494}{144.000}{28.080}{32.292}{{\RobotoCondensed{}\bfseries \parbox{512.494bp}{\raggedright \SlaifMotivationTitle}}}{SlaifPrimaryTeal}
+    \ifx\SlaifMotivationVisual\@empty
+      \placetextbox{381.506}{283.625}{534.410}{130.375}{17.160}{19.734}{{\RobotoCondensed{}\bfseries \parbox{534.410bp}{\raggedright \SlaifMotivationBody}}}{SlaifInk}
+    \else
+      \placeimagerounded{381.506}{187.000}{400.000}{225.600}{8.000}{\SlaifMotivationVisual}
+      \placetextbox{381.506}{424.000}{534.410}{68.000}{13.800}{15.870}{{\RobotoCondensed{}\bfseries \parbox{534.410bp}{\raggedright \SlaifMotivationBody}}}{SlaifInk}
+    \fi
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifMotivationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifMotivationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\SlaifMotivationSlideNumber}}}{SlaifWhite}
+  \end{frame}%
+}
+
+\newcommand{\SlaifBlueDividerSlide}[3]{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]\fill[SlaifWhite] (current page.south west) rectangle (current page.north east);\end{tikzpicture}
+    \placeimage{0.000}{0.000}{960.000}{540.000}{image6.jpg}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \drawshape{fill=SlaifGreenLight,draw=none}{rectangle}{66.000}{103.394}{894.000}{108.837}
+    \placetextbox{73.500}{46.500}{828.000}{13.500}{17.250}{19.320}{{\RobotoCondensed{} #1}}{SlaifGreen}
+    \placetextbox{73.500}{59.500}{828.000}{32.000}{32.500}{36.400}{{\RobotoCondensed{}\bfseries #2}}{SlaifWhite}
+    \placetextbox{73.500}{88.500}{828.000}{18.000}{13.500}{15.120}{{\RobotoCondensed{}\itshape #3}}{SlaifWhite}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}05/26/2026}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering SLAIF WP6 – AI Skills \& Training}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+  \end{frame}%
+}
+
+\newcommand{\SlaifGreenDividerSlide}[3]{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]\fill[SlaifWhite] (current page.south west) rectangle (current page.north east);\end{tikzpicture}
+    \drawshape{fill=SlaifGreenOlive,draw=none}{rectangle}{0.000}{0.000}{960.000}{540.000}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placeimageopacity{325.226}{71.110}{309.548}{397.780}{image7.png}{0.200}
+    \placetextbox{73.500}{46.500}{828.000}{13.500}{17.250}{19.320}{{\RobotoCondensed{} #1}}{SlaifWhite}
+    \placetextbox{73.500}{59.500}{828.000}{32.000}{32.500}{36.400}{{\RobotoCondensed{}\bfseries #2}}{SlaifWhite}
+    \placetextbox{73.500}{88.500}{828.000}{18.000}{13.500}{15.120}{{\RobotoCondensed{}\itshape #3}}{SlaifWhite}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}05/26/2026}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering SLAIF WP6 – AI Skills \& Training}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+  \end{frame}%
+}
+
+\newcount\SlaifSliderCount
+\newcount\SlaifSliderMax
+
+\newcommand{\SlaifSliderReset}{%
+  \def\SlaifSliderRows{}%
+  \def\SlaifSliderLabelX{39.600}%
+  \def\SlaifSliderY{149.760}%
+  \def\SlaifSliderLabelWidth{338.400}%
+  \def\SlaifSliderLabelYOffset{-3.291}%
+  \def\SlaifSliderLabelHeight{20.983}%
+  \def\SlaifSliderLabelFontSize{12.480}%
+  \def\SlaifSliderLabelLineHeight{14.352}%
+  \def\SlaifSliderBarX{388.800}%
+  \def\SlaifSliderBarWidth{518.400}%
+  \def\SlaifSliderBarHeight{15.840}%
+  \def\SlaifSliderRowStep{33.120}%
+  \def\SlaifSliderValueGap{5.760}%
+  \def\SlaifSliderValueYOffset{4.740}%
+  \def\SlaifSliderValueWidth{57.600}%
+  \def\SlaifSliderValueHeight{20.983}%
+  \def\SlaifSliderValueFontSize{12.480}%
+  \def\SlaifSliderValueLineHeight{14.352}%
+  \def\SlaifSliderTrackColor{SlaifSurface}%
+}
+
+\pgfkeys{
+  /SlaifSliderTable/.is family,
+  /SlaifSliderTable,
+  wide/.style={
+    labelX=39.600,
+    y=149.760,
+    labelWidth=338.400,
+    labelYOffset=-3.291,
+    labelHeight=20.983,
+    labelFontSize=12.480,
+    labelLineHeight=14.352,
+    barX=388.800,
+    barWidth=518.400,
+    barHeight=15.840,
+    rowStep=33.120,
+    valueGap=5.760,
+    valueYOffset=4.740,
+    valueWidth=57.600,
+    valueHeight=20.983,
+    valueFontSize=12.480,
+    valueLineHeight=14.352,
+    trackColor=SlaifSurface,
+  },
+  compact/.style={
+    labelX=457.200,
+    y=207.360,
+    labelWidth=263.764,
+    labelYOffset=1.749,
+    labelHeight=20.983,
+    labelFontSize=12.480,
+    labelLineHeight=14.352,
+    barX=727.071,
+    barWidth=144.000,
+    barHeight=23.040,
+    rowStep=82.800,
+    valueGap=5.760,
+    valueYOffset=7.240,
+    valueWidth=43.200,
+    valueHeight=28.546,
+    valueFontSize=17.160,
+    valueLineHeight=19.734,
+    trackColor=SlaifSurface,
+  },
+  rows/.store in=\SlaifSliderRows,
+  labelX/.store in=\SlaifSliderLabelX,
+  y/.store in=\SlaifSliderY,
+  labelWidth/.store in=\SlaifSliderLabelWidth,
+  labelYOffset/.store in=\SlaifSliderLabelYOffset,
+  labelHeight/.store in=\SlaifSliderLabelHeight,
+  labelFontSize/.store in=\SlaifSliderLabelFontSize,
+  labelLineHeight/.store in=\SlaifSliderLabelLineHeight,
+  barX/.store in=\SlaifSliderBarX,
+  barWidth/.store in=\SlaifSliderBarWidth,
+  barHeight/.store in=\SlaifSliderBarHeight,
+  rowStep/.store in=\SlaifSliderRowStep,
+  valueGap/.store in=\SlaifSliderValueGap,
+  valueYOffset/.store in=\SlaifSliderValueYOffset,
+  valueWidth/.store in=\SlaifSliderValueWidth,
+  valueHeight/.store in=\SlaifSliderValueHeight,
+  valueFontSize/.store in=\SlaifSliderValueFontSize,
+  valueLineHeight/.store in=\SlaifSliderValueLineHeight,
+  trackColor/.store in=\SlaifSliderTrackColor,
+}
+
+\newcommand{\SlaifSliderSetColor}[2]{%
+  \def\SlaifSliderColor{SlaifMutedText}%
+  \ifnum#2<4
+    \ifnum#1=1\def\SlaifSliderColor{SlaifAccentTeal}\fi
+    \ifnum#1=2\def\SlaifSliderColor{SlaifGreenDark}\fi
+    \ifnum#1=3\def\SlaifSliderColor{SlaifGreen}\fi
+  \else\ifnum#2<7
+    \ifnum#1<3\def\SlaifSliderColor{SlaifAccentTeal}\fi
+    \ifnum#1>2\ifnum#1<5\def\SlaifSliderColor{SlaifGreenDark}\fi\fi
+    \ifnum#1>4\ifnum#1<7\def\SlaifSliderColor{SlaifGreen}\fi\fi
+  \else\ifnum#1<9
+    \ifnum#1<3\def\SlaifSliderColor{SlaifAccentTeal}\fi
+    \ifnum#1>2\ifnum#1<5\def\SlaifSliderColor{SlaifPrimaryTeal}\fi\fi
+    \ifnum#1>4\ifnum#1<7\def\SlaifSliderColor{SlaifGreenDark}\fi\fi
+    \ifnum#1>6\ifnum#1<9\def\SlaifSliderColor{SlaifGreen}\fi\fi
+  \else
+    \def\SlaifSliderColor{SlaifMutedText}%
+  \fi\fi\fi
+}
+
+\newcommand{\SlaifSliderTable}[1]{%
+  \SlaifSliderReset
+  \pgfkeys{/SlaifSliderTable,wide,#1}%
+  \SlaifSliderCount=0
+  \SlaifSliderMax=0
+  \foreach \SlaifSliderLabel/\SlaifSliderValue in \SlaifSliderRows {%
+    \global\advance\SlaifSliderCount by 1
+    \ifnum\SlaifSliderValue>\SlaifSliderMax
+      \global\SlaifSliderMax=\SlaifSliderValue
+    \fi
+  }%
+  \foreach \SlaifSliderLabel/\SlaifSliderValue [count=\SlaifSliderIndex] in \SlaifSliderRows {%
+    \SlaifSliderSetColor{\SlaifSliderIndex}{\the\SlaifSliderCount}%
+    \pgfmathsetmacro{\SlaifSliderRowY}{\SlaifSliderY + (\SlaifSliderIndex - 1) * \SlaifSliderRowStep}%
+    \pgfmathsetmacro{\SlaifSliderLabelY}{\SlaifSliderRowY + \SlaifSliderLabelYOffset}%
+    \pgfmathsetmacro{\SlaifSliderBarBottom}{\SlaifSliderRowY + \SlaifSliderBarHeight}%
+    \pgfmathsetmacro{\SlaifSliderTrackRight}{\SlaifSliderBarX + \SlaifSliderBarWidth}%
+    \pgfmathsetmacro{\SlaifSliderBarRight}{\SlaifSliderBarX + \SlaifSliderBarWidth * \SlaifSliderValue / \the\SlaifSliderMax}%
+    \pgfmathsetmacro{\SlaifSliderValueX}{\SlaifSliderBarRight + \SlaifSliderValueGap}%
+    \pgfmathsetmacro{\SlaifSliderValueY}{\SlaifSliderRowY + \SlaifSliderValueYOffset}%
+    \placetextbox{\SlaifSliderLabelX}{\SlaifSliderLabelY}{\SlaifSliderLabelWidth}{\SlaifSliderLabelHeight}{\SlaifSliderLabelFontSize}{\SlaifSliderLabelLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifSliderLabelWidth bp}{\raggedright \SlaifSliderLabel}}}{SlaifInk}%
+    \drawshape{fill=\SlaifSliderTrackColor,draw=none}{rectangle}{\SlaifSliderBarX}{\SlaifSliderRowY}{\SlaifSliderTrackRight}{\SlaifSliderBarBottom}%
+    \drawshape{fill=\SlaifSliderColor,draw=none}{rectangle}{\SlaifSliderBarX}{\SlaifSliderRowY}{\SlaifSliderBarRight}{\SlaifSliderBarBottom}%
+    \placetextbox{\SlaifSliderValueX}{\SlaifSliderValueY}{\SlaifSliderValueWidth}{\SlaifSliderValueHeight}{\SlaifSliderValueFontSize}{\SlaifSliderValueLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifSliderValueWidth bp}{\raggedright \SlaifSliderValue}}}{\SlaifSliderColor}%
+  }%
 }
 \makeatother
