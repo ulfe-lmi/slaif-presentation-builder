@@ -1,0 +1,78 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{slaif}[2026/05/26 SLAIF presentation visual primitives]
+
+\RequirePackage{fontspec}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\RequirePackage{xcolor}
+\RequirePackage[absolute,overlay]{textpos}
+\RequirePackage{xstring}
+
+\geometry{paperwidth=960bp,paperheight=540bp,margin=0bp}
+
+\definecolor{SlaifBlack}{RGB}{0,0,0}
+\definecolor{SlaifPrimaryTeal}{RGB}{20,91,110}
+\definecolor{SlaifAccentTeal}{RGB}{27,138,167}
+\definecolor{SlaifInk}{RGB}{28,43,51}
+\definecolor{SlaifInkAlt}{RGB}{30,58,58}
+\definecolor{SlaifTealMuted}{RGB}{42,122,130}
+\definecolor{SlaifTealLight}{RGB}{59,157,165}
+\definecolor{SlaifMutedTextAlt}{RGB}{74,99,99}
+\definecolor{SlaifMutedText}{RGB}{85,102,112}
+\definecolor{SlaifGreenDark}{RGB}{111,146,30}
+\definecolor{SlaifGreen}{RGB}{143,188,47}
+\definecolor{SlaifNeutralGray}{RGB}{143,143,143}
+\definecolor{SlaifGreenOlive}{RGB}{155,185,60}
+\definecolor{SlaifGreenLine}{RGB}{160,183,47}
+\definecolor{SlaifGreenLight}{RGB}{165,196,59}
+\definecolor{SlaifDivider}{RGB}{212,236,238}
+\definecolor{SlaifBorder}{RGB}{216,224,228}
+\definecolor{SlaifPanelBlue}{RGB}{230,242,247}
+\definecolor{SlaifPanelMint}{RGB}{237,245,245}
+\definecolor{SlaifSurface}{RGB}{242,246,248}
+\definecolor{SlaifWhite}{RGB}{255,255,255}
+
+\setmainfont{Roboto Condensed}
+\setsansfont{Roboto Condensed}
+\newfontfamily\RobotoCondensed{Roboto Condensed}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{}
+\setbeamertemplate{headline}{}
+\setbeamersize{text margin left=0pt,text margin right=0pt}
+\setbeamercolor{background canvas}{bg=SlaifWhite}
+\pagestyle{empty}
+
+\newcommand{\placeimage}[5]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0pt] at ([xshift=#1bp,yshift=-#2bp]current page.north west) {\includegraphics[width=#3bp,height=#4bp]{assets/#5}};
+  \end{tikzpicture}%
+}
+
+\newcommand{\placeimageopacity}[6]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0pt,opacity=#6] at ([xshift=#1bp,yshift=-#2bp]current page.north west) {\includegraphics[width=#3bp,height=#4bp]{assets/#5}};
+  \end{tikzpicture}%
+}
+
+\newcommand{\placetextbox}[8]{%
+  \begin{textblock*}{#3bp}(#1bp,#2bp)
+    \begingroup\color{#8}\fontsize{#5pt}{#6pt}\selectfont #7\endgroup
+  \end{textblock*}%
+}
+
+\newcommand{\drawrect}[5]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \path[#1] ([xshift=#2bp,yshift=-#3bp]current page.north west) rectangle ([xshift=#4bp,yshift=-#5bp]current page.north west);
+  \end{tikzpicture}%
+}
+
+\newcommand{\drawellipse}[5]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \path[#1] ([xshift=#2bp,yshift=-#3bp]current page.north west) ellipse [x radius=#4bp, y radius=#5bp];
+  \end{tikzpicture}%
+}
+
+\newcommand{\drawshape}[6]{%
+  \ifstrequal{#2}{ellipse}{\drawellipse{#1}{#3}{#4}{#5}{#6}}{\drawrect{#1}{#3}{#4}{#5}{#6}}%
+}
