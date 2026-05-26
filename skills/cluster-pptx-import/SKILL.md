@@ -264,7 +264,84 @@ Validate title-template extraction with two checks:
 2. Compile a temporary smoke-test title slide with some empty fields and inspect
    text extraction or the render to confirm no dangling delimiters appear.
 
-### 6. Extract One Cluster At A Time
+### 6. Cluster Complex Repeated Elements With User-Guided Semantics
+
+Some repeated graphical elements cannot be clustered safely from geometry
+alone. For complex elements such as slider tables, timelines, KPI tables, card
+grids, process diagrams, grouped chart-like layouts, and multi-row status
+blocks, treat clustering as an interactive semantic step rather than a purely
+mechanical refactor.
+
+Identify repeated visual structures by geometry and role, not only by exact
+appearance. Similar structures may differ by width, row count, label length,
+color sequence, or surrounding context while still representing the same
+component family. A good macro captures the shared behavior while exposing
+layout presets or key-value parameters for the differences.
+
+Before making a complex macro durable, propose the semantic rule to the user
+and let the user correct it. In particular, do not infer color ordering,
+grouping, hierarchy, or emphasis from one instance alone. Imported PowerPoint
+geometry often contains inconsistent values and one-off color choices; the
+right output of clustering is an agreed visual grammar, not blind preservation
+of every imported accident.
+
+For complex components:
+
+- preserve a pre-refactor Beamer render of the affected slides
+- describe the proposed data model and visual rule before locking it in
+- keep user-facing macro calls data-driven
+- compute derived values such as normalized lengths, row positions, and value
+  label positions inside the macro
+- separate layout presets from semantic data
+- recompile and render after the extraction
+- compare exact output when preservation is intended
+- inspect visual quality when the user intentionally chooses a generalized rule
+  over exact preservation
+
+Good deck-side code should contain semantic data:
+
+```tex
+\ThemeSliderTable{
+  layout = wide,
+  rows = {
+    {First row label}/19,
+    {Second row label}/18,
+    {Third row label}/16
+  }
+}
+```
+
+The macro should compute the maximum value, normalize bar lengths, position
+numeric labels relative to bar ends, and keep labels vertically aligned with
+their bars. Row spacing, label column width, bar height, value-label spacing,
+and text sizing should be preset values or optional keys, not repeated raw
+coordinates in the deck.
+
+When color rules are unclear, ask whether colors encode:
+
+- rank
+- category
+- paired grouping
+- threshold bands
+- section grouping
+- emphasis
+- decorative progression
+
+Do not assume a simple repeating color cycle unless the user confirms it. A
+color system may be pair-based, row-count-dependent, or may introduce
+additional colors only after a component exceeds a certain number of rows.
+
+Avoid false precision. Distinguish between:
+
+- values that belong to the visual system
+- values that are content-specific
+- values that compensate for a particular label length
+- values that are import noise
+
+When unsure, render the generalized version and ask the user whether the result
+matches the intended design language.
+
+### 7. Extract One Cluster At A Time
 
 For each cluster:
 
