@@ -6,4 +6,29 @@
 
 # SLAIF Presentation Builder
 
-SLAIF Presentation Builder is two-pronged idea: it serves as a workflow, code, and prompt repository for building SLAIF-branded presentations for Slovenian AI Factory (SLAIF project). On the other hand serves as a base for any workflow for presentation building, and is thus a starting point if you want to AI-automate building of your own presentations using coding agents like OpenAI Codex or Claude Code.
+SLAIF Presentation Builder is a workflow and template repository for converting
+existing PowerPoint presentation styles into maintainable, native Beamer/LaTeX
+systems.
+
+The project combines agent-facing skills with reusable LaTeX templates. The
+current workflow covers PPTX inspection, slide rendering, asset extraction,
+native Beamer reconstruction, visual refinement, and clustering repeated slide
+elements into style-file macros.
+
+## Repository Contents
+
+- `skills/` contains agent skills for importing, refining, and clustering PPTX
+  presentations.
+- `templates/slaif/` contains the evolving SLAIF Beamer style.
+- `source-templates/` is intended for source PowerPoint templates used as import
+  targets.
+
+## Current Template Capabilities
+
+The SLAIF style currently includes semantic colors, absolute placement helpers,
+rounded image rendering, title and motivation slide templates, divider slides,
+and slider-table components.
+
+The goal is to keep presentation content in deck files while moving visual
+rules, layout geometry, and repeated drawing logic into reusable LaTeX style
+files.
