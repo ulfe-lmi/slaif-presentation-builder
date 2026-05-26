@@ -190,7 +190,81 @@ The color-clustering step is complete only when:
 - compilation succeeds
 - rendered output is unchanged from the pre-color-clustering Beamer baseline
 
-### 5. Extract One Cluster At A Time
+### 5. Extract Title And Cover Slide Templates
+
+Title and cover slides are good early template candidates because the visual
+layout is usually fixed while the content fields are few and semantically clear.
+Move all fixed geometry, images, overlays, text-box coordinates, font sizes,
+and colors into the generated `.sty` file. The deck should contain only
+content fields.
+
+Prefer key-value fields instead of positional arguments. Positional arguments
+become unreadable as soon as there are more than two or three fields.
+
+Good deck-side shape:
+
+```tex
+\ThemeTitleSlide{
+  title       = {Project Title},
+  author      = {Presenter Name},
+  institution = {Institution Name},
+  role        = {Presenter Role},
+  event       = {Review Meeting},
+  subtitle    = {Months 1--7 Progress},
+  date        = {2026-05-26}
+}
+```
+
+Use field names that describe the content, not the source slide's internal
+textbox number. Typical title-slide fields:
+
+- `title`
+- `subtitle`
+- `author`
+- `institution`
+- `role`
+- `event`
+- `date`
+
+Do not require every field. Title-slide composers must handle empty fields
+without leaving dangling separators. If a metadata line joins
+`author`, `institution`, and `role`, print delimiters only between fields that
+are actually present. If an event line joins `event` and `subtitle`, omit the
+separator when either side is empty.
+
+In LaTeX, implement this as a small key family and a helper that appends
+non-empty fields:
+
+```tex
+\pgfkeys{
+  /ThemeTitleSlide/.is family,
+  /ThemeTitleSlide,
+  title/.store in=\ThemeTitleTitle,
+  author/.store in=\ThemeTitleAuthor,
+  institution/.store in=\ThemeTitleInstitution,
+  role/.store in=\ThemeTitleRole,
+  event/.store in=\ThemeTitleEvent,
+  subtitle/.store in=\ThemeTitleSubtitle,
+  date/.store in=\ThemeTitleDate,
+}
+```
+
+The exact implementation can vary, but the behavior must be:
+
+- empty fields are allowed
+- delimiters are conditional
+- fixed visual assets and geometry stay in the `.sty`
+- deck-side title-slide code contains content only
+- the extracted title slide renders identically to the raw Beamer baseline
+
+Validate title-template extraction with two checks:
+
+1. Recompile and pixel-compare the extracted title slide against the previous
+   Beamer render.
+2. Compile a temporary smoke-test title slide with some empty fields and inspect
+   text extraction or the render to confirm no dangling delimiters appear.
+
+### 6. Extract One Cluster At A Time
 
 For each cluster:
 
