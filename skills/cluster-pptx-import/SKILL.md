@@ -109,7 +109,88 @@ validation_notes
 Start with the highest-confidence clusters: elements that are repeated many
 times and have simple parameter variation.
 
-### 4. Extract One Cluster At A Time
+### 4. Cluster Colors First
+
+Color clustering is the first practical clustering step. Do it before extracting
+larger shape or text macros, because later macros should use semantic palette
+names instead of imported generated names.
+
+Inspect both the raw deck and the style file for color definitions and color
+uses:
+
+```bash
+rg -n '^\\definecolor|fill=|draw=|\\fill\\[|\\color\\{|setbeamercolor' deck.tex path/to/style.sty
+```
+
+Cluster colors by exact RGB match first, then by near match. Near matches should
+be named separately unless there is strong evidence that they are the same
+semantic color. Similar RGB values can still encode different roles such as
+body text, muted text, divider, card fill, panel fill, accent fill, or final
+overlay stroke.
+
+For each unique color, choose a human-readable semantic name. Use the project,
+theme, or template prefix chosen for the generated style file:
+
+```tex
+\definecolor{ThemePrimary}{RGB}{20,91,110}
+\definecolor{ThemeAccent}{RGB}{27,138,167}
+\definecolor{ThemeInk}{RGB}{28,43,51}
+\definecolor{ThemeMutedText}{RGB}{85,102,112}
+\definecolor{ThemeSuccess}{RGB}{143,188,47}
+\definecolor{ThemeBorder}{RGB}{216,224,228}
+\definecolor{ThemeSurface}{RGB}{242,246,248}
+\definecolor{ThemeWhite}{RGB}{255,255,255}
+```
+
+Use names that describe how the color is used, not just how it looks. Prefer
+`ThemeSurface`, `ThemeBorder`, `ThemeMutedText`, and `ThemeSuccessDark` over names
+that only encode a hue.
+
+After defining semantic colors in the `.sty` file:
+
+1. Replace generated color names in the deck with semantic names.
+2. Replace duplicate aliases with a single semantic name.
+3. Replace literal `white` with the semantic white color when consistency helps.
+4. Remove generated color definitions only after no deck or style references
+   remain.
+5. Run a strict scan for remaining unnamed colors.
+6. Compile, render, and compare against the pre-color-clustering Beamer render.
+
+The strict scan should report only semantic palette names and non-color tokens
+such as `none`:
+
+```python
+from pathlib import Path
+import re
+
+paths = [Path("deck.tex"), Path("path/to/generated-theme.sty")]
+theme_prefix = "Theme"
+issues = []
+
+for path in paths:
+    for i, line in enumerate(path.read_text().splitlines(), 1):
+        for kind, value in re.findall(r"(?<![A-Za-z])(fill|draw|color|text|bg)=([^,}\\]]+)", line):
+            if value != "none" and not value.startswith(theme_prefix):
+                issues.append((path, i, kind, value))
+        for value in re.findall(r"\\fill\[([^\]]+)\]", line):
+            if not value.startswith(theme_prefix):
+                issues.append((path, i, "fill[]", value))
+        for value in re.findall(r"\\definecolor\{([^}]+)\}", line):
+            if not value.startswith(theme_prefix):
+                issues.append((path, i, "definecolor", value))
+
+print(issues)
+```
+
+The color-clustering step is complete only when:
+
+- all active color definitions in the style file use semantic names
+- the deck uses semantic palette names instead of generated import names
+- literal color names have been eliminated or deliberately justified
+- compilation succeeds
+- rendered output is unchanged from the pre-color-clustering Beamer baseline
+
+### 5. Extract One Cluster At A Time
 
 For each cluster:
 
@@ -130,11 +211,11 @@ Macros should expose the parameters that actually vary across the deck.
 Good candidates:
 
 ```tex
-\SlaifMetricCard{x}{y}{w}{h}{number}{label}
-\SlaifProgressBar{x}{y}{w}{value}{label}
-\SlaifTableBand{x}{y}{w}{h}{fill}
-\SlaifHighlightRow{x}{y}{w}{h}
-\SlaifFooter{slideNumber}
+\ThemeMetricCard{x}{y}{w}{h}{number}{label}
+\ThemeProgressBar{x}{y}{w}{value}{label}
+\ThemeTableBand{x}{y}{w}{h}{fill}
+\ThemeHighlightRow{x}{y}{w}{h}
+\ThemeFooter{slideNumber}
 ```
 
 Avoid macros that are just opaque wrappers around one instance. A useful macro
@@ -143,8 +224,8 @@ should make repeated structure easier to read and adjust.
 Keep visual constants centralized when they are truly shared:
 
 ```tex
-\definecolor{SlaifGreen}{HTML}{...}
-\newlength{\SlaifCardRadius}
+\definecolor{ThemeSuccess}{HTML}{...}
+\newlength{\ThemeCardRadius}
 ```
 
 Do not centralize values that only look similar by coincidence.
