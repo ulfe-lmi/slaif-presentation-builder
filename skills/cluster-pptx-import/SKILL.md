@@ -39,6 +39,9 @@ nearby durable work directories before making assumptions.
 - Text inside logo image assets may remain part of the logo image.
 - Preserve absolute visual placement unless the user explicitly asks for layout
   normalization.
+- Treat repeated slide chrome as template state, not slide content. Common
+  date text, footer titles, and sequential slide numbers should be set once in
+  the document preamble or generated style file and rendered by the template.
 - Validate after each meaningful macro extraction by recompiling and rendering.
 - Compare the new render to the pre-clustering Beamer render first. Use the
   original PPTX render only as a regression guard when available.
@@ -204,14 +207,15 @@ become unreadable as soon as there are more than two or three fields.
 Good deck-side shape:
 
 ```tex
+\ThemeSetPresentationDate{2026-05-26}
+
 \ThemeTitleSlide{
   title       = {Project Title},
   author      = {Presenter Name},
   institution = {Institution Name},
   role        = {Presenter Role},
   event       = {Review Meeting},
-  subtitle    = {Months 1--7 Progress},
-  date        = {2026-05-26}
+  subtitle    = {Months 1--7 Progress}
 }
 ```
 
@@ -224,7 +228,19 @@ textbox number. Typical title-slide fields:
 - `institution`
 - `role`
 - `event`
-- `date`
+
+Do not automatically make deck-wide metadata a title-slide parameter. A date
+may appear on the title slide, but if the same date is also used in ordinary
+slide footers, it belongs in document-level template state such as:
+
+```tex
+\ThemeSetPresentationDate{2026-05-26}
+\ThemeSetPresentationFooter{Project or work-package footer}
+```
+
+Then title, content, and divider templates should consume that state. A
+title-slide `date` field is appropriate only when the title page intentionally
+differs from the rest of the deck.
 
 Do not require every field. Title-slide composers must handle empty fields
 without leaving dangling separators. If a metadata line joins
@@ -245,7 +261,6 @@ non-empty fields:
   role/.store in=\ThemeTitleRole,
   event/.store in=\ThemeTitleEvent,
   subtitle/.store in=\ThemeTitleSubtitle,
-  date/.store in=\ThemeTitleDate,
 }
 ```
 
@@ -366,7 +381,7 @@ Good candidates:
 \ThemeProgressBar{x}{y}{w}{value}{label}
 \ThemeTableBand{x}{y}{w}{h}{fill}
 \ThemeHighlightRow{x}{y}{w}{h}
-\ThemeFooter{slideNumber}
+\ThemeFooter
 ```
 
 Avoid macros that are just opaque wrappers around one instance. A useful macro
@@ -380,6 +395,58 @@ Keep visual constants centralized when they are truly shared:
 ```
 
 Do not centralize values that only look similar by coincidence.
+
+### Template State And Slide Chrome
+
+When a repeated element appears on many slides, decide whether it is content or
+chrome before exposing macro parameters. Slide-specific macro calls should
+contain only semantic content for that slide. Repeated footer dates, common
+footer labels, deck names, confidentiality labels, and other stable metadata
+should be governed by document-level setters or macros in the generated style
+file.
+
+Good pattern:
+
+```tex
+\ThemeSetPresentationDate{2026-05-26}
+\ThemeSetPresentationFooter{Workstream name}
+
+\ThemeContentSlide{
+  title = {Slide title},
+  body = {Slide-specific body text}
+}
+```
+
+Avoid this pattern for ordinary content slides:
+
+```tex
+\ThemeContentSlide{
+  title = {Slide title},
+  body = {Slide-specific body text},
+  date = {2026-05-26},
+  footer = {Workstream name},
+  slideNumber = {7}
+}
+```
+
+Sequential slide numbers should normally come from the presentation engine,
+for example `\insertframenumber` in Beamer. Expose slide-number parameters only
+for deliberate nonstandard numbering schemes.
+
+Divider or section slides may need different footer behavior, but the exception
+must be explicit: use an override key or a documented variant rather than
+copying literal footer text into slide calls or hard-coding deck-specific
+metadata in the `.sty` file.
+
+After extracting slide templates, scan for this class of regression:
+
+```bash
+rg -n 'date/.store|footer/.store|slideNumber/.store|20[0-9][0-9]-|[0-9]{2}/[0-9]{2}/[0-9]{4}' deck.tex path/to/generated-theme.sty
+```
+
+Any remaining per-slide metadata keys or hard-coded date/footer literals should
+be either removed, promoted to document-level state, or documented as an
+intentional exception.
 
 ## Drawing Order
 
