@@ -43,6 +43,11 @@
 \setbeamercolor{background canvas}{bg=SlaifWhite}
 \pagestyle{empty}
 
+\newcommand{\SlaifPresentationDate}{}
+\newcommand{\SlaifPresentationFooter}{}
+\newcommand{\SlaifSetPresentationDate}[1]{\renewcommand{\SlaifPresentationDate}{#1}}
+\newcommand{\SlaifSetPresentationFooter}[1]{\renewcommand{\SlaifPresentationFooter}{#1}}
+
 \newcommand{\placeimage}[5]{%
   \begin{tikzpicture}[remember picture,overlay]
     \node[anchor=north west,inner sep=0pt] at ([xshift=#1bp,yshift=-#2bp]current page.north west) {\includegraphics[width=#3bp,height=#4bp]{assets/#5}};
@@ -94,7 +99,6 @@
   \let\SlaifTitleRole\@empty
   \let\SlaifTitleEvent\@empty
   \let\SlaifTitleSubtitle\@empty
-  \let\SlaifTitleDate\@empty
 }
 
 \pgfkeys{
@@ -106,7 +110,6 @@
   role/.store in=\SlaifTitleRole,
   event/.store in=\SlaifTitleEvent,
   subtitle/.store in=\SlaifTitleSubtitle,
-  date/.store in=\SlaifTitleDate,
 }
 
 \newcommand{\SlaifTitleAppend}[3]{%
@@ -145,7 +148,7 @@
     \placetextbox{388.706}{147.014}{505.294}{188.000}{44.000}{47.000}{{\RobotoCondensed{}\bfseries \parbox{505.294bp}{\raggedright \SlaifTitleTitle}}}{SlaifWhite}
     \placetextbox{388.706}{279.100}{505.294}{32.000}{18.000}{20.700}{{\RobotoCondensed{}\bfseries \parbox{505.294bp}{\raggedright \SlaifTitleAuthorLine}}}{SlaifWhite}
     \placetextbox{388.706}{308.400}{505.294}{32.000}{16.000}{18.400}{{\RobotoCondensed{}\itshape \parbox{505.294bp}{\raggedright \SlaifTitleEventLine}}}{SlaifWhite}
-    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifTitleDate}}{SlaifWhite}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
   \end{frame}%
 }
 
@@ -153,9 +156,6 @@
   \let\SlaifMotivationTitle\@empty
   \let\SlaifMotivationBody\@empty
   \let\SlaifMotivationVisual\@empty
-  \let\SlaifMotivationDate\@empty
-  \let\SlaifMotivationFooter\@empty
-  \let\SlaifMotivationSlideNumber\@empty
 }
 
 \pgfkeys{
@@ -164,9 +164,6 @@
   title/.store in=\SlaifMotivationTitle,
   body/.store in=\SlaifMotivationBody,
   visual/.store in=\SlaifMotivationVisual,
-  date/.store in=\SlaifMotivationDate,
-  footer/.store in=\SlaifMotivationFooter,
-  slideNumber/.store in=\SlaifMotivationSlideNumber,
 }
 
 \newcommand{\SlaifMotivationSlide}[1]{%
@@ -188,9 +185,9 @@
     \fi
     \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
-    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifMotivationDate}}{SlaifWhite}
-    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifMotivationFooter}}}{SlaifWhite}
-    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\SlaifMotivationSlideNumber}}}{SlaifWhite}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
   \end{frame}%
 }
 
@@ -207,8 +204,8 @@
     \placetextbox{73.500}{88.500}{828.000}{18.000}{13.500}{15.120}{{\RobotoCondensed{}\itshape #3}}{SlaifWhite}
     \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
-    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}05/26/2026}}{SlaifWhite}
-    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering SLAIF WP6 – AI Skills \& Training}}}{SlaifWhite}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
     \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
   \end{frame}%
 }
@@ -226,8 +223,8 @@
     \placetextbox{73.500}{88.500}{828.000}{18.000}{13.500}{15.120}{{\RobotoCondensed{}\itshape #3}}{SlaifWhite}
     \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
-    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}05/26/2026}}{SlaifWhite}
-    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering SLAIF WP6 – AI Skills \& Training}}}{SlaifWhite}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
     \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
   \end{frame}%
 }
@@ -366,5 +363,104 @@
     \drawshape{fill=\SlaifSliderColor,draw=none}{rectangle}{\SlaifSliderBarX}{\SlaifSliderRowY}{\SlaifSliderBarRight}{\SlaifSliderBarBottom}%
     \placetextbox{\SlaifSliderValueX}{\SlaifSliderValueY}{\SlaifSliderValueWidth}{\SlaifSliderValueHeight}{\SlaifSliderValueFontSize}{\SlaifSliderValueLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifSliderValueWidth bp}{\raggedright \SlaifSliderValue}}}{\SlaifSliderColor}%
   }%
+}
+
+\newcount\SlaifStatisticPanelCount
+\newcount\SlaifStatisticPanelIndex
+
+\newcommand{\SlaifStatisticPanelsReset}{%
+  \def\SlaifStatisticPanelItems{}%
+  \def\SlaifStatisticPanelX{38.628}%
+  \def\SlaifStatisticPanelY{144.000}%
+  \def\SlaifStatisticPanelTotalWidth{882.720}%
+  \def\SlaifStatisticPanelHeight{165.600}%
+  \def\SlaifStatisticPanelGap{15.840}%
+}
+
+\pgfkeys{
+  /SlaifStatisticPanels/.is family,
+  /SlaifStatisticPanels,
+  items/.store in=\SlaifStatisticPanelItems,
+  x/.store in=\SlaifStatisticPanelX,
+  y/.store in=\SlaifStatisticPanelY,
+  totalWidth/.store in=\SlaifStatisticPanelTotalWidth,
+  height/.store in=\SlaifStatisticPanelHeight,
+  gap/.store in=\SlaifStatisticPanelGap,
+}
+
+\newcommand{\SlaifStatistic}[3]{}
+
+\newcommand{\SlaifStatisticPanels}[1]{%
+  \SlaifStatisticPanelsReset
+  \pgfkeys{/SlaifStatisticPanels,#1}%
+  \SlaifStatisticPanelCount=0
+  \def\SlaifStatistic##1##2##3{%
+    \global\advance\SlaifStatisticPanelCount by 1
+  }%
+  \SlaifStatisticPanelItems
+  \SlaifStatisticPanelIndex=0
+  \def\SlaifStatistic##1##2##3{%
+    \global\advance\SlaifStatisticPanelIndex by 1
+    \pgfmathsetmacro{\SlaifStatisticPanelWidth}{(\SlaifStatisticPanelTotalWidth - (\the\SlaifStatisticPanelCount - 1) * \SlaifStatisticPanelGap) / \the\SlaifStatisticPanelCount}%
+    \pgfmathsetmacro{\SlaifStatisticPanelLeft}{\SlaifStatisticPanelX + (\the\SlaifStatisticPanelIndex - 1) * (\SlaifStatisticPanelWidth + \SlaifStatisticPanelGap)}%
+    \pgfmathsetmacro{\SlaifStatisticPanelRight}{\SlaifStatisticPanelLeft + \SlaifStatisticPanelWidth}%
+    \pgfmathsetmacro{\SlaifStatisticPanelBottom}{\SlaifStatisticPanelY + \SlaifStatisticPanelHeight}%
+    \pgfmathsetmacro{\SlaifStatisticDescriptionX}{\SlaifStatisticPanelLeft + 10.800}%
+    \pgfmathsetmacro{\SlaifStatisticDescriptionWidth}{\SlaifStatisticPanelWidth - 21.600}%
+    \pgfmathsetmacro{\SlaifStatisticValueY}{\SlaifStatisticPanelY + 18.000}%
+    \pgfmathsetmacro{\SlaifStatisticTitleY}{\SlaifStatisticPanelY + 82.800}%
+    \pgfmathsetmacro{\SlaifStatisticDescriptionY}{\SlaifStatisticPanelY + 111.600}%
+    \drawshape{fill=SlaifSurface,draw=SlaifBorder,line width=0.750bp,rounded corners=6bp}{rectangle}{\SlaifStatisticPanelLeft}{\SlaifStatisticPanelY}{\SlaifStatisticPanelRight}{\SlaifStatisticPanelBottom}%
+    \placetextbox{\SlaifStatisticPanelLeft}{\SlaifStatisticValueY}{\SlaifStatisticPanelWidth}{77.853}{49.680}{57.132}{{\RobotoCondensed{}\bfseries \parbox{\SlaifStatisticPanelWidth bp}{\centering ##1}}}{SlaifAccentTeal}%
+    \placetextbox{\SlaifStatisticPanelLeft}{\SlaifStatisticTitleY}{\SlaifStatisticPanelWidth}{18.166}{10.920}{12.558}{{\RobotoCondensed{}\bfseries \parbox{\SlaifStatisticPanelWidth bp}{\centering ##2}}}{SlaifInk}%
+    \placetextbox{\SlaifStatisticDescriptionX}{\SlaifStatisticDescriptionY}{\SlaifStatisticDescriptionWidth}{57.380}{10.920}{12.558}{{\RobotoCondensed{} \parbox{\SlaifStatisticDescriptionWidth bp}{\centering ##3}}}{SlaifMutedText}%
+  }%
+  \SlaifStatisticPanelItems
+}
+
+\newcommand{\SlaifConclusionPanel}[2]{%
+  \drawshape{fill=SlaifPanelBlue,draw=none,rounded corners=6bp}{rectangle}{39.600}{345.600}{921.600}{482.400}
+  \placetextbox{61.200}{360.000}{838.800}{23.608}{10.920}{12.558}{{\RobotoCondensed{}\bfseries \parbox{838.800bp}{\raggedright #1}}}{SlaifPrimaryTeal}
+  \placetextbox{61.200}{388.800}{838.800}{66.266}{11.700}{13.455}{{\RobotoCondensed{}\itshape \parbox{838.800bp}{\raggedright #2}}}{SlaifInk}
+}
+
+\newcommand{\SlaifNoTextSlideReset}{%
+  \let\SlaifNoTextTitle\@empty
+  \let\SlaifNoTextSubtitle\@empty
+  \let\SlaifNoTextStatistics\@empty
+  \let\SlaifNoTextConclusionTitle\@empty
+  \let\SlaifNoTextConclusionText\@empty
+}
+
+\pgfkeys{
+  /SlaifNoTextSlide/.is family,
+  /SlaifNoTextSlide,
+  title/.store in=\SlaifNoTextTitle,
+  subtitle/.store in=\SlaifNoTextSubtitle,
+  statistics/.store in=\SlaifNoTextStatistics,
+  conclusionTitle/.store in=\SlaifNoTextConclusionTitle,
+  conclusionText/.store in=\SlaifNoTextConclusionText,
+}
+
+\newcommand{\NoTextSlide}[1]{%
+  \SlaifNoTextSlideReset
+  \pgfkeys{/SlaifNoTextSlide,#1}%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]\fill[SlaifWhite] (current page.south west) rectangle (current page.north east);\end{tikzpicture}
+    \placeimage{0.000}{0.000}{960.000}{540.000}{image3.png}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placeimage{916.052}{17.766}{37.261}{51.516}{image5.png}
+    \placetextbox{39.600}{27.360}{885.600}{41.522}{24.960}{28.704}{{\RobotoCondensed{}\bfseries \parbox{885.600bp}{\raggedright \SlaifNoTextTitle}}}{SlaifPrimaryTeal}
+    \placetextbox{39.600}{79.200}{885.600}{20.761}{12.480}{14.352}{{\RobotoCondensed{}\itshape \parbox{885.600bp}{\raggedright \SlaifNoTextSubtitle}}}{SlaifMutedText}
+    \SlaifStatisticPanels{items={\SlaifNoTextStatistics}}%
+    \SlaifConclusionPanel{\SlaifNoTextConclusionTitle}{\SlaifNoTextConclusionText}%
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+  \end{frame}%
 }
 \makeatother
