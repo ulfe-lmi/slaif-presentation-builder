@@ -1581,4 +1581,77 @@
     \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
   \end{frame}%
 }
+
+\newcommand{\SlaifPlainSlideReset}{%
+  \let\SlaifPlainSlideTitle\@empty
+  \let\SlaifPlainSlideSubtitle\@empty
+  \let\SlaifPlainSlideBody\@empty
+  \let\SlaifPlainSlideLeft\@empty
+  \let\SlaifPlainSlideRight\@empty
+  \def\SlaifPlainSlideSplit{0.50}%
+}
+
+\pgfkeys{
+  /SlaifPlainSlide/.is family,
+  /SlaifPlainSlide,
+  title/.store in=\SlaifPlainSlideTitle,
+  subtitle/.store in=\SlaifPlainSlideSubtitle,
+  body/.store in=\SlaifPlainSlideBody,
+  left/.store in=\SlaifPlainSlideLeft,
+  right/.store in=\SlaifPlainSlideRight,
+  split/.store in=\SlaifPlainSlideSplit,
+}
+
+\newcommand{\SlaifPlainBulletList}[2]{%
+  \begin{minipage}{#1bp}
+    \raggedright
+    \begin{list}{\tikz[baseline=-0.35ex]\fill[SlaifGreen] (0,0) circle[radius=4.200bp];}{%
+      \setlength{\leftmargin}{22.000bp}%
+      \setlength{\labelwidth}{8.400bp}%
+      \setlength{\labelsep}{12.000bp}%
+      \setlength{\itemsep}{9.000pt}%
+      \setlength{\parsep}{0pt}%
+      \setlength{\topsep}{0pt}%
+      \setlength{\partopsep}{0pt}%
+    }%
+    #2%
+    \end{list}%
+  \end{minipage}%
+}
+
+\newcommand{\PlainSlide}[1]{%
+  \SlaifPlainSlideReset
+  \pgfkeys{/SlaifPlainSlide,#1}%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]\fill[SlaifWhite] (current page.south west) rectangle (current page.north east);\end{tikzpicture}
+    \placeimage{0.000}{0.000}{960.000}{540.000}{image3.png}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placeimage{916.052}{17.766}{37.261}{51.516}{image5.png}
+    \placetextbox{39.600}{27.360}{885.600}{41.522}{24.960}{28.704}{{\RobotoCondensed{}\bfseries \parbox{885.600bp}{\raggedright \SlaifPlainSlideTitle}}}{SlaifPrimaryTeal}
+    \placetextbox{39.600}{79.200}{885.600}{20.761}{12.480}{14.352}{{\RobotoCondensed{}\itshape \parbox{885.600bp}{\raggedright \SlaifPlainSlideSubtitle}}}{SlaifMutedText}
+    \ifx\SlaifPlainSlideBody\@empty
+      \pgfmathsetmacro{\SlaifPlainContentX}{82.800}%
+      \pgfmathsetmacro{\SlaifPlainContentY}{143.600}%
+      \pgfmathsetmacro{\SlaifPlainTotalWidth}{794.400}%
+      \pgfmathsetmacro{\SlaifPlainGap}{36.000}%
+      \pgfmathsetmacro{\SlaifPlainLeftWidth}{(\SlaifPlainTotalWidth - \SlaifPlainGap) * \SlaifPlainSlideSplit}%
+      \pgfmathsetmacro{\SlaifPlainRightWidth}{\SlaifPlainTotalWidth - \SlaifPlainGap - \SlaifPlainLeftWidth}%
+      \pgfmathsetmacro{\SlaifPlainRightX}{\SlaifPlainContentX + \SlaifPlainLeftWidth + \SlaifPlainGap}%
+      \pgfmathsetmacro{\SlaifPlainDividerX}{\SlaifPlainContentX + \SlaifPlainLeftWidth + 0.5 * \SlaifPlainGap}%
+      \pgfmathsetmacro{\SlaifPlainDividerRight}{\SlaifPlainDividerX + 0.720}%
+      \drawshape{fill=SlaifDivider,draw=none}{rectangle}{\SlaifPlainDividerX}{143.600}{\SlaifPlainDividerRight}{431.600}
+      \placetextbox{\SlaifPlainContentX}{\SlaifPlainContentY}{\SlaifPlainLeftWidth}{292.000}{15.600}{18.400}{{\RobotoCondensed{} \SlaifPlainBulletList{\SlaifPlainLeftWidth}{\SlaifPlainSlideLeft}}}{SlaifMutedText}
+      \placetextbox{\SlaifPlainRightX}{\SlaifPlainContentY}{\SlaifPlainRightWidth}{292.000}{15.600}{18.400}{{\RobotoCondensed{} \SlaifPlainBulletList{\SlaifPlainRightWidth}{\SlaifPlainSlideRight}}}{SlaifMutedText}
+    \else
+      \placetextbox{118.800}{146.000}{720.000}{292.000}{16.800}{19.800}{{\RobotoCondensed{} \SlaifPlainBulletList{720.000}{\SlaifPlainSlideBody}}}{SlaifMutedText}
+    \fi
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+  \end{frame}%
+}
 \makeatother

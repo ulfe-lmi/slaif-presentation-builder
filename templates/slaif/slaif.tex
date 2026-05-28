@@ -1,0 +1,332 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{slaif}
+
+\SlaifSetPresentationDate{Date field}
+\SlaifSetPresentationFooter{Footer title field}
+
+\begin{document}
+
+\SlaifTitleSlide{
+  title       = {Presentation Title Field},
+  author      = {Author Name Field},
+  institution = {Institution Field},
+  role        = {Role Field},
+  event       = {Event Name Field},
+  subtitle    = {Subtitle Field}
+}
+
+\SlaifMotivationSlide{
+  title = {Motivation},
+  body  = {{\bfseries Lorem ipsum dolor sit amet, consectetur adipiscing elit.}\\[9pt]Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.}
+}
+
+\SlaifMotivationSlide{
+  title = {Motivation With Visual},
+  body  = {{\bfseries Lorem ipsum dolor sit amet, consectetur adipiscing elit.}\\[8pt]Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.},
+  visual = {image8.png}
+}
+
+\NoTextSlide{
+  title = {Statistic Panels},
+  subtitle = {NoTextSlide with statistic panels and a conclusion panel},
+  body = {
+    \SlaifStatisticPanels{
+      \SlaifStatistic{4}{Panels}{Lorem ipsum dolor sit amet\\consectetur adipiscing}
+      \SlaifStatistic{12}{Metrics}{Sed do eiusmod tempor\\incididunt ut labore}
+      \SlaifStatistic{88}{Items}{Ut enim ad minim veniam\\quis nostrud}
+      \SlaifStatistic{3}{Groups}{Duis aute irure dolor\\in reprehenderit}
+    }
+    \SlaifCommentaryPanel{Conclusion panel}{Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.}
+  }
+}
+
+\SlaifBlueDividerSlide
+  {Section label field}
+  {Blue Divider Slide}
+  {Divider subtitle field with lorem ipsum dolor sit amet}
+
+\SlaifGreenDividerSlide
+  {Section label field}
+  {Green Divider Slide}
+  {Divider subtitle field with consectetur adipiscing elit}
+
+\NoTextSlide{
+  title = {Slider Table},
+  subtitle = {Values normalize automatically against the largest row},
+  body = {
+    \SlaifSliderTable{
+      rows={{Lorem ipsum}/19,{Dolor sit amet}/16,{Consectetur}/12,{Adipiscing elit}/9,{Sed eiusmod}/6,{Tempor}/3}
+    }
+    \SlaifFootnotePanel{
+      \itshape Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent libero sed cursus ante dapibus diam.
+    }
+  }
+}
+
+\NoTextSlide{
+  title = {Colored Panels},
+  subtitle = {Automatic color sequence and flexible panel bodies},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Alpha}{Subtitle field}{
+        \SlaifPanelCenteredItems{
+          \SlaifPanelTextItem{{\bfseries Lorem ipsum}}
+          \SlaifPanelTextItem{Dolor sit amet consectetur adipiscing elit}
+        }
+      }{Mini footer}
+      \ColoredPanel{Beta}{Subtitle field}{
+        \SlaifPanelCenteredItems{
+          \SlaifPanelTextItem{{\bfseries Sed do eiusmod}}
+          \SlaifPanelTextItem{Tempor incididunt ut labore et dolore}
+        }
+      }{Mini footer}
+      \ColoredPanel{Gamma}{Subtitle field}{
+        \SlaifPanelCenteredItems{
+          \SlaifPanelTextItem{{\bfseries Ut enim ad minim}}
+          \SlaifPanelTextItem{Veniam quis nostrud exercitation}
+        }
+      }{Mini footer}
+    }
+    \SlaifFootnotePanel[panelCaption]{Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+  }
+}
+
+\NoTextSlide{
+  title = {Colored Panels With Pills},
+  subtitle = {Panel-local status pills and centered items},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{One}{}{
+        \SlaifPanelPill[active]{Active state}
+        \SlaifPanelCenteredItems{
+          \SlaifPanelTextItem{{\bfseries Lorem ipsum dolor}}
+          \SlaifPanelTextItem{Sit amet consectetur adipiscing elit}
+        }
+      }{}
+      \ColoredPanel{Two}{}{
+        \SlaifPanelPill[inactive]{Inactive state}
+        \SlaifPanelCenteredItems{
+          \SlaifPanelTextItem{{\bfseries Sed do eiusmod}}
+          \SlaifPanelTextItem{Tempor incididunt ut labore}
+        }
+      }{}
+      \ColoredPanel{Three}{}{
+        \SlaifPanelPill[inactive]{Inactive state}
+        \SlaifPanelCenteredItems{
+          \SlaifPanelTextItem{{\bfseries Ut enim ad minim}}
+          \SlaifPanelTextItem{Veniam quis nostrud exercitation}
+        }
+      }{}
+    }
+  }
+}
+
+\NoTextSlide{
+  title = {Colored Panels With Bullets},
+  subtitle = {Reusable blue and green panel bullet lists},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Blue Bullets}{}{
+        \SlaifBluePanelBulletList{
+          \item Lorem ipsum dolor sit amet
+          \item Consectetur adipiscing elit
+          \item Sed do eiusmod tempor
+        }
+      }{}
+      \ColoredPanel{Green Bullets}{}{
+        \SlaifGreenPanelBulletList{
+          \item Ut enim ad minim veniam
+          \item Quis nostrud exercitation
+          \item Duis aute irure dolor
+        }
+      }{}
+    }
+  }
+}
+
+\TwoColumnNoTextSlide{
+  title = {Two Column NoText Slide},
+  subtitle = {Left and right regions are independently supplied},
+  left = {
+    \SlaifStatisticPanels[feature]{
+      \SlaifStatistic{1}{Left column}{Lorem ipsum dolor sit amet consectetur adipiscing elit}
+    }
+  },
+  right = {
+    \SlaifRightColumnTopImage{image8.png}
+    \SlaifRightColumnHeading{Right Column Heading}
+    \SlaifSliderTable{
+      labelX=457.200,
+      y=194.400,
+      labelWidth=205.000,
+      barX=672.000,
+      barWidth=177.000,
+      valueWidth=50.000,
+      rows={{Lorem ipsum}/9,{Dolor sit}/6,{Amet elit}/3}
+    }
+    \SlaifFootnotePanel[rightColumn]{\itshape Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+  }
+}
+
+\NoTextSlide{
+  title = {Contribution Header And Text Panels},
+  body = {
+    \ContributionHeader
+      {Lorem ipsum dolor sit amet consectetur adipiscing elit}
+      {Second header line field with provider, owner, source, or metadata}
+    \SmallTextPanels{
+      \SmallTextPanel{Panel One}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.}
+      \SmallTextPanel{Panel Two}{Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.}
+      \SmallTextPanel{Panel Three}{Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.}
+    }
+    \TimelinePanels{
+      \TimelinePanel{Metadata\\Lorem ipsum}
+      \TimelinePanel{Owner\\Dolor sit}
+      \TimelinePanel{Format\\Amet elit}
+      \TimelinePanel{Date\\Field value}
+      \TimelinePanel{Duration\\Field value}
+    }
+  }
+}
+
+\NoTextSlide{
+  title = {Small Text Panels With Widths},
+  subtitle = {Explicit panel widths can override equal-width defaults},
+  body = {
+    \SmallTextPanels{
+      \SmallTextPanel[180.000]{Narrow Panel}{Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+      \SmallTextPanel[430.000]{Wide Panel}{Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.}
+      \SmallTextPanel[248.960]{Medium Panel}{Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.}
+    }
+  }
+}
+
+\PlainSlide{
+  title = {Plain Slide},
+  subtitle = {Single SLAIF-grey bullet list with SLAIF-green bullets},
+  body = {
+    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    \item Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    \item Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+    \item Duis aute irure dolor in reprehenderit in voluptate velit esse.
+    \item Excepteur sint occaecat cupidatat non proident.
+  }
+}
+
+\PlainSlide{
+  title = {Plain Slide Split},
+  subtitle = {Configurable vertical split for two bullet-list regions},
+  split = 0.44,
+  left = {
+    \item Lorem ipsum dolor sit amet.
+    \item Consectetur adipiscing elit.
+    \item Sed do eiusmod tempor incididunt.
+    \item Ut labore et dolore magna aliqua.
+  },
+  right = {
+    \item Ut enim ad minim veniam.
+    \item Quis nostrud exercitation ullamco laboris.
+    \item Duis aute irure dolor in reprehenderit.
+    \item Excepteur sint occaecat cupidatat non proident.
+  }
+}
+
+\NoTextSlide{
+  title = {Metric Summary Panels},
+  subtitle = {Metric blocks with colored bullets and optional footer text},
+  body = {
+    \MetricSummaryPanels{
+      \MetricSummaryPanel
+        {Summary One}
+        {Lead text field}
+        {42}
+        {metric label\\with two lines}
+        {Pre-bullet text field:}
+        {
+          \MetricSummaryBullet{Lorem ipsum dolor sit amet}
+          \MetricSummaryBullet{Consectetur adipiscing elit}
+          \MetricSummaryBullet{Sed do eiusmod tempor}
+        }
+        {Small footer text field}
+      \MetricSummaryPanel
+        {Summary Two}
+        {Lead text field}
+        {17}
+        {metric label\\with two lines}
+        {Pre-bullet text field:}
+        {
+          \MetricSummaryBullet{Ut enim ad minim veniam}
+          \MetricSummaryBullet{Quis nostrud exercitation}
+          \MetricSummaryBullet{Duis aute irure dolor}
+        }
+        {Small footer text field}
+    }
+  }
+}
+
+\NoTextSlide{
+  title = {Data Table},
+  subtitle = {Configurable columns, row fills, and highlights},
+  body = {
+    \SlaifDataTable{
+      \SlaifDataColumn[style=\bfseries,color=SlaifInk]{Column A}{130}{l}
+      \SlaifDataColumn{Column B}{270}{l}
+      \SlaifDataColumn[color=SlaifPrimaryTeal,style=\bfseries]{Column C}{150}{c}
+      \SlaifDataColumn{Column D}{332}{l}
+    }{
+      \SlaifDataRow{\SlaifDataCell{Lorem}\SlaifDataCell{Ipsum dolor sit amet}\SlaifDataCell{11}\SlaifDataCell{Consectetur adipiscing elit}}
+      \SlaifDataRow{\SlaifDataCell{Sed}\SlaifDataCell{Do eiusmod tempor}\SlaifDataCell{18}\SlaifDataCell{Incididunt ut labore et dolore}}
+      \SlaifDataRow{\SlaifDataCell{Ut}\SlaifDataCell{Enim ad minim veniam}\SlaifDataCell{27}\SlaifDataCell{Quis nostrud exercitation ullamco}}
+      \SlaifDataRow{\SlaifDataCell{Duis}\SlaifDataCell{Aute irure dolor}\SlaifDataCell{34}\SlaifDataCell{Reprehenderit in voluptate velit}}
+      \SlaifDataRow{\SlaifDataCell{Excepteur}\SlaifDataCell{Sint occaecat cupidatat}\SlaifDataCell{41}\SlaifDataCell{Non proident sunt in culpa}}
+    }
+    \SlaifDataTableHighlights{2,4}
+  }
+}
+
+\NoTextSlide{
+  title = {Footnote Panel},
+  subtitle = {Panel expands upward from a fixed bottom position},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Alpha}{}{%
+        \SlaifPanelCenteredItems{\SlaifPanelTextItem{Lorem ipsum dolor sit amet}}
+      }{}
+      \ColoredPanel{Beta}{}{%
+        \SlaifPanelCenteredItems{\SlaifPanelTextItem{Consectetur adipiscing elit}}
+      }{}
+      \ColoredPanel{Gamma}{}{%
+        \SlaifPanelCenteredItems{\SlaifPanelTextItem{Sed do eiusmod tempor}}
+      }{}
+    }
+    \SlaifFootnotePanel{Lorem ipsum dolor sit amet, consectetur adipiscing elit.\\[6pt]Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.}
+  }
+}
+
+\NoTextSlide{
+  title = {Final Takeaway Panel},
+  subtitle = {Large final-message panel with configurable lead color},
+  body = {
+    \FinalTakeawayPanel
+      {Top-level text field}
+      {SlaifGreen}
+      {Largest key message field}
+      {Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.}
+  }
+}
+
+\NoTextSlide{
+  title = {QR Code Asset},
+  subtitle = {QR assets should be real generated images, not fake patterns},
+  body = {
+    \placetextbox{90.000}{150.000}{520.000}{120.000}{18.000}{21.600}{{\RobotoCondensed{}\bfseries \parbox{520.000bp}{\raggedright Lorem ipsum dolor sit amet, consectetur adipiscing elit. The QR code image is placed from the template asset directory.}}}{SlaifInk}
+    \placeqrimage{650.000}{145.000}{170.000}{170.000}{slaif-si-qr-rgb.png}
+    \SlaifFootnotePanel{Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+  }
+}
+
+\FinalSlide{Final-slide message field}
+
+\FinalSlide[slaif-si-qr-rgb.png]{Final slide with optional QR field}
+
+\end{document}
