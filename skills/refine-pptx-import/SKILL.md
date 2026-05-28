@@ -342,6 +342,11 @@ reference PNG and Beamer PNG:
   represented as separate live Beamer text boxes or explicit styled lines when
   needed for accurate matching
 
+Preserve run-level emphasis. Do not force an entire text block to be bold,
+italic, or otherwise emphasized just because the imported reconstruction did.
+Compare the source render and PPTX runs, then apply emphasis only to the
+sentences, phrases, or runs that are actually emphasized.
+
 Do not compensate for a placement or text-margin mismatch by changing font size.
 First make the rendered glyph heights match the reference, then tune text-box
 position, paragraph width, and line spacing.
