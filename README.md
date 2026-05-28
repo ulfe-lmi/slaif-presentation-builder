@@ -36,6 +36,9 @@ TikZ shapes, editable text, correct alignment, font sizing, and regression
 checks. `cluster-pptx-import` then turns repeated raw Beamer/TikZ fragments into
 reusable style-file macros, including colors, slide wrappers, panels, cards,
 pills, progress bars, footnote panels, and other repeated graphical elements.
+`insert-qr-code` supports generating real QR-code assets from user-provided
+links and inserting them into existing decks through configurable template
+slots.
 
 Planned future skills include a source-material import skill for converting
 briefing documents, notes, data, and other content sources into structured
@@ -52,7 +55,7 @@ sudo apt-get update
 sudo apt-get install -y \
   libreoffice poppler-utils imagemagick qpdf ghostscript tesseract-ocr \
   latexmk texlive-xetex texlive-latex-extra texlive-fonts-recommended \
-  fonts-roboto fontconfig unzip zip jq bc ripgrep gawk
+  fonts-roboto fontconfig unzip zip jq bc ripgrep gawk qrencode
 ```
 
 Install Python dependencies in a virtual environment:
@@ -75,7 +78,8 @@ fc-match "Roboto Condensed"
 
 The SLAIF style currently includes semantic colors, absolute placement helpers,
 rounded image rendering, title and motivation slide templates, divider slides,
-and slider-table components.
+slider-table components, data-table components, and optional final-slide QR
+code placement.
 
 The goal is to keep presentation content in deck files while moving visual
 rules, layout geometry, and repeated drawing logic into reusable LaTeX style
