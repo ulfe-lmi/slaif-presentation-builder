@@ -42,6 +42,35 @@ briefing documents, notes, data, and other content sources into structured
 presentation inputs, and a presentation creation skill for building new decks
 from an established template system.
 
+## Installation
+
+On Ubuntu, install the system tools needed for PPTX inspection, PDF/PNG
+rendering, and Beamer compilation:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y \
+  libreoffice poppler-utils imagemagick qpdf ghostscript tesseract-ocr \
+  latexmk texlive-xetex texlive-latex-extra texlive-fonts-recommended \
+  fonts-roboto fontconfig unzip zip jq bc ripgrep gawk
+```
+
+Install Python dependencies in a virtual environment:
+
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
+```
+
+For Beamer builds, the Roboto Condensed font must be available through
+fontconfig. Verify it with:
+
+```bash
+fc-match "Roboto Condensed"
+```
+
 ## Current Template Capabilities
 
 The SLAIF style currently includes semantic colors, absolute placement helpers,
