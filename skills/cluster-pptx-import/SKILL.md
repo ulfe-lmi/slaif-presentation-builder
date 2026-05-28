@@ -356,7 +356,102 @@ Avoid false precision. Distinguish between:
 When unsure, render the generalized version and ask the user whether the result
 matches the intended design language.
 
-### 7. Extract One Cluster At A Time
+### 7. Complete Slide-Wrapper And Panel-Row Conversions
+
+When a slide is migrated to a shared slide wrapper, complete that migration
+rather than leaving a half-templated slide. The wrapper should own repeated
+slide chrome: background, common logo placement, title, subtitle, footer,
+date, and slide number. The slide body should contain only slide-specific
+semantic content and calls to content primitives.
+
+If a repeated row of card-like or panel-like elements is present, convert the
+whole row to the shared panel-row primitive instead of preserving the original
+row as manual rectangles and text boxes. Repeated panel geometry, panel
+spacing, panel fills, borders, header bands, and panel header typography belong
+inside the panel-row macro. The deck-side code should describe each panel's
+semantic fields and body content.
+
+Good deck-side pattern:
+
+```tex
+\ThemeContentSlide{
+  title = {Slide title},
+  subtitle = {Slide subtitle},
+  body = {
+    \ThemePanelRow{
+      \ThemePanel{Panel title}{Optional subtitle}{
+        \ThemeStatusPill[active]{Status text}
+        \ThemeCenteredItems{
+          \ThemeItem{{\bfseries Main statement}}
+          \ThemeItem{Supporting text}
+        }
+      }{Optional mini-footer}
+      \ThemePanel{Second panel}{Optional subtitle}{
+        ...
+      }{}
+    }
+  }
+}
+```
+
+Absorb detachable decorative labels into the panel system whenever their role
+is semantic. Examples:
+
+- numbered circles can become panel titles
+- floating date tabs can become panel titles, subtitles, or pills
+- status badges can become a reusable pill macro with `active` and `inactive`
+  states
+- simple repeated body text blocks can become centered-item or list macros
+- bottom explanatory callouts can become the existing footnote/callout panel
+  primitive
+
+This kind of simplification is allowed during clustering when the user accepts
+it. Clustering is not always exact preservation of imported PowerPoint
+accidents; it is the extraction of an agreed visual grammar. Do not simplify
+meaningful content away, but do remove decorative duplication when it can be
+represented by existing semantic primitives.
+
+Inside converted panel rows, prefer existing text primitives over new absolute
+text boxes. If centered panel content has already been extracted, reuse that
+macro for similar centered items. If bulleted list primitives exist, use them
+for repeated lists. Do not introduce a new higher-level macro just to avoid
+using an existing primitive, unless the user has agreed that the broader
+structure is now a real cluster.
+
+Stateful visual elements should be macro options, not manual colors or one-off
+styling. Use a reusable option such as `active` or `inactive` for status pills,
+or a documented variant key for any repeated state. The macro should map state
+to fill color, text color, border, font, and alignment.
+
+After converting a slide wrapper or panel row, run a mechanical check on the
+converted slide body:
+
+```python
+from pathlib import Path
+
+tex = Path("deck.tex").read_text()
+start = tex.index("title = {Converted slide title")
+end = tex.index("\\ThemeNextSlideOrFrameMarker", start)
+block = tex[start:end]
+
+print("direct drawshape:", block.count("\\drawshape"))
+print("direct placetextbox:", block.count("\\placetextbox"))
+print("panel rows:", block.count("\\ThemePanelRow"))
+print("panels:", block.count("\\ThemePanel{"))
+```
+
+A converted slide body should normally have zero direct shape and text
+placement calls. Exceptions are allowed only when a remaining element has no
+macro yet and is explicitly left as raw content for a later cluster.
+
+Report the effect of each conversion:
+
+- old and new deck size in lines and bytes
+- whether direct raw drawing/text placement remains in the converted body
+- compile command and result
+- rendered PNG path for the affected slide
+
+### 8. Extract One Cluster At A Time
 
 For each cluster:
 

@@ -172,6 +172,139 @@
   \end{tikzpicture}%
 }
 
+\newcommand{\SlaifPillReset}{%
+  \def\SlaifPillX{0.000}%
+  \def\SlaifPillY{0.000}%
+  \def\SlaifPillWidth{122.400}%
+  \def\SlaifPillHeight{27.360}%
+  \def\SlaifPillRadius{6.000}%
+  \def\SlaifPillFill{SlaifPanelBlue}%
+  \def\SlaifPillTextColor{SlaifPrimaryTeal}%
+  \def\SlaifPillFontSize{9.360}%
+  \def\SlaifPillLineHeight{10.764}%
+}
+
+\pgfkeys{
+  /SlaifPill/.is family,
+  /SlaifPill,
+  inactive/.style={
+    fill=SlaifPanelBlue,
+    textColor=SlaifPrimaryTeal,
+  },
+  active/.style={
+    fill=SlaifGreen,
+    textColor=SlaifWhite,
+  },
+  x/.store in=\SlaifPillX,
+  y/.store in=\SlaifPillY,
+  width/.store in=\SlaifPillWidth,
+  height/.store in=\SlaifPillHeight,
+  radius/.store in=\SlaifPillRadius,
+  fill/.store in=\SlaifPillFill,
+  textColor/.store in=\SlaifPillTextColor,
+  fontSize/.store in=\SlaifPillFontSize,
+  lineHeight/.store in=\SlaifPillLineHeight,
+}
+
+\newcommand{\SlaifPill}[2][]{%
+  \SlaifPillReset
+  \pgfkeys{/SlaifPill,inactive,#1}%
+  \ifSlaifColoredPanelsMeasuring
+    \SlaifColoredPanelsCandidateBottom=\dimexpr\SlaifPillY bp + \SlaifPillHeight bp\relax
+    \SlaifColoredPanelsReportBottomDim{\SlaifColoredPanelsCandidateBottom}%
+  \else
+    \pgfmathsetmacro{\SlaifPillCenterX}{\SlaifPillX + \SlaifPillWidth / 2}%
+    \pgfmathsetmacro{\SlaifPillCenterY}{\SlaifPillY + \SlaifPillHeight / 2}%
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[
+        anchor=center,
+        fill=\SlaifPillFill,
+        draw=none,
+        rounded corners=\SlaifPillRadius bp,
+        minimum width=\SlaifPillWidth bp,
+        minimum height=\SlaifPillHeight bp,
+        inner sep=0pt,
+        align=center,
+        text width=\SlaifPillWidth bp
+      ] at ([xshift=\SlaifPillCenterX bp,yshift=-\SlaifPillCenterY bp]current page.north west) {%
+        \begingroup\color{\SlaifPillTextColor}\fontsize{\SlaifPillFontSize pt}{\SlaifPillLineHeight pt}\selectfont\RobotoCondensed{}\bfseries #2\endgroup
+      };
+    \end{tikzpicture}%
+  \fi
+}
+
+\newcommand{\SlaifPanelPill}[2][]{%
+  \pgfmathsetmacro{\SlaifPanelPillX}{\SlaifColoredPanelLeft + 18.000}%
+  \pgfmathsetmacro{\SlaifPanelPillWidth}{\SlaifColoredPanelWidth - 36.000}%
+  \SlaifPill[
+    x=\SlaifPanelPillX,
+    y=208.800,
+    width=\SlaifPanelPillWidth,
+    height=32.400,
+    #1
+  ]{#2}%
+}
+
+\newcount\SlaifCenteredItemCount
+\newcount\SlaifCenteredItemIndex
+
+\newcommand{\SlaifCenteredItemsReset}{%
+  \def\SlaifCenteredItemsX{0.000}%
+  \def\SlaifCenteredItemsWidth{144.000}%
+  \def\SlaifPanelCenteredItemsY{252.000}%
+  \def\SlaifPanelCenteredItemsRowStep{61.200}%
+  \def\SlaifPanelCenteredItemsItemHeight{53.184}%
+  \def\SlaifPanelCenteredItemsFontSize{10.920}%
+  \def\SlaifPanelCenteredItemsLineHeight{12.558}%
+  \def\SlaifPanelCenteredItemsColor{SlaifMutedText}%
+}
+
+\pgfkeys{
+  /SlaifCenteredItems/.is family,
+  /SlaifCenteredItems,
+  x/.store in=\SlaifCenteredItemsX,
+  width/.store in=\SlaifCenteredItemsWidth,
+  y/.store in=\SlaifPanelCenteredItemsY,
+  rowStep/.store in=\SlaifPanelCenteredItemsRowStep,
+  itemHeight/.store in=\SlaifPanelCenteredItemsItemHeight,
+  fontSize/.store in=\SlaifPanelCenteredItemsFontSize,
+  lineHeight/.store in=\SlaifPanelCenteredItemsLineHeight,
+  color/.store in=\SlaifPanelCenteredItemsColor,
+}
+
+\newcommand{\SlaifPanelTextItem}[1]{}
+
+\newcommand{\SlaifCenteredItems}[2][]{%
+  \SlaifCenteredItemsReset
+  \pgfkeys{/SlaifCenteredItems,#1}%
+  \SlaifCenteredItemCount=0
+  \def\SlaifPanelTextItem##1{%
+    \global\advance\SlaifCenteredItemCount by 1
+  }%
+  #2%
+  \ifSlaifColoredPanelsMeasuring
+    \pgfmathsetmacro{\SlaifPanelCenteredItemsBottom}{\SlaifPanelCenteredItemsY + (\the\SlaifCenteredItemCount - 1) * \SlaifPanelCenteredItemsRowStep + \SlaifPanelCenteredItemsItemHeight}%
+    \SlaifColoredPanelsCandidateBottom=\dimexpr\SlaifPanelCenteredItemsBottom bp\relax
+    \SlaifColoredPanelsReportBottomDim{\SlaifColoredPanelsCandidateBottom}%
+  \else
+    \SlaifCenteredItemIndex=0
+    \def\SlaifPanelTextItem##1{%
+      \global\advance\SlaifCenteredItemIndex by 1
+      \pgfmathsetmacro{\SlaifPanelCenteredItemY}{\SlaifPanelCenteredItemsY + (\the\SlaifCenteredItemIndex - 1) * \SlaifPanelCenteredItemsRowStep}%
+      \placetextbox{\SlaifCenteredItemsX}{\SlaifPanelCenteredItemY}{\SlaifCenteredItemsWidth}{\SlaifPanelCenteredItemsItemHeight}{\SlaifPanelCenteredItemsFontSize}{\SlaifPanelCenteredItemsLineHeight}{{\RobotoCondensed{} \parbox{\SlaifCenteredItemsWidth bp}{\centering ##1}}}{\SlaifPanelCenteredItemsColor}%
+    }%
+    #2%
+  \fi
+}
+
+\newcommand{\SlaifPanelCenteredItems}[2][]{%
+  \SlaifCenteredItems[
+    x=\SlaifColoredPanelInnerX,
+    width=\SlaifColoredPanelInnerWidth,
+    #1
+  ]{#2}%
+}
+
 \makeatletter
 \newcommand{\SlaifTitleReset}{%
   \let\SlaifTitleTitle\@empty
