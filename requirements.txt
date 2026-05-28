@@ -1,0 +1,9 @@
+python-pptx
+lxml
+Pillow
+numpy
+opencv-python
+PyMuPDF
+pypdf
+pdf2image
+fonttools
