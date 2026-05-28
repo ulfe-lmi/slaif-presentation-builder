@@ -392,6 +392,30 @@ Keep these substructures configurable through semantic keys such as
 of the visual grammar. Avoid positional keys in the deck call unless the source
 slide has a genuine hand-tuned layout that cannot yet be generalized cleanly.
 
+Dense information slides with repeated text-heavy regions often decompose into
+several smaller primitives rather than one monolithic slide macro. Look for a
+header block, a fixed-height multi-panel body, compact metadata strips, or
+other repeated bands that can become independent group/item macro pairs.
+
+For repeated row or panel structures, prefer a two-level API: one macro for the
+group and one macro for each item. The group macro should count declared items,
+own the shared rules, separators, fills, heights, typography, and spacing, and
+support 1-N items. Item macros should expose only semantic contents and, when
+needed, optional explicit width. If widths are omitted, default to equal widths.
+
+Fixed-height containers are important when the source slide uses bounded visual
+regions. Text should adapt inside the fixed visual container instead of making
+the container taller or moving neighboring elements. If a generalized layout
+improves an awkward imported arrangement while preserving semantic content, keep
+the improvement only after rendering it and checking the original reference for
+regressions.
+
+When an imported slide includes optional media or a placeholder-like region,
+validate it against the original render before keeping it. If the original has
+no media in that region, remove the optional visual and restore the no-media
+layout rather than assuming the imported reconstruction's optional branch is
+correct.
+
 Good deck-side pattern:
 
 ```tex
