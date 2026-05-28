@@ -1,0 +1,526 @@
+
+\documentclass[aspectratio=169]{beamer}
+\makeatletter
+\def\input@path{{../../../templates/slaif/}}
+\makeatother
+\usepackage{slaif}
+\SlaifSetPresentationDate{05/26/2026}
+\SlaifSetPresentationFooter{SLAIF WP6 – AI Skills \& Training}
+\begin{document}
+\SlaifTitleSlide{
+  title       = {WP6 — AI Skills \&\\Training},
+  author      = {Vida Groznik},
+  institution = {University of Ljubljana},
+  role        = {WP6 Lead},
+  event       = {SLAIF Mid-Term Review},
+  subtitle    = {Months 1–7 Progress}
+}
+
+\SlaifMotivationSlide{
+  title       = {Why WP6 matters for SLAIF},
+  body        = {{\bfseries Infrastructure without skills is an empty computing centre.}\\[9pt]WP6 builds the Slovenian AI \& HPC talent pipeline — from doctoral students to SME decision-makers — that will put SLAIF's 100-petaflop supercomputer and its service portfolio to work across industry, academia and the public sector.}
+}
+
+\NoTextSlide{
+  title = {WP6 at a glance},
+  subtitle = {Lead: University of Ljubljana  ·  Start M1  ·  End M36  ·  All 10 consortium partners active},
+  body = {
+    \SlaifStatisticPanels{
+      \SlaifStatistic{4}{Tasks}{Talent · Customisation ·\\SME engagement · Onboarding}
+      \SlaifStatistic{338}{Person-months}{Total planned effort across\\the 36-month project}
+      \SlaifStatistic{10}{Partners}{Universities, research institutes,\\chamber of commerce, tech park}
+      \SlaifStatistic{3}{Regional hubs}{Ljubljana · Maribor · Novo mesto\\+ extensions in Koper \& Nova Gorica}
+    }
+    \SlaifCommentaryPanel{Mission}{Develop AI and HPC talent through customised training programmes that address the needs of diverse users — students, professionals, SMEs and public sector — foster SME engagement through accessible learning pathways, and establish onboarding activities that support new users in integrating AI into their workflows.}
+  }
+}
+
+\NoTextSlide{
+  title = {The four-task architecture of WP6},
+  subtitle = {Each task owned by a different institution — effort mirrors strategic weight},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{T6.1}{AI Talent Development}{
+        \drawshape{draw=SlaifBorder,line width=0.500bp}{rectangle}{0.000}{351.360}{0.000}{351.360}
+        \placetextbox{\SlaifColoredPanelInnerX}{\SlaifColoredPanelContentY}{\SlaifColoredPanelInnerWidth}{40.643}{10.920}{12.558}{{\RobotoCondensed{} \parbox{\SlaifColoredPanelInnerWidth bp}{\centering Curricula · micro-credentials ·\\MOOC · train-the-trainer · registry}}}{SlaifMutedText}
+      }{Lead: UL FRI}
+      \ColoredPanel{T6.2}{Customising Training\\for Diverse Users}{
+        \drawshape{draw=SlaifBorder,line width=0.500bp}{rectangle}{0.000}{351.360}{0.000}{351.360}
+        \placetextbox{\SlaifColoredPanelInnerX}{\SlaifColoredPanelContentY}{\SlaifColoredPanelInnerWidth}{62.045}{10.920}{12.558}{{\RobotoCondensed{} \parbox{\SlaifColoredPanelInnerWidth bp}{\centering Needs analysis · 3-level pathway · sector-specific modules · MOOC content}}}{SlaifMutedText}
+      }{Lead: UM FERI}
+      \ColoredPanel{T6.3}{SME \& Industry\\Engagement}{
+        \drawshape{draw=SlaifBorder,line width=0.500bp}{rectangle}{0.000}{351.360}{0.000}{351.360}
+        \placetextbox{\SlaifColoredPanelInnerX}{\SlaifColoredPanelContentY}{\SlaifColoredPanelInnerWidth}{62.045}{10.920}{12.558}{{\RobotoCondensed{} \parbox{\SlaifColoredPanelInnerWidth bp}{\centering AI Industry Days · case studies ·\\polls \& feedback · SME-tailored training}}}{SlaifMutedText}
+      }{Lead: JSI}
+      \ColoredPanel{T6.4}{Onboarding Activities\\for Non-technical Users}{
+        \drawshape{draw=SlaifBorder,line width=0.500bp}{rectangle}{0.000}{351.360}{0.000}{351.360}
+        \placetextbox{\SlaifColoredPanelInnerX}{\SlaifColoredPanelContentY}{\SlaifColoredPanelInnerWidth}{62.045}{10.920}{12.558}{{\RobotoCondensed{} \parbox{\SlaifColoredPanelInnerWidth bp}{\centering Low-threshold workshops ·\\interactive exercises ·\\evaluation}}}{SlaifMutedText}
+      }{Lead: FIS}
+    }
+    \SlaifFootnotePanel[panelCaption]{All 10 partners contribute to at least two tasks. Weekly WP6 coordination meetings have run since October 2025.}
+  }
+}
+
+\SlaifBlueDividerSlide
+  {Part II}
+  {What we delivered in Months 1–7}
+  {Foundations, a training catalogue, a working infrastructure, and first industry contacts}
+
+\TwoColumnNoTextSlide{
+  title = {A consolidated training portfolio},
+  subtitle = {First coordination output: one catalogue, one schema, one registry — published as Appendix C to the PPR},
+  left = {
+    \SlaifStatisticPanels[feature]{
+      \SlaifStatistic{88}{consolidated training activities\\scheduled across the project lifecycle}{Collected from all 10 partners between December 2025 and February 2026, deduplicated through iterative review}
+    }
+  },
+  right = {
+    \SlaifRightColumnTopImage{image8.png}
+    \SlaifRightColumnHeading{By training type}
+    \SlaifSliderTable{
+      compact,
+      rows={{Workshops \& hands-on sessions}/59,{Webinars for broader outreach}/16,{Micro-credential courses (EQF-aligned)}/13}
+    }
+    \SlaifFootnotePanel[rightColumn]{
+      52 trainings combine lectures with practical exercises\\34 delivered in Slovenian · 18 in English · 36 bilingual
+    }
+  }
+}
+
+\NoTextSlide{
+  title = {Thematic coverage across the full AI/HPC stack},
+  subtitle = {Balanced portfolio — from fundamentals to frontier, with deliberate SME focus},
+  body = {
+    \SlaifSliderTable{
+      rows={{Data science \& ML fundamentals}/19,{HPC infrastructure \& workflows}/18,{LLMs \& natural language processing}/16,{AI adoption for SMEs \& industry}/12,{Health \& biomedical AI}/11,{AI ethics \& EU AI Act compliance}/6,{Earth observation \& agriculture}/3,{Computer vision}/2,{Cybersecurity}/1}
+    }
+    \SlaifFootnotePanel{
+      \itshape Nearly a third of the catalogue (33 of 88) targets SMEs, industry AI adoption and EU AI Act compliance — directly addressing the industry-facing mandate of the AI Factory.\\[12pt]
+    }
+  }
+}
+
+\NoTextSlide{
+  title = {Training example},
+  body = {
+    \drawshape{fill=SlaifWhite,draw=none}{rectangle}{42.821}{443.937}{916.181}{488.577}
+    \ContributionHeader
+      {Adapting and fine-tuning LLMs – A hands-on approach for business and science}
+      {Course provider: University of Ljubljana, Faculty of Computer and Information Science (UL FRI)     Instructors: Marko Robnik-Šikonja, Aleš Žagar, Matej Klemen, Domen Vreš, Tjaša Arčon, Živa Štebljaj}
+    \SmallTextPanels{
+      \SmallTextPanel[149.684]
+        {Learning Objectives}
+        {Get practical knowledge on how to use large language models (LLMs) via API calls, their fine-tuning for specific tasks, and efficient inference.}
+      \SmallTextPanel[552.316]
+        {Course Content}
+        {To use large language models (LLMs) in a research or business setting, it is necessary to i) access them on local computers or on GPU servers via API, ii) adapt them to specific needs by fine-tuning them. The hands-on workshop will present theoretically and practically, step-by-step:\\1. How LLMs can be used via API on a local or remote server.\\2. How to fine-tune encoder-only models such as BERT.\\3. How to fine-tune generative models such as Llama, Gemma, and GaMS using compute-efficient techniques such as LoRA.\\4. How to implement efficient LLM inference.\\The work will be based on practical datasets and problems from business and research environments. The use cases will cover popular tasks such as sentiment prediction, information retrieval, and question answering.\\The independent work consists of an assignment using the dataset of your choice, preferably from your business or scientific domain (to be approved by the workshop team). The assignment shall fine-tune a suitable LLM on the prepared data, evaluate the results, and write a report, presenting the problem, methodology, evaluation, results, and conclusions.}
+      \SmallTextPanel[156.960]
+        {Learning Outcomes}
+        {Practical knowledge of LLM API use and fine-tuning. Practical problem-solving skills with LLMs. Ability to independently solve problems with LLMs.}
+    }
+    \TimelinePanels{
+      \TimelinePanel[132.000]{Target audience\\Advanced users of large language models}
+      \TimelinePanel[118.000]{Language\\English}
+      \TimelinePanel[175.000]{Format\\Hands-on sessions; Home assignments}
+      \TimelinePanel[147.000]{Tentative date\\Fall 2026, Spring 2027\&28}
+      \TimelinePanel[235.000]{Duration\\Contact hours: 6h, Independent work: 54h}
+      \TimelinePanel[66.360]{ECTS credits\\2}
+    }
+  }
+}
+
+\NoTextSlide{
+  title = {Training example},
+  body = {
+    \drawshape{fill=SlaifWhite,draw=none}{rectangle}{42.821}{443.937}{916.181}{488.577}
+    \ContributionHeader
+      {From exploratory data analysis to changing business processes using AI}
+      {Course provider: University of Ljubljana, Faculty of Computer and Information Science (UL FRI)   Instructors: Slavko Žitnik, Timotej Knez, Miha Malenšek}
+    \SmallTextPanels{
+      \SmallTextPanel[246.168]
+        {Learning Objectives}
+        {Understand the transition from exploratory data analysis (EDA) to production-grade AI in business processes. Connect data-driven insights with decision-making and business process transformation. Use modern AI frameworks and large language models (LLMs) to support analysis, automation, and decision-making. Assess when and how AI can meaningfully transform existing workflows. Address organizational, technical, and ethical challenges of deploying AI in business environments.}
+      \SmallTextPanel[364.842]
+        {Course Content}
+        {Candidates will get to know how to get from a research analysis to business insights (exploratory data analysis, hypothesis generation, visualization, interpretation), link data to business processes (identifying processes where AI adds value, measurable impact, KPIs), use LLMs for analysis and decision support (such as ChatGPT, Gemini, GaMS, and related LLMs for text analysis, summarization, decision support, and user interaction), use frameworks for building AI-powered solutions (such as LangChain and similar tools to connect models, data sources, tools, and business logic), how to come from a prototype to a process change (integration of AI solutions into existing IT systems, task automation, human-in-the-loop approaches, change management), and get to know risks, limitations, and responsible AI.}
+      \SmallTextPanel[240.750]
+        {Learning Outcomes}
+        {By the end of the training, candidates will have learned to perform exploratory data analysis and link results to concrete business questions, identify business processes suitable for AI-enabled support or transformation, apply LLMs and AI frameworks to support analysis, decision-making, and automation, plan the transition from experimental AI solutions to changes in business processes, critically evaluate the impact of AI on organizations, employees, and business performance.}
+    }
+    \TimelinePanels{
+      \TimelinePanel[132.000]{Target audience\\Team leads, chief information officers}
+      \TimelinePanel[118.000]{Language\\Slovenian, English}
+      \TimelinePanel[175.000]{Format\\Lectures; Hands-on sessions; Home assignments}
+      \TimelinePanel[147.000]{Tentative date\\Fall 2027, Summer 2028}
+      \TimelinePanel[235.000]{Duration\\Contact hours: 16h, Independent work: 32h}
+      \TimelinePanel[66.360]{ECTS credits\\2}
+    }
+  }
+}
+
+\NoTextSlide{
+  title = {Training IT infrastructure — operational by M7},
+  subtitle = {Two platforms, one registry — all discoverable, manageable and KPI-reportable},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{MOOC platform}{}{
+        \SlaifPanelUrl{edu.slaif.si}
+        \SlaifBluePanelBulletList{
+          \item Central repository: lecture notes, source code, Jupyter notebooks, supplementary materials
+          \item Interactive teaching: integrated quizzes, assignments, homework submission, remote assessment
+          \item Dedicated GitHub organisation for source code management
+          \item Standardised content structure: landing pages, code blocks, callouts, example annotations
+          \item Consortium-wide onboarding target: May 2026
+        }
+      }{}
+      \ColoredPanel{Indico event system}{}{
+        \SlaifPanelUrl{indico.slaif.si}
+        \SlaifGreenPanelBulletList{
+          \item Open-source event management, hosted at JSI, customised with SLAIF identity
+          \item Participant registration, event scheduling, automated notifications, attendance tracking
+          \item Synchronised with the SLAIF website, filterable by topic tags
+          \item Standardised templates: feedback survey, attendance certificate, sign-in sheet
+          \item Operational in testing since March 2026
+        }
+      }{}
+    }
+    \SlaifFootnotePanel[panelCaption]{Both platforms feed a single training registry that is the authoritative source for the training catalogue and KPI reporting.}
+  }
+}
+
+\NoTextSlide{
+  title = {Micro-credentials — progress across the consortium},
+  subtitle = {Governance framework in place; first formal accreditation achieved by Month 7},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{UNG}{}{
+        \SlaifPanelPill{Accredited by Senate}
+        \SlaifPanelCenteredItems{
+          \SlaifPanelTextItem{{\bfseries\color{SlaifInk}Hands-on Machine Learning}}
+          \SlaifPanelTextItem{First SLAIF micro-credential — formally accredited during M1–M7}
+        }
+      }{}
+      \ColoredPanel{FIS}{}{
+        \SlaifPanelPill{Accreditation\\applications filed}
+        \SlaifPanelCenteredItems{
+          \SlaifPanelTextItem{{\bfseries\color{SlaifInk}4 HPC intensive courses}}
+          \SlaifPanelTextItem{Linux \& containers · BERTopic · RAG · parallel GPU processing}
+        }
+      }{}
+      \ColoredPanel{UL}{}{
+        \SlaifPanelPill{Courses developed}
+        \SlaifPanelCenteredItems{
+          \SlaifPanelTextItem{{\bfseries\color{SlaifInk}2 micro-credential courses}}
+          \SlaifPanelTextItem{HPC infrastructure for AI workflows · Containers, CI/CD \& Kubernetes}
+        }
+      }{}
+      \ColoredPanel{UM}{}{
+        \SlaifPanelPill{Requirements analysed}
+        \SlaifPanelCenteredItems{
+          \SlaifPanelTextItem{{\bfseries\color{SlaifInk}Framework analysis}}
+          \SlaifPanelTextItem{Participated in Design of Short Educational Programs workshop (March 2026)}
+        }
+      }{}
+      \ColoredPanel{UP}{}{
+        \SlaifPanelPill{Templates compiled}
+        \SlaifPanelCenteredItems{
+          \SlaifPanelTextItem{{\bfseries\color{SlaifInk}Procedural documentation}}
+          \SlaifPanelTextItem{Application forms, learning-plan templates, public certificate specimens}
+        }
+      }{}
+    }
+    \SlaifFootnotePanel[bottom=505.800]{
+      {\bfseries\color{SlaifPrimaryTeal}Governance framework}\par
+      \vspace{4pt}
+      \itshape Shared repository for accreditation templates and institutional guidelines; all certifications aligned with the European Qualifications Framework, ensuring portability across consortium institutions.
+    }
+  }
+}
+
+\NoTextSlide{
+  title = {Reaching industry — first Open Day \& SME channels},
+  subtitle = {From listening to designing: survey responses already shaping the training roadmap},
+  body = {
+    \MetricSummaryPanels{
+      \MetricSummaryPanel[headerColor=SlaifAccentTeal,bulletColor=SlaifGreen]
+        {1st SLAIF Industry Open Day}
+        {17 November 2025  ·  JSI, Ljubljana}
+        {42}
+        {survey responses\\in the WP6 session}
+        {}
+        {
+          \MetricSummaryBullet[y=360.000,textY=349.000]{Results compiled into dedicated presentation, shared with all 10 WP6 partners}
+          \MetricSummaryBullet[y=410.000,textY=392.500]{Findings directly influenced selection of micro-credential topics}
+          \MetricSummaryBullet[y=450.000,textY=435.500]{ARNES designed new workshop — Building a Data Culture — in direct response to the identified \#1 barrier: data acquisition, curation \& management}
+        }
+        {}
+      \MetricSummaryPanel[headerColor=SlaifGreenDark,bulletColor=SlaifAccentTeal]
+        {SME engagement channels}
+        {{\upshape GZS — Chamber of Commerce \& Industry of Slovenia}}
+        {5,300+}
+        {member companies reachable through newsletters \& direct outreach}
+        {3 business-tailored webinars designed:}
+        {
+          \MetricSummaryBullet[y=384.500,textY=379.500]{Artificial Intelligence for Leadership}
+          \MetricSummaryBullet[y=415.500,textY=410.500]{AI for Small Businesses}
+          \MetricSummaryBullet[y=446.500,textY=441.500]{Artificial Intelligence in Entrepreneurship}
+        }
+        {Early industrial contacts: Hidria · Steklarna Hrastnik · Domel · MESI · Caretronic}
+    }
+  }
+}
+
+\NoTextSlide{
+  title = {Regional hub network — physical presence across Slovenia},
+  subtitle = {Low-threshold entry points for students, researchers, SMEs and public sector users},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Ljubljana\\[-2pt]{\fontsize{10.920pt}{12.558pt}\selectfont\itshape UL FRI}}{}{
+        \SlaifPanelPill[active,y=234.000,height=27.360]{Operational}
+        \SlaifPanelCenteredItems[y=277.200,itemHeight=86.431,color=SlaifInk]{
+          \SlaifPanelTextItem{SLAIF co-working space / office — showcases, informal consultations, partner collaboration}
+        }
+      }{}
+      \ColoredPanel{Ljubljana\\[-2pt]{\fontsize{10.920pt}{12.558pt}\selectfont\itshape TPLJ}}{}{
+        \SlaifPanelPill[active,y=234.000,height=27.360]{Operational}
+        \SlaifPanelCenteredItems[y=277.200,itemHeight=86.431,color=SlaifInk]{
+          \SlaifPanelTextItem{Demo AI Factory Training Centre — opened February 2026; AI Hub since September 2025}
+        }
+      }{}
+      \ColoredPanel{Novo mesto\\[-2pt]{\fontsize{10.920pt}{12.558pt}\selectfont\itshape FIŠ}}{}{
+        \SlaifPanelPill[active,y=234.000,height=27.360]{Operational}
+        \SlaifPanelCenteredItems[y=277.200,itemHeight=86.431,color=SlaifInk]{
+          \SlaifPanelTextItem{Dedicated training room · 10 pre-configured laptops · validated test accounts}
+        }
+      }{}
+      \ColoredPanel{Maribor\\[-2pt]{\fontsize{10.920pt}{12.558pt}\selectfont\itshape UM}}{}{
+        \SlaifPanelPill[inactive,y=234.000,height=27.360]{In setup}
+        \SlaifPanelCenteredItems[y=277.200,itemHeight=86.431,color=SlaifInk]{
+          \SlaifPanelTextItem{Planned regional AI Factory training centre — onboarding protocols and user guides in design}
+        }
+      }{}
+      \ColoredPanel{Koper\\[-2pt]{\fontsize{10.920pt}{12.558pt}\selectfont\itshape UP}}{}{
+        \SlaifPanelPill[inactive,y=234.000,height=27.360]{In setup}
+        \SlaifPanelCenteredItems[y=277.200,itemHeight=86.431,color=SlaifInk]{
+          \SlaifPanelTextItem{Co-working space under development — low-threshold entry for self-directed learners}
+        }
+      }{}
+    }
+  }
+}
+
+\NoTextSlide{
+  title = {Training is already happening — not only planned},
+  subtitle = {Signal deliveries during the reporting period validated our approach before the formal start},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Oct 2025}{}{
+        \SlaifPanelCenteredItems[y=208.800,itemHeight=44.975,fontSize=12.480,lineHeight=14.352,color=SlaifInk]{
+          \SlaifPanelTextItem{{\bfseries HPC Open Doors Day}}
+        }
+        \SlaifPanelCenteredItems[y=306.000,itemHeight=129.600,color=SlaifMutedText]{
+          \SlaifPanelTextItem{299 primary \& secondary school students reached\\(ARNES + JSI + UL, with SLING)}
+        }
+      }{}
+      \ColoredPanel{Nov 2025}{}{
+        \SlaifPanelCenteredItems[y=208.800,itemHeight=44.975,fontSize=12.480,lineHeight=14.352,color=SlaifInk]{
+          \SlaifPanelTextItem{{\bfseries 1st SLAIF Industry\\Open Day}}
+        }
+        \SlaifPanelCenteredItems[y=306.000,itemHeight=129.600,color=SlaifMutedText]{
+          \SlaifPanelTextItem{42 WP6 survey responses\\from industry representatives at JSI, Ljubljana}
+        }
+      }{}
+      \ColoredPanel{Jan-April 2026}{}{
+        \SlaifPanelCenteredItems[y=208.800,itemHeight=44.975,fontSize=12.480,lineHeight=14.352,color=SlaifInk]{
+          \SlaifPanelTextItem{{\bfseries ARNES HackathON}}
+        }
+        \SlaifPanelCenteredItems[y=306.000,itemHeight=129.600,color=SlaifMutedText]{
+          \SlaifPanelTextItem{100 students gained\\hands-on HPC experience\\on ARNES Learning Cluster}
+        }
+      }{}
+      \ColoredPanel{Feb 2026}{}{
+        \SlaifPanelCenteredItems[y=208.800,itemHeight=68.240,fontSize=12.480,lineHeight=14.352,color=SlaifInk]{
+          \SlaifPanelTextItem{{\bfseries TPLJ Demo AI Factory\\Training Centre opened}}
+        }
+        \SlaifPanelCenteredItems[y=306.000,itemHeight=129.600,color=SlaifMutedText]{
+          \SlaifPanelTextItem{Physical training infrastructure for startup \& SME cohorts in Ljubljana}
+        }
+      }{}
+      \ColoredPanel{Winter 25/26}{}{
+        \SlaifPanelCenteredItems[y=208.800,itemHeight=44.975,fontSize=12.480,lineHeight=14.352,color=SlaifInk]{
+          \SlaifPanelTextItem{{\bfseries FIŠ doctoral course\\delivered}}
+        }
+        \SlaifPanelCenteredItems[y=306.000,itemHeight=129.600,color=SlaifMutedText]{
+          \SlaifPanelTextItem{5 PhD students completed Transformer topic modelling · RAG\\on HPC — reusable template}
+        }
+      }{}
+    }
+  }
+}
+
+\SlaifGreenDividerSlide
+  {Part III}
+  {Where we go next}
+  {Roadmap to M12 and KPI trajectory}
+
+\NoTextSlide{
+  title = {Roadmap: from preparation to delivery — M8 to M12},
+  subtitle = {Milestone 2 target (M12): Core Services Operational — including commencement of initial training programmes},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{1}{}{
+        \SlaifPanelPill[active,y=173.615,height=39.356]{M8\\April 2026}
+        \SlaifPanelCenteredItems[y=231.215,itemHeight=44.975,fontSize=12.480,lineHeight=14.352,color=SlaifInk]{
+          \SlaifPanelTextItem{{\bfseries Consortium-wide\\MOOC onboarding}}
+        }
+        \SlaifPanelCenteredItems[y=314.015,itemHeight=86.431,color=SlaifMutedText]{
+          \SlaifPanelTextItem{All partners trained on edu.slaif.si; first MOOC content deposited}
+        }
+      }{}
+      \ColoredPanel{2}{}{
+        \SlaifPanelPill[inactive,y=173.615,height=39.356]{M8-M10\\April-Jun 2026}
+        \SlaifPanelCenteredItems[y=231.215,itemHeight=44.975,fontSize=12.480,lineHeight=14.352,color=SlaifInk]{
+          \SlaifPanelTextItem{{\bfseries Launch of FIŠ HPC\\intensive courses}}
+        }
+        \SlaifPanelCenteredItems[y=314.015,itemHeight=86.431,color=SlaifMutedText]{
+          \SlaifPanelTextItem{Linux \& containers, BERTopic, RAG, GPU processing — first deliveries}
+        }
+      }{}
+      \ColoredPanel{3}{}{
+        \SlaifPanelPill[inactive,y=173.615,height=39.356]{M8\\April 2026}
+        \SlaifPanelCenteredItems[y=231.215,itemHeight=44.975,fontSize=12.480,lineHeight=14.352,color=SlaifInk]{
+          \SlaifPanelTextItem{{\bfseries Second AI Industry Day}}
+        }
+        \SlaifPanelCenteredItems[y=314.015,itemHeight=86.431,color=SlaifMutedText]{
+          \SlaifPanelTextItem{Vertical-specific; SME demonstrations with WP5 services}
+        }
+      }{}
+      \ColoredPanel{4}{}{
+        \SlaifPanelPill[inactive,y=173.615,height=39.356]{M8-M12\\April-August 2026}
+        \SlaifPanelCenteredItems[y=231.215,itemHeight=68.018,fontSize=12.480,lineHeight=14.352,color=SlaifInk]{
+          \SlaifPanelTextItem{{\bfseries Micro-credential courses prepared for accreditation}}
+        }
+        \SlaifPanelCenteredItems[y=314.015,itemHeight=86.431,color=SlaifMutedText]{
+          \SlaifPanelTextItem{Formal accreditation paperwork prepared and filed for courses delivered in 2026 and 2027}
+        }
+      }{}
+      \ColoredPanel{5}{}{
+        \SlaifPanelPill[inactive,y=173.615,height=39.356]{M12\\Aug 2026}
+        \SlaifPanelCenteredItems[y=231.215,itemHeight=44.975,fontSize=12.480,lineHeight=14.352,color=SlaifInk]{
+          \SlaifPanelTextItem{{\bfseries Deliverable D6.1\\+ first-year catalogue}}
+        }
+        \SlaifPanelCenteredItems[y=314.015,itemHeight=86.431,color=SlaifMutedText]{
+          \SlaifPanelTextItem{First-year progress report; micro-credentials open for enrolment}
+        }
+      }{}
+    }
+    \SlaifFootnotePanel[bottom=507.472]{
+      {\bfseries\color{SlaifPrimaryTeal}Phase transition}\par
+      \vspace{4pt}
+      \itshape We are shifting from training-programme design to training-programme delivery. Infrastructure, governance and partner network are ready — the next seven months are about volume, feedback, and iteration.\\
+      Priority 1: HPC hands-on trainings; Priority 2: SME onboarding; Priority 3: micro-credential courses;
+    }
+  }
+}
+
+\NoTextSlide{
+  title = {Indicators driven by WP6},
+  subtitle = {Six mandatory and eight non-mandatory indicators — several already showing early contributions},
+  body = {
+    \SlaifDataTable[
+      headerColor=SlaifAccentTeal,
+      headerFontSize=12.480,
+      headerLineHeight=14.352,
+      headerTextColor=SlaifWhite,
+      rowHeight=28.080,
+      headerHeight=32.400,
+      paddingX=10.800
+    ]{
+      \SlaifDataColumn[color=SlaifPrimaryTeal,style=\bfseries,fontSize=12.480,lineHeight=14.352]{No.}{72.000}{c}
+      \SlaifDataColumn[color=SlaifInk,style=\bfseries,fontSize=10.920,lineHeight=12.558]{Indicator}{294.253}{l}
+      \SlaifDataColumn[color=SlaifMutedText,fontSize=9.360,lineHeight=10.764]{How WP6 drives it}{382.547}{l}
+      \SlaifDataColumn[color=SlaifGreenDark,style=\bfseries\itshape,fontSize=8.580,lineHeight=9.867]{M1-M7 status}{133.200}{l}
+    }{
+      \SlaifDataRow{
+        \SlaifDataCell{5}
+        \SlaifDataCell{AI training sessions provided}
+        \SlaifDataCell{Driven by all 4 tasks; MOOC \& train-the-trainer multiply reach}
+        \SlaifDataCell{First trainings already started}
+      }
+      \SlaifDataRow{
+        \SlaifDataCell{10}
+        \SlaifDataCell{AI-dedicated researchers in the AI Factory}
+        \SlaifDataCell{T6.1 talent pipeline · T6.3 industry practitioners · T6.4 onboarded users}
+        \SlaifDataCell{WP6 is the only WP growing it}
+      }
+      \SlaifDataRow{
+        \SlaifDataCell{11}
+        \SlaifDataCell{Students participating in AI Factory activities}
+        \SlaifDataCell{Already >400: 299 at HPC Open Doors + 100 at HackathON + 5 PhD course}
+        \SlaifDataCell{Early traction}
+      }
+      \SlaifDataRow{
+        \SlaifDataCell{14}
+        \SlaifDataCell{Micro-certifications introduced}
+        \SlaifDataCell{Portfolio across UNG, FIS, UL, UM, UP — all EQF-aligned}
+        \SlaifDataCell{First accreditation (UNG) done}
+      }
+      \SlaifDataRow{
+        \SlaifDataCell{15}
+        \SlaifDataCell{New university courses on AI Factory topics}
+        \SlaifDataCell{Driven by T6.1 and T6.2; UM gap analysis identifies priorities}
+        \SlaifDataCell[color=SlaifMutedText]{In design}
+      }
+      \SlaifDataRow{
+        \SlaifDataCell{16}
+        \SlaifDataCell{Registered HPC and AI certified specialists}
+        \SlaifDataCell{Grows as learners complete micro-certifications and pass assessments}
+        \SlaifDataCell[color=SlaifMutedText]{Starts M12}
+      }
+      \SlaifDataRow{
+        \SlaifDataCell{17}
+        \SlaifDataCell{HPC and AI hackathons organised}
+        \SlaifDataCell{HackathON delivered; annual cadence planned}
+        \SlaifDataCell{1 delivered}
+      }
+      \SlaifDataRow{
+        \SlaifDataCell{18}
+        \SlaifDataCell{AI Factory training centres established}
+        \SlaifDataCell{Novo mesto · Ljubljana (2) operational; Maribor \& Koper in setup}
+        \SlaifDataCell{3 of 3 progressing}
+      }
+      \SlaifDataRow{
+        \SlaifDataCell{19}
+        \SlaifDataCell{Cities toured with outreach \& workshops}
+        \SlaifDataCell{Ljubljana · Novo mesto · Maribor + further regional reach via GZS network}
+        \SlaifDataCell{On track for 15 by project end}
+      }
+      \SlaifDataRow{
+        \SlaifDataCell{20}
+        \SlaifDataCell{Application-area use case workshops}
+        \SlaifDataCell{Aligned to WP5 verticals: green transition, health, digital society, science}
+        \SlaifDataCell[color=SlaifMutedText]{Starting M8}
+      }
+      \SlaifDataRow{
+        \SlaifDataCell{21}
+        \SlaifDataCell{AI Factory workshops at HPC events in Slovenia}
+        \SlaifDataCell{SLING Days 2025 · ASHPC26 · embedded in national HPC calendar}
+        \SlaifDataCell{Active}
+      }
+    }
+    \SlaifDataTableHighlights{3,8}
+  }
+}
+
+\NoTextSlide{
+  body = {
+    \FinalTakeawayPanel
+      {Our message to the reviewers}
+      {SlaifGreen}
+      {WP6 has moved from a plan on paper to a running operation.}
+      {88 training activities catalogued · 2 platforms live · first micro-credential accredited ·\\3 regional hubs operating or in setup · 400+ learners already touched · weekly cadence since October 2025}
+  }
+}
+
+\FinalSlide[slaif-si-qr-rgb.png]{Thank you for your attention!}
+\end{document}
