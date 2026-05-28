@@ -371,6 +371,27 @@ spacing, panel fills, borders, header bands, and panel header typography belong
 inside the panel-row macro. The deck-side code should describe each panel's
 semantic fields and body content.
 
+Do not hard-code the number of panels from the first slide where the cluster is
+observed. Panel-row macros should normally support 1-N panels by counting the
+declared panel entries and deriving panel width, x positions, gaps, and color
+sequence from that count. A slide that happens to contain two panels is evidence
+for a row pattern, not evidence that the macro should be a two-panel-only
+primitive.
+
+When panel internals contain reusable substructures, extract those separately
+instead of burying all geometry in the row macro. Common examples include:
+
+- large metric value plus explanatory label
+- colored bullet lists
+- optional lead text above the metric
+- optional pre-bullet text
+- optional small footer text
+
+Keep these substructures configurable through semantic keys such as
+`headerColor`, `bulletColor`, `align`, or `state` when the distinction is part
+of the visual grammar. Avoid positional keys in the deck call unless the source
+slide has a genuine hand-tuned layout that cannot yet be generalized cleanly.
+
 Good deck-side pattern:
 
 ```tex
@@ -567,6 +588,13 @@ After each extraction:
 - compare the affected slides against the pre-clustering Beamer PNGs
 - inspect crops of any affected repeated element at original size
 - confirm no text moved, disappeared, overlapped, or changed size
+
+For metric blocks, badges, progress labels, and other paired elements, inspect
+focused crops rather than only the whole slide. Imported coordinates often
+preserve the bounding boxes but not the perceived alignment once generalized.
+Tune the macro's shared geometry so paired elements are visually aligned, for
+example centering a large number with its adjacent label, instead of copying a
+single imported y-coordinate blindly into the reusable primitive.
 
 Use image differences as a locator, not as the only judge. A small antialiasing
 difference may be acceptable; shifted geometry, changed typography, or hidden
