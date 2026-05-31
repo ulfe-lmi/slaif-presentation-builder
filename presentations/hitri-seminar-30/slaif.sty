@@ -77,9 +77,14 @@
   \end{tikzpicture}%
 }
 
+\newcommand{\SlaifFontScale}{1.3}
 \newcommand{\placetextbox}[8]{%
   \begin{textblock*}{#3bp}(#1bp,#2bp)
-    \begingroup\color{#8}\fontsize{#5pt}{#6pt}\selectfont #7\endgroup
+    \begingroup
+      \pgfmathsetmacro{\SlaifScaledFontSize}{(#5)*\SlaifFontScale}%
+      \pgfmathsetmacro{\SlaifScaledLineHeight}{(#6)*\SlaifFontScale}%
+      \color{#8}\fontsize{\SlaifScaledFontSize pt}{\SlaifScaledLineHeight pt}\selectfont #7%
+    \endgroup
   \end{textblock*}%
 }
 
@@ -550,8 +555,8 @@
     \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
     \placetextbox{388.706}{147.014}{505.294}{188.000}{44.000}{47.000}{{\RobotoCondensed{}\bfseries \parbox{505.294bp}{\raggedright \SlaifTitleTitle}}}{SlaifWhite}
-    \placetextbox{388.706}{279.100}{505.294}{32.000}{18.000}{20.700}{{\RobotoCondensed{}\bfseries \parbox{505.294bp}{\raggedright \SlaifTitleAuthorLine}}}{SlaifWhite}
-    \placetextbox{388.706}{308.400}{505.294}{32.000}{16.000}{18.400}{{\RobotoCondensed{}\itshape \parbox{505.294bp}{\raggedright \SlaifTitleEventLine}}}{SlaifWhite}
+    \placetextbox{388.706}{350.000}{505.294}{32.000}{18.000}{20.700}{{\RobotoCondensed{}\bfseries \parbox{505.294bp}{\raggedright \SlaifTitleAuthorLine}}}{SlaifWhite}
+    \placetextbox{388.706}{418.000}{505.294}{32.000}{16.000}{18.400}{{\RobotoCondensed{}\itshape \parbox{505.294bp}{\raggedright \SlaifTitleEventLine}}}{SlaifWhite}
     \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
   \end{frame}%
 }
@@ -602,10 +607,10 @@
     \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
     \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
-    \drawshape{fill=SlaifGreenLight,draw=none}{rectangle}{66.000}{103.394}{894.000}{108.837}
-    \placetextbox{73.500}{46.500}{828.000}{13.500}{17.250}{19.320}{{\RobotoCondensed{} #1}}{SlaifGreen}
-    \placetextbox{73.500}{59.500}{828.000}{32.000}{32.500}{36.400}{{\RobotoCondensed{}\bfseries #2}}{SlaifWhite}
-    \placetextbox{73.500}{88.500}{828.000}{18.000}{13.500}{15.120}{{\RobotoCondensed{}\itshape #3}}{SlaifWhite}
+    \drawshape{fill=SlaifGreenLight,draw=none}{rectangle}{66.000}{170.000}{894.000}{175.443}
+    \placetextbox{73.500}{48.000}{828.000}{22.000}{17.250}{19.320}{{\RobotoCondensed{} #1}}{SlaifGreen}
+    \placetextbox{73.500}{82.000}{828.000}{78.000}{28.500}{31.920}{{\RobotoCondensed{}\bfseries \parbox{828.000bp}{\raggedright #2}}}{SlaifWhite}
+    \placetextbox{73.500}{190.000}{828.000}{30.000}{15.000}{16.800}{{\RobotoCondensed{}\itshape \parbox{828.000bp}{\raggedright #3}}}{SlaifWhite}
     \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
     \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
@@ -622,9 +627,10 @@
     \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
     \placeimageopacity{325.226}{71.110}{309.548}{397.780}{image7.png}{0.200}
-    \placetextbox{73.500}{46.500}{828.000}{13.500}{17.250}{19.320}{{\RobotoCondensed{} #1}}{SlaifDividerBlue}
-    \placetextbox{73.500}{59.500}{828.000}{32.000}{32.500}{36.400}{{\RobotoCondensed{}\bfseries #2}}{SlaifWhite}
-    \placetextbox{73.500}{88.500}{828.000}{18.000}{13.500}{15.120}{{\RobotoCondensed{}\itshape #3}}{SlaifWhite}
+    \placetextbox{73.500}{48.000}{828.000}{22.000}{17.250}{19.320}{{\RobotoCondensed{} #1}}{SlaifDividerBlue}
+    \placetextbox{73.500}{82.000}{828.000}{44.000}{32.500}{36.400}{{\RobotoCondensed{}\bfseries \parbox{828.000bp}{\raggedright #2}}}{SlaifWhite}
+    \drawshape{fill=SlaifDividerBlue,draw=none}{rectangle}{66.000}{136.000}{894.000}{141.443}
+    \placetextbox{73.500}{156.000}{828.000}{24.000}{13.500}{15.120}{{\RobotoCondensed{}\itshape \parbox{828.000bp}{\raggedright #3}}}{SlaifWhite}
     \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
     \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
@@ -689,6 +695,8 @@
   \def\SlaifSliderValueFontSize{12.480}%
   \def\SlaifSliderValueLineHeight{14.352}%
   \def\SlaifSliderTrackColor{SlaifSurface}%
+  \def\SlaifSliderMaxValue{0}%
+  \def\SlaifSliderValueSuffix{}%
 }
 
 \pgfkeys{
@@ -753,6 +761,8 @@
   valueFontSize/.store in=\SlaifSliderValueFontSize,
   valueLineHeight/.store in=\SlaifSliderValueLineHeight,
   trackColor/.store in=\SlaifSliderTrackColor,
+  maxValue/.store in=\SlaifSliderMaxValue,
+  valueSuffix/.store in=\SlaifSliderValueSuffix,
 }
 
 \newcommand{\SlaifBarColorForIndex}[3]{%
@@ -839,6 +849,9 @@
       \global\SlaifSliderMax=\SlaifSliderValue
     \fi
   }%
+  \ifnum\SlaifSliderMaxValue>0
+    \global\SlaifSliderMax=\SlaifSliderMaxValue
+  \fi
   \SlaifBarColorSequence{\the\SlaifSliderCount}{\SlaifSliderColorSequence}%
   \foreach \SlaifSliderLabel/\SlaifSliderValue [count=\SlaifSliderIndex] in \SlaifSliderRows {%
     \SlaifSelectColorFromSequence{\SlaifSliderColorSequence}{\SlaifSliderIndex}{\SlaifSliderColor}%
@@ -852,7 +865,7 @@
     \placetextbox{\SlaifSliderLabelX}{\SlaifSliderLabelY}{\SlaifSliderLabelWidth}{\SlaifSliderLabelHeight}{\SlaifSliderLabelFontSize}{\SlaifSliderLabelLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifSliderLabelWidth bp}{\raggedright \SlaifSliderLabel}}}{SlaifInk}%
     \drawshape{fill=\SlaifSliderTrackColor,draw=none}{rectangle}{\SlaifSliderBarX}{\SlaifSliderRowY}{\SlaifSliderTrackRight}{\SlaifSliderBarBottom}%
     \drawshape{fill=\SlaifSliderColor,draw=none}{rectangle}{\SlaifSliderBarX}{\SlaifSliderRowY}{\SlaifSliderBarRight}{\SlaifSliderBarBottom}%
-    \placetextbox{\SlaifSliderValueX}{\SlaifSliderValueY}{\SlaifSliderValueWidth}{\SlaifSliderValueHeight}{\SlaifSliderValueFontSize}{\SlaifSliderValueLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifSliderValueWidth bp}{\raggedright \SlaifSliderValue}}}{\SlaifSliderColor}%
+    \placetextbox{\SlaifSliderValueX}{\SlaifSliderValueY}{\SlaifSliderValueWidth}{\SlaifSliderValueHeight}{\SlaifSliderValueFontSize}{\SlaifSliderValueLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifSliderValueWidth bp}{\raggedright \SlaifSliderValue\SlaifSliderValueSuffix}}}{\SlaifSliderColor}%
   }%
 }
 
@@ -1607,6 +1620,23 @@
   \begin{minipage}{#1bp}
     \raggedright
     \begin{list}{\tikz[baseline=-0.35ex]\fill[SlaifGreen] (0,0) circle[radius=4.200bp];}{%
+      \setlength{\leftmargin}{22.000bp}%
+      \setlength{\labelwidth}{8.400bp}%
+      \setlength{\labelsep}{12.000bp}%
+      \setlength{\itemsep}{9.000pt}%
+      \setlength{\parsep}{0pt}%
+      \setlength{\topsep}{0pt}%
+      \setlength{\partopsep}{0pt}%
+    }%
+    #2%
+    \end{list}%
+  \end{minipage}%
+}
+
+\newcommand{\SlaifBluePlainBulletList}[2]{%
+  \begin{minipage}{#1bp}
+    \raggedright
+    \begin{list}{\tikz[baseline=-0.35ex]\fill[SlaifAccentTeal] (0,0) circle[radius=4.200bp];}{%
       \setlength{\leftmargin}{22.000bp}%
       \setlength{\labelwidth}{8.400bp}%
       \setlength{\labelsep}{12.000bp}%
