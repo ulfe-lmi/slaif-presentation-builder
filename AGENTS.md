@@ -461,11 +461,38 @@ Behavior:
   `presentation-builder import-source-material` when one is provided.
 - Reuse the repository presentation template or the user-requested template.
 - Preserve template-like code unless the user explicitly asks to change it.
+- Before changing a style or template file, inspect the existing template for a
+  higher-level slide layout or semantic macro that already expresses the
+  requested structure. Prefer existing slide-level layout macros such as
+  two-column, plain, divider, panel, footnote, image, table, slider, timeline,
+  or final-slide layouts over extending lower-level components.
+- Do not modify a panel, table, card, figure, or other component macro to force
+  a slide-level layout problem when an existing slide-level layout macro can
+  express it. For example, if a slide is naturally split into text and visual
+  regions, use the existing two-column slide layout instead of adding geometry
+  options to panel macros or creating one-off image placement helpers.
+- Only ask to change the template after confirming that no existing
+  higher-level template element can solve the requested layout.
+- If the requested presentation change cannot be implemented with existing
+  template elements, stop before editing and tell the user exactly what is
+  missing. Ask for explicit confirmation or a design decision before either
+  adding/extending reusable template elements in the style file or introducing
+  any custom presentation-side element.
+- Never silently choose between changing the template and adding custom
+  deck-side visual code. The user must approve that direction first.
 - For SLAIF Beamer decks, treat `slaif.sty` as the only valid place for
   presentation-system code. `deck.tex` is content only.
 - Never introduce new visual elements, helper drawing macros, colors, repeated
   geometry, card/note/image/bar helpers, raw TikZ, direct `\drawshape`,
   direct `\placetextbox`, or direct `\includegraphics` calls in `deck.tex`.
+- Never add or keep manual font-size or line-height overrides in `deck.tex`.
+  This includes options or arguments such as `fontSize`, `lineHeight`,
+  `labelFontSize`, `labelLineHeight`, `valueFontSize`, `valueLineHeight`,
+  direct `\fontsize`, or equivalent one-off TeX font sizing. Font sizes belong
+  in the template/style layer. If a presentation change appears to require a
+  font-size override in `deck.tex`, stop before editing and explicitly ask the
+  user whether the template should be changed or whether the exception is
+  approved.
 - If a new visual element is needed while creating or refining a presentation,
   first implement or extend the reusable macro in `slaif.sty`, then call that
   macro from `deck.tex`. This applies to cards, panels, notes, footnotes,

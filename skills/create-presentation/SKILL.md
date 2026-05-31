@@ -25,10 +25,39 @@ This skill covers:
 - Reuse the repository's presentation template or requested template.
 - Preserve template-like code unless the user explicitly asks to alter it.
 - Keep content edits separate from reusable style/framework edits.
+- Before changing a style or template file, inspect the existing template for a
+  higher-level slide layout or semantic macro that already expresses the
+  requested structure. Prefer existing slide-level layout macros such as
+  two-column, plain, divider, panel, footnote, image, table, slider, timeline,
+  or final-slide layouts over extending lower-level components.
+- Do not modify a panel, table, card, figure, or other component macro to force
+  a slide-level layout problem when an existing slide-level layout macro can
+  express it. For example, if a slide is naturally split into text and visual
+  regions, use the existing two-column slide layout instead of adding geometry
+  options to panel macros or creating one-off image placement helpers.
+- Only ask to change the template after confirming that no existing
+  higher-level template element can solve the requested layout.
+- If the requested slide change cannot be expressed with existing template
+  elements, stop before editing and tell the user exactly what is missing.
+  Request explicit confirmation or a design decision before either
+  adding/extending reusable template elements in the style file or introducing
+  any custom presentation-side element.
+- Never silently choose between changing the template and adding custom
+  deck-side visual code. The user must approve that direction first.
 - For SLAIF decks, `deck.tex` is content only and `slaif.sty` is the
   presentation system. Never define new visual elements, helper drawing macros,
   local card/note/image/bar helpers, colors, layout primitives, or repeated
   geometry in `deck.tex`.
+- Never add or keep manual font-size or line-height overrides in `deck.tex`.
+  This includes macro options or arguments such as `fontSize`, `lineHeight`,
+  `labelFontSize`, `labelLineHeight`, `valueFontSize`, `valueLineHeight`,
+  direct `\fontsize`, or any equivalent one-off TeX font sizing. Font sizes are
+  template behavior and must be controlled by `slaif.sty` or the active style
+  file.
+- If a slide appears to require a font-size override in `deck.tex`, stop before
+  editing. Tell the user exactly which element cannot be expressed with the
+  current template and ask explicitly whether to change the template/style file
+  or approve an exception.
 - If a slide needs a visual element that is not already available, first add or
   extend the reusable macro in `slaif.sty`, then use that macro from `deck.tex`.
   This applies to cards, panels, notes, footnotes, figures, image placement,
@@ -191,14 +220,15 @@ Inspect all slides for:
 Also inspect the TeX source for template-boundary violations before finishing:
 
 ```bash
-rg -n '\\newcommand|\\placetextbox|\\drawshape|\\begin\{tikzpicture\}|\\includegraphics' deck.tex
+rg -n '\\newcommand|\\placetextbox|\\drawshape|\\begin\{tikzpicture\}|\\includegraphics|\\fontsize|fontSize=|lineHeight=|labelFontSize=|labelLineHeight=|valueFontSize=|valueLineHeight=' deck.tex
 ```
 
 If this finds newly introduced local visual primitives or raw layout code in
 `deck.tex`, move that behavior into `slaif.sty` and replace the deck-side code
-with semantic macro calls before reporting the work as done. Existing raw
-fragments from older imported decks should be treated as technical debt and not
-copied or expanded.
+with semantic macro calls before reporting the work as done. If this finds font
+size overrides in `deck.tex`, remove them or stop and ask for an explicit user
+decision before continuing. Existing raw fragments from older imported decks
+should be treated as technical debt and not copied or expanded.
 
 For details, crop the suspect region and inspect it directly.
 
