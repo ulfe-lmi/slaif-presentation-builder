@@ -1620,6 +1620,23 @@
   \end{minipage}%
 }
 
+\newcommand{\SlaifBluePlainBulletList}[2]{%
+  \begin{minipage}{#1bp}
+    \raggedright
+    \begin{list}{\tikz[baseline=-0.35ex]\fill[SlaifAccentTeal] (0,0) circle[radius=4.200bp];}{%
+      \setlength{\leftmargin}{22.000bp}%
+      \setlength{\labelwidth}{8.400bp}%
+      \setlength{\labelsep}{12.000bp}%
+      \setlength{\itemsep}{9.000pt}%
+      \setlength{\parsep}{0pt}%
+      \setlength{\topsep}{0pt}%
+      \setlength{\partopsep}{0pt}%
+    }%
+    #2%
+    \end{list}%
+  \end{minipage}%
+}
+
 \newcommand{\SlaifPlainBulletBlockReset}{%
   \def\SlaifPlainBulletBlockX{80.000}%
   \def\SlaifPlainBulletBlockY{348.000}%
@@ -1628,6 +1645,7 @@
   \def\SlaifPlainBulletBlockFontSize{16.800}%
   \def\SlaifPlainBulletBlockLineHeight{19.800}%
   \def\SlaifPlainBulletBlockColor{SlaifInk}%
+  \def\SlaifPlainBulletBlockVariant{green}%
 }
 
 \pgfkeys{
@@ -1640,6 +1658,7 @@
   fontSize/.store in=\SlaifPlainBulletBlockFontSize,
   lineHeight/.store in=\SlaifPlainBulletBlockLineHeight,
   color/.store in=\SlaifPlainBulletBlockColor,
+  variant/.store in=\SlaifPlainBulletBlockVariant,
 }
 
 \NewDocumentCommand{\SlaifPlainBulletBlock}{O{} m}{%
@@ -1647,7 +1666,11 @@
   \pgfkeys{/SlaifPlainBulletBlock,#1}%
   \begin{textblock*}{\SlaifPlainBulletBlockWidth bp}(\SlaifPlainBulletBlockX bp,\SlaifPlainBulletBlockY bp)
     {\RobotoCondensed{}\color{\SlaifPlainBulletBlockColor}\fontsize{\SlaifPlainBulletBlockFontSize pt}{\SlaifPlainBulletBlockLineHeight pt}\selectfont
-    \SlaifPlainBulletList{\SlaifPlainBulletBlockWidth}{#2}}
+    \IfStrEq{\SlaifPlainBulletBlockVariant}{blue}{%
+      \SlaifBluePlainBulletList{\SlaifPlainBulletBlockWidth}{#2}%
+    }{%
+      \SlaifPlainBulletList{\SlaifPlainBulletBlockWidth}{#2}%
+    }}
   \end{textblock*}%
 }
 

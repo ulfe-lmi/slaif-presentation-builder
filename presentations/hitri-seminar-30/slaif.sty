@@ -1658,6 +1658,7 @@
   \def\SlaifPlainBulletBlockFontSize{16.800}%
   \def\SlaifPlainBulletBlockLineHeight{19.800}%
   \def\SlaifPlainBulletBlockColor{SlaifInk}%
+  \def\SlaifPlainBulletBlockVariant{green}%
 }
 
 \pgfkeys{
@@ -1670,6 +1671,7 @@
   fontSize/.store in=\SlaifPlainBulletBlockFontSize,
   lineHeight/.store in=\SlaifPlainBulletBlockLineHeight,
   color/.store in=\SlaifPlainBulletBlockColor,
+  variant/.store in=\SlaifPlainBulletBlockVariant,
 }
 
 \NewDocumentCommand{\SlaifPlainBulletBlock}{O{} m}{%
@@ -1677,7 +1679,11 @@
   \pgfkeys{/SlaifPlainBulletBlock,#1}%
   \begin{textblock*}{\SlaifPlainBulletBlockWidth bp}(\SlaifPlainBulletBlockX bp,\SlaifPlainBulletBlockY bp)
     {\RobotoCondensed{}\color{\SlaifPlainBulletBlockColor}\fontsize{\SlaifPlainBulletBlockFontSize pt}{\SlaifPlainBulletBlockLineHeight pt}\selectfont
-    \SlaifPlainBulletList{\SlaifPlainBulletBlockWidth}{#2}}
+    \IfStrEq{\SlaifPlainBulletBlockVariant}{blue}{%
+      \SlaifBluePlainBulletList{\SlaifPlainBulletBlockWidth}{#2}%
+    }{%
+      \SlaifPlainBulletList{\SlaifPlainBulletBlockWidth}{#2}%
+    }}
   \end{textblock*}%
 }
 
