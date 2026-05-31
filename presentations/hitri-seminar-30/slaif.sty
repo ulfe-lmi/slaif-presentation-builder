@@ -78,12 +78,15 @@
 }
 
 \newcommand{\SlaifFontScale}{1.3}
+\newcommand{\SlaifScaledFont}[2]{%
+  \pgfmathsetmacro{\SlaifScaledFontSize}{(#1)*\SlaifFontScale}%
+  \pgfmathsetmacro{\SlaifScaledLineHeight}{(#2)*\SlaifFontScale}%
+  \fontsize{\SlaifScaledFontSize pt}{\SlaifScaledLineHeight pt}\selectfont
+}
 \newcommand{\placetextbox}[8]{%
   \begin{textblock*}{#3bp}(#1bp,#2bp)
     \begingroup
-      \pgfmathsetmacro{\SlaifScaledFontSize}{(#5)*\SlaifFontScale}%
-      \pgfmathsetmacro{\SlaifScaledLineHeight}{(#6)*\SlaifFontScale}%
-      \color{#8}\fontsize{\SlaifScaledFontSize pt}{\SlaifScaledLineHeight pt}\selectfont #7%
+      \color{#8}\SlaifScaledFont{#5}{#6}#7%
     \endgroup
   \end{textblock*}%
 }
@@ -301,8 +304,8 @@
   \def\SlaifFootnotePanelDraw{none}%
   \def\SlaifFootnotePanelLineWidth{0.000}%
   \def\SlaifFootnotePanelTextColor{SlaifInk}%
-  \def\SlaifFootnotePanelFontSize{10.920}%
-  \def\SlaifFootnotePanelLineHeight{12.558}%
+  \def\SlaifFootnotePanelFontSize{12.880}%
+  \def\SlaifFootnotePanelLineHeight{15.714}%
 }
 
 \pgfkeys{
@@ -321,8 +324,8 @@
     paddingY=12.558,
     fill=SlaifPanelBlue,
     textColor=SlaifMutedText,
-    fontSize=10.920,
-    lineHeight=12.558,
+    fontSize=12.880,
+    lineHeight=15.714,
     centerText,
   },
   x/.store in=\SlaifFootnotePanelX,
@@ -355,7 +358,7 @@
       inner ysep=\SlaifFootnotePanelPaddingY bp
     ] at ([xshift=\SlaifFootnotePanelX bp,yshift=-\SlaifFootnotePanelBottom bp]current page.north west) {%
       \begin{minipage}{\SlaifFootnotePanelContentWidth bp}
-        \begingroup\color{\SlaifFootnotePanelTextColor}\fontsize{\SlaifFootnotePanelFontSize pt}{\SlaifFootnotePanelLineHeight pt}\selectfont\RobotoCondensed{}%
+        \begingroup\color{\SlaifFootnotePanelTextColor}\SlaifScaledFont{\SlaifFootnotePanelFontSize}{\SlaifFootnotePanelLineHeight}\RobotoCondensed{}%
           \ifSlaifFootnotePanelCenterText
             \centering #2\par
           \else
@@ -375,8 +378,8 @@
   \def\SlaifPillRadius{6.000}%
   \def\SlaifPillFill{SlaifPanelBlue}%
   \def\SlaifPillTextColor{SlaifPrimaryTeal}%
-  \def\SlaifPillFontSize{9.360}%
-  \def\SlaifPillLineHeight{10.764}%
+  \def\SlaifPillFontSize{12.880}%
+  \def\SlaifPillLineHeight{15.714}%
 }
 
 \pgfkeys{
@@ -422,7 +425,7 @@
         align=center,
         text width=\SlaifPillWidth bp
       ] at ([xshift=\SlaifPillCenterX bp,yshift=-\SlaifPillCenterY bp]current page.north west) {%
-        \begingroup\color{\SlaifPillTextColor}\fontsize{\SlaifPillFontSize pt}{\SlaifPillLineHeight pt}\selectfont\RobotoCondensed{}\bfseries #2\endgroup
+        \begingroup\color{\SlaifPillTextColor}\SlaifScaledFont{\SlaifPillFontSize}{\SlaifPillLineHeight}\RobotoCondensed{}\bfseries #2\endgroup
       };
     \end{tikzpicture}%
   \fi
@@ -449,8 +452,8 @@
   \def\SlaifPanelCenteredItemsY{252.000}%
   \def\SlaifPanelCenteredItemsRowStep{61.200}%
   \def\SlaifPanelCenteredItemsItemHeight{53.184}%
-  \def\SlaifPanelCenteredItemsFontSize{10.920}%
-  \def\SlaifPanelCenteredItemsLineHeight{12.558}%
+  \def\SlaifPanelCenteredItemsFontSize{12.880}%
+  \def\SlaifPanelCenteredItemsLineHeight{15.714}%
   \def\SlaifPanelCenteredItemsColor{SlaifMutedText}%
 }
 
@@ -554,10 +557,10 @@
     \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
     \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
-    \placetextbox{388.706}{147.014}{505.294}{188.000}{44.000}{47.000}{{\RobotoCondensed{}\bfseries \parbox{505.294bp}{\raggedright \SlaifTitleTitle}}}{SlaifWhite}
+    \placetextbox{388.706}{147.014}{505.294}{188.000}{30.769}{33.846}{{\RobotoCondensed{}\bfseries \parbox{505.294bp}{\raggedright \SlaifTitleTitle}}}{SlaifWhite}
     \placetextbox{388.706}{350.000}{505.294}{32.000}{18.000}{20.700}{{\RobotoCondensed{}\bfseries \parbox{505.294bp}{\raggedright \SlaifTitleAuthorLine}}}{SlaifWhite}
     \placetextbox{388.706}{418.000}{505.294}{32.000}{16.000}{18.400}{{\RobotoCondensed{}\itshape \parbox{505.294bp}{\raggedright \SlaifTitleEventLine}}}{SlaifWhite}
-    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
   \end{frame}%
 }
 
@@ -594,9 +597,9 @@
     \fi
     \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
-    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
-    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
-    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
   \end{frame}%
 }
 
@@ -613,9 +616,9 @@
     \placetextbox{73.500}{190.000}{828.000}{30.000}{15.000}{16.800}{{\RobotoCondensed{}\itshape \parbox{828.000bp}{\raggedright #3}}}{SlaifWhite}
     \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
-    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
-    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
-    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
   \end{frame}%
 }
 
@@ -633,9 +636,9 @@
     \placetextbox{73.500}{156.000}{828.000}{24.000}{13.500}{15.120}{{\RobotoCondensed{}\itshape \parbox{828.000bp}{\raggedright #3}}}{SlaifWhite}
     \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
-    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
-    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
-    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
   \end{frame}%
 }
 
@@ -655,7 +658,7 @@
     \placeimage{313.500}{415.600}{155.550}{27.800}{image18.png}
     \drawshape{fill=SlaifNeutralGray,draw=none}{rectangle}{480.600}{399.200}{482.000}{485.600}
     \placetextbox{492.000}{409.500}{430.000}{75.000}{7.650}{8.800}{{\RobotoCondensed{}\bfseries \parbox{430.000bp}{\raggedright SLAIF: Slovenska tovarna umetne inteligence je prejela financiranje Skupnega podjetja za evropsko visokozmogljivo računalništvo v okviru sporazuma o nepovratnih sredstvih št. 101254461. Projekt financirata Ministrstvo za visoko šolstvo, znanost in inovacije Republike Slovenije ter program Horizon Europe Evropske unije.\\[4pt]SLAIF: Slovenian AI Factory has received funding by the European High Performance Computing Joint Undertaking under the grant agreement no. 101254461. The project is funded by the Ministry of Higher Education, Science and Innovation of Republic of Slovenia and by Horizon Europe Programme of the European Union.}}}{SlaifNeutralGray}
-    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
     \placetextbox{49.000}{511.000}{260.000}{28.500}{11.000}{12.650}{{\RobotoCondensed{}© 2026 by SLAIF, licensed under CC BY-SA 4.0}}{SlaifWhite}
     \placeimage{311.200}{512.850}{12.150}{12.150}{image10.png}
     \placeimage{324.800}{512.850}{12.150}{12.150}{image12.png}
@@ -682,8 +685,8 @@
   \def\SlaifSliderLabelWidth{338.400}%
   \def\SlaifSliderLabelYOffset{-3.291}%
   \def\SlaifSliderLabelHeight{20.983}%
-  \def\SlaifSliderLabelFontSize{12.480}%
-  \def\SlaifSliderLabelLineHeight{14.352}%
+  \def\SlaifSliderLabelFontSize{12.880}%
+  \def\SlaifSliderLabelLineHeight{15.714}%
   \def\SlaifSliderBarX{388.800}%
   \def\SlaifSliderBarWidth{518.400}%
   \def\SlaifSliderBarHeight{15.840}%
@@ -692,8 +695,8 @@
   \def\SlaifSliderValueYOffset{4.740}%
   \def\SlaifSliderValueWidth{57.600}%
   \def\SlaifSliderValueHeight{20.983}%
-  \def\SlaifSliderValueFontSize{12.480}%
-  \def\SlaifSliderValueLineHeight{14.352}%
+  \def\SlaifSliderValueFontSize{12.880}%
+  \def\SlaifSliderValueLineHeight{15.714}%
   \def\SlaifSliderTrackColor{SlaifSurface}%
   \def\SlaifSliderMaxValue{0}%
   \def\SlaifSliderValueSuffix{}%
@@ -708,8 +711,8 @@
     labelWidth=338.400,
     labelYOffset=-3.291,
     labelHeight=20.983,
-    labelFontSize=12.480,
-    labelLineHeight=14.352,
+    labelFontSize=12.880,
+    labelLineHeight=15.714,
     barX=388.800,
     barWidth=518.400,
     barHeight=15.840,
@@ -718,8 +721,8 @@
     valueYOffset=4.740,
     valueWidth=57.600,
     valueHeight=20.983,
-    valueFontSize=12.480,
-    valueLineHeight=14.352,
+    valueFontSize=12.880,
+    valueLineHeight=15.714,
     trackColor=SlaifSurface,
   },
   compact/.style={
@@ -728,8 +731,8 @@
     labelWidth=263.764,
     labelYOffset=1.749,
     labelHeight=20.983,
-    labelFontSize=12.480,
-    labelLineHeight=14.352,
+    labelFontSize=12.880,
+    labelLineHeight=15.714,
     barX=727.071,
     barWidth=144.000,
     barHeight=23.040,
@@ -884,12 +887,12 @@
   \def\SlaifColoredPanelsHeaderTitleLineHeight{23.322}%
   \def\SlaifColoredPanelsSubtitleYOffset{75.600}%
   \def\SlaifColoredPanelsSubtitleHeight{48.691}%
-  \def\SlaifColoredPanelsSubtitleFontSize{10.920}%
-  \def\SlaifColoredPanelsSubtitleLineHeight{12.558}%
+  \def\SlaifColoredPanelsSubtitleFontSize{12.880}%
+  \def\SlaifColoredPanelsSubtitleLineHeight{15.714}%
   \def\SlaifColoredPanelsMiniFooterYOffset{158.400}%
   \def\SlaifColoredPanelsMiniFooterHeight{20.983}%
-  \def\SlaifColoredPanelsMiniFooterFontSize{12.480}%
-  \def\SlaifColoredPanelsMiniFooterLineHeight{14.352}%
+  \def\SlaifColoredPanelsMiniFooterFontSize{12.880}%
+  \def\SlaifColoredPanelsMiniFooterLineHeight{15.714}%
   \def\SlaifColoredPanelsContentYOffset{223.200}%
   \def\SlaifColoredPanelsBottomPadding{18.000}%
 }
@@ -1049,7 +1052,7 @@
   \ifSlaifColoredPanelsMeasuring
     \setbox\SlaifPanelMeasureBox=\vbox{%
       \begin{minipage}{\SlaifPanelBulletListWidth bp}
-        \begingroup\color{SlaifInk}\fontsize{12.880pt}{15.714pt}\selectfont\RobotoCondensed{}%
+        \begingroup\color{SlaifInk}\SlaifScaledFont{12.880}{15.714}\RobotoCondensed{}%
           \raggedright\hyphenpenalty=10000\exhyphenpenalty=10000
           \begin{list}{\tikz[baseline=-0.35ex]\fill[#1] (0,0) circle[radius=5.500bp];}{%
             \setlength{\leftmargin}{25.000bp}%
@@ -1111,8 +1114,8 @@
   \def\SlaifDataTableHeaderColor{SlaifAccentTeal}%
   \def\SlaifDataTableOddFill{SlaifSurface}%
   \def\SlaifDataTableEvenFill{SlaifWhite}%
-  \def\SlaifDataTableHeaderFontSize{12.480}%
-  \def\SlaifDataTableHeaderLineHeight{14.352}%
+  \def\SlaifDataTableHeaderFontSize{12.880}%
+  \def\SlaifDataTableHeaderLineHeight{15.714}%
   \def\SlaifDataTableHeaderTextColor{SlaifWhite}%
   \def\SlaifDataTableDefaultFontSize{10.920}%
   \def\SlaifDataTableDefaultLineHeight{12.558}%
@@ -1305,11 +1308,11 @@
   \def\SlaifStatisticPanelValueFontSize{49.680}%
   \def\SlaifStatisticPanelValueLineHeight{57.132}%
   \def\SlaifStatisticPanelTitleHeight{18.166}%
-  \def\SlaifStatisticPanelTitleFontSize{10.920}%
-  \def\SlaifStatisticPanelTitleLineHeight{12.558}%
+  \def\SlaifStatisticPanelTitleFontSize{12.880}%
+  \def\SlaifStatisticPanelTitleLineHeight{15.714}%
   \def\SlaifStatisticPanelDescriptionHeight{57.380}%
-  \def\SlaifStatisticPanelDescriptionFontSize{10.920}%
-  \def\SlaifStatisticPanelDescriptionLineHeight{12.558}%
+  \def\SlaifStatisticPanelDescriptionFontSize{12.880}%
+  \def\SlaifStatisticPanelDescriptionLineHeight{15.714}%
   \def\SlaifStatisticPanelValueYOffset{18.000}%
   \def\SlaifStatisticPanelTitleYOffset{82.800}%
   \def\SlaifStatisticPanelDescriptionYOffset{111.600}%
@@ -1334,8 +1337,8 @@
     titleLineHeight=19.734,
     descriptionYOffset=273.600,
     descriptionHeight=42.324,
-    descriptionFontSize=10.920,
-    descriptionLineHeight=12.558,
+    descriptionFontSize=12.880,
+    descriptionLineHeight=15.714,
   },
   x/.store in=\SlaifStatisticPanelX,
   y/.store in=\SlaifStatisticPanelY,
@@ -1396,9 +1399,9 @@
 
 \newcommand{\FinalTakeawayPanel}[4]{%
   \drawshape{fill=SlaifAccentTeal,draw=none,rounded corners=6bp}{rectangle}{39.600}{109.543}{921.600}{397.543}%
-  \placetextbox{61.200}{134.743}{838.800}{20.761}{12.480}{14.352}{{\RobotoCondensed{}\bfseries\itshape \parbox{838.800bp}{\raggedright #1}}}{#2}%
+  \placetextbox{61.200}{134.743}{838.800}{20.761}{12.880}{15.714}{{\RobotoCondensed{}\bfseries\itshape \parbox{838.800bp}{\raggedright #1}}}{#2}%
   \placetextbox{61.200}{177.943}{838.800}{42.976}{24.960}{28.704}{{\RobotoCondensed{}\bfseries \parbox{838.800bp}{\raggedright #3}}}{SlaifWhite}%
-  \placetextbox{61.200}{278.743}{838.800}{55.153}{12.480}{14.352}{{\RobotoCondensed{}\itshape \parbox{838.800bp}{\raggedright #4}}}{SlaifWhite}%
+  \placetextbox{61.200}{278.743}{838.800}{55.153}{12.880}{15.714}{{\RobotoCondensed{}\itshape \parbox{838.800bp}{\raggedright #4}}}{SlaifWhite}%
 }
 
 \newcount\SlaifMetricSummaryPanelCount
@@ -1465,14 +1468,16 @@
     \placetextbox{\SlaifMetricSummaryPanelX}{150.480}{\SlaifMetricSummaryPanelWidth}{25.951}{15.600}{17.940}{{\RobotoCondensed{}\bfseries \parbox{\SlaifMetricSummaryPanelWidth bp}{\centering ##2}}}{SlaifWhite}%
     \placetextbox{\SlaifMetricSummaryInnerX}{216.000}{\SlaifMetricSummaryInnerWidth}{18.363}{10.920}{12.558}{{\RobotoCondensed{}\bfseries\itshape \parbox{\SlaifMetricSummaryInnerWidth bp}{\raggedright ##3}}}{SlaifPrimaryTeal}%
     \placetextbox{\SlaifMetricSummaryInnerX}{267.000}{180.000}{71.000}{49.680}{60.610}{{\RobotoCondensed{}\bfseries ##4}}{SlaifGreenDark}%
-    \settowidth{\SlaifMetricSummaryMetricBoxWidth}{\fontsize{49.680pt}{60.610pt}\selectfont\RobotoCondensed{}\bfseries ##4}%
+    \pgfmathsetmacro{\SlaifMetricSummaryScaledMetricFontSize}{49.680*\SlaifFontScale}%
+    \pgfmathsetmacro{\SlaifMetricSummaryScaledMetricLineHeight}{60.610*\SlaifFontScale}%
+    \settowidth{\SlaifMetricSummaryMetricBoxWidth}{\fontsize{\SlaifMetricSummaryScaledMetricFontSize pt}{\SlaifMetricSummaryScaledMetricLineHeight pt}\selectfont\RobotoCondensed{}\bfseries ##4}%
     \SlaifMetricSummaryMetricLabelWidth=\dimexpr\SlaifMetricSummaryInnerWidth bp-\SlaifMetricSummaryMetricBoxWidth-14.400bp\relax
     \ifdim\SlaifMetricSummaryMetricLabelWidth<90bp
       \SlaifMetricSummaryMetricLabelWidth=90bp
     \fi
     \edef\SlaifMetricSummaryMetricLabelWidthValue{\strip@pt\SlaifMetricSummaryMetricLabelWidth}%
     \pgfmathsetmacro{\SlaifMetricSummaryMetricLabelX}{\SlaifMetricSummaryInnerX + \strip@pt\SlaifMetricSummaryMetricBoxWidth + 14.400}%
-    \placetextbox{\SlaifMetricSummaryMetricLabelX}{268.000}{\SlaifMetricSummaryMetricLabelWidthValue}{58.163}{12.480}{14.352}{{\RobotoCondensed{} \parbox{\SlaifMetricSummaryMetricLabelWidthValue bp}{\raggedright ##5}}}{SlaifInk}%
+    \placetextbox{\SlaifMetricSummaryMetricLabelX}{268.000}{\SlaifMetricSummaryMetricLabelWidthValue}{58.163}{12.880}{15.714}{{\RobotoCondensed{} \parbox{\SlaifMetricSummaryMetricLabelWidthValue bp}{\raggedright ##5}}}{SlaifInk}%
     \ifstrempty{##6}{}{%
       \placetextbox{\SlaifMetricSummaryInnerX}{342.000}{\SlaifMetricSummaryInnerWidth}{18.363}{10.920}{12.558}{{\RobotoCondensed{} \parbox{\SlaifMetricSummaryInnerWidth bp}{\raggedright ##6}}}{SlaifInk}%
     }%
@@ -1544,7 +1549,7 @@
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
     \placeimage{916.052}{17.766}{37.261}{51.516}{image5.png}
     \placetextbox{39.600}{27.360}{885.600}{41.522}{24.960}{28.704}{{\RobotoCondensed{}\bfseries \parbox{885.600bp}{\raggedright \SlaifNoTextTitle}}}{SlaifPrimaryTeal}
-    \placetextbox{39.600}{79.200}{885.600}{20.761}{12.480}{14.352}{{\RobotoCondensed{}\itshape \parbox{885.600bp}{\raggedright \SlaifNoTextSubtitle}}}{SlaifMutedText}
+    \placetextbox{39.600}{79.200}{885.600}{20.761}{12.880}{15.714}{{\RobotoCondensed{}\itshape \parbox{885.600bp}{\raggedright \SlaifNoTextSubtitle}}}{SlaifMutedText}
     \ifx\SlaifNoTextBody\@empty
       \SlaifStatisticPanels{\SlaifNoTextStatistics}%
     \else
@@ -1552,9 +1557,9 @@
     \fi
     \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
-    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
-    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
-    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
   \end{frame}%
 }
 
@@ -1585,14 +1590,14 @@
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
     \placeimage{916.052}{17.766}{37.261}{51.516}{image5.png}
     \placetextbox{39.600}{27.360}{885.600}{41.522}{24.960}{28.704}{{\RobotoCondensed{}\bfseries \parbox{885.600bp}{\raggedright \SlaifTwoColumnNoTextTitle}}}{SlaifPrimaryTeal}
-    \placetextbox{39.600}{79.200}{885.600}{32.400}{12.480}{14.352}{{\RobotoCondensed{}\itshape \parbox{885.600bp}{\raggedright \SlaifTwoColumnNoTextSubtitle}}}{SlaifMutedText}
+    \placetextbox{39.600}{79.200}{885.600}{32.400}{12.880}{15.714}{{\RobotoCondensed{}\itshape \parbox{885.600bp}{\raggedright \SlaifTwoColumnNoTextSubtitle}}}{SlaifMutedText}
     \SlaifTwoColumnNoTextLeft
     \SlaifTwoColumnNoTextRight
     \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
-    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
-    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
-    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
   \end{frame}%
 }
 
@@ -1678,7 +1683,7 @@
   \SlaifPlainBulletBlockReset
   \pgfkeys{/SlaifPlainBulletBlock,#1}%
   \begin{textblock*}{\SlaifPlainBulletBlockWidth bp}(\SlaifPlainBulletBlockX bp,\SlaifPlainBulletBlockY bp)
-    {\RobotoCondensed{}\color{\SlaifPlainBulletBlockColor}\fontsize{\SlaifPlainBulletBlockFontSize pt}{\SlaifPlainBulletBlockLineHeight pt}\selectfont
+    {\RobotoCondensed{}\color{\SlaifPlainBulletBlockColor}\SlaifScaledFont{\SlaifPlainBulletBlockFontSize}{\SlaifPlainBulletBlockLineHeight}%
     \IfStrEq{\SlaifPlainBulletBlockVariant}{blue}{%
       \SlaifBluePlainBulletList{\SlaifPlainBulletBlockWidth}{#2}%
     }{%
@@ -1698,7 +1703,7 @@
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
     \placeimage{916.052}{17.766}{37.261}{51.516}{image5.png}
     \placetextbox{39.600}{27.360}{885.600}{41.522}{24.960}{28.704}{{\RobotoCondensed{}\bfseries \parbox{885.600bp}{\raggedright \SlaifPlainSlideTitle}}}{SlaifPrimaryTeal}
-    \placetextbox{39.600}{79.200}{885.600}{20.761}{12.480}{14.352}{{\RobotoCondensed{}\itshape \parbox{885.600bp}{\raggedright \SlaifPlainSlideSubtitle}}}{SlaifMutedText}
+    \placetextbox{39.600}{79.200}{885.600}{20.761}{12.880}{15.714}{{\RobotoCondensed{}\itshape \parbox{885.600bp}{\raggedright \SlaifPlainSlideSubtitle}}}{SlaifMutedText}
     \ifx\SlaifPlainSlideBody\@empty
       \pgfmathsetmacro{\SlaifPlainContentX}{82.800}%
       \pgfmathsetmacro{\SlaifPlainContentY}{143.600}%
@@ -1717,9 +1722,9 @@
     \fi
     \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
     \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
-    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
-    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
-    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{12.880}{15.714}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
   \end{frame}%
 }
 \makeatother
