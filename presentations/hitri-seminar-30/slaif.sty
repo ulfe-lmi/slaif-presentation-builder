@@ -1650,6 +1650,37 @@
   \end{minipage}%
 }
 
+\newcommand{\SlaifPlainBulletBlockReset}{%
+  \def\SlaifPlainBulletBlockX{80.000}%
+  \def\SlaifPlainBulletBlockY{348.000}%
+  \def\SlaifPlainBulletBlockWidth{820.000}%
+  \def\SlaifPlainBulletBlockHeight{130.000}%
+  \def\SlaifPlainBulletBlockFontSize{16.800}%
+  \def\SlaifPlainBulletBlockLineHeight{19.800}%
+  \def\SlaifPlainBulletBlockColor{SlaifInk}%
+}
+
+\pgfkeys{
+  /SlaifPlainBulletBlock/.is family,
+  /SlaifPlainBulletBlock,
+  x/.store in=\SlaifPlainBulletBlockX,
+  y/.store in=\SlaifPlainBulletBlockY,
+  width/.store in=\SlaifPlainBulletBlockWidth,
+  height/.store in=\SlaifPlainBulletBlockHeight,
+  fontSize/.store in=\SlaifPlainBulletBlockFontSize,
+  lineHeight/.store in=\SlaifPlainBulletBlockLineHeight,
+  color/.store in=\SlaifPlainBulletBlockColor,
+}
+
+\NewDocumentCommand{\SlaifPlainBulletBlock}{O{} m}{%
+  \SlaifPlainBulletBlockReset
+  \pgfkeys{/SlaifPlainBulletBlock,#1}%
+  \begin{textblock*}{\SlaifPlainBulletBlockWidth bp}(\SlaifPlainBulletBlockX bp,\SlaifPlainBulletBlockY bp)
+    {\RobotoCondensed{}\color{\SlaifPlainBulletBlockColor}\fontsize{\SlaifPlainBulletBlockFontSize pt}{\SlaifPlainBulletBlockLineHeight pt}\selectfont
+    \SlaifPlainBulletList{\SlaifPlainBulletBlockWidth}{#2}}
+  \end{textblock*}%
+}
+
 \newcommand{\PlainSlide}[1]{%
   \SlaifPlainSlideReset
   \pgfkeys{/SlaifPlainSlide,#1}%
