@@ -25,6 +25,13 @@ This skill covers:
 - Reuse the repository's presentation template or requested template.
 - Preserve template-like code unless the user explicitly asks to alter it.
 - Keep content edits separate from reusable style/framework edits.
+- If the requested slide change cannot be expressed with existing template
+  elements, stop before editing and tell the user exactly what is missing.
+  Request explicit confirmation or a design decision before either
+  adding/extending reusable template elements in the style file or introducing
+  any custom presentation-side element.
+- Never silently choose between changing the template and adding custom
+  deck-side visual code. The user must approve that direction first.
 - For SLAIF decks, `deck.tex` is content only and `slaif.sty` is the
   presentation system. Never define new visual elements, helper drawing macros,
   local card/note/image/bar helpers, colors, layout primitives, or repeated

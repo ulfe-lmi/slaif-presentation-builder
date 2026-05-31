@@ -461,6 +461,13 @@ Behavior:
   `presentation-builder import-source-material` when one is provided.
 - Reuse the repository presentation template or the user-requested template.
 - Preserve template-like code unless the user explicitly asks to change it.
+- If the requested presentation change cannot be implemented with existing
+  template elements, stop before editing and tell the user exactly what is
+  missing. Ask for explicit confirmation or a design decision before either
+  adding/extending reusable template elements in the style file or introducing
+  any custom presentation-side element.
+- Never silently choose between changing the template and adding custom
+  deck-side visual code. The user must approve that direction first.
 - For SLAIF Beamer decks, treat `slaif.sty` as the only valid place for
   presentation-system code. `deck.tex` is content only.
 - Never introduce new visual elements, helper drawing macros, colors, repeated
