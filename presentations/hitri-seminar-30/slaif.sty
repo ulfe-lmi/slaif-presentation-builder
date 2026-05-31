@@ -1,0 +1,1688 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{slaif}[2026/05/26 SLAIF presentation visual primitives]
+
+\RequirePackage{fontspec}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\RequirePackage{xcolor}
+\RequirePackage[absolute,overlay]{textpos}
+\RequirePackage{xstring}
+\RequirePackage{xparse}
+
+\geometry{paperwidth=960bp,paperheight=540bp,margin=0bp}
+
+\definecolor{SlaifBlack}{RGB}{0,0,0}
+\definecolor{SlaifPrimaryTeal}{RGB}{20,91,110}
+\definecolor{SlaifAccentTeal}{RGB}{27,138,167}
+\definecolor{SlaifInk}{RGB}{28,43,51}
+\definecolor{SlaifInkAlt}{RGB}{30,58,58}
+\definecolor{SlaifTealMuted}{RGB}{42,122,130}
+\definecolor{SlaifTealLight}{RGB}{59,157,165}
+\definecolor{SlaifMutedTextAlt}{RGB}{74,99,99}
+\definecolor{SlaifMutedText}{RGB}{85,102,112}
+\definecolor{SlaifGreenDark}{RGB}{111,146,30}
+\definecolor{SlaifGreen}{RGB}{143,188,47}
+\definecolor{SlaifNeutralGray}{RGB}{143,143,143}
+\definecolor{SlaifGreenOlive}{RGB}{155,185,60}
+\definecolor{SlaifGreenLine}{RGB}{160,183,47}
+\definecolor{SlaifGreenLight}{RGB}{165,196,59}
+\definecolor{SlaifDividerBlue}{RGB}{37,144,178}
+\definecolor{SlaifDivider}{RGB}{212,236,238}
+\definecolor{SlaifBorder}{RGB}{216,224,228}
+\definecolor{SlaifPanelBlue}{RGB}{230,242,247}
+\definecolor{SlaifPanelMint}{RGB}{237,245,245}
+\definecolor{SlaifSurface}{RGB}{242,246,248}
+\definecolor{SlaifWhite}{RGB}{255,255,255}
+
+\setmainfont{Roboto Condensed}
+\setsansfont{Roboto Condensed}
+\newfontfamily\RobotoCondensed{Roboto Condensed}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{}
+\setbeamertemplate{headline}{}
+\setbeamersize{text margin left=0pt,text margin right=0pt}
+\setbeamercolor{background canvas}{bg=SlaifWhite}
+\pagestyle{empty}
+
+\newcommand{\SlaifPresentationDate}{}
+\newcommand{\SlaifPresentationFooter}{}
+\newcommand{\SlaifSetPresentationDate}[1]{\renewcommand{\SlaifPresentationDate}{#1}}
+\newcommand{\SlaifSetPresentationFooter}[1]{\renewcommand{\SlaifPresentationFooter}{#1}}
+
+\newcommand{\placeimage}[5]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0pt] at ([xshift=#1bp,yshift=-#2bp]current page.north west) {\includegraphics[width=#3bp,height=#4bp]{assets/#5}};
+  \end{tikzpicture}%
+}
+
+\newcommand{\placeqrimage}[5]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0pt] at ([xshift=#1bp,yshift=-#2bp]current page.north west) {\includegraphics[interpolate=false,width=#3bp,height=#4bp]{assets/#5}};
+  \end{tikzpicture}%
+}
+
+\newcommand{\placeimageopacity}[6]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0pt,opacity=#6] at ([xshift=#1bp,yshift=-#2bp]current page.north west) {\includegraphics[width=#3bp,height=#4bp]{assets/#5}};
+  \end{tikzpicture}%
+}
+
+\newcommand{\placeimagerounded}[6]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \begin{scope}[shift={([xshift=#1bp,yshift=-#2bp]current page.north west)}]
+      \clip[rounded corners=#5bp] (0,0) rectangle (#3bp,-#4bp);
+      \node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=#3bp,height=#4bp]{assets/#6}};
+    \end{scope}
+  \end{tikzpicture}%
+}
+
+\newcommand{\SlaifFontScale}{1.3}
+\newcommand{\placetextbox}[8]{%
+  \begin{textblock*}{#3bp}(#1bp,#2bp)
+    \begingroup
+      \pgfmathsetmacro{\SlaifScaledFontSize}{(#5)*\SlaifFontScale}%
+      \pgfmathsetmacro{\SlaifScaledLineHeight}{(#6)*\SlaifFontScale}%
+      \color{#8}\fontsize{\SlaifScaledFontSize pt}{\SlaifScaledLineHeight pt}\selectfont #7%
+    \endgroup
+  \end{textblock*}%
+}
+
+\newcommand{\drawrect}[5]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \path[#1] ([xshift=#2bp,yshift=-#3bp]current page.north west) rectangle ([xshift=#4bp,yshift=-#5bp]current page.north west);
+  \end{tikzpicture}%
+}
+
+\newcommand{\drawellipse}[5]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \path[#1] ([xshift=#2bp,yshift=-#3bp]current page.north west) ellipse [x radius=#4bp, y radius=#5bp];
+  \end{tikzpicture}%
+}
+
+\newcommand{\drawshape}[6]{%
+  \ifstrequal{#2}{ellipse}{\drawellipse{#1}{#3}{#4}{#5}{#6}}{\drawrect{#1}{#3}{#4}{#5}{#6}}%
+}
+
+\newcommand{\ContributionHeader}[2]{%
+  \drawshape{fill=SlaifDivider,draw=none}{rectangle}{43.200}{92.160}{916.560}{93.240}%
+  \placetextbox{43.200}{73.000}{873.360}{20.000}{15.600}{17.940}{{\RobotoCondensed{}\bfseries \parbox{873.360bp}{\raggedright #1}}}{SlaifInkAlt}%
+  \placetextbox{43.200}{96.500}{873.360}{23.040}{10.920}{12.558}{{\RobotoCondensed{}\bfseries \parbox{873.360bp}{\raggedright #2}}}{SlaifInkAlt}%
+}
+
+\newcount\SlaifSmallTextPanelCount
+\newcount\SlaifSmallTextPanelIndex
+\newcount\SlaifSmallTextPanelExplicitCount
+
+\newcommand{\SlaifSmallTextPanelsReset}{%
+  \def\SlaifSmallTextPanelsX{43.200}%
+  \def\SlaifSmallTextPanelsY{136.497}%
+  \def\SlaifSmallTextPanelsTotalWidth{873.360}%
+  \def\SlaifSmallTextPanelsHeight{273.600}%
+  \def\SlaifSmallTextPanelsGap{7.200}%
+  \def\SlaifSmallTextPanelsSideBarWidth{3.600}%
+  \def\SlaifSmallTextPanelsTitleXOffset{14.400}%
+  \def\SlaifSmallTextPanelsTitleYOffset{5.760}%
+  \def\SlaifSmallTextPanelsTitleHeight{22.320}%
+  \def\SlaifSmallTextPanelsTitleFontSize{10.920}%
+  \def\SlaifSmallTextPanelsTitleLineHeight{12.558}%
+  \def\SlaifSmallTextPanelsContentXOffset{14.400}%
+  \def\SlaifSmallTextPanelsContentYOffset{25.200}%
+  \def\SlaifSmallTextPanelsContentBottomPadding{10.800}%
+  \def\SlaifSmallTextPanelsContentFontSize{10.140}%
+  \def\SlaifSmallTextPanelsContentLineHeight{11.661}%
+  \def\SlaifSmallTextPanelsFill{SlaifPanelMint}%
+  \def\SlaifSmallTextPanelsSideBarFill{SlaifTealLight}%
+  \def\SlaifSmallTextPanelsTitleColor{SlaifTealMuted}%
+  \def\SlaifSmallTextPanelsContentColor{SlaifMutedTextAlt}%
+}
+
+\pgfkeys{
+  /SlaifSmallTextPanels/.is family,
+  /SlaifSmallTextPanels,
+  x/.store in=\SlaifSmallTextPanelsX,
+  y/.store in=\SlaifSmallTextPanelsY,
+  totalWidth/.store in=\SlaifSmallTextPanelsTotalWidth,
+  height/.store in=\SlaifSmallTextPanelsHeight,
+  gap/.store in=\SlaifSmallTextPanelsGap,
+  titleFontSize/.store in=\SlaifSmallTextPanelsTitleFontSize,
+  titleLineHeight/.store in=\SlaifSmallTextPanelsTitleLineHeight,
+  contentFontSize/.store in=\SlaifSmallTextPanelsContentFontSize,
+  contentLineHeight/.store in=\SlaifSmallTextPanelsContentLineHeight,
+}
+
+\NewDocumentCommand{\SmallTextPanel}{O{} m m}{}
+
+\NewDocumentCommand{\SmallTextPanels}{O{} m}{%
+  \SlaifSmallTextPanelsReset
+  \pgfkeys{/SlaifSmallTextPanels,#1}%
+  \def\SlaifSmallTextPanelItems{#2}%
+  \SlaifSmallTextPanelCount=0
+  \SlaifSmallTextPanelExplicitCount=0
+  \def\SlaifSmallTextPanelsExplicitWidthTotal{0}%
+  \RenewDocumentCommand{\SmallTextPanel}{O{} m m}{%
+    \global\advance\SlaifSmallTextPanelCount by 1
+    \if\relax\detokenize{##1}\relax
+    \else
+      \global\advance\SlaifSmallTextPanelExplicitCount by 1
+      \pgfmathsetmacro{\SlaifSmallTextPanelsExplicitWidthTotal}{\SlaifSmallTextPanelsExplicitWidthTotal + ##1}%
+      \xdef\SlaifSmallTextPanelsExplicitWidthTotal{\SlaifSmallTextPanelsExplicitWidthTotal}%
+    \fi
+  }%
+  \SlaifSmallTextPanelItems
+  \pgfmathsetmacro{\SlaifSmallTextPanelsRemainingWidth}{\SlaifSmallTextPanelsTotalWidth - (\the\SlaifSmallTextPanelCount - 1) * \SlaifSmallTextPanelsGap - \SlaifSmallTextPanelsExplicitWidthTotal}%
+  \pgfmathtruncatemacro{\SlaifSmallTextPanelsAutoCount}{\the\SlaifSmallTextPanelCount - \the\SlaifSmallTextPanelExplicitCount}%
+  \ifnum\SlaifSmallTextPanelsAutoCount>0
+    \pgfmathsetmacro{\SlaifSmallTextPanelsAutoWidth}{\SlaifSmallTextPanelsRemainingWidth / \SlaifSmallTextPanelsAutoCount}%
+  \else
+    \def\SlaifSmallTextPanelsAutoWidth{0}%
+  \fi
+  \SlaifSmallTextPanelIndex=0
+  \def\SlaifSmallTextPanelsCursor{\SlaifSmallTextPanelsX}%
+  \RenewDocumentCommand{\SmallTextPanel}{O{} m m}{%
+    \global\advance\SlaifSmallTextPanelIndex by 1
+    \def\SlaifSmallTextPanelWidth{##1}%
+    \if\relax\detokenize{##1}\relax
+      \def\SlaifSmallTextPanelWidth{\SlaifSmallTextPanelsAutoWidth}%
+    \fi
+    \pgfmathsetmacro{\SlaifSmallTextPanelRight}{\SlaifSmallTextPanelsCursor + \SlaifSmallTextPanelWidth}%
+    \pgfmathsetmacro{\SlaifSmallTextPanelBottom}{\SlaifSmallTextPanelsY + \SlaifSmallTextPanelsHeight}%
+    \pgfmathsetmacro{\SlaifSmallTextPanelTextX}{\SlaifSmallTextPanelsCursor + \SlaifSmallTextPanelsTitleXOffset}%
+    \pgfmathsetmacro{\SlaifSmallTextPanelTextWidth}{\SlaifSmallTextPanelWidth - \SlaifSmallTextPanelsTitleXOffset - 10.800}%
+    \pgfmathsetmacro{\SlaifSmallTextPanelTitleY}{\SlaifSmallTextPanelsY + \SlaifSmallTextPanelsTitleYOffset}%
+    \pgfmathsetmacro{\SlaifSmallTextPanelContentY}{\SlaifSmallTextPanelsY + \SlaifSmallTextPanelsContentYOffset}%
+    \pgfmathsetmacro{\SlaifSmallTextPanelContentHeight}{\SlaifSmallTextPanelsHeight - \SlaifSmallTextPanelsContentYOffset - \SlaifSmallTextPanelsContentBottomPadding}%
+    \pgfmathsetmacro{\SlaifSmallTextPanelSideBarRight}{\SlaifSmallTextPanelsCursor + \SlaifSmallTextPanelsSideBarWidth}%
+    \drawshape{fill=\SlaifSmallTextPanelsFill,draw=none}{rectangle}{\SlaifSmallTextPanelsCursor}{\SlaifSmallTextPanelsY}{\SlaifSmallTextPanelRight}{\SlaifSmallTextPanelBottom}%
+    \drawshape{fill=\SlaifSmallTextPanelsSideBarFill,draw=none}{rectangle}{\SlaifSmallTextPanelsCursor}{\SlaifSmallTextPanelsY}{\SlaifSmallTextPanelSideBarRight}{\SlaifSmallTextPanelBottom}%
+    \placetextbox{\SlaifSmallTextPanelTextX}{\SlaifSmallTextPanelTitleY}{\SlaifSmallTextPanelTextWidth}{\SlaifSmallTextPanelsTitleHeight}{\SlaifSmallTextPanelsTitleFontSize}{\SlaifSmallTextPanelsTitleLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifSmallTextPanelTextWidth bp}{\raggedright ##2}}}{\SlaifSmallTextPanelsTitleColor}%
+    \placetextbox{\SlaifSmallTextPanelTextX}{\SlaifSmallTextPanelContentY}{\SlaifSmallTextPanelTextWidth}{\SlaifSmallTextPanelContentHeight}{\SlaifSmallTextPanelsContentFontSize}{\SlaifSmallTextPanelsContentLineHeight}{{\RobotoCondensed{} \parbox{\SlaifSmallTextPanelTextWidth bp}{\raggedright ##3}}}{\SlaifSmallTextPanelsContentColor}%
+    \pgfmathsetmacro{\SlaifSmallTextPanelsCursor}{\SlaifSmallTextPanelRight + \SlaifSmallTextPanelsGap}%
+    \xdef\SlaifSmallTextPanelsCursor{\SlaifSmallTextPanelsCursor}%
+  }%
+  \SlaifSmallTextPanelItems
+}
+
+\newcount\SlaifTimelinePanelCount
+\newcount\SlaifTimelinePanelIndex
+\newcount\SlaifTimelinePanelExplicitCount
+
+\newcommand{\SlaifTimelinePanelsReset}{%
+  \def\SlaifTimelinePanelsX{43.200}%
+  \def\SlaifTimelinePanelsY{443.937}%
+  \def\SlaifTimelinePanelsTotalWidth{873.360}%
+  \def\SlaifTimelinePanelsRuleHeight{2.880}%
+  \def\SlaifTimelinePanelsTextY{449.000}%
+  \def\SlaifTimelinePanelsTextHeight{37.000}%
+  \def\SlaifTimelinePanelsTextPaddingX{8.640}%
+  \def\SlaifTimelinePanelsFontSize{8.900}%
+  \def\SlaifTimelinePanelsLineHeight{10.235}%
+  \def\SlaifTimelinePanelsSeparatorTop{451.400}%
+  \def\SlaifTimelinePanelsSeparatorBottom{480.800}%
+  \def\SlaifTimelinePanelsSeparatorWidth{0.720}%
+  \def\SlaifTimelinePanelsRuleColor{SlaifGreenLine}%
+  \def\SlaifTimelinePanelsSeparatorColor{SlaifDivider}%
+  \def\SlaifTimelinePanelsTextColor{SlaifInkAlt}%
+}
+
+\pgfkeys{
+  /SlaifTimelinePanels/.is family,
+  /SlaifTimelinePanels,
+  x/.store in=\SlaifTimelinePanelsX,
+  y/.store in=\SlaifTimelinePanelsY,
+  totalWidth/.store in=\SlaifTimelinePanelsTotalWidth,
+  textY/.store in=\SlaifTimelinePanelsTextY,
+  textHeight/.store in=\SlaifTimelinePanelsTextHeight,
+  fontSize/.store in=\SlaifTimelinePanelsFontSize,
+  lineHeight/.store in=\SlaifTimelinePanelsLineHeight,
+}
+
+\NewDocumentCommand{\TimelinePanel}{O{} m}{}
+
+\NewDocumentCommand{\TimelinePanels}{O{} m}{%
+  \SlaifTimelinePanelsReset
+  \pgfkeys{/SlaifTimelinePanels,#1}%
+  \def\SlaifTimelinePanelItems{#2}%
+  \SlaifTimelinePanelCount=0
+  \SlaifTimelinePanelExplicitCount=0
+  \def\SlaifTimelinePanelsExplicitWidthTotal{0}%
+  \RenewDocumentCommand{\TimelinePanel}{O{} m}{%
+    \global\advance\SlaifTimelinePanelCount by 1
+    \if\relax\detokenize{##1}\relax
+    \else
+      \global\advance\SlaifTimelinePanelExplicitCount by 1
+      \pgfmathsetmacro{\SlaifTimelinePanelsExplicitWidthTotal}{\SlaifTimelinePanelsExplicitWidthTotal + ##1}%
+      \xdef\SlaifTimelinePanelsExplicitWidthTotal{\SlaifTimelinePanelsExplicitWidthTotal}%
+    \fi
+  }%
+  \SlaifTimelinePanelItems
+  \pgfmathsetmacro{\SlaifTimelinePanelsRemainingWidth}{\SlaifTimelinePanelsTotalWidth - \SlaifTimelinePanelsExplicitWidthTotal}%
+  \pgfmathtruncatemacro{\SlaifTimelinePanelsAutoCount}{\the\SlaifTimelinePanelCount - \the\SlaifTimelinePanelExplicitCount}%
+  \ifnum\SlaifTimelinePanelsAutoCount>0
+    \pgfmathsetmacro{\SlaifTimelinePanelsAutoWidth}{\SlaifTimelinePanelsRemainingWidth / \SlaifTimelinePanelsAutoCount}%
+  \else
+    \def\SlaifTimelinePanelsAutoWidth{0}%
+  \fi
+  \pgfmathsetmacro{\SlaifTimelinePanelsRight}{\SlaifTimelinePanelsX + \SlaifTimelinePanelsTotalWidth}%
+  \pgfmathsetmacro{\SlaifTimelinePanelsRuleBottom}{\SlaifTimelinePanelsY + \SlaifTimelinePanelsRuleHeight}%
+  \drawshape{fill=\SlaifTimelinePanelsRuleColor,draw=none}{rectangle}{\SlaifTimelinePanelsX}{\SlaifTimelinePanelsY}{\SlaifTimelinePanelsRight}{\SlaifTimelinePanelsRuleBottom}%
+  \SlaifTimelinePanelIndex=0
+  \def\SlaifTimelinePanelsCursor{\SlaifTimelinePanelsX}%
+  \RenewDocumentCommand{\TimelinePanel}{O{} m}{%
+    \global\advance\SlaifTimelinePanelIndex by 1
+    \def\SlaifTimelinePanelWidth{##1}%
+    \if\relax\detokenize{##1}\relax
+      \def\SlaifTimelinePanelWidth{\SlaifTimelinePanelsAutoWidth}%
+    \fi
+    \ifnum\SlaifTimelinePanelIndex>1
+      \pgfmathsetmacro{\SlaifTimelineSeparatorRight}{\SlaifTimelinePanelsCursor + \SlaifTimelinePanelsSeparatorWidth}%
+      \drawshape{fill=\SlaifTimelinePanelsSeparatorColor,draw=none}{rectangle}{\SlaifTimelinePanelsCursor}{\SlaifTimelinePanelsSeparatorTop}{\SlaifTimelineSeparatorRight}{\SlaifTimelinePanelsSeparatorBottom}%
+    \fi
+    \pgfmathsetmacro{\SlaifTimelinePanelTextX}{\SlaifTimelinePanelsCursor + \SlaifTimelinePanelsTextPaddingX}%
+    \pgfmathsetmacro{\SlaifTimelinePanelTextWidth}{\SlaifTimelinePanelWidth - 2 * \SlaifTimelinePanelsTextPaddingX}%
+    \placetextbox{\SlaifTimelinePanelTextX}{\SlaifTimelinePanelsTextY}{\SlaifTimelinePanelTextWidth}{\SlaifTimelinePanelsTextHeight}{\SlaifTimelinePanelsFontSize}{\SlaifTimelinePanelsLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifTimelinePanelTextWidth bp}{\raggedright ##2}}}{\SlaifTimelinePanelsTextColor}%
+    \pgfmathsetmacro{\SlaifTimelinePanelsCursor}{\SlaifTimelinePanelsCursor + \SlaifTimelinePanelWidth}%
+    \xdef\SlaifTimelinePanelsCursor{\SlaifTimelinePanelsCursor}%
+  }%
+  \SlaifTimelinePanelItems
+}
+
+\newif\ifSlaifFootnotePanelCenterText
+
+\newcommand{\SlaifFootnotePanelReset}{%
+  \SlaifFootnotePanelCenterTextfalse
+  \def\SlaifFootnotePanelX{39.600}%
+  \def\SlaifFootnotePanelBottom{503.165}%
+  \def\SlaifFootnotePanelWidth{882.000}%
+  \def\SlaifFootnotePanelPaddingX{21.600}%
+  \def\SlaifFootnotePanelPaddingY{9.000}%
+  \def\SlaifFootnotePanelRadius{6.000}%
+  \def\SlaifFootnotePanelFill{SlaifPanelBlue}%
+  \def\SlaifFootnotePanelDraw{none}%
+  \def\SlaifFootnotePanelLineWidth{0.000}%
+  \def\SlaifFootnotePanelTextColor{SlaifInk}%
+  \def\SlaifFootnotePanelFontSize{10.920}%
+  \def\SlaifFootnotePanelLineHeight{12.558}%
+}
+
+\pgfkeys{
+  /SlaifFootnotePanel/.is family,
+  /SlaifFootnotePanel,
+  rightColumn/.style={
+    x=457.200,
+    bottom=504.948,
+    width=464.400,
+  },
+  panelCaption/.style={
+    x=39.600,
+    width=882.000,
+    bottom=503.165,
+    paddingX=21.600,
+    paddingY=12.558,
+    fill=SlaifPanelBlue,
+    textColor=SlaifMutedText,
+    fontSize=10.920,
+    lineHeight=12.558,
+    centerText,
+  },
+  x/.store in=\SlaifFootnotePanelX,
+  bottom/.store in=\SlaifFootnotePanelBottom,
+  width/.store in=\SlaifFootnotePanelWidth,
+  paddingX/.store in=\SlaifFootnotePanelPaddingX,
+  paddingY/.store in=\SlaifFootnotePanelPaddingY,
+  radius/.store in=\SlaifFootnotePanelRadius,
+  fill/.store in=\SlaifFootnotePanelFill,
+  draw/.store in=\SlaifFootnotePanelDraw,
+  lineWidth/.store in=\SlaifFootnotePanelLineWidth,
+  textColor/.store in=\SlaifFootnotePanelTextColor,
+  fontSize/.store in=\SlaifFootnotePanelFontSize,
+  lineHeight/.store in=\SlaifFootnotePanelLineHeight,
+  centerText/.code={\SlaifFootnotePanelCenterTexttrue},
+}
+
+\newcommand{\SlaifFootnotePanel}[2][]{%
+  \SlaifFootnotePanelReset
+  \pgfkeys{/SlaifFootnotePanel,#1}%
+  \pgfmathsetmacro{\SlaifFootnotePanelContentWidth}{\SlaifFootnotePanelWidth - 2 * \SlaifFootnotePanelPaddingX}%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[
+      anchor=south west,
+      fill=\SlaifFootnotePanelFill,
+      draw=\SlaifFootnotePanelDraw,
+      line width=\SlaifFootnotePanelLineWidth bp,
+      rounded corners=\SlaifFootnotePanelRadius bp,
+      inner xsep=\SlaifFootnotePanelPaddingX bp,
+      inner ysep=\SlaifFootnotePanelPaddingY bp
+    ] at ([xshift=\SlaifFootnotePanelX bp,yshift=-\SlaifFootnotePanelBottom bp]current page.north west) {%
+      \begin{minipage}{\SlaifFootnotePanelContentWidth bp}
+        \begingroup\color{\SlaifFootnotePanelTextColor}\fontsize{\SlaifFootnotePanelFontSize pt}{\SlaifFootnotePanelLineHeight pt}\selectfont\RobotoCondensed{}%
+          \ifSlaifFootnotePanelCenterText
+            \centering #2\par
+          \else
+            #2%
+          \fi
+        \endgroup
+      \end{minipage}%
+    };
+  \end{tikzpicture}%
+}
+
+\newcommand{\SlaifPillReset}{%
+  \def\SlaifPillX{0.000}%
+  \def\SlaifPillY{0.000}%
+  \def\SlaifPillWidth{122.400}%
+  \def\SlaifPillHeight{27.360}%
+  \def\SlaifPillRadius{6.000}%
+  \def\SlaifPillFill{SlaifPanelBlue}%
+  \def\SlaifPillTextColor{SlaifPrimaryTeal}%
+  \def\SlaifPillFontSize{9.360}%
+  \def\SlaifPillLineHeight{10.764}%
+}
+
+\pgfkeys{
+  /SlaifPill/.is family,
+  /SlaifPill,
+  inactive/.style={
+    fill=SlaifPanelBlue,
+    textColor=SlaifPrimaryTeal,
+  },
+  active/.style={
+    fill=SlaifGreen,
+    textColor=SlaifWhite,
+  },
+  x/.store in=\SlaifPillX,
+  y/.store in=\SlaifPillY,
+  width/.store in=\SlaifPillWidth,
+  height/.store in=\SlaifPillHeight,
+  radius/.store in=\SlaifPillRadius,
+  fill/.store in=\SlaifPillFill,
+  textColor/.store in=\SlaifPillTextColor,
+  fontSize/.store in=\SlaifPillFontSize,
+  lineHeight/.store in=\SlaifPillLineHeight,
+}
+
+\newcommand{\SlaifPill}[2][]{%
+  \SlaifPillReset
+  \pgfkeys{/SlaifPill,inactive,#1}%
+  \ifSlaifColoredPanelsMeasuring
+    \SlaifColoredPanelsCandidateBottom=\dimexpr\SlaifPillY bp + \SlaifPillHeight bp\relax
+    \SlaifColoredPanelsReportBottomDim{\SlaifColoredPanelsCandidateBottom}%
+  \else
+    \pgfmathsetmacro{\SlaifPillCenterX}{\SlaifPillX + \SlaifPillWidth / 2}%
+    \pgfmathsetmacro{\SlaifPillCenterY}{\SlaifPillY + \SlaifPillHeight / 2}%
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[
+        anchor=center,
+        fill=\SlaifPillFill,
+        draw=none,
+        rounded corners=\SlaifPillRadius bp,
+        minimum width=\SlaifPillWidth bp,
+        minimum height=\SlaifPillHeight bp,
+        inner sep=0pt,
+        align=center,
+        text width=\SlaifPillWidth bp
+      ] at ([xshift=\SlaifPillCenterX bp,yshift=-\SlaifPillCenterY bp]current page.north west) {%
+        \begingroup\color{\SlaifPillTextColor}\fontsize{\SlaifPillFontSize pt}{\SlaifPillLineHeight pt}\selectfont\RobotoCondensed{}\bfseries #2\endgroup
+      };
+    \end{tikzpicture}%
+  \fi
+}
+
+\newcommand{\SlaifPanelPill}[2][]{%
+  \pgfmathsetmacro{\SlaifPanelPillX}{\SlaifColoredPanelLeft + 18.000}%
+  \pgfmathsetmacro{\SlaifPanelPillWidth}{\SlaifColoredPanelWidth - 36.000}%
+  \SlaifPill[
+    x=\SlaifPanelPillX,
+    y=208.800,
+    width=\SlaifPanelPillWidth,
+    height=32.400,
+    #1
+  ]{#2}%
+}
+
+\newcount\SlaifCenteredItemCount
+\newcount\SlaifCenteredItemIndex
+
+\newcommand{\SlaifCenteredItemsReset}{%
+  \def\SlaifCenteredItemsX{0.000}%
+  \def\SlaifCenteredItemsWidth{144.000}%
+  \def\SlaifPanelCenteredItemsY{252.000}%
+  \def\SlaifPanelCenteredItemsRowStep{61.200}%
+  \def\SlaifPanelCenteredItemsItemHeight{53.184}%
+  \def\SlaifPanelCenteredItemsFontSize{10.920}%
+  \def\SlaifPanelCenteredItemsLineHeight{12.558}%
+  \def\SlaifPanelCenteredItemsColor{SlaifMutedText}%
+}
+
+\pgfkeys{
+  /SlaifCenteredItems/.is family,
+  /SlaifCenteredItems,
+  x/.store in=\SlaifCenteredItemsX,
+  width/.store in=\SlaifCenteredItemsWidth,
+  y/.store in=\SlaifPanelCenteredItemsY,
+  rowStep/.store in=\SlaifPanelCenteredItemsRowStep,
+  itemHeight/.store in=\SlaifPanelCenteredItemsItemHeight,
+  fontSize/.store in=\SlaifPanelCenteredItemsFontSize,
+  lineHeight/.store in=\SlaifPanelCenteredItemsLineHeight,
+  color/.store in=\SlaifPanelCenteredItemsColor,
+}
+
+\newcommand{\SlaifPanelTextItem}[1]{}
+
+\newcommand{\SlaifCenteredItems}[2][]{%
+  \SlaifCenteredItemsReset
+  \pgfkeys{/SlaifCenteredItems,#1}%
+  \SlaifCenteredItemCount=0
+  \def\SlaifPanelTextItem##1{%
+    \global\advance\SlaifCenteredItemCount by 1
+  }%
+  #2%
+  \ifSlaifColoredPanelsMeasuring
+    \pgfmathsetmacro{\SlaifPanelCenteredItemsBottom}{\SlaifPanelCenteredItemsY + (\the\SlaifCenteredItemCount - 1) * \SlaifPanelCenteredItemsRowStep + \SlaifPanelCenteredItemsItemHeight}%
+    \SlaifColoredPanelsCandidateBottom=\dimexpr\SlaifPanelCenteredItemsBottom bp\relax
+    \SlaifColoredPanelsReportBottomDim{\SlaifColoredPanelsCandidateBottom}%
+  \else
+    \SlaifCenteredItemIndex=0
+    \def\SlaifPanelTextItem##1{%
+      \global\advance\SlaifCenteredItemIndex by 1
+      \pgfmathsetmacro{\SlaifPanelCenteredItemY}{\SlaifPanelCenteredItemsY + (\the\SlaifCenteredItemIndex - 1) * \SlaifPanelCenteredItemsRowStep}%
+      \placetextbox{\SlaifCenteredItemsX}{\SlaifPanelCenteredItemY}{\SlaifCenteredItemsWidth}{\SlaifPanelCenteredItemsItemHeight}{\SlaifPanelCenteredItemsFontSize}{\SlaifPanelCenteredItemsLineHeight}{{\RobotoCondensed{} \parbox{\SlaifCenteredItemsWidth bp}{\centering ##1}}}{\SlaifPanelCenteredItemsColor}%
+    }%
+    #2%
+  \fi
+}
+
+\newcommand{\SlaifPanelCenteredItems}[2][]{%
+  \SlaifCenteredItems[
+    x=\SlaifColoredPanelInnerX,
+    width=\SlaifColoredPanelInnerWidth,
+    #1
+  ]{#2}%
+}
+
+\makeatletter
+\newcommand{\SlaifTitleReset}{%
+  \let\SlaifTitleTitle\@empty
+  \let\SlaifTitleAuthor\@empty
+  \let\SlaifTitleInstitution\@empty
+  \let\SlaifTitleRole\@empty
+  \let\SlaifTitleEvent\@empty
+  \let\SlaifTitleSubtitle\@empty
+}
+
+\pgfkeys{
+  /SlaifTitleSlide/.is family,
+  /SlaifTitleSlide,
+  title/.store in=\SlaifTitleTitle,
+  author/.store in=\SlaifTitleAuthor,
+  institution/.store in=\SlaifTitleInstitution,
+  role/.store in=\SlaifTitleRole,
+  event/.store in=\SlaifTitleEvent,
+  subtitle/.store in=\SlaifTitleSubtitle,
+}
+
+\newcommand{\SlaifTitleAppend}[3]{%
+  \ifx#3\@empty\else
+    \ifx#1\@empty
+      \let#1#3%
+    \else
+      \expandafter\g@addto@macro\expandafter#1\expandafter{#2#3}%
+    \fi
+  \fi
+}
+
+\newcommand{\SlaifTitleBuildLines}{%
+  \let\SlaifTitleAuthorLine\@empty
+  \let\SlaifTitleEventLine\@empty
+  \SlaifTitleAppend{\SlaifTitleAuthorLine}{}{\SlaifTitleAuthor}%
+  \SlaifTitleAppend{\SlaifTitleAuthorLine}{ · }{\SlaifTitleInstitution}%
+  \SlaifTitleAppend{\SlaifTitleAuthorLine}{  · }{\SlaifTitleRole}%
+  \SlaifTitleAppend{\SlaifTitleEventLine}{}{\SlaifTitleEvent}%
+  \SlaifTitleAppend{\SlaifTitleEventLine}{  ·  }{\SlaifTitleSubtitle}%
+}
+
+\newcommand{\SlaifTitleSlide}[1]{%
+  \SlaifTitleReset
+  \pgfkeys{/SlaifTitleSlide,#1}%
+  \SlaifTitleBuildLines
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]\fill[SlaifWhite] (current page.south west) rectangle (current page.north east);\end{tikzpicture}
+    \placeimage{0.000}{8.365}{960.000}{487.470}{image1_crop_r6512.jpg}
+    \drawshape{fill=SlaifBlack, fill opacity=0.400,draw=none}{rectangle}{0.000}{8.365}{960.000}{495.835}
+    \placeimage{44.369}{122.125}{292.767}{219.778}{image2.png}
+    \placeimage{0.000}{0.000}{960.000}{540.000}{image3.png}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placetextbox{388.706}{147.014}{505.294}{188.000}{44.000}{47.000}{{\RobotoCondensed{}\bfseries \parbox{505.294bp}{\raggedright \SlaifTitleTitle}}}{SlaifWhite}
+    \placetextbox{388.706}{350.000}{505.294}{32.000}{18.000}{20.700}{{\RobotoCondensed{}\bfseries \parbox{505.294bp}{\raggedright \SlaifTitleAuthorLine}}}{SlaifWhite}
+    \placetextbox{388.706}{418.000}{505.294}{32.000}{16.000}{18.400}{{\RobotoCondensed{}\itshape \parbox{505.294bp}{\raggedright \SlaifTitleEventLine}}}{SlaifWhite}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+  \end{frame}%
+}
+
+\newcommand{\SlaifMotivationReset}{%
+  \let\SlaifMotivationTitle\@empty
+  \let\SlaifMotivationBody\@empty
+  \let\SlaifMotivationVisual\@empty
+}
+
+\pgfkeys{
+  /SlaifMotivationSlide/.is family,
+  /SlaifMotivationSlide,
+  title/.store in=\SlaifMotivationTitle,
+  body/.store in=\SlaifMotivationBody,
+  visual/.store in=\SlaifMotivationVisual,
+}
+
+\newcommand{\SlaifMotivationSlide}[1]{%
+  \SlaifMotivationReset
+  \pgfkeys{/SlaifMotivationSlide,#1}%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]\fill[SlaifWhite] (current page.south west) rectangle (current page.north east);\end{tikzpicture}
+    \placeimage{0.000}{0.000}{960.000}{540.000}{image3.png}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placeimage{44.369}{122.125}{292.767}{219.778}{image4.png}
+    \placetextbox{381.506}{139.625}{512.494}{144.000}{28.080}{32.292}{{\RobotoCondensed{}\bfseries \parbox{512.494bp}{\raggedright \SlaifMotivationTitle}}}{SlaifPrimaryTeal}
+    \ifx\SlaifMotivationVisual\@empty
+      \placetextbox{381.506}{283.625}{534.410}{130.375}{17.160}{19.734}{{\RobotoCondensed{} \parbox{534.410bp}{\raggedright \SlaifMotivationBody}}}{SlaifInk}
+    \else
+      \placeimagerounded{381.506}{187.000}{400.000}{225.600}{8.000}{\SlaifMotivationVisual}
+      \placetextbox{381.506}{424.000}{534.410}{68.000}{13.800}{15.870}{{\RobotoCondensed{} \parbox{534.410bp}{\raggedright \SlaifMotivationBody}}}{SlaifInk}
+    \fi
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+  \end{frame}%
+}
+
+\newcommand{\SlaifBlueDividerSlide}[3]{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]\fill[SlaifWhite] (current page.south west) rectangle (current page.north east);\end{tikzpicture}
+    \placeimage{0.000}{0.000}{960.000}{540.000}{image6.jpg}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \drawshape{fill=SlaifGreenLight,draw=none}{rectangle}{66.000}{170.000}{894.000}{175.443}
+    \placetextbox{73.500}{48.000}{828.000}{22.000}{17.250}{19.320}{{\RobotoCondensed{} #1}}{SlaifGreen}
+    \placetextbox{73.500}{82.000}{828.000}{78.000}{28.500}{31.920}{{\RobotoCondensed{}\bfseries \parbox{828.000bp}{\raggedright #2}}}{SlaifWhite}
+    \placetextbox{73.500}{190.000}{828.000}{30.000}{15.000}{16.800}{{\RobotoCondensed{}\itshape \parbox{828.000bp}{\raggedright #3}}}{SlaifWhite}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+  \end{frame}%
+}
+
+\newcommand{\SlaifGreenDividerSlide}[3]{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]\fill[SlaifWhite] (current page.south west) rectangle (current page.north east);\end{tikzpicture}
+    \drawshape{fill=SlaifGreenOlive,draw=none}{rectangle}{0.000}{0.000}{960.000}{540.000}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placeimageopacity{325.226}{71.110}{309.548}{397.780}{image7.png}{0.200}
+    \placetextbox{73.500}{48.000}{828.000}{22.000}{17.250}{19.320}{{\RobotoCondensed{} #1}}{SlaifWhite}
+    \placetextbox{73.500}{82.000}{828.000}{44.000}{32.500}{36.400}{{\RobotoCondensed{}\bfseries \parbox{828.000bp}{\raggedright #2}}}{SlaifWhite}
+    \drawshape{fill=SlaifDividerBlue,draw=none}{rectangle}{66.000}{136.000}{894.000}{141.443}
+    \placetextbox{73.500}{156.000}{828.000}{24.000}{13.500}{15.120}{{\RobotoCondensed{}\itshape \parbox{828.000bp}{\raggedright #3}}}{SlaifWhite}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+  \end{frame}%
+}
+
+\NewDocumentCommand{\FinalSlide}{O{} m}{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]\fill[SlaifWhite] (current page.south west) rectangle (current page.north east);\end{tikzpicture}
+    \placeimage{0.000}{0.000}{960.000}{540.000}{image3.png}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placeimage{0.000}{0.000}{960.000}{368.200}{image9_crop_b31814.png}
+    \placetextbox{38.800}{97.750}{511.650}{46.050}{25.500}{29.325}{{\RobotoCondensed{}\bfseries\itshape \parbox{511.650bp}{\raggedright #2}}}{SlaifNeutralGray}
+    \IfBlankF{#1}{\placeqrimage{515.000}{45.000}{174.000}{174.000}{#1}}
+    \placeimage{36.500}{415.550}{134.800}{28.300}{image16.png}
+    \placeimage{178.600}{412.150}{117.750}{32.050}{image17.png}
+    \placeimage{313.500}{415.600}{155.550}{27.800}{image18.png}
+    \drawshape{fill=SlaifNeutralGray,draw=none}{rectangle}{480.600}{399.200}{482.000}{485.600}
+    \placetextbox{492.000}{409.500}{430.000}{75.000}{7.650}{8.800}{{\RobotoCondensed{}\bfseries \parbox{430.000bp}{\raggedright SLAIF: Slovenska tovarna umetne inteligence je prejela financiranje Skupnega podjetja za evropsko visokozmogljivo računalništvo v okviru sporazuma o nepovratnih sredstvih št. 101254461. Projekt financirata Ministrstvo za visoko šolstvo, znanost in inovacije Republike Slovenije ter program Horizon Europe Evropske unije.\\[4pt]SLAIF: Slovenian AI Factory has received funding by the European High Performance Computing Joint Undertaking under the grant agreement no. 101254461. The project is funded by the Ministry of Higher Education, Science and Innovation of Republic of Slovenia and by Horizon Europe Programme of the European Union.}}}{SlaifNeutralGray}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+    \placetextbox{49.000}{511.000}{260.000}{28.500}{11.000}{12.650}{{\RobotoCondensed{}© 2026 by SLAIF, licensed under CC BY-SA 4.0}}{SlaifWhite}
+    \placeimage{311.200}{512.850}{12.150}{12.150}{image10.png}
+    \placeimage{324.800}{512.850}{12.150}{12.150}{image12.png}
+    \placeimage{338.700}{512.850}{12.150}{12.150}{image14.png}
+  \end{frame}%
+}
+
+\newcount\SlaifSliderCount
+\newcount\SlaifSliderMax
+\newcount\SlaifBarColorSequenceIndex
+\newcount\SlaifColoredPanelCount
+\newcount\SlaifColoredPanelIndex
+\newif\ifSlaifColoredPanelsMeasuring
+\newif\ifSlaifColoredPanelsHasMeasuredBottom
+\newdimen\SlaifColoredPanelsMeasuredBottom
+\newdimen\SlaifColoredPanelsCandidateBottom
+\newdimen\SlaifPanelMeasureContentHeight
+\newbox\SlaifPanelMeasureBox
+
+\newcommand{\SlaifSliderReset}{%
+  \def\SlaifSliderRows{}%
+  \def\SlaifSliderLabelX{39.600}%
+  \def\SlaifSliderY{149.760}%
+  \def\SlaifSliderLabelWidth{338.400}%
+  \def\SlaifSliderLabelYOffset{-3.291}%
+  \def\SlaifSliderLabelHeight{20.983}%
+  \def\SlaifSliderLabelFontSize{12.480}%
+  \def\SlaifSliderLabelLineHeight{14.352}%
+  \def\SlaifSliderBarX{388.800}%
+  \def\SlaifSliderBarWidth{518.400}%
+  \def\SlaifSliderBarHeight{15.840}%
+  \def\SlaifSliderRowStep{33.120}%
+  \def\SlaifSliderValueGap{5.760}%
+  \def\SlaifSliderValueYOffset{4.740}%
+  \def\SlaifSliderValueWidth{57.600}%
+  \def\SlaifSliderValueHeight{20.983}%
+  \def\SlaifSliderValueFontSize{12.480}%
+  \def\SlaifSliderValueLineHeight{14.352}%
+  \def\SlaifSliderTrackColor{SlaifSurface}%
+  \def\SlaifSliderMaxValue{0}%
+  \def\SlaifSliderValueSuffix{}%
+}
+
+\pgfkeys{
+  /SlaifSliderTable/.is family,
+  /SlaifSliderTable,
+  wide/.style={
+    labelX=39.600,
+    y=149.760,
+    labelWidth=338.400,
+    labelYOffset=-3.291,
+    labelHeight=20.983,
+    labelFontSize=12.480,
+    labelLineHeight=14.352,
+    barX=388.800,
+    barWidth=518.400,
+    barHeight=15.840,
+    rowStep=33.120,
+    valueGap=5.760,
+    valueYOffset=4.740,
+    valueWidth=57.600,
+    valueHeight=20.983,
+    valueFontSize=12.480,
+    valueLineHeight=14.352,
+    trackColor=SlaifSurface,
+  },
+  compact/.style={
+    labelX=457.200,
+    y=207.360,
+    labelWidth=263.764,
+    labelYOffset=1.749,
+    labelHeight=20.983,
+    labelFontSize=12.480,
+    labelLineHeight=14.352,
+    barX=727.071,
+    barWidth=144.000,
+    barHeight=23.040,
+    rowStep=82.800,
+    valueGap=5.760,
+    valueYOffset=7.240,
+    valueWidth=43.200,
+    valueHeight=28.546,
+    valueFontSize=17.160,
+    valueLineHeight=19.734,
+    trackColor=SlaifSurface,
+  },
+  rows/.store in=\SlaifSliderRows,
+  labelX/.store in=\SlaifSliderLabelX,
+  y/.store in=\SlaifSliderY,
+  labelWidth/.store in=\SlaifSliderLabelWidth,
+  labelYOffset/.store in=\SlaifSliderLabelYOffset,
+  labelHeight/.store in=\SlaifSliderLabelHeight,
+  labelFontSize/.store in=\SlaifSliderLabelFontSize,
+  labelLineHeight/.store in=\SlaifSliderLabelLineHeight,
+  barX/.store in=\SlaifSliderBarX,
+  barWidth/.store in=\SlaifSliderBarWidth,
+  barHeight/.store in=\SlaifSliderBarHeight,
+  rowStep/.store in=\SlaifSliderRowStep,
+  valueGap/.store in=\SlaifSliderValueGap,
+  valueYOffset/.store in=\SlaifSliderValueYOffset,
+  valueWidth/.store in=\SlaifSliderValueWidth,
+  valueHeight/.store in=\SlaifSliderValueHeight,
+  valueFontSize/.store in=\SlaifSliderValueFontSize,
+  valueLineHeight/.store in=\SlaifSliderValueLineHeight,
+  trackColor/.store in=\SlaifSliderTrackColor,
+  maxValue/.store in=\SlaifSliderMaxValue,
+  valueSuffix/.store in=\SlaifSliderValueSuffix,
+}
+
+\newcommand{\SlaifBarColorForIndex}[3]{%
+  \def#3{SlaifMutedText}%
+  \ifnum#2<4
+    \ifnum#1=1\def#3{SlaifAccentTeal}\fi
+    \ifnum#1=2\def#3{SlaifGreenDark}\fi
+    \ifnum#1=3\def#3{SlaifGreen}\fi
+  \else\ifnum#2=4
+    \ifnum#1=1\def#3{SlaifAccentTeal}\fi
+    \ifnum#1=2\def#3{SlaifPrimaryTeal}\fi
+    \ifnum#1=3\def#3{SlaifGreenDark}\fi
+    \ifnum#1=4\def#3{SlaifGreen}\fi
+  \else
+    \ifnum#2=5
+      \ifnum#1=1\def#3{SlaifAccentTeal}\fi
+      \ifnum#1=2\def#3{SlaifPrimaryTeal}\fi
+      \ifnum#1=3\def#3{SlaifGreenDark}\fi
+      \ifnum#1=4\def#3{SlaifGreen}\fi
+      \ifnum#1=5\def#3{SlaifMutedText}\fi
+    \else
+      \ifnum#1<3\def#3{SlaifAccentTeal}\fi
+      \ifnum#2=6
+        \ifnum#1=3\def#3{SlaifPrimaryTeal}\fi
+        \ifnum#1=4\def#3{SlaifGreenDark}\fi
+        \ifnum#1=5\def#3{SlaifGreen}\fi
+        \ifnum#1>5\def#3{SlaifMutedText}\fi
+      \else\ifnum#2=7
+        \ifnum#1>2\ifnum#1<5\def#3{SlaifPrimaryTeal}\fi\fi
+        \ifnum#1=5\def#3{SlaifGreenDark}\fi
+        \ifnum#1=6\def#3{SlaifGreen}\fi
+        \ifnum#1>6\def#3{SlaifMutedText}\fi
+      \else\ifnum#2=8
+        \ifnum#1>2\ifnum#1<5\def#3{SlaifPrimaryTeal}\fi\fi
+        \ifnum#1>4\ifnum#1<7\def#3{SlaifGreenDark}\fi\fi
+        \ifnum#1=7\def#3{SlaifGreen}\fi
+        \ifnum#1>7\def#3{SlaifMutedText}\fi
+      \else
+        \ifnum#1>2\ifnum#1<5\def#3{SlaifPrimaryTeal}\fi\fi
+        \ifnum#1>4\ifnum#1<7\def#3{SlaifGreenDark}\fi\fi
+        \ifnum#1>6\ifnum#1<9\def#3{SlaifGreen}\fi\fi
+        \ifnum#1>8\def#3{SlaifMutedText}\fi
+      \fi\fi\fi
+    \fi
+  \fi\fi
+}
+
+\newcommand{\SlaifAppendBarColor}[2]{%
+  \ifx#1\@empty
+    \edef#1{#2}%
+  \else
+    \edef#1{#1,#2}%
+  \fi
+}
+
+\newcommand{\SlaifBarColorSequence}[2]{%
+  \let#2\@empty
+  \SlaifBarColorSequenceIndex=1
+  \loop
+    \ifnum\SlaifBarColorSequenceIndex<\numexpr#1+1\relax
+      \SlaifBarColorForIndex{\the\SlaifBarColorSequenceIndex}{#1}{\SlaifBarColorSequenceItem}%
+      \SlaifAppendBarColor{#2}{\SlaifBarColorSequenceItem}%
+      \advance\SlaifBarColorSequenceIndex by 1
+  \repeat
+}
+
+\newcommand{\SlaifSelectColorFromSequence}[3]{%
+  \def#3{SlaifMutedText}%
+  \foreach \SlaifSequenceColor [count=\SlaifSequenceIndex] in #1 {%
+    \ifnum\SlaifSequenceIndex=#2\relax
+      \xdef#3{\SlaifSequenceColor}%
+    \fi
+  }%
+}
+
+\newcommand{\SlaifSliderTable}[1]{%
+  \SlaifSliderReset
+  \pgfkeys{/SlaifSliderTable,wide,#1}%
+  \SlaifSliderCount=0
+  \SlaifSliderMax=0
+  \foreach \SlaifSliderLabel/\SlaifSliderValue in \SlaifSliderRows {%
+    \global\advance\SlaifSliderCount by 1
+    \ifnum\SlaifSliderValue>\SlaifSliderMax
+      \global\SlaifSliderMax=\SlaifSliderValue
+    \fi
+  }%
+  \ifnum\SlaifSliderMaxValue>0
+    \global\SlaifSliderMax=\SlaifSliderMaxValue
+  \fi
+  \SlaifBarColorSequence{\the\SlaifSliderCount}{\SlaifSliderColorSequence}%
+  \foreach \SlaifSliderLabel/\SlaifSliderValue [count=\SlaifSliderIndex] in \SlaifSliderRows {%
+    \SlaifSelectColorFromSequence{\SlaifSliderColorSequence}{\SlaifSliderIndex}{\SlaifSliderColor}%
+    \pgfmathsetmacro{\SlaifSliderRowY}{\SlaifSliderY + (\SlaifSliderIndex - 1) * \SlaifSliderRowStep}%
+    \pgfmathsetmacro{\SlaifSliderLabelY}{\SlaifSliderRowY + \SlaifSliderLabelYOffset}%
+    \pgfmathsetmacro{\SlaifSliderBarBottom}{\SlaifSliderRowY + \SlaifSliderBarHeight}%
+    \pgfmathsetmacro{\SlaifSliderTrackRight}{\SlaifSliderBarX + \SlaifSliderBarWidth}%
+    \pgfmathsetmacro{\SlaifSliderBarRight}{\SlaifSliderBarX + \SlaifSliderBarWidth * \SlaifSliderValue / \the\SlaifSliderMax}%
+    \pgfmathsetmacro{\SlaifSliderValueX}{\SlaifSliderBarRight + \SlaifSliderValueGap}%
+    \pgfmathsetmacro{\SlaifSliderValueY}{\SlaifSliderRowY + \SlaifSliderValueYOffset}%
+    \placetextbox{\SlaifSliderLabelX}{\SlaifSliderLabelY}{\SlaifSliderLabelWidth}{\SlaifSliderLabelHeight}{\SlaifSliderLabelFontSize}{\SlaifSliderLabelLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifSliderLabelWidth bp}{\raggedright \SlaifSliderLabel}}}{SlaifInk}%
+    \drawshape{fill=\SlaifSliderTrackColor,draw=none}{rectangle}{\SlaifSliderBarX}{\SlaifSliderRowY}{\SlaifSliderTrackRight}{\SlaifSliderBarBottom}%
+    \drawshape{fill=\SlaifSliderColor,draw=none}{rectangle}{\SlaifSliderBarX}{\SlaifSliderRowY}{\SlaifSliderBarRight}{\SlaifSliderBarBottom}%
+    \placetextbox{\SlaifSliderValueX}{\SlaifSliderValueY}{\SlaifSliderValueWidth}{\SlaifSliderValueHeight}{\SlaifSliderValueFontSize}{\SlaifSliderValueLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifSliderValueWidth bp}{\raggedright \SlaifSliderValue\SlaifSliderValueSuffix}}}{\SlaifSliderColor}%
+  }%
+}
+
+\newcommand{\SlaifColoredPanelsReset}{%
+  \def\SlaifColoredPanelItems{}%
+  \def\SlaifColoredPanelsX{35.748}%
+  \def\SlaifColoredPanelsY{136.800}%
+  \def\SlaifColoredPanelsTotalWidth{888.480}%
+  \def\SlaifColoredPanelsHeight{316.800}%
+  \def\SlaifColoredPanelsGap{12.960}%
+  \def\SlaifColoredPanelsHeaderHeight{61.200}%
+  \def\SlaifColoredPanelsPadding{10.800}%
+  \def\SlaifColoredPanelsHeaderTitleYOffset{8.640}%
+  \def\SlaifColoredPanelsHeaderTitleHeight{33.736}%
+  \def\SlaifColoredPanelsHeaderTitleFontSize{20.280}%
+  \def\SlaifColoredPanelsHeaderTitleLineHeight{23.322}%
+  \def\SlaifColoredPanelsSubtitleYOffset{75.600}%
+  \def\SlaifColoredPanelsSubtitleHeight{48.691}%
+  \def\SlaifColoredPanelsSubtitleFontSize{10.920}%
+  \def\SlaifColoredPanelsSubtitleLineHeight{12.558}%
+  \def\SlaifColoredPanelsMiniFooterYOffset{158.400}%
+  \def\SlaifColoredPanelsMiniFooterHeight{20.983}%
+  \def\SlaifColoredPanelsMiniFooterFontSize{12.480}%
+  \def\SlaifColoredPanelsMiniFooterLineHeight{14.352}%
+  \def\SlaifColoredPanelsContentYOffset{223.200}%
+  \def\SlaifColoredPanelsBottomPadding{18.000}%
+}
+
+\newcommand{\SlaifColoredPanelsApplyAutoLayout}{%
+  \ifnum\SlaifColoredPanelCount=2
+    \def\SlaifColoredPanelsX{38.988}%
+    \def\SlaifColoredPanelsY{140.400}%
+    \def\SlaifColoredPanelsTotalWidth{882.000}%
+    \def\SlaifColoredPanelsHeight{327.600}%
+    \def\SlaifColoredPanelsGap{18.000}%
+    \def\SlaifColoredPanelsHeaderHeight{54.000}%
+    \def\SlaifColoredPanelsHeaderTitleYOffset{9.360}%
+    \def\SlaifColoredPanelsHeaderTitleHeight{28.546}%
+    \def\SlaifColoredPanelsHeaderTitleFontSize{17.160}%
+    \def\SlaifColoredPanelsHeaderTitleLineHeight{19.734}%
+    \def\SlaifColoredPanelsContentYOffset{114.600}%
+  \else
+    \ifnum\SlaifColoredPanelCount>4
+      \def\SlaifColoredPanelsX{29.268}%
+      \def\SlaifColoredPanelsY{140.400}%
+      \def\SlaifColoredPanelsTotalWidth{901.440}%
+      \def\SlaifColoredPanelsHeight{259.200}%
+      \def\SlaifColoredPanelsGap{9.360}%
+      \def\SlaifColoredPanelsHeaderHeight{54.000}%
+      \def\SlaifColoredPanelsHeaderTitleYOffset{9.360}%
+      \def\SlaifColoredPanelsHeaderTitleHeight{28.546}%
+      \def\SlaifColoredPanelsHeaderTitleFontSize{17.160}%
+      \def\SlaifColoredPanelsHeaderTitleLineHeight{19.734}%
+    \fi
+  \fi
+}
+
+\pgfkeys{
+  /SlaifColoredPanels/.is family,
+  /SlaifColoredPanels,
+  items/.store in=\SlaifColoredPanelItems,
+  x/.store in=\SlaifColoredPanelsX,
+  y/.store in=\SlaifColoredPanelsY,
+  totalWidth/.store in=\SlaifColoredPanelsTotalWidth,
+  height/.store in=\SlaifColoredPanelsHeight,
+  gap/.store in=\SlaifColoredPanelsGap,
+  headerHeight/.store in=\SlaifColoredPanelsHeaderHeight,
+  padding/.store in=\SlaifColoredPanelsPadding,
+  headerTitleYOffset/.store in=\SlaifColoredPanelsHeaderTitleYOffset,
+  headerTitleHeight/.store in=\SlaifColoredPanelsHeaderTitleHeight,
+  headerTitleFontSize/.store in=\SlaifColoredPanelsHeaderTitleFontSize,
+  headerTitleLineHeight/.store in=\SlaifColoredPanelsHeaderTitleLineHeight,
+  subtitleYOffset/.store in=\SlaifColoredPanelsSubtitleYOffset,
+  subtitleHeight/.store in=\SlaifColoredPanelsSubtitleHeight,
+  subtitleFontSize/.store in=\SlaifColoredPanelsSubtitleFontSize,
+  subtitleLineHeight/.store in=\SlaifColoredPanelsSubtitleLineHeight,
+  miniFooterYOffset/.store in=\SlaifColoredPanelsMiniFooterYOffset,
+  miniFooterHeight/.store in=\SlaifColoredPanelsMiniFooterHeight,
+  miniFooterFontSize/.store in=\SlaifColoredPanelsMiniFooterFontSize,
+  miniFooterLineHeight/.store in=\SlaifColoredPanelsMiniFooterLineHeight,
+  contentYOffset/.store in=\SlaifColoredPanelsContentYOffset,
+  bottomPadding/.store in=\SlaifColoredPanelsBottomPadding,
+}
+
+\newcommand{\SlaifMeasureNoopFive}[5]{}
+\newcommand{\SlaifMeasureNoopSix}[6]{}
+\newcommand{\SlaifMeasureNoopEight}[8]{}
+
+\newcommand{\SlaifColoredPanelsReportBottomDim}[1]{%
+  \global\SlaifColoredPanelsHasMeasuredBottomtrue
+  \ifdim#1>\SlaifColoredPanelsMeasuredBottom
+    \global\SlaifColoredPanelsMeasuredBottom=#1\relax
+  \fi
+}
+
+\newcommand{\SlaifColoredPanelsSetupPanelGeometry}{%
+  \pgfmathsetmacro{\SlaifColoredPanelWidth}{(\SlaifColoredPanelsTotalWidth - (\the\SlaifColoredPanelCount - 1) * \SlaifColoredPanelsGap) / \the\SlaifColoredPanelCount}%
+  \pgfmathsetmacro{\SlaifColoredPanelLeft}{\SlaifColoredPanelsX + (\the\SlaifColoredPanelIndex - 1) * (\SlaifColoredPanelWidth + \SlaifColoredPanelsGap)}%
+  \pgfmathsetmacro{\SlaifColoredPanelRight}{\SlaifColoredPanelLeft + \SlaifColoredPanelWidth}%
+  \pgfmathsetmacro{\SlaifColoredPanelBottom}{\SlaifColoredPanelsY + \SlaifColoredPanelsHeight}%
+  \pgfmathsetmacro{\SlaifColoredPanelHeaderBottom}{\SlaifColoredPanelsY + \SlaifColoredPanelsHeaderHeight}%
+  \pgfmathsetmacro{\SlaifColoredPanelInnerX}{\SlaifColoredPanelLeft + \SlaifColoredPanelsPadding}%
+  \pgfmathsetmacro{\SlaifColoredPanelInnerWidth}{\SlaifColoredPanelWidth - 2 * \SlaifColoredPanelsPadding}%
+  \pgfmathsetmacro{\SlaifColoredPanelHeaderTitleY}{\SlaifColoredPanelsY + \SlaifColoredPanelsHeaderTitleYOffset}%
+  \pgfmathsetmacro{\SlaifColoredPanelSubtitleY}{\SlaifColoredPanelsY + \SlaifColoredPanelsSubtitleYOffset}%
+  \pgfmathsetmacro{\SlaifColoredPanelMiniFooterY}{\SlaifColoredPanelsY + \SlaifColoredPanelsMiniFooterYOffset}%
+  \pgfmathsetmacro{\SlaifColoredPanelContentY}{\SlaifColoredPanelsY + \SlaifColoredPanelsContentYOffset}%
+}
+
+\NewDocumentCommand{\ColoredPanel}{O{} m m m m}{}
+
+\newcommand{\ColoredPanels}[1]{%
+  \SlaifColoredPanelsReset
+  \def\SlaifColoredPanelItems{#1}%
+  \SlaifColoredPanelCount=0
+  \RenewDocumentCommand{\ColoredPanel}{O{} m m m m}{%
+    \global\advance\SlaifColoredPanelCount by 1
+  }%
+  \SlaifColoredPanelItems
+  \SlaifColoredPanelsApplyAutoLayout
+  \global\SlaifColoredPanelsHasMeasuredBottomfalse
+  \global\SlaifColoredPanelsMeasuredBottom=0bp
+  \SlaifColoredPanelsMeasuringtrue
+  \SlaifColoredPanelIndex=0
+  \begingroup
+    \let\placeimage\SlaifMeasureNoopFive
+    \let\placeimageopacity\SlaifMeasureNoopSix
+    \let\drawshape\SlaifMeasureNoopSix
+    \let\placetextbox\SlaifMeasureNoopEight
+    \RenewDocumentCommand{\ColoredPanel}{O{} m m m m}{%
+      \global\advance\SlaifColoredPanelIndex by 1
+      \SlaifColoredPanelsSetupPanelGeometry
+      ##4%
+    }%
+    \SlaifColoredPanelItems
+  \endgroup
+  \SlaifColoredPanelsMeasuringfalse
+  \ifSlaifColoredPanelsHasMeasuredBottom
+    \SlaifColoredPanelsCandidateBottom=\dimexpr\SlaifColoredPanelsMeasuredBottom + \SlaifColoredPanelsBottomPadding bp\relax
+    \SlaifPanelMeasureContentHeight=\dimexpr\SlaifColoredPanelsCandidateBottom - \SlaifColoredPanelsY bp\relax
+    \edef\SlaifColoredPanelsMeasuredHeightPt{\strip@pt\SlaifPanelMeasureContentHeight}%
+    \pgfmathsetmacro{\SlaifColoredPanelsHeight}{\SlaifColoredPanelsMeasuredHeightPt * 0.99626401}%
+  \fi
+  \SlaifBarColorSequence{\the\SlaifColoredPanelCount}{\SlaifColoredPanelColorSequence}%
+  \SlaifColoredPanelIndex=0
+  \RenewDocumentCommand{\ColoredPanel}{O{} m m m m}{%
+    \global\advance\SlaifColoredPanelIndex by 1
+    \SlaifColoredPanelsSetupPanelGeometry
+    \def\SlaifColoredPanelColor{##1}%
+    \if\relax\detokenize{##1}\relax
+      \SlaifSelectColorFromSequence{\SlaifColoredPanelColorSequence}{\the\SlaifColoredPanelIndex}{\SlaifColoredPanelColor}%
+    \fi
+    \drawshape{fill=SlaifWhite,draw=SlaifBorder,line width=0.750bp,rounded corners=6bp}{rectangle}{\SlaifColoredPanelLeft}{\SlaifColoredPanelsY}{\SlaifColoredPanelRight}{\SlaifColoredPanelBottom}%
+    \drawshape{fill=\SlaifColoredPanelColor,draw=none}{rectangle}{\SlaifColoredPanelLeft}{\SlaifColoredPanelsY}{\SlaifColoredPanelRight}{\SlaifColoredPanelHeaderBottom}%
+    \placetextbox{\SlaifColoredPanelLeft}{\SlaifColoredPanelHeaderTitleY}{\SlaifColoredPanelWidth}{\SlaifColoredPanelsHeaderTitleHeight}{\SlaifColoredPanelsHeaderTitleFontSize}{\SlaifColoredPanelsHeaderTitleLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifColoredPanelWidth bp}{\centering ##2}}}{SlaifWhite}%
+    \if\relax\detokenize{##3}\relax\else
+      \placetextbox{\SlaifColoredPanelInnerX}{\SlaifColoredPanelSubtitleY}{\SlaifColoredPanelInnerWidth}{\SlaifColoredPanelsSubtitleHeight}{\SlaifColoredPanelsSubtitleFontSize}{\SlaifColoredPanelsSubtitleLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifColoredPanelInnerWidth bp}{\centering ##3}}}{SlaifInk}%
+    \fi
+    \if\relax\detokenize{##5}\relax\else
+      \placetextbox{\SlaifColoredPanelInnerX}{\SlaifColoredPanelMiniFooterY}{\SlaifColoredPanelInnerWidth}{\SlaifColoredPanelsMiniFooterHeight}{\SlaifColoredPanelsMiniFooterFontSize}{\SlaifColoredPanelsMiniFooterLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifColoredPanelInnerWidth bp}{\centering ##5}}}{SlaifPrimaryTeal}%
+    \fi
+    ##4%
+  }%
+  \SlaifColoredPanelItems
+}
+
+\newcommand{\SlaifPanelUrl}[1]{%
+  \pgfmathsetmacro{\SlaifPanelUrlY}{\SlaifColoredPanelHeaderBottom + 7.200}%
+  \ifSlaifColoredPanelsMeasuring
+    \SlaifColoredPanelsCandidateBottom=\dimexpr\SlaifPanelUrlY bp + 23.356bp\relax
+    \SlaifColoredPanelsReportBottomDim{\SlaifColoredPanelsCandidateBottom}%
+  \else
+    \placetextbox{\SlaifColoredPanelLeft}{\SlaifPanelUrlY}{\SlaifColoredPanelWidth}{23.356}{14.040}{16.146}{{\RobotoCondensed{}\bfseries\itshape \parbox{\SlaifColoredPanelWidth bp}{\centering #1}}}{\SlaifColoredPanelColor}%
+  \fi
+}
+
+\newcommand{\SlaifPanelBulletList}[2]{%
+  \pgfmathsetmacro{\SlaifPanelBulletListX}{\SlaifColoredPanelInnerX + 18.000}%
+  \pgfmathsetmacro{\SlaifPanelBulletListY}{\SlaifColoredPanelHeaderBottom + 60.600}%
+  \pgfmathsetmacro{\SlaifPanelBulletListWidth}{\SlaifColoredPanelInnerWidth - 30.000}%
+  \ifSlaifColoredPanelsMeasuring
+    \setbox\SlaifPanelMeasureBox=\vbox{%
+      \begin{minipage}{\SlaifPanelBulletListWidth bp}
+        \begingroup\color{SlaifInk}\fontsize{12.880pt}{15.714pt}\selectfont\RobotoCondensed{}%
+          \raggedright\hyphenpenalty=10000\exhyphenpenalty=10000
+          \begin{list}{\tikz[baseline=-0.35ex]\fill[#1] (0,0) circle[radius=5.500bp];}{%
+            \setlength{\leftmargin}{25.000bp}%
+            \setlength{\labelwidth}{11.000bp}%
+            \setlength{\labelsep}{13.000bp}%
+            \setlength{\itemsep}{14.000pt}%
+            \setlength{\parsep}{0pt}%
+            \setlength{\topsep}{0pt}%
+            \setlength{\partopsep}{0pt}%
+          }%
+          #2%
+          \end{list}%
+        \endgroup
+      \end{minipage}%
+    }%
+    \SlaifPanelMeasureContentHeight=\dimexpr\ht\SlaifPanelMeasureBox+\dp\SlaifPanelMeasureBox\relax
+    \SlaifColoredPanelsCandidateBottom=\dimexpr\SlaifPanelBulletListY bp + \SlaifPanelMeasureContentHeight\relax
+    \SlaifColoredPanelsReportBottomDim{\SlaifColoredPanelsCandidateBottom}%
+  \else
+    \placetextbox{\SlaifPanelBulletListX}{\SlaifPanelBulletListY}{\SlaifPanelBulletListWidth}{210.000}{12.880}{15.714}{%
+      \begin{minipage}{\SlaifPanelBulletListWidth bp}
+        \raggedright\hyphenpenalty=10000\exhyphenpenalty=10000
+        \begin{list}{\tikz[baseline=-0.35ex]\fill[#1] (0,0) circle[radius=5.500bp];}{%
+          \setlength{\leftmargin}{25.000bp}%
+          \setlength{\labelwidth}{11.000bp}%
+          \setlength{\labelsep}{13.000bp}%
+          \setlength{\itemsep}{14.000pt}%
+          \setlength{\parsep}{0pt}%
+          \setlength{\topsep}{0pt}%
+          \setlength{\partopsep}{0pt}%
+        }%
+        #2%
+        \end{list}%
+      \end{minipage}%
+    }{SlaifInk}%
+  \fi
+}
+
+\newcommand{\SlaifBluePanelBulletList}[1]{%
+  \SlaifPanelBulletList{SlaifAccentTeal}{#1}%
+}
+
+\newcommand{\SlaifGreenPanelBulletList}[1]{%
+  \SlaifPanelBulletList{SlaifGreenDark}{#1}%
+}
+
+\newcount\SlaifDataTableColumnCount
+\newcount\SlaifDataTableColumnIndex
+\newcount\SlaifDataTableRowIndex
+\newcount\SlaifDataTableCellIndex
+\newdimen\SlaifDataTableColumnCursor
+
+\newcommand{\SlaifDataTableReset}{%
+  \def\SlaifDataTableX{39.600}%
+  \def\SlaifDataTableY{135.360}%
+  \def\SlaifDataTableWidth{882.000}%
+  \def\SlaifDataTableHeaderHeight{32.400}%
+  \def\SlaifDataTableRowHeight{28.080}%
+  \def\SlaifDataTableHeaderColor{SlaifAccentTeal}%
+  \def\SlaifDataTableOddFill{SlaifSurface}%
+  \def\SlaifDataTableEvenFill{SlaifWhite}%
+  \def\SlaifDataTableHeaderFontSize{12.480}%
+  \def\SlaifDataTableHeaderLineHeight{14.352}%
+  \def\SlaifDataTableHeaderTextColor{SlaifWhite}%
+  \def\SlaifDataTableDefaultFontSize{10.920}%
+  \def\SlaifDataTableDefaultLineHeight{12.558}%
+  \def\SlaifDataTableDefaultTextColor{SlaifInk}%
+  \def\SlaifDataTableDefaultStyle{}%
+  \def\SlaifDataTableDefaultAlign{l}%
+  \def\SlaifDataTablePaddingX{10.800}%
+  \def\SlaifDataTableHeaderTextYOffset{5.820}%
+  \def\SlaifDataTableCellTextYOffset{3.660}%
+  \def\SlaifDataTableHighlightColor{SlaifGreenDark}%
+  \def\SlaifDataTableHighlightLineWidth{1.500}%
+  \def\SlaifDataTableHighlightRadius{3.000}%
+  \def\SlaifDataTableHighlightInsetX{-2.600}%
+  \def\SlaifDataTableHighlightInsetY{-1.300}%
+}
+
+\pgfkeys{
+  /SlaifDataTable/.is family,
+  /SlaifDataTable,
+  x/.store in=\SlaifDataTableX,
+  y/.store in=\SlaifDataTableY,
+  width/.store in=\SlaifDataTableWidth,
+  headerHeight/.store in=\SlaifDataTableHeaderHeight,
+  rowHeight/.store in=\SlaifDataTableRowHeight,
+  headerColor/.store in=\SlaifDataTableHeaderColor,
+  oddFill/.store in=\SlaifDataTableOddFill,
+  evenFill/.store in=\SlaifDataTableEvenFill,
+  headerFontSize/.store in=\SlaifDataTableHeaderFontSize,
+  headerLineHeight/.store in=\SlaifDataTableHeaderLineHeight,
+  headerTextColor/.store in=\SlaifDataTableHeaderTextColor,
+  fontSize/.store in=\SlaifDataTableDefaultFontSize,
+  lineHeight/.store in=\SlaifDataTableDefaultLineHeight,
+  textColor/.store in=\SlaifDataTableDefaultTextColor,
+  style/.store in=\SlaifDataTableDefaultStyle,
+  align/.store in=\SlaifDataTableDefaultAlign,
+  paddingX/.store in=\SlaifDataTablePaddingX,
+  headerTextYOffset/.store in=\SlaifDataTableHeaderTextYOffset,
+  cellTextYOffset/.store in=\SlaifDataTableCellTextYOffset,
+  highlightColor/.store in=\SlaifDataTableHighlightColor,
+  highlightLineWidth/.store in=\SlaifDataTableHighlightLineWidth,
+  highlightRadius/.store in=\SlaifDataTableHighlightRadius,
+  highlightInsetX/.store in=\SlaifDataTableHighlightInsetX,
+  highlightInsetY/.store in=\SlaifDataTableHighlightInsetY,
+}
+
+\newcommand{\SlaifDataColumnReset}{%
+  \let\SlaifDataColumnTextColor\SlaifDataTableDefaultTextColor
+  \let\SlaifDataColumnStyle\SlaifDataTableDefaultStyle
+  \let\SlaifDataColumnFontSize\SlaifDataTableDefaultFontSize
+  \let\SlaifDataColumnLineHeight\SlaifDataTableDefaultLineHeight
+}
+
+\pgfkeys{
+  /SlaifDataColumn/.is family,
+  /SlaifDataColumn,
+  color/.store in=\SlaifDataColumnTextColor,
+  style/.store in=\SlaifDataColumnStyle,
+  fontSize/.store in=\SlaifDataColumnFontSize,
+  lineHeight/.store in=\SlaifDataColumnLineHeight,
+}
+
+\newcommand{\SlaifDataCellReset}{%
+  \def\SlaifDataCellTextColor{}%
+  \def\SlaifDataCellStyle{}%
+}
+
+\pgfkeys{
+  /SlaifDataCell/.is family,
+  /SlaifDataCell,
+  color/.store in=\SlaifDataCellTextColor,
+  style/.store in=\SlaifDataCellStyle,
+}
+
+\NewDocumentCommand{\SlaifDataColumn}{O{} m m m}{}
+\NewDocumentCommand{\SlaifDataRow}{m}{}
+\NewDocumentCommand{\SlaifDataCell}{O{} m}{}
+
+\newcommand{\SlaifDataTableAlignCommand}[1]{%
+  \ifstrequal{#1}{c}{\centering}{\ifstrequal{#1}{r}{\raggedleft}{\raggedright}}%
+}
+
+\newcommand{\SlaifDataTableDefineColumn}[5]{%
+  \expandafter\def\csname SlaifDataTableColumnHeader#1\endcsname{#2}%
+  \expandafter\def\csname SlaifDataTableColumnWidth#1\endcsname{#3}%
+  \expandafter\def\csname SlaifDataTableColumnAlign#1\endcsname{#4}%
+  \SlaifDataColumnReset
+  \pgfkeys{/SlaifDataColumn,#5}%
+  \expandafter\let\csname SlaifDataTableColumnColor#1\endcsname\SlaifDataColumnTextColor
+  \expandafter\let\csname SlaifDataTableColumnStyle#1\endcsname\SlaifDataColumnStyle
+  \expandafter\let\csname SlaifDataTableColumnFontSize#1\endcsname\SlaifDataColumnFontSize
+  \expandafter\let\csname SlaifDataTableColumnLineHeight#1\endcsname\SlaifDataColumnLineHeight
+  \edef\SlaifDataTableCursorValue{\strip@pt\SlaifDataTableColumnCursor}%
+  \pgfmathsetmacro{\SlaifDataTableColumnLeft}{\SlaifDataTableCursorValue + \SlaifDataTablePaddingX}%
+  \pgfmathsetmacro{\SlaifDataTableColumnTextWidth}{#3 - 2 * \SlaifDataTablePaddingX}%
+  \expandafter\edef\csname SlaifDataTableColumnX#1\endcsname{\SlaifDataTableColumnLeft}%
+  \expandafter\edef\csname SlaifDataTableColumnTextWidth#1\endcsname{\SlaifDataTableColumnTextWidth}%
+  \global\advance\SlaifDataTableColumnCursor by #3bp\relax
+}
+
+\newcommand{\SlaifDataTableRenderHeader}[1]{%
+  \pgfmathsetmacro{\SlaifDataTableHeaderTextY}{\SlaifDataTableY + \SlaifDataTableHeaderTextYOffset}%
+  \placetextbox{\csname SlaifDataTableColumnX#1\endcsname}{\SlaifDataTableHeaderTextY}{\csname SlaifDataTableColumnTextWidth#1\endcsname}{20.761}{\SlaifDataTableHeaderFontSize}{\SlaifDataTableHeaderLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\csname SlaifDataTableColumnTextWidth#1\endcsname bp}{\SlaifDataTableAlignCommand{\csname SlaifDataTableColumnAlign#1\endcsname}\csname SlaifDataTableColumnHeader#1\endcsname}}}{\SlaifDataTableHeaderTextColor}%
+}
+
+\newcommand{\SlaifDataTableRenderCell}[3]{%
+  \SlaifDataCellReset
+  \pgfkeys{/SlaifDataCell,#2}%
+  \ifx\SlaifDataCellTextColor\@empty
+    \expandafter\let\expandafter\SlaifDataCellEffectiveColor\csname SlaifDataTableColumnColor#1\endcsname
+  \else
+    \let\SlaifDataCellEffectiveColor\SlaifDataCellTextColor
+  \fi
+  \ifx\SlaifDataCellStyle\@empty
+    \expandafter\let\expandafter\SlaifDataCellEffectiveStyle\csname SlaifDataTableColumnStyle#1\endcsname
+  \else
+    \let\SlaifDataCellEffectiveStyle\SlaifDataCellStyle
+  \fi
+  \pgfmathsetmacro{\SlaifDataTableCellY}{\SlaifDataTableY + \SlaifDataTableHeaderHeight + (\the\SlaifDataTableRowIndex - 1) * \SlaifDataTableRowHeight + \SlaifDataTableCellTextYOffset}%
+  \placetextbox{\csname SlaifDataTableColumnX#1\endcsname}{\SlaifDataTableCellY}{\csname SlaifDataTableColumnTextWidth#1\endcsname}{20.761}{\csname SlaifDataTableColumnFontSize#1\endcsname}{\csname SlaifDataTableColumnLineHeight#1\endcsname}{{\RobotoCondensed{}\SlaifDataCellEffectiveStyle \parbox{\csname SlaifDataTableColumnTextWidth#1\endcsname bp}{\SlaifDataTableAlignCommand{\csname SlaifDataTableColumnAlign#1\endcsname}#3}}}{\SlaifDataCellEffectiveColor}%
+}
+
+\newcommand{\SlaifDataTableRenderRow}[1]{%
+  \global\advance\SlaifDataTableRowIndex by 1
+  \pgfmathsetmacro{\SlaifDataTableRowTop}{\SlaifDataTableY + \SlaifDataTableHeaderHeight + (\the\SlaifDataTableRowIndex - 1) * \SlaifDataTableRowHeight}%
+  \pgfmathsetmacro{\SlaifDataTableRowBottom}{\SlaifDataTableRowTop + \SlaifDataTableRowHeight}%
+  \pgfmathsetmacro{\SlaifDataTableRight}{\SlaifDataTableX + \SlaifDataTableWidth}%
+  \pgfmathtruncatemacro{\SlaifDataTableOddRow}{mod(\the\SlaifDataTableRowIndex,2)}%
+  \ifnum\SlaifDataTableOddRow=1
+    \def\SlaifDataTableRowFill{\SlaifDataTableOddFill}%
+  \else
+    \def\SlaifDataTableRowFill{\SlaifDataTableEvenFill}%
+  \fi
+  \ifx\SlaifDataTableRowFill\@empty\else
+    \drawshape{fill=\SlaifDataTableRowFill,draw=none}{rectangle}{\SlaifDataTableX}{\SlaifDataTableRowTop}{\SlaifDataTableRight}{\SlaifDataTableRowBottom}%
+  \fi
+  \SlaifDataTableCellIndex=0
+  \RenewDocumentCommand{\SlaifDataCell}{O{} m}{%
+    \global\advance\SlaifDataTableCellIndex by 1
+    \SlaifDataTableRenderCell{\the\SlaifDataTableCellIndex}{##1}{##2}%
+  }%
+  #1%
+}
+
+\newcommand{\SlaifDataTable}[3][]{%
+  \SlaifDataTableReset
+  \pgfkeys{/SlaifDataTable,#1}%
+  \pgfmathsetmacro{\SlaifDataTableRight}{\SlaifDataTableX + \SlaifDataTableWidth}%
+  \pgfmathsetmacro{\SlaifDataTableHeaderBottom}{\SlaifDataTableY + \SlaifDataTableHeaderHeight}%
+  \drawshape{fill=\SlaifDataTableHeaderColor,draw=none}{rectangle}{\SlaifDataTableX}{\SlaifDataTableY}{\SlaifDataTableRight}{\SlaifDataTableHeaderBottom}%
+  \SlaifDataTableColumnCount=0
+  \SlaifDataTableColumnCursor=\dimexpr\SlaifDataTableX bp\relax
+  \RenewDocumentCommand{\SlaifDataColumn}{O{} m m m}{%
+    \global\advance\SlaifDataTableColumnCount by 1
+    \SlaifDataTableDefineColumn{\the\SlaifDataTableColumnCount}{##2}{##3}{##4}{##1}%
+  }%
+  #2%
+  \SlaifDataTableColumnIndex=0
+  \loop\ifnum\SlaifDataTableColumnIndex<\SlaifDataTableColumnCount
+    \advance\SlaifDataTableColumnIndex by 1
+    \SlaifDataTableRenderHeader{\the\SlaifDataTableColumnIndex}%
+  \repeat
+  \SlaifDataTableRowIndex=0
+  \RenewDocumentCommand{\SlaifDataRow}{m}{\SlaifDataTableRenderRow{##1}}%
+  #3%
+}
+
+\newcommand{\SlaifDataTableHighlights}[2][]{%
+  \SlaifDataTableReset
+  \pgfkeys{/SlaifDataTable,#1}%
+  \foreach \SlaifDataTableHighlightIndex in {#2} {%
+    \pgfmathsetmacro{\SlaifDataTableHighlightTop}{\SlaifDataTableY + \SlaifDataTableHeaderHeight + (\SlaifDataTableHighlightIndex - 1) * \SlaifDataTableRowHeight + \SlaifDataTableHighlightInsetY}%
+    \pgfmathsetmacro{\SlaifDataTableHighlightBottom}{\SlaifDataTableY + \SlaifDataTableHeaderHeight + \SlaifDataTableHighlightIndex * \SlaifDataTableRowHeight - \SlaifDataTableHighlightInsetY}%
+    \pgfmathsetmacro{\SlaifDataTableHighlightLeft}{\SlaifDataTableX + \SlaifDataTableHighlightInsetX}%
+    \pgfmathsetmacro{\SlaifDataTableHighlightRight}{\SlaifDataTableX + \SlaifDataTableWidth - \SlaifDataTableHighlightInsetX}%
+    \drawshape{fill opacity=0,draw=\SlaifDataTableHighlightColor,line width=\SlaifDataTableHighlightLineWidth bp,rounded corners=\SlaifDataTableHighlightRadius bp}{rectangle}{\SlaifDataTableHighlightLeft}{\SlaifDataTableHighlightTop}{\SlaifDataTableHighlightRight}{\SlaifDataTableHighlightBottom}%
+  }%
+}
+
+\newcount\SlaifStatisticPanelCount
+\newcount\SlaifStatisticPanelIndex
+
+\newcommand{\SlaifStatisticPanelsReset}{%
+  \def\SlaifStatisticPanelItems{}%
+  \def\SlaifStatisticPanelX{38.628}%
+  \def\SlaifStatisticPanelY{144.000}%
+  \def\SlaifStatisticPanelTotalWidth{882.720}%
+  \def\SlaifStatisticPanelHeight{165.600}%
+  \def\SlaifStatisticPanelGap{15.840}%
+  \def\SlaifStatisticPanelValueHeight{77.853}%
+  \def\SlaifStatisticPanelValueFontSize{49.680}%
+  \def\SlaifStatisticPanelValueLineHeight{57.132}%
+  \def\SlaifStatisticPanelTitleHeight{18.166}%
+  \def\SlaifStatisticPanelTitleFontSize{10.920}%
+  \def\SlaifStatisticPanelTitleLineHeight{12.558}%
+  \def\SlaifStatisticPanelDescriptionHeight{57.380}%
+  \def\SlaifStatisticPanelDescriptionFontSize{10.920}%
+  \def\SlaifStatisticPanelDescriptionLineHeight{12.558}%
+  \def\SlaifStatisticPanelValueYOffset{18.000}%
+  \def\SlaifStatisticPanelTitleYOffset{82.800}%
+  \def\SlaifStatisticPanelDescriptionYOffset{111.600}%
+}
+
+\pgfkeys{
+  /SlaifStatisticPanels/.is family,
+  /SlaifStatisticPanels,
+  feature/.style={
+    x=39.600,
+    y=140.400,
+    totalWidth=396.000,
+    height=352.800,
+    gap=0.000,
+    valueYOffset=45.000,
+    valueHeight=168.676,
+    valueFontSize=107.640,
+    valueLineHeight=123.786,
+    titleYOffset=196.386,
+    titleHeight=54.012,
+    titleFontSize=17.160,
+    titleLineHeight=19.734,
+    descriptionYOffset=273.600,
+    descriptionHeight=42.324,
+    descriptionFontSize=10.920,
+    descriptionLineHeight=12.558,
+  },
+  x/.store in=\SlaifStatisticPanelX,
+  y/.store in=\SlaifStatisticPanelY,
+  totalWidth/.store in=\SlaifStatisticPanelTotalWidth,
+  height/.store in=\SlaifStatisticPanelHeight,
+  gap/.store in=\SlaifStatisticPanelGap,
+  valueYOffset/.store in=\SlaifStatisticPanelValueYOffset,
+  valueHeight/.store in=\SlaifStatisticPanelValueHeight,
+  valueFontSize/.store in=\SlaifStatisticPanelValueFontSize,
+  valueLineHeight/.store in=\SlaifStatisticPanelValueLineHeight,
+  titleYOffset/.store in=\SlaifStatisticPanelTitleYOffset,
+  titleHeight/.store in=\SlaifStatisticPanelTitleHeight,
+  titleFontSize/.store in=\SlaifStatisticPanelTitleFontSize,
+  titleLineHeight/.store in=\SlaifStatisticPanelTitleLineHeight,
+  descriptionYOffset/.store in=\SlaifStatisticPanelDescriptionYOffset,
+  descriptionHeight/.store in=\SlaifStatisticPanelDescriptionHeight,
+  descriptionFontSize/.store in=\SlaifStatisticPanelDescriptionFontSize,
+  descriptionLineHeight/.store in=\SlaifStatisticPanelDescriptionLineHeight,
+}
+
+\newcommand{\SlaifStatistic}[3]{}
+
+\NewDocumentCommand{\SlaifStatisticPanels}{O{} m}{%
+  \SlaifStatisticPanelsReset
+  \pgfkeys{/SlaifStatisticPanels,#1}%
+  \def\SlaifStatisticPanelItems{#2}%
+  \SlaifStatisticPanelCount=0
+  \def\SlaifStatistic##1##2##3{%
+    \global\advance\SlaifStatisticPanelCount by 1
+  }%
+  \SlaifStatisticPanelItems
+  \SlaifStatisticPanelIndex=0
+  \def\SlaifStatistic##1##2##3{%
+    \global\advance\SlaifStatisticPanelIndex by 1
+    \pgfmathsetmacro{\SlaifStatisticPanelWidth}{(\SlaifStatisticPanelTotalWidth - (\the\SlaifStatisticPanelCount - 1) * \SlaifStatisticPanelGap) / \the\SlaifStatisticPanelCount}%
+    \pgfmathsetmacro{\SlaifStatisticPanelLeft}{\SlaifStatisticPanelX + (\the\SlaifStatisticPanelIndex - 1) * (\SlaifStatisticPanelWidth + \SlaifStatisticPanelGap)}%
+    \pgfmathsetmacro{\SlaifStatisticPanelRight}{\SlaifStatisticPanelLeft + \SlaifStatisticPanelWidth}%
+    \pgfmathsetmacro{\SlaifStatisticPanelBottom}{\SlaifStatisticPanelY + \SlaifStatisticPanelHeight}%
+    \pgfmathsetmacro{\SlaifStatisticDescriptionX}{\SlaifStatisticPanelLeft + 10.800}%
+    \pgfmathsetmacro{\SlaifStatisticDescriptionWidth}{\SlaifStatisticPanelWidth - 21.600}%
+    \pgfmathsetmacro{\SlaifStatisticValueY}{\SlaifStatisticPanelY + \SlaifStatisticPanelValueYOffset}%
+    \pgfmathsetmacro{\SlaifStatisticTitleY}{\SlaifStatisticPanelY + \SlaifStatisticPanelTitleYOffset}%
+    \pgfmathsetmacro{\SlaifStatisticDescriptionY}{\SlaifStatisticPanelY + \SlaifStatisticPanelDescriptionYOffset}%
+    \drawshape{fill=SlaifSurface,draw=SlaifBorder,line width=0.750bp,rounded corners=6bp}{rectangle}{\SlaifStatisticPanelLeft}{\SlaifStatisticPanelY}{\SlaifStatisticPanelRight}{\SlaifStatisticPanelBottom}%
+    \placetextbox{\SlaifStatisticPanelLeft}{\SlaifStatisticValueY}{\SlaifStatisticPanelWidth}{\SlaifStatisticPanelValueHeight}{\SlaifStatisticPanelValueFontSize}{\SlaifStatisticPanelValueLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifStatisticPanelWidth bp}{\centering ##1}}}{SlaifAccentTeal}%
+    \placetextbox{\SlaifStatisticPanelLeft}{\SlaifStatisticTitleY}{\SlaifStatisticPanelWidth}{\SlaifStatisticPanelTitleHeight}{\SlaifStatisticPanelTitleFontSize}{\SlaifStatisticPanelTitleLineHeight}{{\RobotoCondensed{}\bfseries \parbox{\SlaifStatisticPanelWidth bp}{\centering ##2}}}{SlaifInk}%
+    \placetextbox{\SlaifStatisticDescriptionX}{\SlaifStatisticDescriptionY}{\SlaifStatisticDescriptionWidth}{\SlaifStatisticPanelDescriptionHeight}{\SlaifStatisticPanelDescriptionFontSize}{\SlaifStatisticPanelDescriptionLineHeight}{{\RobotoCondensed{} \parbox{\SlaifStatisticDescriptionWidth bp}{\centering ##3}}}{SlaifMutedText}%
+  }%
+  \SlaifStatisticPanelItems
+}
+
+\newcommand{\SlaifCommentaryPanel}[2]{%
+  \drawshape{fill=SlaifPanelBlue,draw=none,rounded corners=6bp}{rectangle}{39.600}{345.600}{921.600}{482.400}
+  \placetextbox{61.200}{360.000}{838.800}{23.608}{10.920}{12.558}{{\RobotoCondensed{}\bfseries \parbox{838.800bp}{\raggedright #1}}}{SlaifPrimaryTeal}
+  \placetextbox{61.200}{388.800}{838.800}{66.266}{11.700}{13.455}{{\RobotoCondensed{}\itshape \parbox{838.800bp}{\raggedright #2}}}{SlaifInk}
+}
+\let\SlaifConclusionPanel\SlaifCommentaryPanel
+
+\newcommand{\FinalTakeawayPanel}[4]{%
+  \drawshape{fill=SlaifAccentTeal,draw=none,rounded corners=6bp}{rectangle}{39.600}{109.543}{921.600}{397.543}%
+  \placetextbox{61.200}{134.743}{838.800}{20.761}{12.480}{14.352}{{\RobotoCondensed{}\bfseries\itshape \parbox{838.800bp}{\raggedright #1}}}{#2}%
+  \placetextbox{61.200}{177.943}{838.800}{42.976}{24.960}{28.704}{{\RobotoCondensed{}\bfseries \parbox{838.800bp}{\raggedright #3}}}{SlaifWhite}%
+  \placetextbox{61.200}{278.743}{838.800}{55.153}{12.480}{14.352}{{\RobotoCondensed{}\itshape \parbox{838.800bp}{\raggedright #4}}}{SlaifWhite}%
+}
+
+\newcount\SlaifMetricSummaryPanelCount
+\newcount\SlaifMetricSummaryPanelIndex
+\newcount\SlaifMetricSummaryBulletIndex
+\newdimen\SlaifMetricSummaryMetricBoxWidth
+\newdimen\SlaifMetricSummaryMetricLabelWidth
+
+\NewDocumentCommand{\MetricSummaryPanel}{O{} m m m m m m m}{}
+\NewDocumentCommand{\MetricSummaryBullet}{O{} m}{}
+
+\newcommand{\SlaifMetricSummaryPanelReset}{%
+  \let\SlaifMetricSummaryPanelColor\@empty
+  \let\SlaifMetricSummaryBulletColor\@empty
+}
+
+\pgfkeys{
+  /SlaifMetricSummaryPanel/.is family,
+  /SlaifMetricSummaryPanel,
+  headerColor/.store in=\SlaifMetricSummaryPanelColor,
+  bulletColor/.store in=\SlaifMetricSummaryBulletColor,
+}
+
+\newcommand{\SlaifMetricSummaryBulletReset}{%
+  \let\SlaifMetricSummaryBulletY\@empty
+  \let\SlaifMetricSummaryBulletTextY\@empty
+}
+
+\pgfkeys{
+  /SlaifMetricSummaryBullet/.is family,
+  /SlaifMetricSummaryBullet,
+  y/.store in=\SlaifMetricSummaryBulletY,
+  textY/.store in=\SlaifMetricSummaryBulletTextY,
+}
+
+\newcommand{\MetricSummaryPanels}[1]{%
+  \SlaifMetricSummaryPanelCount=0
+  \RenewDocumentCommand{\MetricSummaryPanel}{O{} m m m m m m m}{%
+    \global\advance\SlaifMetricSummaryPanelCount by 1
+  }%
+  #1%
+  \SlaifBarColorSequence{\the\SlaifMetricSummaryPanelCount}{\SlaifMetricSummaryColorSequence}%
+  \SlaifMetricSummaryPanelIndex=0
+  \RenewDocumentCommand{\MetricSummaryPanel}{O{} m m m m m m m}{%
+    \global\advance\SlaifMetricSummaryPanelIndex by 1
+    \SlaifMetricSummaryPanelReset
+    \pgfkeys{/SlaifMetricSummaryPanel,##1}%
+    \ifx\SlaifMetricSummaryPanelColor\@empty
+      \SlaifSelectColorFromSequence{\SlaifMetricSummaryColorSequence}{\the\SlaifMetricSummaryPanelIndex}{\SlaifMetricSummaryPanelColor}%
+    \fi
+    \ifx\SlaifMetricSummaryBulletColor\@empty
+      \let\SlaifMetricSummaryBulletColor\SlaifMetricSummaryPanelColor
+    \fi
+    \pgfmathsetmacro{\SlaifMetricSummaryGap}{14.400}%
+    \pgfmathsetmacro{\SlaifMetricSummaryTotalWidth}{885.600}%
+    \pgfmathsetmacro{\SlaifMetricSummaryPanelWidth}{(\SlaifMetricSummaryTotalWidth - (\the\SlaifMetricSummaryPanelCount - 1) * \SlaifMetricSummaryGap) / \the\SlaifMetricSummaryPanelCount}%
+    \pgfmathsetmacro{\SlaifMetricSummaryPanelX}{39.600 + (\the\SlaifMetricSummaryPanelIndex - 1) * (\SlaifMetricSummaryPanelWidth + \SlaifMetricSummaryGap)}%
+    \pgfmathsetmacro{\SlaifMetricSummaryPanelRight}{\SlaifMetricSummaryPanelX + \SlaifMetricSummaryPanelWidth}%
+    \pgfmathsetmacro{\SlaifMetricSummaryHeaderBottom}{201.600}%
+    \pgfmathsetmacro{\SlaifMetricSummaryInnerX}{\SlaifMetricSummaryPanelX + 25.200}%
+    \pgfmathsetmacro{\SlaifMetricSummaryInnerWidth}{\SlaifMetricSummaryPanelWidth - 50.400}%
+    \drawshape{fill=SlaifWhite,draw=SlaifBorder,line width=0.750bp,rounded corners=6bp}{rectangle}{\SlaifMetricSummaryPanelX}{140.400}{\SlaifMetricSummaryPanelRight}{489.600}%
+    \drawshape{fill=\SlaifMetricSummaryPanelColor,draw=none}{rectangle}{\SlaifMetricSummaryPanelX}{140.400}{\SlaifMetricSummaryPanelRight}{\SlaifMetricSummaryHeaderBottom}%
+    \placetextbox{\SlaifMetricSummaryPanelX}{150.480}{\SlaifMetricSummaryPanelWidth}{25.951}{15.600}{17.940}{{\RobotoCondensed{}\bfseries \parbox{\SlaifMetricSummaryPanelWidth bp}{\centering ##2}}}{SlaifWhite}%
+    \placetextbox{\SlaifMetricSummaryInnerX}{216.000}{\SlaifMetricSummaryInnerWidth}{18.363}{10.920}{12.558}{{\RobotoCondensed{}\bfseries\itshape \parbox{\SlaifMetricSummaryInnerWidth bp}{\raggedright ##3}}}{SlaifPrimaryTeal}%
+    \placetextbox{\SlaifMetricSummaryInnerX}{267.000}{180.000}{71.000}{49.680}{60.610}{{\RobotoCondensed{}\bfseries ##4}}{SlaifGreenDark}%
+    \settowidth{\SlaifMetricSummaryMetricBoxWidth}{\fontsize{49.680pt}{60.610pt}\selectfont\RobotoCondensed{}\bfseries ##4}%
+    \SlaifMetricSummaryMetricLabelWidth=\dimexpr\SlaifMetricSummaryInnerWidth bp-\SlaifMetricSummaryMetricBoxWidth-14.400bp\relax
+    \ifdim\SlaifMetricSummaryMetricLabelWidth<90bp
+      \SlaifMetricSummaryMetricLabelWidth=90bp
+    \fi
+    \edef\SlaifMetricSummaryMetricLabelWidthValue{\strip@pt\SlaifMetricSummaryMetricLabelWidth}%
+    \pgfmathsetmacro{\SlaifMetricSummaryMetricLabelX}{\SlaifMetricSummaryInnerX + \strip@pt\SlaifMetricSummaryMetricBoxWidth + 14.400}%
+    \placetextbox{\SlaifMetricSummaryMetricLabelX}{268.000}{\SlaifMetricSummaryMetricLabelWidthValue}{58.163}{12.480}{14.352}{{\RobotoCondensed{} \parbox{\SlaifMetricSummaryMetricLabelWidthValue bp}{\raggedright ##5}}}{SlaifInk}%
+    \ifstrempty{##6}{}{%
+      \placetextbox{\SlaifMetricSummaryInnerX}{342.000}{\SlaifMetricSummaryInnerWidth}{18.363}{10.920}{12.558}{{\RobotoCondensed{} \parbox{\SlaifMetricSummaryInnerWidth bp}{\raggedright ##6}}}{SlaifInk}%
+    }%
+    \SlaifMetricSummaryBulletIndex=0
+    \RenewDocumentCommand{\MetricSummaryBullet}{O{} m}{%
+      \global\advance\SlaifMetricSummaryBulletIndex by 1
+      \SlaifMetricSummaryBulletReset
+      \pgfkeys{/SlaifMetricSummaryBullet,####1}%
+      \ifstrempty{##6}{%
+        \pgfmathsetmacro{\SlaifMetricSummaryBulletDefaultY}{360.000 + (\the\SlaifMetricSummaryBulletIndex - 1) * 45.000}%
+      }{%
+        \pgfmathsetmacro{\SlaifMetricSummaryBulletDefaultY}{384.500 + (\the\SlaifMetricSummaryBulletIndex - 1) * 31.000}%
+      }%
+      \ifx\SlaifMetricSummaryBulletY\@empty
+        \let\SlaifMetricSummaryBulletCenterY\SlaifMetricSummaryBulletDefaultY
+      \else
+        \let\SlaifMetricSummaryBulletCenterY\SlaifMetricSummaryBulletY
+      \fi
+      \ifx\SlaifMetricSummaryBulletTextY\@empty
+        \pgfmathsetmacro{\SlaifMetricSummaryBulletTextYValue}{\SlaifMetricSummaryBulletCenterY - 5.000}%
+      \else
+        \let\SlaifMetricSummaryBulletTextYValue\SlaifMetricSummaryBulletTextY
+      \fi
+      \drawshape{fill=\SlaifMetricSummaryBulletColor,draw=none}{ellipse}{\SlaifMetricSummaryInnerX}{\SlaifMetricSummaryBulletCenterY}{5.500}{5.500}%
+      \pgfmathsetmacro{\SlaifMetricSummaryBulletTextX}{\SlaifMetricSummaryInnerX + 13.000}%
+      \pgfmathsetmacro{\SlaifMetricSummaryBulletTextWidth}{\SlaifMetricSummaryInnerWidth - 13.000}%
+      \placetextbox{\SlaifMetricSummaryBulletTextX}{\SlaifMetricSummaryBulletTextYValue}{\SlaifMetricSummaryBulletTextWidth}{60.000}{12.880}{15.714}{{\RobotoCondensed{}\parbox{\SlaifMetricSummaryBulletTextWidth bp}{\raggedright ####2}}}{SlaifInk}%
+    }%
+    ##7%
+    \ifstrempty{##8}{}{%
+      \placetextbox{\SlaifMetricSummaryInnerX}{468.000}{\SlaifMetricSummaryInnerWidth}{14.430}{8.580}{9.867}{{\RobotoCondensed{}\itshape \parbox{\SlaifMetricSummaryInnerWidth bp}{\raggedright ##8}}}{SlaifMutedText}%
+    }%
+  }%
+  #1%
+}
+
+\newcommand{\SlaifRightColumnHeading}[1]{%
+  \placetextbox{457.200}{140.400}{468.000}{23.356}{14.040}{16.146}{{\RobotoCondensed{}\bfseries \parbox{468.000bp}{\raggedright #1}}}{SlaifPrimaryTeal}%
+}
+
+\newcommand{\SlaifRightColumnTopImage}[1]{%
+  \placeimage{775.914}{28.770}{97.886}{138.569}{#1}%
+}
+
+\newcommand{\SlaifNoTextSlideReset}{%
+  \let\SlaifNoTextTitle\@empty
+  \let\SlaifNoTextSubtitle\@empty
+  \let\SlaifNoTextStatistics\@empty
+  \let\SlaifNoTextBody\@empty
+}
+
+\pgfkeys{
+  /SlaifNoTextSlide/.is family,
+  /SlaifNoTextSlide,
+  title/.store in=\SlaifNoTextTitle,
+  subtitle/.store in=\SlaifNoTextSubtitle,
+  statistics/.store in=\SlaifNoTextStatistics,
+  body/.store in=\SlaifNoTextBody,
+}
+
+\newcommand{\NoTextSlide}[1]{%
+  \SlaifNoTextSlideReset
+  \pgfkeys{/SlaifNoTextSlide,#1}%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]\fill[SlaifWhite] (current page.south west) rectangle (current page.north east);\end{tikzpicture}
+    \placeimage{0.000}{0.000}{960.000}{540.000}{image3.png}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placeimage{916.052}{17.766}{37.261}{51.516}{image5.png}
+    \placetextbox{39.600}{27.360}{885.600}{41.522}{24.960}{28.704}{{\RobotoCondensed{}\bfseries \parbox{885.600bp}{\raggedright \SlaifNoTextTitle}}}{SlaifPrimaryTeal}
+    \placetextbox{39.600}{79.200}{885.600}{20.761}{12.480}{14.352}{{\RobotoCondensed{}\itshape \parbox{885.600bp}{\raggedright \SlaifNoTextSubtitle}}}{SlaifMutedText}
+    \ifx\SlaifNoTextBody\@empty
+      \SlaifStatisticPanels{\SlaifNoTextStatistics}%
+    \else
+      \SlaifNoTextBody
+    \fi
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+  \end{frame}%
+}
+
+\newcommand{\SlaifTwoColumnNoTextSlideReset}{%
+  \let\SlaifTwoColumnNoTextTitle\@empty
+  \let\SlaifTwoColumnNoTextSubtitle\@empty
+  \let\SlaifTwoColumnNoTextLeft\@empty
+  \let\SlaifTwoColumnNoTextRight\@empty
+}
+
+\pgfkeys{
+  /SlaifTwoColumnNoTextSlide/.is family,
+  /SlaifTwoColumnNoTextSlide,
+  title/.store in=\SlaifTwoColumnNoTextTitle,
+  subtitle/.store in=\SlaifTwoColumnNoTextSubtitle,
+  left/.store in=\SlaifTwoColumnNoTextLeft,
+  right/.store in=\SlaifTwoColumnNoTextRight,
+}
+
+\newcommand{\TwoColumnNoTextSlide}[1]{%
+  \SlaifTwoColumnNoTextSlideReset
+  \pgfkeys{/SlaifTwoColumnNoTextSlide,#1}%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]\fill[SlaifWhite] (current page.south west) rectangle (current page.north east);\end{tikzpicture}
+    \placeimage{0.000}{0.000}{960.000}{540.000}{image3.png}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placeimage{916.052}{17.766}{37.261}{51.516}{image5.png}
+    \placetextbox{39.600}{27.360}{885.600}{41.522}{24.960}{28.704}{{\RobotoCondensed{}\bfseries \parbox{885.600bp}{\raggedright \SlaifTwoColumnNoTextTitle}}}{SlaifPrimaryTeal}
+    \placetextbox{39.600}{79.200}{885.600}{32.400}{12.480}{14.352}{{\RobotoCondensed{}\itshape \parbox{885.600bp}{\raggedright \SlaifTwoColumnNoTextSubtitle}}}{SlaifMutedText}
+    \SlaifTwoColumnNoTextLeft
+    \SlaifTwoColumnNoTextRight
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+  \end{frame}%
+}
+
+\newcommand{\SlaifPlainSlideReset}{%
+  \let\SlaifPlainSlideTitle\@empty
+  \let\SlaifPlainSlideSubtitle\@empty
+  \let\SlaifPlainSlideBody\@empty
+  \let\SlaifPlainSlideLeft\@empty
+  \let\SlaifPlainSlideRight\@empty
+  \def\SlaifPlainSlideSplit{0.50}%
+}
+
+\pgfkeys{
+  /SlaifPlainSlide/.is family,
+  /SlaifPlainSlide,
+  title/.store in=\SlaifPlainSlideTitle,
+  subtitle/.store in=\SlaifPlainSlideSubtitle,
+  body/.store in=\SlaifPlainSlideBody,
+  left/.store in=\SlaifPlainSlideLeft,
+  right/.store in=\SlaifPlainSlideRight,
+  split/.store in=\SlaifPlainSlideSplit,
+}
+
+\newcommand{\SlaifPlainBulletList}[2]{%
+  \begin{minipage}{#1bp}
+    \raggedright
+    \begin{list}{\tikz[baseline=-0.35ex]\fill[SlaifGreen] (0,0) circle[radius=4.200bp];}{%
+      \setlength{\leftmargin}{22.000bp}%
+      \setlength{\labelwidth}{8.400bp}%
+      \setlength{\labelsep}{12.000bp}%
+      \setlength{\itemsep}{9.000pt}%
+      \setlength{\parsep}{0pt}%
+      \setlength{\topsep}{0pt}%
+      \setlength{\partopsep}{0pt}%
+    }%
+    #2%
+    \end{list}%
+  \end{minipage}%
+}
+
+\newcommand{\SlaifBluePlainBulletList}[2]{%
+  \begin{minipage}{#1bp}
+    \raggedright
+    \begin{list}{\tikz[baseline=-0.35ex]\fill[SlaifAccentTeal] (0,0) circle[radius=4.200bp];}{%
+      \setlength{\leftmargin}{22.000bp}%
+      \setlength{\labelwidth}{8.400bp}%
+      \setlength{\labelsep}{12.000bp}%
+      \setlength{\itemsep}{9.000pt}%
+      \setlength{\parsep}{0pt}%
+      \setlength{\topsep}{0pt}%
+      \setlength{\partopsep}{0pt}%
+    }%
+    #2%
+    \end{list}%
+  \end{minipage}%
+}
+
+\newcommand{\PlainSlide}[1]{%
+  \SlaifPlainSlideReset
+  \pgfkeys{/SlaifPlainSlide,#1}%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]\fill[SlaifWhite] (current page.south west) rectangle (current page.north east);\end{tikzpicture}
+    \placeimage{0.000}{0.000}{960.000}{540.000}{image3.png}
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{318.000}{500.500}{642.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placeimage{916.052}{17.766}{37.261}{51.516}{image5.png}
+    \placetextbox{39.600}{27.360}{885.600}{41.522}{24.960}{28.704}{{\RobotoCondensed{}\bfseries \parbox{885.600bp}{\raggedright \SlaifPlainSlideTitle}}}{SlaifPrimaryTeal}
+    \placetextbox{39.600}{79.200}{885.600}{20.761}{12.480}{14.352}{{\RobotoCondensed{}\itshape \parbox{885.600bp}{\raggedright \SlaifPlainSlideSubtitle}}}{SlaifMutedText}
+    \ifx\SlaifPlainSlideBody\@empty
+      \pgfmathsetmacro{\SlaifPlainContentX}{82.800}%
+      \pgfmathsetmacro{\SlaifPlainContentY}{143.600}%
+      \pgfmathsetmacro{\SlaifPlainTotalWidth}{794.400}%
+      \pgfmathsetmacro{\SlaifPlainGap}{36.000}%
+      \pgfmathsetmacro{\SlaifPlainLeftWidth}{(\SlaifPlainTotalWidth - \SlaifPlainGap) * \SlaifPlainSlideSplit}%
+      \pgfmathsetmacro{\SlaifPlainRightWidth}{\SlaifPlainTotalWidth - \SlaifPlainGap - \SlaifPlainLeftWidth}%
+      \pgfmathsetmacro{\SlaifPlainRightX}{\SlaifPlainContentX + \SlaifPlainLeftWidth + \SlaifPlainGap}%
+      \pgfmathsetmacro{\SlaifPlainDividerX}{\SlaifPlainContentX + \SlaifPlainLeftWidth + 0.5 * \SlaifPlainGap}%
+      \pgfmathsetmacro{\SlaifPlainDividerRight}{\SlaifPlainDividerX + 0.720}%
+      \drawshape{fill=SlaifDivider,draw=none}{rectangle}{\SlaifPlainDividerX}{143.600}{\SlaifPlainDividerRight}{431.600}
+      \placetextbox{\SlaifPlainContentX}{\SlaifPlainContentY}{\SlaifPlainLeftWidth}{292.000}{15.600}{18.400}{{\RobotoCondensed{} \SlaifPlainBulletList{\SlaifPlainLeftWidth}{\SlaifPlainSlideLeft}}}{SlaifMutedText}
+      \placetextbox{\SlaifPlainRightX}{\SlaifPlainContentY}{\SlaifPlainRightWidth}{292.000}{15.600}{18.400}{{\RobotoCondensed{} \SlaifPlainBulletList{\SlaifPlainRightWidth}{\SlaifPlainSlideRight}}}{SlaifMutedText}
+    \else
+      \placetextbox{118.800}{146.000}{720.000}{292.000}{16.800}{19.800}{{\RobotoCondensed{} \SlaifPlainBulletList{720.000}{\SlaifPlainSlideBody}}}{SlaifMutedText}
+    \fi
+    \drawshape{draw=none}{rectangle}{66.000}{500.500}{282.000}{529.250}
+    \drawshape{draw=none}{rectangle}{678.000}{500.500}{894.000}{529.250}
+    \placetextbox{73.500}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\SlaifPresentationDate}}{SlaifWhite}
+    \placetextbox{318.000}{511.000}{324.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\parbox{324.000bp}{\centering \SlaifPresentationFooter}}}{SlaifWhite}
+    \placetextbox{678.000}{511.000}{216.000}{28.500}{9.200}{11.224}{{\RobotoCondensed{}\makebox[216.000bp][r]{\insertframenumber}}}{SlaifWhite}
+  \end{frame}%
+}
+\makeatother

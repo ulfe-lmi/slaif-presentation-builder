@@ -1,0 +1,458 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{slaif}
+
+\SlaifSetPresentationDate{30. maj 2026}
+\SlaifSetPresentationFooter{Hitri seminar: sodobna UI v pedagoškem delu}
+
+\begin{document}
+
+\SlaifTitleSlide{
+  title       = {{\fontsize{40}{44}\selectfont Hitri seminar:\\Sodobna UI kot pomoč pri napornih\\pedagoških opravilih}},
+  author      = {Janez Perš},
+  institution = {UL FE},
+  event       = {Za pedagoške kolege in asistente},
+  subtitle    = {Praktični delovni tokovi}
+}
+
+\SlaifMotivationSlide{
+  title = {Zakaj je to posebej pomembno za mlajše sodelavce?},
+  body  = {{\bfseries Mlajši sodelavci pogosto nosijo največji del operativnega pedagoškega bremena.}\\[8pt]
+  Oddaje, vaje, napake, povratne informacije, zagovori in popravljanje zahtevajo strokovno presojo, a se pogosto ponavljajo.\\[8pt]
+  Današnja teza: UI je koristna tam, kjer ohrani odgovornost pri učitelju, zmanjša ponavljanje in poveča preglednost dela.}
+}
+
+\NoTextSlide{
+  title = {Ocenjevanje ni drobna administracija},
+  subtitle = {Je strokovno delo, ki se ponavlja, se kopiči in tiho poje čas za boljše poučevanje.},
+  body = {
+    \SlaifStatisticPanels{
+      \SlaifStatistic{9,9}{ur / teden}{Povprečen čas, ki ga učitelji v anketi porabijo za ocenjevanje in označevanje.}
+      \SlaifStatistic{--}{energija}{Obsežno ocenjevanje porablja pozornost, ki bi lahko šla v načrtovanje predmeta.}
+      \SlaifStatistic{!}{čustveni strošek}{Na univerzi je ocenjevanje doživeto manj pozitivno kot raziskovanje in poučevanje.}
+    }
+    \SlaifFootnotePanel[fontSize=12,lineHeight=14.2,fill=SlaifPanelBlue]{Podpora: Learnosity (2025) poroča o 9,9 urah ocenjevanja na teden v anketi 258 učiteljev; Schwab et al. (2024) poročajo, da fakultetni učitelji ocenjevanje doživljajo z manj pozitivnimi in več negativnimi čustvi kot raziskovanje in poučevanje; Terada in Merrill (2024) poudarjata, da pogosto ocenjevanje jemlje čas in energijo za izboljševanje pouka.}
+  }
+}
+
+\NoTextSlide{
+  title = {V STEM predmetih je breme še ostrejše},
+  subtitle = {Ne preverjamo samo končnega odgovora, ampak pot, skice, formule, napake in razloge.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Več korakov}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{Študent lahko pride do napačnega rezultata z dobro metodo ali do prave številke po slabi poti.}}}{}
+      \ColoredPanel{Več modalnosti}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{Rokopis, diagrami, vezja, enačbe in prosti komentarji so del odgovora, ne okras.}}}{}
+      \ColoredPanel{Več zakasnitve}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{Ko se povratna informacija zavleče, je manj uporabna za učenje in naslednje vaje.}}}{}
+    }
+    \SlaifFootnotePanel[fontSize=12,lineHeight=14.2,fill=SlaifPanelBlue]{Podpora: Tan et al. (2025) opisujejo STEM ocenjevanje kot delo z večkorakovnimi rešitvami, formulami, diagrami in grafičnimi artefakti ter problem pravočasne povratne informacije pri večjih obremenitvah; Singh et al. (2017) pokažejo, da digitalizacija pomaga pri hitrosti in konsistentnosti, vendar osnovno branje in presoja odgovorov ostaneta človeško delo.}
+  }
+}
+
+\NoTextSlide{
+  title = {Teza seminarja: razbremeniti ponavljanje, ne presoje},
+  subtitle = {UI je uporabna šele, ko je delo ponovljivo, preverljivo in popravljivo.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Priprava}{iz gradiv}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{{\bfseries Hitrejši prvi osnutek}}\SlaifPanelTextItem{Viri, slike, struktura in poudarki se uredijo v pregledno izhodišče.}}}{}
+      \ColoredPanel{Preverjanje}{oddaj}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{{\bfseries Boljša vprašanja}}\SlaifPanelTextItem{Sistem pripravi izhodišča za pogovor, učitelj pa vodi presojo.}}}{}
+      \ColoredPanel{Ocenjevanje}{STEM odgovorov}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{{\bfseries Več nadzora}}\SlaifPanelTextItem{Reference, pravila, več ocenjevalcev in ročni pregled zmanjšajo slepe odločitve.}}}{}
+      \ColoredPanel{Dokumentiranje}{odločitev}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{{\bfseries Več sledljivosti}}\SlaifPanelTextItem{Vsaka trditev mora imeti vir, razlog in možnost popravka.}}}{}
+    }
+    \SlaifFootnotePanel[fontSize=12,lineHeight=14.2,fill=SlaifPanelMint]{Podpora: Singh et al. (2017) podpirajo idejo, da urejen digitalni delovni tok zmanjša režijo in izboljša konsistentnost; Tan et al. (2025) podpirajo motivacijo za avtomatizacijo zaradi obremenitve in časa povratne informacije; Schwab et al. (2024) opozarjajo, da je treba zmanjševati tudi čustveni strošek ocenjevanja, ne samo število klikov.}
+  }
+}
+
+\NoTextSlide{
+  title = {Meja je jasna: orodje ne sme prevzeti odgovornosti},
+  subtitle = {Najslabša uporaba UI je tista, ki pospeši delo tako, da skrije presojo.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Ne}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{UI ne pozna lokalnih pravil, ciljev predmeta in mejnih primerov sama od sebe.}}}{}
+      \ColoredPanel{Ne}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{Modelov odgovor ni odločba; je gradivo za presojo, preverjanje in izboljšavo.}}}{}
+      \ColoredPanel{Ne}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{Detektorji niso stabilna pedagoška podlaga za obtoževanje študentov.}}}{}
+      \ColoredPanel{Ne}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{Če postopka ni mogoče razložiti študentu, ni zrel za pedagoško rabo.}}}{}
+    }
+    \SlaifFootnotePanel[fontSize=12,lineHeight=14.2,fill=SlaifPanelBlue]{Podpora: Singh et al. (2017) pokažejo, da uspešni sistemi najprej uredijo človeški delovni tok; Tan et al. (2025) avtomatizacijo povezujejo z zmanjšanjem obremenitve in hitrejšo povratno informacijo, ne z odstranitvijo odgovornosti; Schwab et al. (2024) pomagajo utemeljiti, zakaj je pomembno zmanjšati breme brez razvrednotenja strokovne presoje.}
+  }
+}
+
+\SlaifGreenDividerSlide
+  {Primer 1}
+  {UI-podprta priprava prosojnic za STEM}
+  {Od gradiv do preverljivega osnutka, ki ga učitelj lahko popravi.}
+
+\NoTextSlide{
+  title = {Postopek priprave prosojnic iz poljubnih gradiv},
+  subtitle = {Repozitorij vsebuje navodila agentu ter spretnosti za uvoz virov, izdelavo predstavitev in razvoj predlog LaTeX.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{1. Viri}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{skripta\\članek\\stare prosojnice\\slike in tabele}}}{}
+      \ColoredPanel{2. Uvoz}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{inventar\\izrezi\\struktura\\viri}}}{}
+      \ColoredPanel{3. Zasnova}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{zaporedje\\didaktični poudarki\\vizualni ritem}}}{}
+      \ColoredPanel{4. Pregled}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{prevod PDF\\PNG pregled\\popravki}}}{}
+    }
+    \SlaifCommentaryPanel{GitHub}{\texttt{github.com/ulfe-lmi/slaif-presentation-builder}\\[5pt]Učitelj ostane avtor: določi raven razlage, izbriše odvečno, popravi poudarke in potrdi končno sporočilo.}
+  }
+}
+
+\NoTextSlide{
+  title = {Uvoz vira: kaj mora agent oddati},
+  subtitle = {Dober uvoz ni povzetek, ampak mapa dokazov za kasnejšo predstavitev.},
+  body = {
+    \SlaifStatisticPanels[y=128,totalWidth=820,x=70,height=155]{
+      \SlaifStatistic{1}{Struktura}{kaj je v virih in kako bi to lahko postalo zaporedje prosojnic}
+      \SlaifStatistic{2}{Gradniki}{slike, izrezi, tabele, strani in drugi elementi, ki jih je smiselno uporabiti}
+      \SlaifStatistic{3}{Sledljivost}{od kod prihaja trditev ali vizualni element, da učitelj lahko preveri vir}
+    }
+    \SlaifCommentaryPanel{Zakaj to ni formalnost}{Če tega ni, kasnejša izdelava prosojnic postane ugibanje. Če je to narejeno dobro, učitelj hitro vidi, kaj lahko uporabi.}
+  }
+}
+
+\NoTextSlide{
+  title = {Ustvarjanje predstavitve: kaj mora agent preveriti},
+  subtitle = {Uspešen prevod LaTeX-a še ne pomeni uporabne predstavitve.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Vsebina}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{slovenščina\\jasno zaporedje\\primerna gostota}}}{}
+      \ColoredPanel{Vizualno}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{berljive slike\\pravilni izrezi\\dovolj praznega prostora}}}{}
+      \ColoredPanel{Prevod}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{lokalni PDF\\brez napak\\ponovljiv ukaz}}}{}
+      \ColoredPanel{Pregled}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{PNG izris\\ročno gledanje\\popravki}}}{}
+    }
+    \SlaifCommentaryPanel{Končni standard}{Agent mora sam iskati prekrivanje besedila, premajhne črke, slabe izreze in zlomljene postavitve.}
+  }
+}
+
+\SlaifBlueDividerSlide
+  {Primer 2}
+  {Priprava vprašanj za zagovor samostojno izvedenih aktivnosti}
+  {Kako preverimo, ali študenti razumejo oddane izdelke.}
+
+\NoTextSlide{
+  title = {Študenti uporabljajo umetno inteligenco},
+  subtitle = {Zanesljive detekcije uporabe UI ni, zato mora zagovor preverjati razumevanje konkretne oddaje.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Slaba smer}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{{\bfseries "Ali si uporabil UI?"}}\SlaifPanelTextItem{Nezanesljivo, težko dokazljivo in pogosto pedagoško neproduktivno.}}}{}
+      \ColoredPanel{Dobra smer}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{{\bfseries "Ali razumeš to, kar si oddal?"}}\SlaifPanelTextItem{Vprašanja o kodi, grafu, parametru, odločitvi, napaki ali nenavadni razlagi.}}}{}
+    }
+    \begin{textblock*}{790bp}(90bp,390bp)
+      \SlaifBluePlainBulletList{790}{
+        \item Korekten obvod ni kaznovanje domnevne uporabe UI, ampak preverjanje zagovora oddanega izdelka.
+        \item Slab zagovor je pedagoško pomemben signal, ne glede na to, ali je vzrok UI, prepisovanje ali površno razumevanje.
+        \item UI lahko pripravi vprašanja, ne sme pa sama sklepati o avtorstvu.
+      }
+    \end{textblock*}
+  }
+}
+
+\NoTextSlide{
+  title = {Delovni tok za zagovore vaj},
+  subtitle = {Oddaje se izvozijo iz Moodla, psevdonimizirajo, primerjajo N x N in pretvorijo v vprašanja za zagovor.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{1. Moodle}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{izvoz oddaj\\seznam študentov\\navodilo}}}{}
+      \ColoredPanel{2. Priprava}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{psevdonimizacija\\besedila\\koda\\priloge}}}{}
+      \ColoredPanel{3. Primerjava}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{N x N oddaj\\podobnosti\\razlike}}}{}
+      \ColoredPanel{4. Vprašanja}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{vidiki\\razlogi\\pričakovani odgovori}}}{}
+    }
+    \begin{textblock*}{790bp}(90bp,390bp)
+      \SlaifPlainBulletList{790}{
+        \item Agent nadomesti delo, ki ga človek realistično ne more opraviti ročno: sistematično primerjavo vsake oddaje z vsako drugo oddajo.
+        \item Rezultat niso sodbe, ampak izhodišča za ciljana vprašanja pri zagovoru.
+        \item Vsako vprašanje mora imeti opis, zakaj vidik izstopa, vprašanje za študenta in pričakovani odgovor za učitelja.
+      }
+    \end{textblock*}
+  }
+}
+
+\NoTextSlide{
+  title = {Kakšno vprašanje je uporabno na zagovoru?},
+  subtitle = {Dobro vprašanje je specifično za študenta, preverljivo in vezano na njegovo oddajo.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Preširoko}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{Razloži regresijo.}\SlaifPanelTextItem{Ali razumeš program?}\SlaifPanelTextItem{Kaj je rezultat?}}}{}
+      \ColoredPanel{Uporabno}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{Zakaj si tukaj izbral ta prag?}\SlaifPanelTextItem{Kaj se zgodi, če zamenjamo parameter?}\SlaifPanelTextItem{Zakaj je ta graf drugačen od pričakovanega?}}}{}
+    }
+    \begin{textblock*}{790bp}(90bp,430bp)
+      \fontsize{8.9}{10.1}\selectfont
+      \begin{minipage}[t]{370bp}
+        \SlaifBluePlainBulletList{370}{
+          \item Vprašanja so specifična za posameznega študenta in njegovo oddajo.
+          \item Če je mogoče, se vprašanja med študenti ne ponavljajo.
+        }
+      \end{minipage}\hfill
+      \begin{minipage}[t]{370bp}
+        \SlaifBluePlainBulletList{370}{
+          \item Študenti se težje naučijo standardnih odgovorov.
+          \item Pedagog ne porabi ur za ročno pripravo individualnih vprašanj.
+      }
+      \end{minipage}
+    \end{textblock*}
+  }
+}
+
+\SlaifGreenDividerSlide
+  {Primer 3}
+  {UI-podprto ocenjevanje STEM izpitov}
+  {Do GPT-5.2 je bil to doslej nerešen problem.}
+
+\NoTextSlide{
+  title = {Ročno pisani izpiti v tehniki in naravoslovju},
+  subtitle = {Ocenjevanje mora biti iz perspektive študenta 100\% kompatibilno z dosedanjim načinom pisnih izpitov.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Vhod je kompleksen}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{ročno pisanje\\enačbe\\diagrami\\popravki}}}{}
+      \ColoredPanel{Ocena je delna}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{vmesni koraki\\točke po pravilih\\razlaga napak}}}{}
+      \ColoredPanel{OCR ni dovolj}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{matematika\\skice\\nečitljivost\\kontekst}}}{}
+      \ColoredPanel{Zato: sistem}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{referenca\\pravila\\več ocen\\nadzor}}}{}
+    }
+    \SlaifCommentaryPanel{Zakaj je to dober primer}{Pri ročno pisanih izpitih "samo uporabi model" hitro odpove; urejen cevovod pa lahko pomaga, ker loči prepoznavanje, pravila, ocenjevanje, validacijo in ročni pregled.}
+  }
+}
+
+\NoTextSlide{
+  title = {Zakaj je STEM rokopis drugačen problem},
+  subtitle = {Sken pisnega izpita je zelo kompleksen ročno narejen dokument.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Kaj vidimo v odgovoru}{}{\SlaifBluePanelBulletList{
+        \item besedilo in formule sta prepletena;
+        \item diagram je del odgovora;
+        \item nekaj je prečrtano ali popravljeno;
+        \item ocena mora razložiti delne točke.
+      }}{}
+      \ColoredPanel{Primer skena}{}{}{}
+    }
+    \placeimage{610}{205}{230}{233}{stem-handwritten-example-nocaption.png}
+    \SlaifFootnotePanel[fontSize=10.4,lineHeight=12.2,fill=SlaifPanelBlue]{Perš, J., Muhovič, J., Košir, A., \& Murovec, B. (2026). \textit{Grading Handwritten Engineering Exams with Multimodal Large Language Models}. arXiv:2601.00730v1 [cs.CV], 2. januar 2026.}
+  }
+}
+
+\NoTextSlide{
+  title = {Arhitektura: ne en prompt, ampak cevovod},
+  subtitle = {GitHub repo še ni javen, na željo dostop pedagogom iz FE in FRI.},
+  body = {
+    \placeimage{72}{130}{820}{316}{stem-pipeline-overview-nocaption.png}
+    \SlaifFootnotePanel[fontSize=10.4,lineHeight=12.2,fill=SlaifPanelBlue]{Perš, J., Muhovič, J., Košir, A., \& Murovec, B. (2026). \textit{Grading Handwritten Engineering Exams with Multimodal Large Language Models}. arXiv:2601.00730v1 [cs.CV], 2. januar 2026.}
+  }
+}
+
+\NoTextSlide{
+  title = {Kaj je novost in zakaj je evalvacija težka},
+  subtitle = {Pomemben rezultat ni "model zna ocenjevati", ampak sistemska zasnova okoli modela.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Novost}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{realistični skeni STEM rešitev\\brez prilagajanja študentov\\brez ročnega pretipkavanja}}}{}
+      \ColoredPanel{Sistemska zasnova}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{referenčna rešitev\\pravila in stroge predloge\\več neodvisnih ocen\\nadzorni korak}}}{}
+      \ColoredPanel{Težka evalvacija}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{zasebnost podatkov\\redki javni nabori\\človeška ocena ni absolutna\\pomembna je tudi razlaga}}}{}
+    }
+    \begin{textblock*}{790bp}(90bp,380bp)
+      \SlaifBluePlainBulletList{790}{
+        \item Poleg točnosti je pomembna tudi nepristranskost ocenjevanja.
+        \item Rezultati morajo biti stabilni med ponovitvami.
+        \item Sistem mora zaznati primere, ki zahtevajo ročni pregled.
+        \item Povratna informacija mora študentu razložiti, zakaj je rešitev pravilna, delno pravilna ali napačna.
+      }
+    \end{textblock*}
+  }
+}
+
+\NoTextSlide{
+  title = {Referenčna rešitev: zakaj je ključna},
+  subtitle = {Ocenjevanje ni "model proti študentu", ampak model ob pravilih in lokalni normi.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{1. Referenca}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{Predavatelj pripravi 100\% rešitev, lahko tudi ročno pisano.}}}{}
+      \ColoredPanel{2. Povzetek}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{Sistem pretvori referenco v ocenjevalno sidro.}}}{}
+      \ColoredPanel{3. Ocenjevanje}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{Odgovor se presoja ob pravilih, ne ob splošnem vtisu modela.}}}{}
+    }
+    \SlaifCommentaryPanel{Zakaj referenca ni dodatek}{Brez reference se model lažje premakne v splošno razlago in sistematično precenjevanje.}
+  }
+}
+
+\NoTextSlide{
+  title = {Prisotnost odgovora in stroge predloge},
+  subtitle = {Dve majhni varovali, ki preprečita velik del nereda.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Prisotnost odgovora}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{Najprej preveri, ali ima vprašanje dejanski odgovor. Praznine se ne smejo spremeniti v delne točke.}}}{}
+      \ColoredPanel{Stroga predloga}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{Poročilo ima pričakovano strukturo: vprašanje, povzetek, pravila, razlaga in točke.}}}{}
+      \ColoredPanel{Validacija izvoza}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{Če vsota ne ustreza prispevkom ali format ni strojno berljiv, sledi ročni pregled.}}}{}
+    }
+    \SlaifCommentaryPanel{Zakaj stroga oblika šteje}{Cevovod zaradi svoje zasnove izdela strukturiran zapis, ki ga lahko deterministično razčlenimo, preverimo, preračunamo in prenesemo v tabele ali poročila.}
+  }
+}
+
+\NoTextSlide{
+  title = {Zakaj več ocenjevalcev in nadzornik?},
+  subtitle = {En sam modelni odgovor je premalo stabilen za pedagoško rabo.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Ocenjevalec A}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{neodvisen osnutek}}}{}
+      \ColoredPanel{Ocenjevalec B}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{neodvisen osnutek}}}{}
+      \ColoredPanel{Ocenjevalec C}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{neodvisen osnutek}}}{}
+      \ColoredPanel{Nadzornik}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{združi osnutke, uveljavi predlogo in označi neskladja}}}{}
+    }
+    \SlaifCommentaryPanel{Interpretacija}{Nesoglasje ni napaka; je signal za človeški pregled.}
+  }
+}
+
+\NoTextSlide{
+  title = {Primer: referenčna rešitev kot vhod},
+  subtitle = {Referenčna rešitev model zasidra na pravo mesto glede pričakovanega nivoja znanja in podrobnosti.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Kaj je pomembno pri referenci?}{}{\SlaifBluePanelBulletList{
+        \item ni nujno tipkana; lahko je ročno pisana;
+        \item vsebuje metode, skice in formule;
+        \item služi kot lokalna ocenjevalna norma;
+        \item mora biti dovolj jasna, da jo sistem povzame.
+      }}{}
+      \ColoredPanel{Primer}{}{}{}
+    }
+    \placeimage{616}{196}{205}{276}{supplement-reference-solution-page1.png}
+    \SlaifFootnotePanel[fontSize=10.4,lineHeight=12.2,fill=SlaifPanelBlue]{Perš, J., Muhovič, J., Košir, A., \& Murovec, B. (2026). \textit{Grading Handwritten Engineering Exams with Multimodal Large Language Models}. arXiv:2601.00730v1 [cs.CV], 2. januar 2026.}
+  }
+}
+
+\NoTextSlide{
+  title = {Primer: izhod ni samo številka},
+  subtitle = {Glavna prednost za študente: obsežna povratna informacija s podrobno razlago, kaj so naredili narobe.},
+  body = {
+    \placeimage{54}{126}{410}{312}{supplement-final-grade.png}
+    \placeimage{510}{126}{377}{312}{supplement-task-feedback.png}
+    \SlaifFootnotePanel[fontSize=10.4,lineHeight=12.2,fill=SlaifPanelBlue]{Perš, J., Muhovič, J., Košir, A., \& Murovec, B. (2026). \textit{Grading Handwritten Engineering Exams with Multimodal Large Language Models}. arXiv:2601.00730v1 [cs.CV], 2. januar 2026.}
+  }
+}
+
+\NoTextSlide{
+  title = {Povratna informacija od študentov},
+  subtitle = {Predmet: Elektronika z digitalno tehniko, zimski semester 2025/2026},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Vprašanje 1}{Odnos do UI-prvega ocenjevanja}{\SlaifSliderTable{
+        labelX=54,y=265,labelWidth=150,barX=222,barWidth=70,barHeight=12,rowStep=28,
+        labelFontSize=9.8,labelLineHeight=11.4,valueFontSize=9.8,valueLineHeight=11.4,
+        valueYOffset=2.8,valueWidth=42,maxValue=100,valueSuffix={\%},
+        rows={pozitiven odnos ali preferenca/64,negativen odnos/21,neopredeljeni/14}
+      }}{}
+      \ColoredPanel{Vprašanje 2}{Ali imate korist od sistema?}{\SlaifSliderTable{
+        labelX=370,y=265,labelWidth=62,barX=450,barWidth=108,barHeight=12,rowStep=32,
+        labelFontSize=10.2,labelLineHeight=11.8,valueFontSize=10.2,valueLineHeight=11.8,
+        valueYOffset=2.8,valueWidth=42,maxValue=100,valueSuffix={\%},
+        rows={da/71,ne/29}
+      }}{}
+      \ColoredPanel{Vprašanje 3}{Katere koristi vidite?}{\SlaifSliderTable{
+        labelX=664,y=265,labelWidth=122,barX=804,barWidth=62,barHeight=12,rowStep=28,
+        labelFontSize=9.8,labelLineHeight=11.4,valueFontSize=9.8,valueLineHeight=11.4,
+        valueYOffset=2.8,valueWidth=42,maxValue=100,valueSuffix={\%},
+        rows={podrobne razlage/41,občutek nepristranskosti/34,hiter odziv/21}
+      }}{}
+    }
+    \SlaifFootnotePanel[fontSize=10.4,lineHeight=12.2,fill=SlaifPanelBlue]{Perš, J., Muhovič, J., Košir, A., \& Murovec, B. (2026). \textit{Grading Handwritten Engineering Exams with Multimodal Large Language Models}. arXiv:2601.00730v1 [cs.CV], 2. januar 2026. V anketi je sodelovalo 14 študentov po 8 tedenskih UI-ocenjenih kvizih.}
+  }
+}
+
+\NoTextSlide{
+  title = {Povratna informacija od študentov},
+  subtitle = {Predmet: Elektronika z digitalno tehniko, zimski semester 2025/2026},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Vprašanje 4}{Kaj vas skrbi?}{\SlaifSliderTable{
+        labelX=62,y=252,labelWidth=205,barX=292,barWidth=145,barHeight=13,rowStep=34,
+        labelFontSize=10.6,labelLineHeight=12.2,valueFontSize=10.6,valueLineHeight=12.2,
+        valueYOffset=3.0,valueWidth=48,maxValue=100,valueSuffix={\%},
+        rows={spregledani odgovori/35,več napak kot pri profesorjih/26,izpit je manj zahteven/22,izpit je bolj zahteven/17}
+      }}{}
+      \ColoredPanel{Vprašanje 5}{Skupna presoja}{\SlaifSliderTable{
+        labelX=530,y=252,labelWidth=215,barX=770,barWidth=100,barHeight=13,rowStep=36,
+        labelFontSize=10.6,labelLineHeight=12.2,valueFontSize=10.6,valueLineHeight=12.2,
+        valueYOffset=3.0,valueWidth=48,maxValue=100,valueSuffix={\%},
+        rows={prednosti pretehtajo slabosti/43,slabosti pretehtajo prednosti/29,brez bistvene razlike/21}
+      }}{}
+    }
+    \SlaifFootnotePanel[fontSize=10.4,lineHeight=12.2,fill=SlaifPanelBlue]{Perš, J., Muhovič, J., Košir, A., \& Murovec, B. (2026). \textit{Grading Handwritten Engineering Exams with Multimodal Large Language Models}. arXiv:2601.00730v1 [cs.CV], 2. januar 2026. V anketi je sodelovalo 14 študentov po 8 tedenskih UI-ocenjenih kvizih.}
+  }
+}
+
+\NoTextSlide{
+  title = {Kaj povedo rezultati},
+  subtitle = {Najboljši sodobni modeli so uporabni, šibkejši pa hitro odpovejo.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Merila v članku}{}{\SlaifBluePanelBulletList{
+        \item MAD: povprečna absolutna razlika do učiteljeve ocene;
+        \item bias: sistematično precenjevanje ali podcenjevanje;
+        \item ročni pregled: sproži ga nesoglasje med ocenjevalci;
+        \item najboljši sistemi dosegajo približno enomestno MAD in nizko pristranskost.
+      }}{}
+      \ColoredPanel{Rezultati}{}{}{}
+    }
+    \placeimage{585}{202}{280}{244}{stem-baseline-metrics-crop.png}
+    \SlaifFootnotePanel[fontSize=10.4,lineHeight=12.2,fill=SlaifPanelBlue]{Perš, J., Muhovič, J., Košir, A., \& Murovec, B. (2026). \textit{Grading Handwritten Engineering Exams with Multimodal Large Language Models}. arXiv:2601.00730v1 [cs.CV], 2. januar 2026.}
+  }
+}
+
+\NoTextSlide{
+  title = {Zakaj "samo vprašaj model" ni dovolj},
+  subtitle = {Ablacija: trivialno pozivanje brez pravil, reference in nadzornika poslabša ocenjevanje.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Poučna lekcija}{}{\SlaifBluePanelBulletList{
+        \item referenca ni dodatek, ampak sidro;
+        \item pravila morajo biti vidna v razlagi;
+        \item predloga prepreči formatni kaos;
+        \item nadzornik in validacija zmanjšata zdrse.
+      }}{}
+      \ColoredPanel{Ablacija}{}{}{}
+    }
+    \placeimage{585}{202}{280}{256}{stem-guidance-ablation-crop.png}
+    \SlaifFootnotePanel[fontSize=10.4,lineHeight=12.2,fill=SlaifPanelBlue]{Perš, J., Muhovič, J., Košir, A., \& Murovec, B. (2026). \textit{Grading Handwritten Engineering Exams with Multimodal Large Language Models}. arXiv:2601.00730v1 [cs.CV], 2. januar 2026.}
+  }
+}
+
+\NoTextSlide{
+  title = {Ročni pregled kot varnostni ventil},
+  subtitle = {Ne avtomatiziramo vsega; avtomatiziramo pripravo in označimo sporne primere.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Praktična interpretacija}{}{\SlaifBluePanelBulletList{
+        \item kadar se ocenjevalci ne strinjajo, naj človek pogleda;
+        \item prag ni tehnična malenkost, ampak pedagoška odločitev;
+        \item cilj je zmanjšati obseg pregleda, ne odstraniti odgovornost;
+        \item tako dobimo nadzorovan kompromis med hitrostjo in varnostjo.
+      }}{}
+      \ColoredPanel{Sprožilci}{}{}{}
+    }
+    \placeimage{585}{202}{280}{258}{stem-manual-review-triggers-crop.png}
+    \SlaifFootnotePanel[fontSize=10.4,lineHeight=12.2,fill=SlaifPanelBlue]{Perš, J., Muhovič, J., Košir, A., \& Murovec, B. (2026). \textit{Grading Handwritten Engineering Exams with Multimodal Large Language Models}. arXiv:2601.00730v1 [cs.CV], 2. januar 2026.}
+  }
+}
+
+\NoTextSlide{
+  title = {Etika in lokalna pravila},
+  subtitle = {Sistem mora biti tak, da ga predavatelj razume dovolj dobro, da ga lahko zavrne.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{Podatki}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{psevdoanonimizacija, lokalna deanonimizacija in jasen nadzor nad vhodnimi datotekami}}}{}
+      \ColoredPanel{Študent}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{ve, kateri del postopka je avtomatiziran in kje odloča človek}}}{}
+      \ColoredPanel{Napake}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{sistem pričakuje napačno branje, spregledan diagram in preveč samozavestno razlago}}}{}
+    }
+    \SlaifCommentaryPanel{Minimalni standard}{V izobraževanju ni dovolj, da je ocena približno pravilna; postopek mora biti razložljiv in popravljiv.}
+  }
+}
+
+\NoTextSlide{
+  title = {Kaj bi bil dober naslednji korak pri nas?},
+  subtitle = {Ne velika obljuba, ampak majhen, preverljiv pilot.},
+  body = {
+    \ColoredPanels{
+      \ColoredPanel{1. Izberemo}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{en predmet, eno vrsto naloge in delovni tok, ki res obremenjuje ekipo}}}{}
+      \ColoredPanel{2. Zberemo}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{navodila, primere oddaj, kriterije in stare povratne informacije}}}{}
+      \ColoredPanel{3. Naredimo}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{osnutek prosojnic, vprašanj za zagovor ali ocenjevalnega poročila}}}{}
+      \ColoredPanel{4. Merimo}{}{\SlaifPanelCenteredItems{\SlaifPanelTextItem{čas\\napake\\popravljivost\\nadzor}}}{}
+    }
+    \SlaifCommentaryPanel{Naslednji korak}{Cilj jesenske delavnice: konkretna opravila iz vaših predmetov, ne abstraktna razprava o UI.}
+  }
+}
+
+\end{document}

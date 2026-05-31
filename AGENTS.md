@@ -65,6 +65,8 @@ The currently implemented commands are:
 - `presentation-builder help`
 - `presentation-builder requirements`
 - `presentation-builder verify`
+- `presentation-builder import-source-material`
+- `presentation-builder create-presentation`
 
 Future commands must be added to both this list and the `help` command output.
 
@@ -90,17 +92,29 @@ Usage:
   presentation-builder <command> [optional parameters]
 
 Commands:
-  help
-      Print this command list.
+  Command                         Purpose
+  ------------------------------  ---------------------------------------------
+  help                            Print this command list.
 
-  requirements
-      Print the local software required for PowerPoint-template inspection,
-      LibreOffice rendering, PDF/image conversion, visual comparison, and text
-      extraction.
+  requirements                    Print the local software required for
+                                  PowerPoint-template inspection, source
+                                  material import, LibreOffice rendering,
+                                  PDF/image conversion, visual comparison, and
+                                  text extraction.
 
-  verify
-      Check whether the required local tools and Python packages are available.
-      Run this after installing requirements.
+  verify                          Check whether the required local tools and
+                                  Python packages are available. Run this after
+                                  installing requirements.
+
+  import-source-material          Inspect user-provided source files, extract
+                                  useful assets into a system temporary folder,
+                                  and write a markdown content dossier for
+                                  presentation creation.
+
+  create-presentation             Build a Beamer presentation from an imported
+                                  content dossier, extracted assets, source
+                                  documents, or a user outline; compile and
+                                  inspect the rendered PDF.
 ```
 
 ---
@@ -385,8 +399,101 @@ fi
 
 ---
 
+## Command: `presentation-builder import-source-material`
+
+Purpose:
+
+Import source material for a future presentation-building step.
+
+Behavior:
+
+- This command is dynamic; do not print a fixed prewritten output block.
+- Use the repository skill at `skills/import-source-material/SKILL.md`.
+- Treat optional command parameters as source paths, directories, page hints,
+  output hints, or user constraints.
+- If no source path is supplied, inspect the user request and nearby repository
+  context for likely source material. If no reasonable source can be found, ask
+  for the source path.
+- Create a dedicated workspace in the system temporary directory.
+- Copy source inputs into that temporary workspace before processing.
+- Inspect source files before proposing slides.
+- Extract useful images, page renders, crops, OCR text, tables, equations, and
+  other reusable assets into the temporary workspace.
+- Produce a markdown file named `contents.md` in the temporary workspace.
+- Produce manifests for source files and extracted assets.
+- End by reporting the path to `contents.md`, the temporary workspace path, the
+  extracted asset directory, and any open questions.
+- Do not create a Beamer deck during this command unless the user explicitly
+  asks to continue into `presentation-builder create-presentation`.
+
+Minimum expected temporary output structure:
+
+```text
+/tmp/presentation-source-import-XXXXXX/
+  contents.md
+  source/
+  assets/
+  pages/
+  crops/
+  ocr/
+  manifests/
+    source-files.tsv
+    assets.tsv
+```
+
+---
+
+## Command: `presentation-builder create-presentation`
+
+Purpose:
+
+Create a compiled Beamer presentation from imported material, extracted assets,
+source documents, or a user-provided outline.
+
+Behavior:
+
+- This command is dynamic; do not print a fixed prewritten output block.
+- Use the repository skill at `skills/create-presentation/SKILL.md`.
+- Treat optional command parameters as paths to `contents.md`, source files,
+  asset directories, target template directories, existing decks, or output
+  hints.
+- Prefer a previously generated `contents.md` from
+  `presentation-builder import-source-material` when one is provided.
+- Reuse the repository presentation template or the user-requested template.
+- Preserve template-like code unless the user explicitly asks to change it.
+- For SLAIF Beamer decks, treat `slaif.sty` as the only valid place for
+  presentation-system code. `deck.tex` is content only.
+- Never introduce new visual elements, helper drawing macros, colors, repeated
+  geometry, card/note/image/bar helpers, raw TikZ, direct `\drawshape`,
+  direct `\placetextbox`, or direct `\includegraphics` calls in `deck.tex`.
+- If a new visual element is needed while creating or refining a presentation,
+  first implement or extend the reusable macro in `slaif.sty`, then call that
+  macro from `deck.tex`. This applies to cards, panels, notes, footnotes,
+  figures, image placement, bullet lists, bar/slider charts, timelines, tables,
+  arrows, badges, dividers, and any other repeated visual structure.
+- Do not misuse existing template elements just to avoid writing content
+  directly. Footnote panels are for citations, source notes, and references
+  only; do not put ordinary slide arguments, explanations, or bullet lists in
+  footnote panels.
+- If a slide needs a plain bullet list, use the existing template bullet-list
+  macros directly in the slide body. Do not force bullets into panels or
+  small-text panel groups when the slide design calls for ordinary bullets
+  under, beside, or between other template elements.
+- Before adding a new list macro, check whether the template already provides
+  the needed green or blue bullet-list macro and reuse it when present.
+- Before reporting a create-presentation task as complete, inspect the edited
+  TeX for template-boundary violations. Newly introduced local visual helpers
+  or raw layout code in `deck.tex` must be moved into `slaif.sty` first.
+- Generate or update Beamer content, compile locally, render or inspect the
+  output PDF, and iterate until visible layout issues are fixed.
+- End by reporting the final TeX path, final PDF path, compile command, assets
+  used or created, and any unresolved risks.
+- Do not commit, push, or open a pull request unless the user explicitly asks.
+
+---
+
 ## Current scope
 
-Only the command interface and the three commands above are defined at this stage.
-Do not assume that PowerPoint reconstruction, rendering, comparison, or deck
-generation commands exist until they are explicitly added to this file.
+Only the command interface and the commands above are defined at this stage.
+Do not assume that additional PowerPoint reconstruction, rendering, comparison,
+or deck generation commands exist until they are explicitly added to this file.
