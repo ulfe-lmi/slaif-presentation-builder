@@ -22,6 +22,18 @@ This skill covers:
 
 ## Non-Negotiable Rules
 
+- Do not start creating or modifying presentation files until the target
+  template is explicit. The user must name a repository template, identify the
+  showroom/template directory to use, or ask for a standard Beamer theme. If the
+  template is unclear, stop and ask before editing.
+- Create final presentation decks only under `presentations/`.
+- For repository templates, scaffold a new deck from the showroom presentation
+  associated with that template. Copy the style file and required assets into
+  the deck workspace under `presentations/<deck-name>/`, then edit the deck-local
+  copies. Treat the showroom deck as the authoritative example of how to call
+  the template's prepared elements.
+- If the user wants standard Beamer instead of a repository template, help them
+  choose an appropriate Beamer theme before writing the deck.
 - Reuse the repository's presentation template or requested template.
 - Preserve template-like code unless the user explicitly asks to alter it.
 - Keep content edits separate from reusable style/framework edits.
@@ -58,6 +70,12 @@ This skill covers:
   editing. Tell the user exactly which element cannot be expressed with the
   current template and ask explicitly whether to change the template/style file
   or approve an exception.
+- If the template has a global font-size multiplier, all text-bearing template
+  elements and text-dependent geometry must participate in that scaling model.
+  Check titles, subtitles, bullets, panel text, table text, slider labels,
+  slider values, footnotes, footer text, slide numbers, and vertical offsets
+  that align text with graphical elements. Do not leave isolated offsets or text
+  sizes unscaled.
 - If a slide needs a visual element that is not already available, first add or
   extend the reusable macro in `slaif.sty`, then use that macro from `deck.tex`.
   This applies to cards, panels, notes, footnotes, figures, image placement,
@@ -81,6 +99,10 @@ This skill covers:
 - Do not push or commit generated PDFs/build artifacts unless explicitly asked.
 - If required fonts, LaTeX packages, or asset files are missing, report that
   clearly and do not pretend the rendered output is validated.
+- If a one-time asset-generation tool or Python package is missing, prefer a
+  temporary virtual environment under the system temporary directory. Do not
+  write into a repository `.venv` that is missing, unwritable, or not clearly
+  intended for the current task unless the user explicitly asks to modify it.
 
 ## Inputs
 
@@ -103,6 +125,8 @@ brief internal outline before writing slides.
 
 Identify:
 
+- selected template or standard Beamer theme
+- associated showroom presentation, when using a repository template
 - target `.tex` file to create or edit
 - style file or template directory
 - asset directory
@@ -110,8 +134,11 @@ Identify:
 - compile command
 - intended output PDF path
 
-Prefer a durable repository path for the final deck and a local build directory
-for generated artifacts.
+For new repository-template decks, create a durable
+`presentations/<deck-name>/` directory, copy the selected template's showroom
+style file and required assets into that directory, and use the showroom `.tex`
+only as the element-usage reference. Keep generated build artifacts in a local
+build directory.
 
 ### 2. Read The Content Dossier
 
@@ -216,6 +243,11 @@ Inspect all slides for:
 - inconsistent footer/header behavior
 - obvious alignment problems
 - missing fonts or substituted glyphs
+
+When the issue is an alignment, crop, overlap, or small visual detail, render
+the affected slide at higher resolution and inspect a close crop of the suspect
+region before patching. Use full-slide inspection for overall composition and
+close crops for pixel-level decisions.
 
 Also inspect the TeX source for template-boundary violations before finishing:
 

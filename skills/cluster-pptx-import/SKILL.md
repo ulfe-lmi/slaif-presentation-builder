@@ -47,6 +47,16 @@ nearby durable work directories before making assumptions.
   original PPTX render only as a regression guard when available.
 - Keep macro names semantic enough to be reusable, but do not invent a design
   system that is not supported by repeated evidence in the deck.
+- Use an existing completed showroom template as the model for the final
+  `.tex`/`.sty` split. For the SLAIF template, inspect
+  `templates/slaif/slaif.tex` and `templates/slaif/slaif.sty`: the showroom
+  `.tex` demonstrates the desired deck-side surface, and the `.sty` demonstrates
+  where reusable colors, geometry, typography, drawing primitives, component
+  definitions, and repeated layout logic belong.
+- The clustering goal is not merely fewer lines in the deck. The goal is a
+  reusable template surface where future decks can be written using semantic
+  macros shown by the showroom, without requiring users to repeatedly remind
+  the agent to extract reusable components.
 
 ## Workflow
 
