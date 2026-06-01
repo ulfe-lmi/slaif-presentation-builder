@@ -15,6 +15,10 @@ current workflow covers PPTX inspection, slide rendering, asset extraction,
 native Beamer reconstruction, visual refinement, and clustering repeated slide
 elements into style-file macros.
 
+Start with [QUICKSTART.md](QUICKSTART.md) for the recommended order: create a
+deck from the SLAIF template first, use generic Beamer when needed, and leave
+PPTX import/clustering for template engineering work.
+
 ## Repository Contents
 
 - `skills/` contains agent skills for importing, refining, and clustering PPTX
