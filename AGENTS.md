@@ -72,6 +72,50 @@ Future commands must be added to both this list and the `help` command output.
 
 ---
 
+## Repository skills
+
+This repository also defines workflow skills under `skills/`. Use these skills
+when their task matches the user request, even when the request is not phrased
+as a `presentation-builder` command.
+
+- `skills/import-pptx/SKILL.md`
+  Import an existing PPTX/POTX/PPT deck or template into a reproducible Beamer
+  workflow by rendering through office tooling, extracting media, mapping
+  assets, documenting structure, and generating the first reconstruction.
+
+- `skills/refine-pptx-import/SKILL.md`
+  Continue an imported PPTX-to-Beamer reconstruction by refining visual
+  placement, fonts, assets, cards, panels, bars, tables, overlays, and other
+  details while preserving editable native Beamer output.
+
+- `skills/cluster-pptx-import/SKILL.md`
+  Convert a visually credible raw Beamer reconstruction into reusable `.sty`
+  components and semantic deck-side macros, using completed showroom templates
+  as examples of the desired `.tex`/`.sty` boundary.
+
+- `skills/import-source-material/SKILL.md`
+  Import source documents, web/PDF/text/image material, extracted assets, OCR,
+  tables, equations, and other inputs into a markdown content dossier for later
+  presentation creation.
+
+- `skills/create-presentation/SKILL.md`
+  Create or refine a concrete Beamer presentation from imported material,
+  assets, source documents, or a user outline, using an explicitly selected
+  template and compiling/inspecting the rendered output.
+
+- `skills/insert-qr-code/SKILL.md`
+  Generate a real QR code asset for a user-provided URL or text and insert it
+  through the existing presentation/template mechanism.
+
+When preparing or clustering templates, inspect the completed showroom example
+associated with the selected template. For the SLAIF template, use
+`templates/slaif/slaif.tex` as the model for deck-side content and semantic
+macro calls, and `templates/slaif/slaif.sty` as the model for reusable visual
+components, geometry, colors, typography, drawing primitives, and repeated
+layout behavior.
+
+---
+
 ## Command: `presentation-builder help`
 
 Purpose:
@@ -459,6 +503,20 @@ Behavior:
   hints.
 - Prefer a previously generated `contents.md` from
   `presentation-builder import-source-material` when one is provided.
+- Before creating or modifying presentation files, establish which template the
+  user wants to use. If the user has not named a repository template, showroom
+  template, or standard Beamer theme family, stop and ask. Do not begin
+  presentation creation until the template choice is explicit.
+- Presentation decks must be created under `presentations/`. Do not create new
+  final decks in the repository root, `templates/`, `skills/`, or a temporary
+  workspace.
+- For repository templates, scaffold the presentation from the showroom
+  presentation associated with the selected template. Copy the needed style file
+  and assets into the new `presentations/<deck-name>/` workspace, then edit that
+  deck-local copy. Use the showroom deck as the usage reference for available
+  template elements, not as presentation content.
+- If the user wants a standard Beamer template instead of a repository template,
+  help the user choose an appropriate Beamer theme before creating the deck.
 - Reuse the repository presentation template or the user-requested template.
 - Preserve template-like code unless the user explicitly asks to change it.
 - Before changing a style or template file, inspect the existing template for a
@@ -493,6 +551,11 @@ Behavior:
   font-size override in `deck.tex`, stop before editing and explicitly ask the
   user whether the template should be changed or whether the exception is
   approved.
+- When a template has a global font-size multiplier, every template text element
+  and every text-dependent offset must respect it. This includes titles,
+  subtitles, bullets, panel text, tables, sliders, value labels, footnotes,
+  footer text, slide numbers, and vertical alignment offsets tied to text
+  height. Do not leave isolated text geometry outside the global scaling model.
 - If a new visual element is needed while creating or refining a presentation,
   first implement or extend the reusable macro in `slaif.sty`, then call that
   macro from `deck.tex`. This applies to cards, panels, notes, footnotes,
@@ -513,6 +576,15 @@ Behavior:
   or raw layout code in `deck.tex` must be moved into `slaif.sty` first.
 - Generate or update Beamer content, compile locally, render or inspect the
   output PDF, and iterate until visible layout issues are fixed.
+- When the user reports an alignment, cropping, overlap, or small visual detail
+  problem, render the affected slide at high resolution and inspect a close crop
+  of the suspect region. Do not rely only on the full-slide view for pixel-level
+  layout decisions.
+- If a one-time asset-generation tool or Python package is missing, prefer an
+  isolated temporary virtual environment under the system temporary directory.
+  Do not write into a repository virtual environment that is missing,
+  unwritable, or not clearly intended for the current task unless the user asks
+  for that environment to be modified.
 - End by reporting the final TeX path, final PDF path, compile command, assets
   used or created, and any unresolved risks.
 - Do not commit, push, or open a pull request unless the user explicitly asks.

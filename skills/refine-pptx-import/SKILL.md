@@ -40,6 +40,16 @@ Use this refinement skill for:
   overlays, even when current ordering appears visually harmless.
 - Normal slide text must be live Beamer text.
 - Text that is part of a logo image may remain inside that logo image.
+- Use an existing completed showroom template as the reference for the
+  `.tex`/`.sty` boundary. For the SLAIF template, inspect
+  `templates/slaif/slaif.tex` and `templates/slaif/slaif.sty`: deck `.tex`
+  should contain slide order, content, data, asset filenames, and semantic
+  macro calls; reusable geometry, colors, typography, drawing primitives,
+  repeated layout logic, and component definitions belong in `.sty`.
+- During refinement, do not add new repeated raw textbox/drawing code to the
+  `.tex` file when the issue is really a missing or incomplete reusable
+  component. Extend the style/template layer and then call the semantic macro
+  from the deck.
 - Use the office-rendered PPTX slides as the visual reference, but also judge
   final Beamer slide quality directly.
 - Avoid blindly optimizing pixel-diff metrics at the expense of readable,
