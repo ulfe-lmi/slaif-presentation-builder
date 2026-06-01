@@ -43,6 +43,16 @@ This workflow favors evidence over assumption:
   not as rendered slide crops. This includes cards, panels, rounded rectangles,
   metric/stat boxes, status pills, table row bands, header bands, progress bars,
   callout boxes, and dividers. Their text must remain live Beamer text.
+- When deciding what belongs in the generated `.tex` file versus the generated
+  `.sty` file, use an existing completed showroom template as the reference
+  pattern. For the SLAIF template, inspect `templates/slaif/slaif.tex` and
+  `templates/slaif/slaif.sty`: the `.tex` file demonstrates slide content and
+  semantic macro calls, while reusable visual components, geometry, colors,
+  font behavior, drawing primitives, and repeated layout logic belong in the
+  `.sty` file.
+- If an imported visual pattern appears more than once, or is likely to be
+  reused in a future deck, reconstruct it as a reusable component rather than
+  leaving repeated raw drawing/textbox code in the `.tex` file.
 - Do not use cropped rendered text as an admissible final Beamer solution.
   Rendered text crops may be used only as a validation experiment to isolate
   geometry/asset problems from font/text-layout problems.
