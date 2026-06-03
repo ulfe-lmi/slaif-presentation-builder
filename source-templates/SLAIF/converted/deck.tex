@@ -4,6 +4,7 @@
 \def\input@path{{../../../templates/slaif/}}
 \makeatother
 \usepackage{slaif}
+\renewcommand{\SlaifFontScale}{1.2}
 \SlaifSetPresentationDate{05/26/2026}
 \SlaifSetPresentationFooter{SLAIF WP6 – AI Skills \& Training}
 \begin{document}
@@ -70,7 +71,7 @@
   title = {A consolidated training portfolio},
   subtitle = {First coordination output: one catalogue, one schema, one registry — published as Appendix C to the PPR},
   left = {
-    \SlaifStatisticPanels[feature]{
+    \SlaifStatisticPanels[feature,height=335.000]{
       \SlaifStatistic{88}{consolidated training activities\\scheduled across the project lifecycle}{Collected from all 10 partners between December 2025 and February 2026, deduplicated through iterative review}
     }
   },
@@ -92,10 +93,11 @@
   subtitle = {Balanced portfolio — from fundamentals to frontier, with deliberate SME focus},
   body = {
     \SlaifSliderTable{
+      y=135.000,
       rows={{Data science \& ML fundamentals}/19,{HPC infrastructure \& workflows}/18,{LLMs \& natural language processing}/16,{AI adoption for SMEs \& industry}/12,{Health \& biomedical AI}/11,{AI ethics \& EU AI Act compliance}/6,{Earth observation \& agriculture}/3,{Computer vision}/2,{Cybersecurity}/1}
     }
-    \SlaifFootnotePanel{
-      \itshape Nearly a third of the catalogue (33 of 88) targets SMEs, industry AI adoption and EU AI Act compliance — directly addressing the industry-facing mandate of the AI Factory.\\[12pt]
+    \SlaifFootnotePanel[paddingY=5.000]{
+      \itshape Nearly a third of the catalogue (33 of 88) targets SMEs, industry AI adoption and EU AI Act compliance — directly addressing the industry-facing mandate of the AI Factory.
     }
   }
 }
@@ -162,7 +164,7 @@
   title = {Training IT infrastructure — operational by M7},
   subtitle = {Two platforms, one registry — all discoverable, manageable and KPI-reportable},
   body = {
-    \ColoredPanels{
+    \ColoredPanels[y=102.000]{
       \ColoredPanel{MOOC platform}{}{
         \SlaifPanelUrl{edu.slaif.si}
         \SlaifBluePanelBulletList{
@@ -184,7 +186,7 @@
         }
       }{}
     }
-    \SlaifFootnotePanel[panelCaption]{Both platforms feed a single training registry that is the authoritative source for the training catalogue and KPI reporting.}
+    \SlaifFootnotePanel[panelCaption,paddingY=4.000]{Both platforms feed a single training registry that is the authoritative source for the training catalogue and KPI reporting.}
   }
 }
 
@@ -241,7 +243,7 @@
   title = {Reaching industry — first Open Day \& SME channels},
   subtitle = {From listening to designing: survey responses already shaping the training roadmap},
   body = {
-    \MetricSummaryPanels{
+    \MetricSummaryPanels[minBottom=468.000,footerY=445.000]{
       \MetricSummaryPanel[headerColor=SlaifAccentTeal,bulletColor=SlaifGreen]
         {1st SLAIF Industry Open Day}
         {17 November 2025  ·  JSI, Ljubljana}
@@ -249,9 +251,9 @@
         {survey responses\\in the WP6 session}
         {}
         {
-          \MetricSummaryBullet[y=360.000,textY=349.000]{Results compiled into dedicated presentation, shared with all 10 WP6 partners}
-          \MetricSummaryBullet[y=410.000,textY=392.500]{Findings directly influenced selection of micro-credential topics}
-          \MetricSummaryBullet[y=450.000,textY=435.500]{ARNES designed new workshop — Building a Data Culture — in direct response to the identified \#1 barrier: data acquisition, curation \& management}
+          \MetricSummaryBullet[y=340.000,textY=331.000]{Results compiled into dedicated presentation, shared with all 10 WP6 partners}
+          \MetricSummaryBullet[y=384.000,textY=374.000]{Findings directly influenced selection of micro-credential topics}
+          \MetricSummaryBullet[y=422.000,textY=407.000]{ARNES designed new workshop — Building a Data Culture — in direct response to the identified \#1 barrier: data acquisition, curation \& management}
         }
         {}
       \MetricSummaryPanel[headerColor=SlaifGreenDark,bulletColor=SlaifAccentTeal]
@@ -261,9 +263,9 @@
         {member companies reachable through newsletters \& direct outreach}
         {3 business-tailored webinars designed:}
         {
-          \MetricSummaryBullet[y=384.500,textY=379.500]{Artificial Intelligence for Leadership}
-          \MetricSummaryBullet[y=415.500,textY=410.500]{AI for Small Businesses}
-          \MetricSummaryBullet[y=446.500,textY=441.500]{Artificial Intelligence in Entrepreneurship}
+          \MetricSummaryBullet[y=368.000,textY=363.000]{Artificial Intelligence for Leadership}
+          \MetricSummaryBullet[y=399.000,textY=394.000]{AI for Small Businesses}
+          \MetricSummaryBullet[y=430.000,textY=425.000]{Artificial Intelligence in Entrepreneurship}
         }
         {Early industrial contacts: Hidria · Steklarna Hrastnik · Domel · MESI · Caretronic}
     }
