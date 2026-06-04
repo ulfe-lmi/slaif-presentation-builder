@@ -14,7 +14,8 @@ shell commands.
 ## Creating presentation from template
 
 Use this workflow when you already have a repository template, such as
-`templates/slaif`, or you want the agent to create a generic Beamer deck.
+`templates/slaif` or `templates/ulfe`, or you want the agent to create a generic
+Beamer deck.
 
 ### Step 1. Verify The Local Environment
 
@@ -76,10 +77,16 @@ For the SLAIF visual system, use:
 Use the SLAIF template from templates/slaif.
 ```
 
+For the ULFE visual system, use:
+
+```text
+Use the ULFE template from templates/ulfe.
+```
+
 For a generic Beamer deck, use:
 
 ```text
-Use a standard Beamer theme, not the SLAIF template.
+Use a standard Beamer theme, not the SLAIF or ULFE template.
 Help me choose an appropriate Beamer theme.
 ```
 
@@ -102,6 +109,19 @@ Language: <language>.
 Target length: <number of slides>.
 ```
 
+Or choose ULFE instead:
+
+```text
+presentation-builder create-presentation <path-to-contents.md>
+
+Use the ULFE template from templates/ulfe.
+Create the deck under presentations/<deck-name>.
+Title: <presentation title>.
+Audience: <audience>.
+Language: <language>.
+Target length: <number of slides>.
+```
+
 If you are skipping the import step and already know the source files, give the
 agent the files directly:
 
@@ -117,6 +137,12 @@ Language: <language>.
 Target length: <number of slides>.
 ```
 
+For ULFE, replace the template line with:
+
+```text
+Use the ULFE template from templates/ulfe.
+```
+
 The agent should:
 
 - create a new directory under `presentations/`
@@ -126,9 +152,12 @@ The agent should:
 - keep reusable visual behavior in the deck-local `.sty` file
 - compile the deck and inspect the rendered PDF
 
-For SLAIF decks, the agent should use `templates/slaif/slaif.tex` as the
-showroom example and `templates/slaif/slaif.sty` as the reusable visual system
-model.
+For repository decks, the agent should use the selected template showroom as
+the usage example and the matching `.sty` file as the reusable visual system
+model:
+
+- SLAIF: `templates/slaif/slaif.tex` and `templates/slaif/slaif.sty`
+- ULFE: `templates/ulfe/ulfe.tex` and `templates/ulfe/ulfe.sty`
 
 ### Step 5. Review The PDF
 
@@ -171,6 +200,19 @@ The showroom PDF is:
 
 ```text
 templates/slaif/build/slaif.pdf
+```
+
+For a quick look at the ULFE template showroom itself:
+
+```bash
+cd templates/ulfe
+latexmk -xelatex -interaction=nonstopmode -halt-on-error -outdir=build ulfe.tex
+```
+
+The showroom PDF is:
+
+```text
+templates/ulfe/build/ulfe.pdf
 ```
 
 ## Creating new templates from .pptx

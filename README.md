@@ -16,14 +16,16 @@ native Beamer reconstruction, visual refinement, and clustering repeated slide
 elements into style-file macros.
 
 Start with [QUICKSTART.md](QUICKSTART.md) for the recommended order: create a
-deck from the SLAIF template first, use generic Beamer when needed, and leave
-PPTX import/clustering for template engineering work.
+deck from an existing repository template such as SLAIF or ULFE first, use
+generic Beamer when needed, and leave PPTX import/clustering for template
+engineering work.
 
 ## Repository Contents
 
 - `skills/` contains agent skills for importing, refining, and clustering PPTX
   presentations.
-- `templates/slaif/` contains the evolving SLAIF Beamer style.
+- `templates/slaif/` contains the SLAIF Beamer style and showroom deck.
+- `templates/ulfe/` contains the ULFE Beamer style and showroom deck.
 - `source-templates/` is intended for source PowerPoint templates used as import
   targets.
 
@@ -78,12 +80,17 @@ fontconfig. Verify it with:
 fc-match "Roboto Condensed"
 ```
 
-## Current Template Capabilities
+## Current Templates
 
-The SLAIF style currently includes semantic colors, absolute placement helpers,
-rounded image rendering, title and motivation slide templates, divider slides,
-slider-table components, data-table components, and optional final-slide QR
-code placement.
+The repository currently includes two reusable Beamer templates:
+
+- `templates/slaif/` for the SLAIF visual system.
+- `templates/ulfe/` for the ULFE visual system reconstructed from the imported
+  ULFE PowerPoint template.
+
+The template styles keep semantic colors, placement helpers, slide layouts,
+tables, charts, image treatments, dividers, and other reusable presentation
+components in `.sty` files.
 
 The goal is to keep presentation content in deck files while moving visual
 rules, layout geometry, and repeated drawing logic into reusable LaTeX style
