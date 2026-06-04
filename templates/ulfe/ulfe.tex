@@ -1,0 +1,139 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{ulfe}
+
+\begin{document}
+
+% 01-03: title variants from the imported PowerPoint layout set.
+\ULFETitleSlide{
+  colorStyle = {Red},
+  title = {Naslovni diapozitiv predstavitve},
+  subtitle = {Podnaslov predstavitve},
+  lecturer = {Predavatelj},
+  placeDate = {Kraj in datum}
+}
+\ULFETitleSlide{
+  colorStyle = {Gray},
+  title = {Naslovni diapozitiv predstavitve},
+  subtitle = {Podnaslov predstavitve},
+  lecturer = {Predavatelj},
+  placeDate = {Kraj in datum}
+}
+\ULFETitleSlide{
+  colorStyle = {Gray},
+  imageBackground = {image4.png},
+  title = {Naslovni diapozitiv predstavitve},
+  subtitle = {Podnaslov predstavitve},
+  lecturer = {Predavatelj},
+  placeDate = {Kraj in datum}
+}
+
+% 04: copyright warning layout.
+\ULFECopyrightSlide
+  {Predavatelj}
+  {Opozorilo glede avtorskih pravic izvedenih predavanj}
+
+% 05-07: table-of-contents variants.
+\ULFETocSlide{Gray}
+  {Poglavje; Poglavje; Poglavje; Poglavje; Poglavje; Poglavje; Poglavje; Poglavje}
+\ULFETocSlide{Red}
+  {Poglavje; Poglavje; Poglavje; Poglavje; Poglavje; Poglavje; Poglavje; Poglavje}
+\ULFETocSlide{RedWhiteGray}
+  {Poglavje; Poglavje; Poglavje; Poglavje; Poglavje; Poglavje; Poglavje; Poglavje}
+
+% 08-10: chapter title variants.
+\ULFEChapterTitleSlideStyle{Red}{Kliknite, če želite dodati naslov}
+\ULFEChapterTitleSlideStyle{Gray}{Kliknite, če želite dodati naslov}
+\ULFEChapterTitleSlideStyle{RedWhiteGray}{Kliknite, če želite dodati naslov}
+
+% 11-12: image layouts with editable surrounding structure.
+\ULFEPhotoLeftContentSlide
+  {0.4270833333333333}
+  {Kliknite, če želite dodati naslov}
+  {Kliknite, če želite dodati besedilo\\Navajate lahko tudi po alinejah}
+  {Podatki o fotografiji}
+  {image7.jpg}
+\ULFEPhotoRightContentSlide
+  {0.35625}
+  {Kliknite, če želite urediti slog naslova matrice}
+  {Kliknite za urejanje slogov besedila matrice\\Druga raven\\Tretja raven\\Četrta raven\\Peta raven}
+  {Podatki o fotografiji}
+  {image8.jpg}
+
+% 13-15: quote layouts.
+\ULFEQuoteSlideStyle{Gray}{Kliknite, če želite dodati citat}
+\ULFEQuoteSlideStyle{Red}{Kliknite, če želite dodati citat}
+\ULFEQuoteSlideStyle{RedWhiteGray}{Kliknite, če želite dodati citat}
+
+% 16-18: text comparison and plain text layouts.
+\ULFEHeaderComparisonSlideStyle{RedWhiteGray}
+  {Kliknite, če želite urediti slog naslova matrice}
+  {Kliknite za urejanje slogov besedila matrice}
+  {Kliknite za urejanje slogov besedila matrice}
+  {Kliknite za urejanje slogov besedila matrice}
+  {Kliknite za urejanje slogov besedila matrice}
+\ULFEHeaderComparisonSlideStyle{GrayWhite}
+  {Kliknite, če želite urediti slog naslova matrice}
+  {Kliknite za urejanje slogov besedila matrice}
+  {Kliknite za urejanje slogov besedila matrice}
+  {Kliknite za urejanje slogov besedila matrice}
+  {Kliknite za urejanje slogov besedila matrice}
+\ULFEPlainTextSlide
+  {Kliknite, če želite urediti slog naslova matrice}
+  {Kliknite za urejanje slogov besedila matrice; Druga raven; Tretja raven; Četrta raven; Peta raven}
+
+% 19-22: visible chart/table examples reconstructed natively.
+\ULFEPieChartSlide
+  {Kliknite, če želite dodati naslov}
+  {1. metoda/12.5; 2. metoda/12.5; 3. metoda/12.5; 4. metoda/12.5; 5. metoda/50}
+\ULFEPieChartBulletsSlide
+  {Kliknite, če želite dodati naslov}
+  {1. metoda/12.5; 2. metoda/12.5; 3. metoda/12.5; 4. metoda/12.5; 5. metoda/50}
+  {Kliknite, če želite dodati besedilo; Navajate lahko tudi po alinejah}
+\ULFEDataTableSlide
+  {Kliknite, če želite dodati naslov}
+  {Plačilna skupina | Ženske | Moški}
+  {indent: D (pedagoška delovna mesta) | 25 | 27;
+   indent: E (delovna mesta za zdravstveno dejavnost) | 4 | 2;
+   indent: H (raziskovalna delovna mesta) | 66 | 83;
+   indent: J (spremljajoča delovna mesta) | 35 | 9;
+   bold: Vsota | 130 | 121;
+   redbold: Vsi skupaj | 251 |}
+\ULFEGroupedBarChartSlide
+  {Kliknite, če želite dodati naslov}
+  {2021/22 | 2022/23 | 2023/24}
+  {prva stopnja/4.3 \%|2.4 \%|2 \%;
+   druga stopnja/2.5 \%|4.4 \%|2 \%;
+   tretja stopnja/3.5 \%|1.8 \%|3 \%;
+   skupaj/10.4 \%|8.6 \%|7 \%}
+
+% 23-25: numeric display layouts.
+\ULFEMetricPairSlide
+\ULFEMetricTripleSlide
+\ULFEMetricQuadSlide
+
+% 26-28: data-block layouts.
+\ULFEAreaBlocksSlide
+  {Kliknite če želite dodati besedilo}
+  {Štev./0.26; Štev./0.26; Štev./0.24; Štev./0.24}
+\ULFESplitRowsSlide
+  {Kliknite, če želite dodati naslov}
+  {Štev./Štev./0.45; Štev./Štev./0.57}
+\ULFEVerticalBarsSlide
+  {Kliknite, če želite dodati naslov}
+  {Štev./1.0; Štev./0.54; Štev./0.92; Štev./0.74}
+
+% 29: blank white layout.
+\ULFEWhiteLayout
+
+% 30-32: final slide variants.
+\ULFEFinalGraySlide
+  {Kliknite, če želite dodati besedilo zadnjega diapozitiva}
+  {Avtor in kontakt}
+\ULFEFinalRedSlide
+  {Kliknite, če želite dodati besedilo zadnjega diapozitiva}
+  {Avtor in kontakt}
+\ULFEFinalPhotoSlide
+  {Kliknite, če želite dodati besedilo zadnjega diapozitiva}
+  {Avtor in kontakt}
+
+\end{document}

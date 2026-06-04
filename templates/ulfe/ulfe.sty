@@ -1,0 +1,2325 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ulfe}[2026/06/04 UL FE PowerPoint template reconstruction]
+
+\RequirePackage{fontspec}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\RequirePackage{xcolor}
+\RequirePackage[absolute,overlay]{textpos}
+\RequirePackage{xparse}
+\RequirePackage{array}
+
+\geometry{paperwidth=960bp,paperheight=540bp,margin=0bp}
+
+\definecolor{ULFEBrandRed}{HTML}{E03127}
+\definecolor{ULFECharcoal}{HTML}{58595B}
+\definecolor{ULFEBodyGray}{HTML}{5D5E60}
+\definecolor{ULFEChartInk}{HTML}{404040}
+\definecolor{ULFEDataGrayDark}{HTML}{7A7A7C}
+\definecolor{ULFEDataGrayMid}{HTML}{9B9B9D}
+\definecolor{ULFEDataGrayLight}{HTML}{ACACAD}
+\definecolor{ULFEChartGrayDark}{HTML}{878787}
+\definecolor{ULFEChartGrayMedium}{HTML}{A6A6A6}
+\definecolor{ULFEChartGrayLight}{HTML}{BFBFBF}
+\definecolor{ULFEChartGrayPale}{HTML}{D9D9D9}
+\definecolor{ULFEChartAxisRule}{HTML}{D0D0D0}
+\definecolor{ULFETableRule}{HTML}{111111}
+\definecolor{ULFEWhite}{HTML}{FFFFFF}
+
+\newcommand{\ULFEColorStyleRedBackground}{ULFEBrandRed}
+\newcommand{\ULFEColorStyleRedCanvas}{ULFEBrandRed}
+\newcommand{\ULFEColorStyleRedTitle}{ULFEWhite}
+\newcommand{\ULFEColorStyleRedText}{ULFEWhite}
+\newcommand{\ULFEColorStyleRedCaption}{ULFEWhite}
+\newcommand{\ULFEColorStyleRedSlideNumber}{ULFEWhite}
+\newcommand{\ULFEColorStyleRedTopLogo}{image5.png}
+\newcommand{\ULFEColorStyleRedAccent}{ULFEBrandRed}
+\newcommand{\ULFEColorStyleRedOnAccent}{ULFEWhite}
+\newcommand{\ULFEColorStyleRedAccentLogo}{image5.png}
+
+\newcommand{\ULFEColorStyleGrayBackground}{ULFECharcoal}
+\newcommand{\ULFEColorStyleGrayCanvas}{ULFECharcoal}
+\newcommand{\ULFEColorStyleGrayTitle}{ULFEWhite}
+\newcommand{\ULFEColorStyleGrayText}{ULFEWhite}
+\newcommand{\ULFEColorStyleGrayCaption}{ULFEWhite}
+\newcommand{\ULFEColorStyleGraySlideNumber}{ULFEWhite}
+\newcommand{\ULFEColorStyleGrayTopLogo}{image5.png}
+\newcommand{\ULFEColorStyleGrayAccent}{ULFECharcoal}
+\newcommand{\ULFEColorStyleGrayOnAccent}{ULFEWhite}
+\newcommand{\ULFEColorStyleGrayAccentLogo}{image5.png}
+
+\newcommand{\ULFEColorStyleRedWhiteGrayBackground}{ULFEWhite}
+\newcommand{\ULFEColorStyleRedWhiteGrayCanvas}{ULFEWhite}
+\newcommand{\ULFEColorStyleRedWhiteGrayTitle}{ULFEBrandRed}
+\newcommand{\ULFEColorStyleRedWhiteGrayText}{ULFEBodyGray}
+\newcommand{\ULFEColorStyleRedWhiteGrayCaption}{ULFECharcoal}
+\newcommand{\ULFEColorStyleRedWhiteGraySlideNumber}{ULFECharcoal}
+\newcommand{\ULFEColorStyleRedWhiteGrayTopLogo}{image6.png}
+\newcommand{\ULFEColorStyleRedWhiteGrayAccent}{ULFEBrandRed}
+\newcommand{\ULFEColorStyleRedWhiteGrayOnAccent}{ULFEWhite}
+\newcommand{\ULFEColorStyleRedWhiteGrayAccentLogo}{image5.png}
+
+\newcommand{\ULFEColorStyleGrayWhiteBackground}{ULFEWhite}
+\newcommand{\ULFEColorStyleGrayWhiteCanvas}{ULFEWhite}
+\newcommand{\ULFEColorStyleGrayWhiteTitle}{ULFECharcoal}
+\newcommand{\ULFEColorStyleGrayWhiteText}{ULFEBodyGray}
+\newcommand{\ULFEColorStyleGrayWhiteCaption}{ULFECharcoal}
+\newcommand{\ULFEColorStyleGrayWhiteSlideNumber}{ULFECharcoal}
+\newcommand{\ULFEColorStyleGrayWhiteTopLogo}{image6.png}
+\newcommand{\ULFEColorStyleGrayWhiteAccent}{ULFECharcoal}
+\newcommand{\ULFEColorStyleGrayWhiteOnAccent}{ULFEWhite}
+\newcommand{\ULFEColorStyleGrayWhiteAccentLogo}{image5.png}
+
+\newcommand{\ULFEColorStyleBackground}[1]{\csname ULFEColorStyle#1Background\endcsname}
+\newcommand{\ULFEColorStyleCanvas}[1]{\csname ULFEColorStyle#1Canvas\endcsname}
+\newcommand{\ULFEColorStyleTitle}[1]{\csname ULFEColorStyle#1Title\endcsname}
+\newcommand{\ULFEColorStyleText}[1]{\csname ULFEColorStyle#1Text\endcsname}
+\newcommand{\ULFEColorStyleCaption}[1]{\csname ULFEColorStyle#1Caption\endcsname}
+\newcommand{\ULFEColorStyleSlideNumber}[1]{\csname ULFEColorStyle#1SlideNumber\endcsname}
+\newcommand{\ULFEColorStyleTopLogo}[1]{\csname ULFEColorStyle#1TopLogo\endcsname}
+\newcommand{\ULFEColorStyleAccent}[1]{\csname ULFEColorStyle#1Accent\endcsname}
+\newcommand{\ULFEColorStyleOnAccent}[1]{\csname ULFEColorStyle#1OnAccent\endcsname}
+\newcommand{\ULFEColorStyleAccentLogo}[1]{\csname ULFEColorStyle#1AccentLogo\endcsname}
+
+\IfFontExistsTF{Liberation Sans}
+  {\setsansfont{Liberation Sans}\setmainfont{Liberation Sans}}
+  {\setsansfont{Arial}\setmainfont{Arial}}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+\setbeamersize{text margin left=0pt,text margin right=0pt}
+\setbeamercolor{background canvas}{bg=ULFEWhite}
+\pagestyle{empty}
+
+% ---------------------------------------------------------------------------
+% ULFE deck-facing macro contracts
+% ---------------------------------------------------------------------------
+%
+% Keep presentation content in ulfe.tex as calls to these public macros. The
+% coordinates, font sizes, colors, clipping, chart drawing, and overflow
+% behavior live in this style file. Lower-level helpers below are template
+% internals unless a public macro explicitly says to call them.
+%
+% ColorStyle names:
+%   Red
+%   Gray
+%   RedWhiteGray
+%   GrayWhite
+%
+% List syntax used by several macros:
+%   item one; item two; item three
+%
+%   Semicolon is the item separator. Do not put semicolons inside an item unless
+%   the item is protected or the macro is extended to support escaping. Long
+%   items are expected to wrap in the template-provided text box; font sizes
+%   should not be overridden in the deck.
+%
+% Pie chart item/value syntax:
+%   Legend label/value; Legend label/value; ...
+%
+%   The slash separates the legend label from the numeric percentage. The value
+%   is written as a plain number, for example 12.5 or 50, and the macro prints
+%   the percent sign. Values are interpreted as percentages and should normally
+%   sum to 100. Labels should not contain "/" or ";" unless the macro is later
+%   extended with escaping.
+%
+% Grouped bar chart syntax:
+%   Legend labels:
+%     2021/22 | 2022/23 | 2023/24
+%   Groups:
+%     prva stopnja/4.3 \%|2.4 \%|2 \%;
+%     druga stopnja/2.5 \%|4.4 \%|2 \%
+%
+%   The first slash separates the group name from that group's bar values. The
+%   vertical bar separates bars within a group and legend entries. Values are
+%   printed exactly as supplied, so units can be percentages, counts, EUR, or
+%   other text. The bar height is calculated from the leading numeric part of
+%   each value. Labels should not contain "|", ";", or "/" unless the macro is
+%   later extended with escaping.
+%
+% Public slide macros:
+%
+%   \ULFETitleSlide{
+%     colorStyle = {Red|Gray|RedWhiteGray|GrayWhite},
+%     imageBackground = {asset-name-or-empty},
+%     title = {...},
+%     subtitle = {...},
+%     lecturer = {...},
+%     placeDate = {...}
+%   }
+%     Title/cover slide. The optional imageBackground is an asset file under
+%     templates/ulfe/assets and is used by image-backed title variants.
+%
+%   \ULFECopyrightSlide{lecturer}{warning text}
+%     Copyright warning slide. The warning text can be long; the macro keeps the
+%     imported title and warning geometry rather than resizing fonts.
+%
+%   \ULFETocSlide{ColorStyle}{chapter title; chapter title; ...}
+%     Table-of-contents slide. Item numbers are generated automatically from the
+%     number of semicolon-separated chapter titles.
+%
+%   \ULFEChapterTitleSlideStyle{ColorStyle}{chapter title}
+%     Chapter title divider. Long titles wrap in the style layer.
+%
+%   \ULFEPhotoLeftContentSlide{split}{title}{bullet items}{photo remark}{photo}
+%   \ULFEPhotoRightContentSlide{split}{title}{bullet items}{photo remark}{photo}
+%     Image/content slide. split is a decimal fraction of slide width, for
+%     example 0.33, 0.5, or 0.66. The image preserves aspect ratio by centered
+%     cover-cropping. bullet items use the semicolon list syntax above.
+%
+%   \ULFEQuoteSlideStyle{ColorStyle}{quote}
+%     Quote slide. Long quotes wrap in the style layer without deck-side font
+%     overrides.
+%
+%   \ULFEHeaderComparisonSlideStyle
+%     {ColorStyle}{title}{left subtitle}{left bullet items}
+%     {right subtitle}{right bullet items}
+%     Two-column comparison slide. Both content arguments use semicolon-separated
+%     red bullet lists by default.
+%
+%   \ULFEPlainTextSlide{title}{bullet items}
+%     Plain bullet slide. The bullet list uses the semicolon list syntax.
+%
+%   \ULFEPieChartSlide{title}{legend/value; legend/value; ...}
+%     Native pie chart slide. The macro calculates slice angles from percentages
+%     in TeX, draws the pie and legend, and prints bold percentage labels.
+%
+%   \ULFEPieChartBulletsSlide
+%     {title}{legend/value; legend/value; ...}{bullet items}
+%     Native pie chart plus right-side bullet list. The chart data uses the same
+%     semicolon and slash syntax as \ULFEPieChartSlide; bullet items use the
+%     semicolon list syntax.
+%
+%   \ULFEGroupedBarChartSlide{title}{legend labels}{group specs}
+%     Native grouped bar chart slide. Legend labels are separated with "|".
+%     Group specs are separated with semicolons and each group is written as
+%     group name/value|value|value. The supplied value text is printed above
+%     the bar; its leading number drives the native bar height. Bar colors
+%     repeat red, charcoal, and gray when there are more than three bars.
+%
+%   \ULFEDataTableSlide{title}{header cells}{row specs}
+%     Native table slide. Header cells are separated with "|". Data rows are
+%     separated with semicolons, and each row contains "|" separated cells.
+%     Rows may be prefixed with "normal:", "indent:", "bold:", or "redbold:".
+%     The table renderer supports 1-10 columns and 1-20 data rows.
+%
+%   \ULFEAreaBlocksSlide{text}{label/area; label/area; label/area; label/area}
+%     Native area-block slide. The left red block contains non-bulleted text.
+%     The four right-side blocks are generated from label/area pairs. The area
+%     number can be written as fractions such as 0.25 or percentages such as 25;
+%     only the relative values matter. Labels should not contain "/" or ";".
+%
+%   \ULFESplitRowsSlide{title}{left label/right label/split; ...}
+%     Native horizontal split-row slide. Each row contains two blocks separated
+%     by the imported gap. split is a number from 0 to 1; 0.2 means the left
+%     block receives 20 percent of the available row width. Supports up to six
+%     rows. The first two row color pairs repeat for rows 3-6.
+%
+%   \ULFEVerticalBarsSlide{title}{label/value; label/value; ...}
+%     Native vertical bar slide. value is a number from 0 to 1 and controls the
+%     bar height relative to the imported maximum height. Supports up to sixteen
+%     bars. The first four bar colors repeat, and bars become narrower as more
+%     bars are supplied. Labels should not contain "/" or ";".
+%
+%   \ULFEFinalGraySlide{title}{author and contact}
+%   \ULFEFinalRedSlide{title}{author and contact}
+%   \ULFEFinalPhotoSlide{title}{author and contact}
+%     Final slide variants. All three share the same live-text geometry; only the
+%     background treatment and footer style differ.
+%
+% Current legacy/showroom macros still present:
+%   \ULFEWhiteLayout
+%   \ULFEMetricPairSlide
+%   \ULFEMetricTripleSlide
+%   \ULFEMetricQuadSlide
+%   \ULFEChartSlide{chart-body}
+%   \ULFEChartTextSlide{chart-body}
+%
+% These legacy/showroom macros are not fully parameterized yet; keep using them
+% only for the existing reconstruction until their slide families are clustered.
+%
+\newcommand{\ULFEBackground}[1]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \path[fill=#1,draw=none] (current page.north west) rectangle (current page.south east);
+  \end{tikzpicture}%
+}
+
+\newcommand{\ULFEPlaceImage}[5]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0pt] at ([xshift=#1bp,yshift=-#2bp]current page.north west)
+      {\includegraphics[width=#3bp,height=#4bp]{assets/#5}};
+  \end{tikzpicture}%
+}
+
+\newcommand{\ULFEPlaceImageOpacity}[6]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0pt,opacity=#6] at ([xshift=#1bp,yshift=-#2bp]current page.north west)
+      {\includegraphics[width=#3bp,height=#4bp]{assets/#5}};
+  \end{tikzpicture}%
+}
+
+\newcommand{\ULFEPlaceImageClip}[9]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \begin{scope}[shift={([xshift=#1bp,yshift=-#2bp]current page.north west)}]
+      \clip (0,0) rectangle (#3bp,-#4bp);
+      \node[anchor=north west,inner sep=0pt] at (#7bp,#8bp)
+        {\includegraphics[width=#5bp,height=#6bp]{assets/#9}};
+    \end{scope}
+  \end{tikzpicture}%
+}
+
+\newcommand{\ULFEPictureFrame}[5]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \path[draw=none,fill=ULFEWhite] ([xshift=#1bp,yshift=-#2bp]current page.north west) rectangle
+      ([xshift=#3bp,yshift=-#4bp]current page.north west);
+  \end{tikzpicture}%
+  \ULFEPlaceImage{#1}{#2}{#3-#1}{#4-#2}{#5}%
+}
+
+\newcommand{\ULFEText}[8]{%
+  \begin{textblock*}{#3bp}(#1bp,#2bp)
+    \begingroup
+      \edef\ULFETextColor{#6}%
+      \fontsize{#4pt}{#5pt}\selectfont\color{\ULFETextColor}%
+      \begin{minipage}[t]{#3bp}#7 #8\end{minipage}%
+    \endgroup
+  \end{textblock*}%
+}
+
+\newcommand{\ULFEPlaceImageClipDim}[9]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \begin{scope}[shift={([xshift=#1,yshift=-#2]current page.north west)}]
+      \clip (0,0) rectangle (#3,-#4);
+      \node[anchor=north west,inner sep=0pt] at (#7,#8)
+        {\includegraphics[width=#5,height=#6]{assets/#9}};
+    \end{scope}
+  \end{tikzpicture}%
+}
+
+\newsavebox{\ULFEClipFitImageBox}
+\newdimen\ULFEClipFitImageXDim
+\newdimen\ULFEClipFitImageYDim
+\newcommand{\ULFEPlaceImageClipCoverDim}[6]{%
+  \sbox{\ULFEClipFitImageBox}{\includegraphics[width=#5]{assets/#6}}%
+  \ifdim\dimexpr\ht\ULFEClipFitImageBox+\dp\ULFEClipFitImageBox\relax<#4
+    \sbox{\ULFEClipFitImageBox}{\includegraphics[height=#4]{assets/#6}}%
+  \fi
+  \ULFEClipFitImageXDim=\dimexpr#3-\wd\ULFEClipFitImageBox\relax
+  \divide\ULFEClipFitImageXDim by 2
+  \ULFEClipFitImageYDim=\dimexpr\ht\ULFEClipFitImageBox+\dp\ULFEClipFitImageBox-#4\relax
+  \divide\ULFEClipFitImageYDim by 2
+  \begin{tikzpicture}[remember picture,overlay]
+    \begin{scope}[shift={([xshift=#1,yshift=-#2]current page.north west)}]
+      \clip (0,0) rectangle (#3,-#4);
+      \node[anchor=north west,inner sep=0pt] at (\ULFEClipFitImageXDim,\ULFEClipFitImageYDim)
+        {\usebox{\ULFEClipFitImageBox}};
+    \end{scope}
+  \end{tikzpicture}%
+}
+
+\newcommand{\ULFETextDim}[8]{%
+  \begin{textblock*}{#3}(#1,#2)
+    \begingroup
+      \edef\ULFETextColor{#6}%
+      \fontsize{#4pt}{#5pt}\selectfont\color{\ULFETextColor}%
+      \begin{minipage}[t]{#3}#7 #8\end{minipage}%
+    \endgroup
+  \end{textblock*}%
+}
+
+\newif\ifULFETitleOverflow
+\newsavebox{\ULFETitleProbeBox}
+\newsavebox{\ULFETitleAdaptiveBox}
+\newcommand{\ULFETitleMeasure}[4]{%
+  \setbox\ULFETitleProbeBox=\vbox{%
+    \hsize=#1bp
+    \fontsize{#2pt}{#3pt}\selectfont
+    \raggedright\sloppy\emergencystretch=1em #4\par
+  }%
+}
+\newcommand{\ULFETitleCheckOverflow}{%
+  \ULFETitleOverflowfalse
+  \ULFETitleMeasure{456.3}{40}{47}{\bfseries\ULFETitleTitle}%
+  \ifdim\dimexpr\ht\ULFETitleProbeBox+\dp\ULFETitleProbeBox\relax>104bp
+    \ULFETitleOverflowtrue
+  \fi
+  \ULFETitleMeasure{456.3}{20}{24}{\ULFETitleSubtitle}%
+  \ifdim\dimexpr\ht\ULFETitleProbeBox+\dp\ULFETitleProbeBox\relax>76bp
+    \ULFETitleOverflowtrue
+  \fi
+}
+\newcommand{\ULFETitleBuildAdaptive}[5]{%
+  \setbox\ULFETitleAdaptiveBox=\vbox{%
+    \hsize=700bp
+    \fontsize{#1pt}{#2pt}\selectfont\bfseries
+    \raggedright\sloppy\emergencystretch=1em \ULFETitleTitle\par
+    \vskip #5bp
+    \fontsize{#3pt}{#4pt}\selectfont\normalfont
+    \raggedright\sloppy\emergencystretch=1em \ULFETitleSubtitle\par
+  }%
+}
+\newcommand{\ULFETitleSelectAdaptiveBox}{%
+  \ULFETitleBuildAdaptive{40}{47}{20}{24}{16}%
+}
+\newcommand{\ULFETitleAdaptiveFields}{%
+  \ULFETitleSelectAdaptiveBox
+  \edef\ULFETextColor{\ULFEColorStyleTitle{\ULFETitleColorStyle}}%
+  \begin{tikzpicture}[remember picture,overlay]
+    \begin{scope}[shift={([xshift=196.75bp,yshift=-199bp]current page.north west)}]
+      \clip (0,0) rectangle (700bp,-232bp);
+      \node[anchor=north west,inner sep=0pt] at (0,0) {\color{\ULFETextColor}\copy\ULFETitleAdaptiveBox};
+    \end{scope}
+  \end{tikzpicture}%
+}
+\newif\ifULFETitleMetaOverflow
+\newcommand{\ULFETitleBuildMeta}[5]{%
+  \setbox\ULFETitleAdaptiveBox=\vbox{%
+    \hsize=#2bp
+    \fontsize{#3pt}{#4pt}\selectfont
+    \raggedright\sloppy\emergencystretch=1em #5\par
+  }%
+}
+\newcommand{\ULFETitleCheckMetaOverflow}{%
+  \ULFETitleMetaOverflowfalse
+  \ULFETitleBuildMeta{196.75}{231.6}{14}{17}{\ULFETitleLecturer}%
+  \ifdim\dimexpr\ht\ULFETitleAdaptiveBox+\dp\ULFETitleAdaptiveBox\relax>20bp
+    \ULFETitleMetaOverflowtrue
+  \fi
+  \ULFETitleBuildMeta{476.7}{176.3}{14}{17}{\ULFETitlePlaceDate}%
+  \ifdim\dimexpr\ht\ULFETitleAdaptiveBox+\dp\ULFETitleAdaptiveBox\relax>20bp
+    \ULFETitleMetaOverflowtrue
+  \fi
+}
+\newcommand{\ULFETitleWideMetaText}[3]{%
+  \ULFETitleBuildMeta{#1}{#2}{14}{17}{#3}%
+  \edef\ULFETextColor{\ULFEColorStyleTitle{\ULFETitleColorStyle}}%
+  \begin{tikzpicture}[remember picture,overlay]
+    \begin{scope}[shift={([xshift=#1bp,yshift=-453bp]current page.north west)}]
+      \clip (0,0) rectangle (#2bp,-51bp);
+      \node[anchor=north west,inner sep=0pt] at (0,0) {\color{\ULFETextColor}\copy\ULFETitleAdaptiveBox};
+    \end{scope}
+  \end{tikzpicture}%
+}
+\newcommand{\ULFETitleMetaFields}{%
+  \ULFETitleCheckMetaOverflow
+  \ifULFETitleMetaOverflow
+    \ULFETitleWideMetaText{196.75}{360}{\ULFETitleLecturer}%
+    \ULFETitleWideMetaText{600}{290}{\ULFETitlePlaceDate}%
+  \else
+    \ULFEText{196.75}{453}{231.6}{14}{17}{\ULFEColorStyleTitle{\ULFETitleColorStyle}}{\raggedright}{\ULFETitleLecturer}%
+    \ULFEText{476.7}{453}{176.3}{14}{17}{\ULFEColorStyleTitle{\ULFETitleColorStyle}}{\raggedright}{\ULFETitlePlaceDate}%
+  \fi
+}
+\newcommand{\ULFEDataTitle}{%
+  \ULFEText{67}{110}{520.8}{32}{38}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries}{Kliknite, če želite dodati naslov}%
+}
+\newcommand{\ULFEDataValue}[3]{%
+  \ULFEText{#1}{#2}{#3}{48}{56}{ULFEWhite}{\raggedright\bfseries}{Štev.}%
+}
+\newcommand{\ULFEDataSideText}{%
+  \ULFEText{28.4}{130}{216.5}{18}{22}{ULFEWhite}{\raggedright\bfseries}{Kliknite če želite dodati besedilo}%
+}
+
+\NewDocumentCommand{\ULFEDataBlockRectText}{m m m m m m m m +m}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \begin{scope}[shift={([xshift=#1bp,yshift=-#2bp]current page.north west)}]
+      \path[fill=#5,draw=none] (0,0) rectangle (#3bp,-#4bp);
+      \clip (0,0) rectangle (#3bp,-#4bp);
+      \node[
+        anchor=north west,
+        inner sep=0pt,
+        text=ULFEWhite,
+        align=left,
+        text width=\dimexpr#3bp-#7bp-#7bp\relax,
+        font=#6
+      ] at (#7bp,-#8bp) {#9};
+    \end{scope}
+  \end{tikzpicture}%
+}
+
+\newenvironment{ULFERedBulletList}{%
+  \begin{list}{\tikz[baseline=-0.45ex]\fill[ULFEBrandRed] (0,0) circle (4.4bp);}{%
+    \setlength{\leftmargin}{22bp}%
+    \setlength{\labelwidth}{10bp}%
+    \setlength{\labelsep}{8bp}%
+    \setlength{\rightmargin}{0pt}%
+    \setlength{\itemindent}{0pt}%
+    \setlength{\itemsep}{1bp}%
+    \setlength{\parsep}{0pt}%
+    \setlength{\topsep}{0pt}%
+    \setlength{\partopsep}{0pt}%
+  }%
+}{%
+  \end{list}%
+}
+
+% Pie slice drawing primitive used by the native chart parser.
+% Arguments:
+%   #1 fill color
+%   #2 start angle in degrees
+%   #3 end angle in degrees
+%   #4 radius in bp
+% This is intentionally ordinary TeX/TikZ syntax because TikZ polar coordinates
+% conflict with LaTeX3's catcode for ":" inside expl3 code.
+\newcommand{\ULFEPieSlicePath}[4]{%
+  \path[fill=#1,draw=ULFEWhite,line width=1.25bp]
+    (0,0) -- (#2:#4) arc (#2:#3:#4) -- cycle;
+}
+
+% Full-circle drawing primitive for a one-slice pie chart.
+% Arguments:
+%   #1 fill color
+%   #2 radius in bp
+\newcommand{\ULFEPieFullCirclePath}[2]{%
+  \path[fill=#1,draw=ULFEWhite,line width=1.25bp] (0,0) circle[radius=#2];
+}
+
+% Percentage label primitive for native pie charts.
+% Arguments:
+%   #1 label angle in degrees
+%   #2 numeric value without percent sign
+% The label is intentionally bold to match the PowerPoint chart.
+\newcommand{\ULFEPiePercentLabel}[2]{%
+  \node[
+    anchor=center,
+    inner sep=0pt,
+    text=ULFEChartInk,
+    align=center,
+    font=\fontsize{23pt}{27pt}\selectfont\bfseries
+  ] at (#1:155) {#2\ \%};
+}
+
+\ExplSyntaxOn
+\seq_new:N \l_ulfe_red_bullet_items_seq
+% Shared red bullet parser.
+% Argument:
+%   #1 semicolon-separated bullet text:
+%      First item; Second item; Third item
+% This helper owns the red bullet marker, list spacing, and wrapping behavior
+% for clustered slides that should render PowerPoint placeholder text as a
+% live Beamer bullet list. Deck authors should not add raw itemize environments
+% or manual font overrides around this macro.
+\NewDocumentCommand{\ULFERedBulletItems}{m}{%
+  \begin{ULFERedBulletList}
+    \seq_set_split:Nnn \l_ulfe_red_bullet_items_seq {;} {#1}
+    \seq_map_inline:Nn \l_ulfe_red_bullet_items_seq
+      {\tl_if_blank:nF {##1} {\item \tl_trim_spaces:n {##1}}}
+  \end{ULFERedBulletList}%
+}
+\ExplSyntaxOff
+
+\newsavebox{\ULFEPhotoTitleProbeBox}
+\newdimen\ULFEPhotoSplitXDim
+\newdimen\ULFEPhotoContentXDim
+\newdimen\ULFEPhotoContentWDim
+\newdimen\ULFEPhotoImageWDim
+\newdimen\ULFEPhotoTextXDim
+\newdimen\ULFEPhotoTextWDim
+\newdimen\ULFEPhotoCaptionXDim
+\newdimen\ULFEPhotoContentY
+\newcommand{\ULFEPhotoMeasureTitle}[4]{%
+  \setbox\ULFEPhotoTitleProbeBox=\vbox{%
+    \hsize=#1
+    \fontsize{#2pt}{#3pt}\selectfont
+    \raggedright\bfseries\sloppy\emergencystretch=1em #4\par
+  }%
+}
+\newcommand{\ULFEPhotoLeftSetContentY}[2]{%
+  \ULFEPhotoMeasureTitle{#1}{32}{35}{#2}%
+  \ULFEPhotoContentY=178.5bp
+  \ifdim\dimexpr82.5bp+\ht\ULFEPhotoTitleProbeBox+\dp\ULFEPhotoTitleProbeBox+18bp\relax>\ULFEPhotoContentY
+    \ULFEPhotoContentY=\dimexpr82.5bp+\ht\ULFEPhotoTitleProbeBox+\dp\ULFEPhotoTitleProbeBox+18bp\relax
+  \fi
+}
+\newcommand{\ULFEPhotoRightSetContentY}[2]{%
+  \ULFEPhotoMeasureTitle{#1}{32}{34}{#2}%
+  \ULFEPhotoContentY=244bp
+  \ifdim\dimexpr73bp+\ht\ULFEPhotoTitleProbeBox+\dp\ULFEPhotoTitleProbeBox+22bp\relax>\ULFEPhotoContentY
+    \ULFEPhotoContentY=\dimexpr73bp+\ht\ULFEPhotoTitleProbeBox+\dp\ULFEPhotoTitleProbeBox+22bp\relax
+  \fi
+}
+
+\newcommand{\ULFEPlaceholderDate}[1]{%
+  \ULFEText{66}{500.5}{216}{8.5}{10.5}{#1}{\raggedright}{26. 05. 2024}%
+}
+
+\newcommand{\ULFESlideNumber}[2]{%
+  \ULFEText{870}{482.5}{60}{12}{14}{#1}{\raggedleft}{#2}%
+}
+
+% Unified footer for all clustered slides.
+% Argument:
+%   #1 ColorStyle name.
+% The slide number is generated from \insertframenumber. The deck must not pass
+% explicit slide numbers; footer color is derived from the current ColorStyle.
+\newcommand{\ULFEFooter}[1]{%
+  \ULFESlideNumber{\ULFEColorStyleSlideNumber{#1}}{\insertframenumber}%
+}
+
+\newcommand{\ULFETopLogo}[1]{%
+  \ULFEPlaceImage{869.5}{27.5}{64.5}{31.5}{#1}%
+}
+
+\newcommand{\ULFELeftLogo}{%
+  \ULFEPlaceImage{38}{56.5}{197}{89.5}{image3.png}%
+}
+
+\newcommand{\ULFETitleLineArt}{%
+  \ULFEPlaceImageClip{453}{0}{507}{540}{507}{638.6}{0}{40.0}{image1.png}%
+}
+
+\newcommand{\ULFEPhotoBackdrop}{%
+  \ULFEPlaceImageClip{355}{0}{605}{540}{605}{668.2}{0}{64.1}{image4.png}%
+}
+
+\newcommand{\ULFEPhotoBackdropAsset}[1]{%
+  \ULFEPlaceImageClip{355}{0}{605}{540}{605}{668.2}{0}{64.1}{#1}%
+}
+
+\newcommand{\ULFEFrame}[2]{%
+  \begin{frame}[plain]
+    \ULFEBackground{#1}%
+    #2%
+  \end{frame}%
+}
+
+\newcommand{\ULFETitleSlideReset}{%
+  \def\ULFETitleColorStyle{Gray}%
+  \def\ULFETitleImageBackground{}%
+  \def\ULFETitleTitle{}%
+  \def\ULFETitleSubtitle{}%
+  \def\ULFETitleLecturer{}%
+  \def\ULFETitlePlaceDate{}%
+}
+
+\pgfkeys{
+  /ULFETitleSlide/.is family,
+  /ULFETitleSlide,
+  colorStyle/.store in=\ULFETitleColorStyle,
+  imageBackground/.store in=\ULFETitleImageBackground,
+  title/.store in=\ULFETitleTitle,
+  subtitle/.store in=\ULFETitleSubtitle,
+  lecturer/.store in=\ULFETitleLecturer,
+  placeDate/.store in=\ULFETitlePlaceDate,
+}
+
+% Title slide background selector.
+% Uses the imported line-art background when imageBackground is empty and the
+% imported photo-crop geometry when imageBackground names an asset. Deck authors
+% should pass only an asset filename, not raw \includegraphics commands.
+\newcommand{\ULFETitleBackdrop}{%
+  \ifx\ULFETitleImageBackground\empty
+    \ULFETitleLineArt
+  \else
+    \ULFEPhotoBackdropAsset{\ULFETitleImageBackground}%
+  \fi
+}
+
+\newcommand{\ULFETitleFields}{%
+  \ULFETitleCheckOverflow
+  \ifULFETitleOverflow
+    \ULFETitleAdaptiveFields
+  \else
+    \ULFEText{196.75}{199}{456.3}{40}{47}{\ULFEColorStyleTitle{\ULFETitleColorStyle}}{\raggedright\bfseries}{\ULFETitleTitle}%
+    \ULFEText{196.75}{323}{456.3}{20}{24}{\ULFEColorStyleTitle{\ULFETitleColorStyle}}{\raggedright}{\ULFETitleSubtitle}%
+  \fi
+  \ULFETitleMetaFields
+}
+
+% Public title slide macro for slides 1-3.
+% Argument:
+%   #1 pgfkeys block with:
+%      colorStyle      = {Red|Gray|RedWhiteGray|GrayWhite}
+%      imageBackground = {asset filename} or empty
+%      title           = visible title text
+%      subtitle        = visible subtitle text
+%      lecturer        = visible lecturer/presenter text
+%      placeDate       = visible place/date text
+% Behavior:
+%   Normal text keeps the imported PowerPoint title geometry. Long title or
+%   subtitle text expands the shared horizontal title block instead of shrinking
+%   fonts. Metadata fields use style-layer overflow handling.
+\NewDocumentCommand{\ULFETitleSlide}{m}{%
+  \ULFETitleSlideReset
+  \pgfkeys{/ULFETitleSlide,#1}%
+  \ULFEFrame{\ULFEColorStyleBackground{\ULFETitleColorStyle}}{%
+    \ULFETitleBackdrop
+    \ULFELeftLogo
+    \ULFETitleFields
+    \ULFEFooter{\ULFETitleColorStyle}%
+  }%
+}
+
+\newcommand{\ULFESectionSlide}[3]{%
+  \ULFEFrame{#1}{\ULFETopLogo{#2}\ULFESlideNumber{ULFEWhite}{#3}}%
+}
+
+\newcommand{\ULFEBlankSlide}[3]{%
+  \ULFEFrame{#1}{\ULFETopLogo{#2}\ULFESlideNumber{#3}{\insertframenumber}}%
+}
+
+\NewDocumentCommand{\ULFEWhiteLayout}{}{%
+  \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{\ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}\ULFEFooter{RedWhiteGray}}%
+}
+
+\newif\ifULFECopyrightWarningOverflow
+\newsavebox{\ULFECopyrightWarningProbeBox}
+\newcommand{\ULFECopyrightMeasureWarning}[1]{%
+  \setbox\ULFECopyrightWarningProbeBox=\vbox{%
+    \hsize=828bp
+    \fontsize{16pt}{20pt}\selectfont
+    \raggedright\sloppy\emergencystretch=1em #1\par
+  }%
+}
+\newcommand{\ULFECopyrightWarningText}[1]{%
+  \ULFECopyrightWarningOverflowfalse
+  \ULFECopyrightMeasureWarning{#1}%
+  \ifdim\dimexpr\ht\ULFECopyrightWarningProbeBox+\dp\ULFECopyrightWarningProbeBox\relax>96bp
+    \ULFECopyrightWarningOverflowtrue
+  \fi
+  \edef\ULFETextColor{\ULFEColorStyleText{RedWhiteGray}}%
+  \ifULFECopyrightWarningOverflow
+    \begin{tikzpicture}[remember picture,overlay]
+      \begin{scope}[shift={([xshift=66bp,yshift=-276bp]current page.north west)}]
+        \clip (0,0) rectangle (828bp,-190bp);
+        \node[anchor=north west,inner sep=0pt] at (0,0) {\color{\ULFETextColor}\copy\ULFECopyrightWarningProbeBox};
+      \end{scope}
+    \end{tikzpicture}%
+  \else
+    \ULFEText{66}{365}{828}{16}{20}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright}{#1}%
+  \fi
+}
+
+% Public copyright warning slide for slide 4.
+% Arguments:
+%   #1 lecturer/presenter line
+%   #2 warning text
+% Behavior:
+%   Short warning text uses the imported PowerPoint placeholder position. Long
+%   warning text keeps the same 16/20 typography, moves into the larger warning
+%   region, and clips to the available slide area.
+\newcommand{\ULFECopyrightSlide}[2]{%
+  \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{%
+    \ULFEText{66}{218.25}{330.75}{16}{20}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright}{#1}%
+    \ULFECopyrightWarningText{#2}%
+    \ULFEFooter{RedWhiteGray}%
+  }%
+}
+
+\newsavebox{\ULFETocTitleProbeBox}
+\newcommand{\ULFETocTitleText}[6]{%
+  \setbox\ULFETocTitleProbeBox=\vbox{%
+    \hsize=#3bp
+    \fontsize{16pt}{19pt}\selectfont
+    \raggedright\sloppy\emergencystretch=1em #6\par
+  }%
+  \ifdim\dimexpr\ht\ULFETocTitleProbeBox+\dp\ULFETocTitleProbeBox\relax>#4bp
+    \edef\ULFETocTitleColor{#5}%
+    \begin{tikzpicture}[remember picture,overlay]
+      \begin{scope}[shift={([xshift=#1bp,yshift=-#2bp]current page.north west)}]
+        \clip (0,0) rectangle (#3bp,-#4bp);
+        \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (0,0)
+          {\color{\ULFETocTitleColor}\copy\ULFETocTitleProbeBox};
+      \end{scope}
+    \end{tikzpicture}%
+  \else
+    \ULFEText{#1}{#2}{#3}{16}{19}{#5}{\raggedright}{#6}%
+  \fi
+}
+
+\newcommand{\ULFETocItem}[8]{%
+  \ULFEText{#3}{#4}{62.9}{26}{30}{#1}{\raggedright\bfseries}{#2.}%
+  \ULFETocTitleText{#3}{#5}{#6}{#7}{#1}{#8}%
+}
+
+\newcount\ULFETocItemIndex
+\newcount\ULFETocItemTotal
+\newcommand{\ULFETocCurrentColor}{ULFECharcoal}
+\newcommand{\ULFETocFirstRowTitleHeight}{85}
+\newcommand{\ULFETocCountItem}[1]{%
+  \advance\ULFETocItemTotal by 1\relax
+}
+\newcommand{\ULFETocProcessItem}[1]{%
+  \advance\ULFETocItemIndex by 1\relax
+  \ifcase\ULFETocItemIndex
+  \or \ULFETocItem{\ULFETocCurrentColor}{1}{257.5}{201.5}{235.5}{150.9}{\ULFETocFirstRowTitleHeight}{#1}%
+  \or \ULFETocItem{\ULFETocCurrentColor}{2}{431.3}{201.5}{235.5}{142.4}{\ULFETocFirstRowTitleHeight}{#1}%
+  \or \ULFETocItem{\ULFETocCurrentColor}{3}{596.6}{201.5}{235.5}{150.9}{\ULFETocFirstRowTitleHeight}{#1}%
+  \or \ULFETocItem{\ULFETocCurrentColor}{4}{770.4}{201.5}{235.5}{150.9}{\ULFETocFirstRowTitleHeight}{#1}%
+  \or \ULFETocItem{\ULFETocCurrentColor}{5}{257.5}{339.5}{373.5}{150.9}{92}{#1}%
+  \or \ULFETocItem{\ULFETocCurrentColor}{6}{431.3}{339.5}{373.5}{142.4}{92}{#1}%
+  \or \ULFETocItem{\ULFETocCurrentColor}{7}{596.6}{339.5}{373.5}{150.9}{92}{#1}%
+  \or \ULFETocItem{\ULFETocCurrentColor}{8}{770.4}{339.5}{373.5}{150.9}{92}{#1}%
+  \fi
+}
+
+\newcommand{\ULFETocSlideLayout}[6]{%
+  \ULFEFrame{#1}{%
+    \ULFETopLogo{#2}%
+    \ULFEText{66}{201}{174}{30}{35}{#4}{\raggedright\bfseries}{Vsebina}%
+    #5{#3}%
+    \ULFESlideNumber{#3}{#6}%
+  }%
+}
+
+% Public table-of-contents slide for slides 5-7.
+% Arguments:
+%   #1 ColorStyle name.
+%   #2 semicolon-separated chapter titles.
+% Behavior:
+%   Item numbers are generated automatically from the list order. Up to eight
+%   items are supported by the imported geometry. If fewer than five items are
+%   passed, first-row item title regions expand vertically so longer titles
+%   have more room without changing font size.
+\NewDocumentCommand{\ULFETocSlide}{m >{\SplitList{;}}m}{%
+  \ULFEFrame{\ULFEColorStyleBackground{#1}}{%
+    \ULFETopLogo{\ULFEColorStyleTopLogo{#1}}%
+    \ULFEText{66}{201}{174}{30}{35}{\ULFEColorStyleTitle{#1}}{\raggedright\bfseries}{Vsebina}%
+    \ULFETocItemTotal=0\relax
+    \ProcessList{#2}{\ULFETocCountItem}%
+    \ifnum\ULFETocItemTotal<5\relax
+      \renewcommand{\ULFETocFirstRowTitleHeight}{205}%
+    \else
+      \renewcommand{\ULFETocFirstRowTitleHeight}{85}%
+    \fi
+    \ULFETocItemIndex=0\relax
+    \edef\ULFETocCurrentColor{\ULFEColorStyleCaption{#1}}%
+    \ProcessList{#2}{\ULFETocProcessItem}%
+    \ULFEFooter{#1}%
+  }%
+}
+
+\newsavebox{\ULFEChapterTitleProbeBox}
+\newcommand{\ULFEChapterTitleMeasure}[2]{%
+  \setbox\ULFEChapterTitleProbeBox=\vbox{%
+    \hsize=#1bp
+    \fontsize{54pt}{59pt}\selectfont
+    \raggedright\bfseries\sloppy\emergencystretch=1em #2\par
+  }%
+}
+\newcommand{\ULFEChapterTitleText}[2]{%
+  \ULFEChapterTitleMeasure{577.5}{#2}%
+  \ifdim\dimexpr\ht\ULFEChapterTitleProbeBox+\dp\ULFEChapterTitleProbeBox\relax>145bp
+    \ULFEChapterTitleMeasure{790}{#2}%
+    \edef\ULFEChapterTitleColor{\ULFEColorStyleTitle{#1}}%
+    \begin{tikzpicture}[remember picture,overlay]
+      \begin{scope}[shift={([xshift=64.5bp,yshift=-145bp]current page.north west)}]
+        \clip (0,0) rectangle (790bp,-340bp);
+        \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (0,0)
+          {\color{\ULFEChapterTitleColor}\copy\ULFEChapterTitleProbeBox};
+      \end{scope}
+    \end{tikzpicture}%
+  \else
+    \ULFEText{64.5}{201.5}{577.5}{54}{59}{\ULFEColorStyleTitle{#1}}{\raggedright\bfseries}{#2}%
+  \fi
+}
+
+% Public chapter-title/divider slide for slides 8-10.
+% Arguments:
+%   #1 ColorStyle name.
+%   #2 chapter title text.
+% Behavior:
+%   Normal titles keep the exact imported 54/59 typography and original text
+%   box. Very long titles expand into a wider style-layer region and wrap; the
+%   deck must not pass a smaller font size to make them fit.
+\newcommand{\ULFEChapterTitleSlideStyle}[2]{%
+  \ULFEFrame{\ULFEColorStyleBackground{#1}}{%
+    \ULFETopLogo{\ULFEColorStyleTopLogo{#1}}%
+    \ULFEChapterTitleText{#1}{#2}%
+    \ULFEFooter{#1}%
+  }%
+}
+
+% Public image-left/content-right slide for slide 11-like layouts.
+% Arguments:
+%   #1 split fraction of slide width, e.g. 0.33, 0.5, 0.66
+%   #2 title text
+%   #3 content text, normally semicolon-separated red bullet items
+%   #4 photo remark/caption
+%   #5 photo asset filename under templates/ulfe/assets
+% Behavior:
+%   The image fills the left side by centered cover-cropping, preserving aspect
+%   ratio. The content side is computed from the split. Long titles can push the
+%   bullet area downward while retaining the imported font sizes.
+\NewDocumentCommand{\ULFEPhotoLeftContentSlide}{m m +m m m}{%
+  \pgfmathsetlength{\ULFEPhotoSplitXDim}{960bp*(#1)}%
+  \ULFEPhotoContentXDim=\dimexpr\ULFEPhotoSplitXDim+76bp\relax
+  \ULFEPhotoContentWDim=\dimexpr960bp-\ULFEPhotoContentXDim-57.3bp\relax
+  \ULFEPhotoLeftSetContentY{\ULFEPhotoContentWDim}{#2}%
+  \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{%
+    \ULFEPlaceImageClipCoverDim{0bp}{0bp}{\ULFEPhotoSplitXDim}{540bp}{\ULFEPhotoSplitXDim}{#5}%
+    \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}%
+    \ULFETextDim{\ULFEPhotoContentXDim}{82.5bp}{\ULFEPhotoContentWDim}{32}{35}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries\sloppy\emergencystretch=1em}{#2}%
+    \ULFETextDim{\ULFEPhotoContentXDim}{\ULFEPhotoContentY}{\ULFEPhotoContentWDim}{20}{32}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright\sloppy\emergencystretch=1em}{#3}%
+    \ULFETextDim{\ULFEPhotoContentXDim}{489bp}{\ULFEPhotoContentWDim}{14}{16}{\ULFEColorStyleCaption{RedWhiteGray}}{\raggedright\sloppy\emergencystretch=1em}{#4}%
+    \ULFEFooter{RedWhiteGray}%
+  }%
+}
+
+% Public content-left/image-right slide for slide 12-like layouts.
+% Arguments:
+%   #1 split fraction of slide width, e.g. 0.33, 0.5, 0.66
+%   #2 title text
+%   #3 content text, normally semicolon-separated red bullet items
+%   #4 photo remark/caption
+%   #5 photo asset filename under templates/ulfe/assets
+% Behavior:
+%   The image fills the right side by centered cover-cropping, preserving aspect
+%   ratio. The left text region and right image region are computed from the
+%   split. Deck content stays semantic; no direct image placement belongs there.
+\NewDocumentCommand{\ULFEPhotoRightContentSlide}{m m +m m m}{%
+  \pgfmathsetlength{\ULFEPhotoSplitXDim}{960bp*(#1)}%
+  \ULFEPhotoTextXDim=66bp
+  \ULFEPhotoTextWDim=\dimexpr\ULFEPhotoSplitXDim-\ULFEPhotoTextXDim-28.5bp\relax
+  \ULFEPhotoImageWDim=\dimexpr960bp-\ULFEPhotoSplitXDim-64.5bp\relax
+  \ULFEPhotoCaptionXDim=\dimexpr\ULFEPhotoSplitXDim+7bp\relax
+  \ULFEPhotoRightSetContentY{\ULFEPhotoTextWDim}{#2}%
+  \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{%
+    \ULFEPlaceImageClipCoverDim{\ULFEPhotoSplitXDim}{96bp}{\ULFEPhotoImageWDim}{376bp}{\ULFEPhotoImageWDim}{#5}%
+    \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}%
+    \ULFETextDim{\ULFEPhotoTextXDim}{73bp}{\ULFEPhotoTextWDim}{32}{34}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries\sloppy\emergencystretch=1em}{#2}%
+    \ULFETextDim{\ULFEPhotoTextXDim}{\ULFEPhotoContentY}{\ULFEPhotoTextWDim}{20}{26}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright\sloppy\emergencystretch=1em}{#3}%
+    \ULFETextDim{\ULFEPhotoCaptionXDim}{488bp}{230.3bp}{14}{16}{\ULFEColorStyleCaption{RedWhiteGray}}{\raggedright\sloppy\emergencystretch=1em}{#4}%
+    \ULFEFooter{RedWhiteGray}%
+  }%
+}
+
+% Compatibility wrapper for the original slide-11 raw macro shape.
+% Prefer \ULFEPhotoLeftContentSlide in new deck content because it exposes the
+% split parameter explicitly.
+\NewDocumentCommand{\ULFEImageComparisonSlide}{m m +m m}{%
+  \ULFEPhotoLeftContentSlide{0.427083333}{#2}{#3}{#4}{#1}%
+}
+
+% Compatibility wrapper for the original slide-12 raw macro shape.
+% Prefer \ULFEPhotoRightContentSlide in new deck content because it exposes the
+% split parameter explicitly.
+\NewDocumentCommand{\ULFETextImageSlide}{m m +m m}{%
+  \ULFEPhotoRightContentSlide{0.35625}{#2}{#3}{#4}{#1}%
+}
+
+\newsavebox{\ULFEQuoteProbeBox}
+\newcommand{\ULFEQuoteMeasure}[2]{%
+  \setbox\ULFEQuoteProbeBox=\vbox{%
+    \hsize=#1bp
+    \fontsize{32pt}{38pt}\selectfont
+    \raggedright\bfseries\sloppy\emergencystretch=1em #2\par
+  }%
+}
+\newcommand{\ULFEQuoteText}[2]{%
+  \ULFEQuoteMeasure{693.4}{#2}%
+  \ifdim\dimexpr\ht\ULFEQuoteProbeBox+\dp\ULFEQuoteProbeBox\relax>105bp
+    \ULFEQuoteMeasure{790}{#2}%
+    \edef\ULFEQuoteColor{\ULFEColorStyleCaption{#1}}%
+    \begin{tikzpicture}[remember picture,overlay]
+      \begin{scope}[shift={([xshift=85bp,yshift=-150bp]current page.north west)}]
+        \clip (0,0) rectangle (790bp,-330bp);
+        \node[anchor=north west,inner sep=0pt,outer sep=0pt] at (0,0)
+          {\color{\ULFEQuoteColor}\copy\ULFEQuoteProbeBox};
+      \end{scope}
+    \end{tikzpicture}%
+  \else
+    \ULFEText{135.5}{256}{693.4}{32}{38}{\ULFEColorStyleCaption{#1}}{\raggedright\bfseries}{#2}%
+  \fi
+}
+
+% Legacy quote helper retained from the raw reconstruction.
+% Prefer \ULFEQuoteSlideStyle for new content because it takes a ColorStyle and
+% uses the long-quote overflow handling.
+\newcommand{\ULFEQuoteSlide}[4]{%
+  \ULFEFrame{#1}{%
+    \ULFETopLogo{#2}%
+    \ULFEText{135.5}{256}{693.4}{32}{38}{#3}{\raggedright\bfseries}{#4}%
+    \ULFESlideNumber{#3}{\insertframenumber}%
+  }%
+}
+
+% Public quote slide for slides 13-15.
+% Arguments:
+%   #1 ColorStyle name.
+%   #2 quote text.
+% Behavior:
+%   Normal quotes keep the imported centered quote geometry. Long quotes keep
+%   32/38 bold typography, expand into the wider quote region, and clip inside
+%   the safe slide area rather than shrinking fonts.
+\NewDocumentCommand{\ULFEQuoteSlideStyle}{m +m}{%
+  \ULFEFrame{\ULFEColorStyleBackground{#1}}{%
+    \ULFETopLogo{\ULFEColorStyleTopLogo{#1}}%
+    \ULFEQuoteText{#1}{#2}%
+    \ULFEFooter{#1}%
+  }%
+}
+
+\newcommand{\ULFEHeaderComparisonSlide}[3]{%
+  \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{%
+    \begin{tikzpicture}[remember picture,overlay]
+      \path[fill=#1,draw=none] (current page.north west) rectangle ([yshift=-140.5bp]current page.north east);
+    \end{tikzpicture}%
+    \ULFETopLogo{#2}%
+    \ULFEText{60.8}{92}{833.1}{29}{34}{\ULFEColorStyleOnAccent{RedWhiteGray}}{\raggedright\bfseries}{Kliknite, če želite urediti slog naslova matrice}%
+    \ULFEText{66.1}{178}{406.1}{23}{28}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright\bfseries}{Kliknite za urejanje slogov besedila matrice}%
+    \ULFEText{486}{178}{408.1}{23}{28}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright\bfseries}{Kliknite za urejanje slogov besedila matrice}%
+    \ULFEText{65.9}{249}{406.4}{17}{22}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright}{Kliknite za urejanje slogov besedila matrice}%
+    \ULFEText{486}{249}{406.4}{17}{22}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright}{Kliknite za urejanje slogov besedila matrice}%
+    \ULFEFooter{RedWhiteGray}%
+  }%
+}
+
+% Title helper for comparison slides.
+% Arguments:
+%   #1 ColorStyle name.
+%   #2 title text.
+% Behavior:
+%   One-line titles keep the imported y=92 position. Wrapped titles start
+%   higher in the red/gray header band while keeping the same 29/34 font.
+\newsavebox{\ULFEHeaderComparisonTitleBox}
+\NewDocumentCommand{\ULFEHeaderComparisonTitle}{m +m}{%
+  \setbox\ULFEHeaderComparisonTitleBox=\vbox{%
+    \hsize=833.1bp
+    \fontsize{29pt}{34pt}\selectfont
+    \raggedright\bfseries\sloppy\emergencystretch=1em #2\par
+  }%
+  \ifdim\dimexpr\ht\ULFEHeaderComparisonTitleBox+\dp\ULFEHeaderComparisonTitleBox\relax>42bp
+    \ULFEText{60.8}{52}{833.1}{29}{34}{\ULFEColorStyleOnAccent{#1}}{\raggedright\bfseries\sloppy\emergencystretch=1em}{#2}%
+  \else
+    \ULFEText{60.8}{92}{833.1}{29}{34}{\ULFEColorStyleOnAccent{#1}}{\raggedright\bfseries}{#2}%
+  \fi
+}
+
+% Bullet helper for comparison slides.
+% Argument:
+%   #1 semicolon-separated bullet items.
+% Uses the shared red bullet parser and owns wrapping/list spacing.
+\NewDocumentCommand{\ULFEHeaderComparisonBullets}{+m}{%
+  \raggedright\sloppy\emergencystretch=1em
+  \ULFERedBulletItems{#1}%
+}
+
+% Public two-column comparison slide for slides 16-17.
+% Arguments:
+%   #1 ColorStyle name.
+%   #2 title text.
+%   #3 left subtitle.
+%   #4 left content as semicolon-separated red bullet items.
+%   #5 right subtitle.
+%   #6 right content as semicolon-separated red bullet items.
+% Behavior:
+%   The header color and footer number color come from ColorStyle. Both content
+%   columns are bullet lists by default; deck authors should not insert raw
+%   itemize environments or manual font sizes.
+\NewDocumentCommand{\ULFEHeaderComparisonSlideStyle}{m m m +m m +m}{%
+  \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{%
+    \begin{tikzpicture}[remember picture,overlay]
+      \path[fill=\ULFEColorStyleAccent{#1},draw=none] (current page.north west) rectangle ([yshift=-140.5bp]current page.north east);
+    \end{tikzpicture}%
+    \ULFETopLogo{\ULFEColorStyleAccentLogo{#1}}%
+    \ULFEHeaderComparisonTitle{#1}{#2}%
+    \ULFEText{66.1}{178}{406.1}{23}{28}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright\bfseries}{#3}%
+    \ULFEText{486}{178}{408.1}{23}{28}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright\bfseries}{#5}%
+    \ULFEText{65.9}{249}{406.4}{17}{22}{\ULFEColorStyleText{RedWhiteGray}}{}{\ULFEHeaderComparisonBullets{#4}}%
+    \ULFEText{486}{249}{406.4}{17}{22}{\ULFEColorStyleText{RedWhiteGray}}{}{\ULFEHeaderComparisonBullets{#6}}%
+    \ULFEFooter{#1}%
+  }%
+}
+
+% Title helper for the plain bullet slide.
+% Argument:
+%   #1 title text.
+% Behavior:
+%   Normal titles use the imported title position. Wrapped titles move higher
+%   and use a wider region, preserving 29/34 bold typography.
+\newsavebox{\ULFEPlainTextTitleBox}
+\NewDocumentCommand{\ULFEPlainTextTitle}{+m}{%
+  \setbox\ULFEPlainTextTitleBox=\vbox{%
+    \hsize=770bp
+    \fontsize{29pt}{34pt}\selectfont
+    \raggedright\bfseries\sloppy\emergencystretch=1em #1\par
+  }%
+  \ifdim\dimexpr\ht\ULFEPlainTextTitleBox+\dp\ULFEPlainTextTitleBox\relax>42bp
+    \ULFEText{60.8}{58}{770}{29}{34}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries\sloppy\emergencystretch=1em}{#1}%
+  \else
+    \ULFEText{60.8}{82}{770}{29}{34}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries}{#1}%
+  \fi
+}
+
+% Bullet helper for the plain bullet slide.
+% Argument:
+%   #1 semicolon-separated bullet items.
+% Uses the shared red bullet parser with smaller slide-18 body typography.
+\NewDocumentCommand{\ULFEPlainTextBullets}{+m}{%
+  \raggedright\sloppy\emergencystretch=1em
+  \ULFERedBulletItems{#1}%
+}
+
+% Public plain bullet slide for slide 18.
+% Arguments:
+%   #1 title text.
+%   #2 content as semicolon-separated red bullet items.
+% Behavior:
+%   The title is wider and higher than the raw import so long titles wrap
+%   cleanly. Bullet items use the style-owned smaller body typography and red
+%   circular bullets.
+\NewDocumentCommand{\ULFEPlainTextSlide}{m +m}{%
+  \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{%
+    \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}%
+    \ULFEPlainTextTitle{#1}%
+    \ULFEText{60.8}{222}{835.5}{22}{28}{\ULFEColorStyleText{RedWhiteGray}}{}{\ULFEPlainTextBullets{#2}}%
+    \ULFEFooter{RedWhiteGray}%
+  }%
+}
+
+\ExplSyntaxOn
+\seq_new:N \l_ulfe_table_header_seq
+\seq_new:N \l_ulfe_table_rows_seq
+\seq_new:N \l_ulfe_table_cells_seq
+\tl_new:N \l_ulfe_table_row_tl
+\tl_new:N \l_ulfe_table_style_tl
+\tl_new:N \l_ulfe_table_color_tl
+\tl_new:N \l_ulfe_table_weight_tl
+\int_new:N \l_ulfe_table_col_count_int
+\int_new:N \l_ulfe_table_row_count_int
+\int_new:N \l_ulfe_table_row_index_int
+\fp_new:N \l_ulfe_table_row_height_fp
+\fp_new:N \l_ulfe_table_font_size_fp
+\fp_new:N \l_ulfe_table_line_height_fp
+\cs_generate_variant:Nn \seq_set_split:Nnn { NnV }
+
+\cs_new_protected:Npn \ulfe_table_count_rows:n #1
+  {
+    \seq_set_split:Nnn \l_ulfe_table_rows_seq {;} {#1}
+    \int_zero:N \l_ulfe_table_row_count_int
+    \seq_map_inline:Nn \l_ulfe_table_rows_seq
+      {
+        \tl_if_blank:nF {##1}
+          { \int_incr:N \l_ulfe_table_row_count_int }
+      }
+  }
+
+\cs_new_protected:Npn \ulfe_table_parse_row:n #1
+  {
+    \tl_set:Nn \l_ulfe_table_style_tl {normal}
+    \tl_set:Nn \l_ulfe_table_row_tl {#1}
+    \regex_match:nnT { \A\s*redbold\s*: } {#1}
+      {
+        \tl_set:Nn \l_ulfe_table_style_tl {redbold}
+        \regex_replace_once:nnN { \A\s*redbold\s*:\s* } {} \l_ulfe_table_row_tl
+      }
+    \regex_match:nnT { \A\s*bold\s*: } {#1}
+      {
+        \tl_set:Nn \l_ulfe_table_style_tl {bold}
+        \regex_replace_once:nnN { \A\s*bold\s*:\s* } {} \l_ulfe_table_row_tl
+      }
+    \regex_match:nnT { \A\s*indent\s*: } {#1}
+      {
+        \tl_set:Nn \l_ulfe_table_style_tl {indent}
+        \regex_replace_once:nnN { \A\s*indent\s*:\s* } {} \l_ulfe_table_row_tl
+      }
+    \regex_match:nnT { \A\s*normal\s*: } {#1}
+      {
+        \tl_set:Nn \l_ulfe_table_style_tl {normal}
+        \regex_replace_once:nnN { \A\s*normal\s*:\s* } {} \l_ulfe_table_row_tl
+      }
+  }
+
+\cs_new:Npn \ulfe_table_col_x:n #1
+  {
+    \int_compare:nNnTF { \l_ulfe_table_col_count_int } = {3}
+      {
+        \int_case:nnF {#1}
+          {
+            {1}{72}
+            {2}{603.9}
+            {3}{741.6}
+          }
+          { \fp_eval:n {72 + (#1 - 1) * 797.8 / \l_ulfe_table_col_count_int} }
+      }
+      { \fp_eval:n {72 + (#1 - 1) * 797.8 / \l_ulfe_table_col_count_int} }
+  }
+
+\cs_new:Npn \ulfe_table_col_w:n #1
+  {
+    \int_compare:nNnTF { \l_ulfe_table_col_count_int } = {3}
+      {
+        \int_case:nnF {#1}
+          {
+            {1}{531.9}
+            {2}{137.7}
+            {3}{128.2}
+          }
+          { \fp_eval:n {797.8 / \l_ulfe_table_col_count_int} }
+      }
+      { \fp_eval:n {797.8 / \l_ulfe_table_col_count_int - 8} }
+  }
+
+\cs_new:Npn \ulfe_table_cell_w:nn #1#2
+  {
+    \bool_lazy_and:nnTF
+      { \int_compare_p:nNn { \l_ulfe_table_col_count_int } = {3} }
+      {
+        \bool_lazy_and_p:nn
+          { \int_compare_p:nNn {#1} = {1} }
+          {
+            \bool_lazy_or_p:nn
+              { \str_if_eq_p:ee {#2} {indent} }
+              { \str_if_eq_p:ee {#2} {header} }
+          }
+      }
+      {397.1}
+      { \ulfe_table_col_w:n {#1} }
+  }
+
+\cs_new:Npn \ulfe_table_cell_x:nn #1#2
+  {
+    \bool_lazy_and:nnTF
+      { \int_compare_p:nNn { \l_ulfe_table_col_count_int } = {3} }
+      {
+        \bool_lazy_and_p:nn
+          { \int_compare_p:nNn {#1} = {1} }
+          {
+            \bool_lazy_or_p:nn
+              { \str_if_eq_p:ee {#2} {indent} }
+              { \str_if_eq_p:ee {#2} {header} }
+          }
+      }
+      {206.8}
+      { \ulfe_table_col_x:n {#1} }
+  }
+
+\cs_new_protected:Npn \ulfe_table_set_style:n #1
+  {
+    \tl_set:Nn \l_ulfe_table_color_tl {ULFECharcoal}
+    \tl_clear:N \l_ulfe_table_weight_tl
+    \str_case:en {#1}
+      {
+        {header}{ \tl_set:Nn \l_ulfe_table_weight_tl {\bfseries} }
+        {bold}{ \tl_set:Nn \l_ulfe_table_weight_tl {\bfseries} }
+        {redbold}
+          {
+            \tl_set:Nn \l_ulfe_table_color_tl {ULFEBrandRed}
+            \tl_set:Nn \l_ulfe_table_weight_tl {\bfseries}
+          }
+      }
+  }
+
+\cs_new_protected:Npn \ulfe_table_cell:nnnn #1#2#3#4
+  {
+    \ulfe_table_set_style:n {#3}
+    \node[
+      anchor=north~west,
+      inner~sep=0pt,
+      text=\l_ulfe_table_color_tl,
+      text~width=\ulfe_table_cell_w:nn {#2} {#3} bp,
+      align=left,
+      font=\fontsize{\fp_use:N \l_ulfe_table_font_size_fp pt}
+        {\fp_use:N \l_ulfe_table_line_height_fp pt}\selectfont
+        \l_ulfe_table_weight_tl
+    ] at
+      (
+        {\fp_eval:n { \ulfe_table_cell_x:nn {#2} {#3} }},
+        {\fp_eval:n {224.2 + #1 * \l_ulfe_table_row_height_fp}}
+      )
+      {\tl_trim_spaces:n {#4}};
+  }
+
+\cs_new_protected:Npn \ulfe_table_row:nn #1#2
+  {
+    \ulfe_table_parse_row:n {#2}
+    \seq_set_split:NnV \l_ulfe_table_cells_seq {|} \l_ulfe_table_row_tl
+    \seq_map_indexed_inline:Nn \l_ulfe_table_cells_seq
+      {
+        \int_compare:nT { ##1 <= \l_ulfe_table_col_count_int }
+          { \ulfe_table_cell:nnnn {#1}{##1}{\l_ulfe_table_style_tl}{##2} }
+      }
+  }
+
+\cs_new_protected:Npn \ulfe_table_render:nn #1#2
+  {
+    \seq_set_split:Nnn \l_ulfe_table_header_seq {|} {#1}
+    \int_set:Nn \l_ulfe_table_col_count_int { \seq_count:N \l_ulfe_table_header_seq }
+    \int_compare:nNnT { \l_ulfe_table_col_count_int } > {10}
+      { \int_set:Nn \l_ulfe_table_col_count_int {10} }
+    \ulfe_table_count_rows:n {#2}
+    \int_compare:nNnT { \l_ulfe_table_row_count_int } > {20}
+      { \int_set:Nn \l_ulfe_table_row_count_int {20} }
+    \fp_set:Nn \l_ulfe_table_row_height_fp
+      { min(28.6, max(12.0, 252 / (\l_ulfe_table_row_count_int + 1))) }
+    \fp_set:Nn \l_ulfe_table_font_size_fp
+      { min(16, max(7.3, \l_ulfe_table_row_height_fp * .56)) }
+    \fp_set:Nn \l_ulfe_table_line_height_fp
+      { \l_ulfe_table_font_size_fp * 1.19 }
+    \begin{tikzpicture}[remember~picture,overlay]
+      \begin{scope}[shift={(current~page.north~west)},x=1bp,y=-1bp]
+        \int_step_inline:nn { \l_ulfe_table_row_count_int }
+          {
+            \draw[ULFETableRule,line~width=.8bp]
+              (72,{\fp_eval:n {224.2 + \l_ulfe_table_row_height_fp * (##1 - 1) + \l_ulfe_table_row_height_fp * .832}})
+              --
+              (869.8,{\fp_eval:n {224.2 + \l_ulfe_table_row_height_fp * (##1 - 1) + \l_ulfe_table_row_height_fp * .832}});
+          }
+        \seq_map_indexed_inline:Nn \l_ulfe_table_header_seq
+          {
+            \int_compare:nT { ##1 <= \l_ulfe_table_col_count_int }
+              { \ulfe_table_cell:nnnn {0}{##1}{header}{##2} }
+          }
+        \int_zero:N \l_ulfe_table_row_index_int
+        \seq_map_inline:Nn \l_ulfe_table_rows_seq
+          {
+            \tl_if_blank:nF {##1}
+              {
+                \int_incr:N \l_ulfe_table_row_index_int
+                \int_compare:nT { \l_ulfe_table_row_index_int <= 20 }
+                  { \ulfe_table_row:nn { \l_ulfe_table_row_index_int } {##1} }
+              }
+          }
+      \end{scope}
+    \end{tikzpicture}
+  }
+
+% Public native table slide.
+% Arguments:
+%   #1 slide title; pass an empty argument {} for a table-only slide.
+%   #2 header cells separated with "|":
+%      Plačilna skupina | Ženske | Moški
+%   #3 data rows separated with semicolons. Each row contains "|" separated
+%      cells and may start with one style prefix:
+%      normal: ordinary row
+%      indent: ordinary row with the imported first-column indentation
+%      bold: bold row
+%      redbold: bold red row
+% Behavior:
+%   The renderer calculates column count from the header, draws horizontal rules,
+%   scales row height and font size for 1-20 data rows, and clips practical use
+%   to the first 10 columns. It does not create rasterized table text.
+\NewDocumentCommand{\ULFEDataTableSlide}{m m +m}
+  {
+    \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{
+      \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}
+      \tl_if_blank:nF {#1}
+        {
+          \ULFEText{73.5}{122.5}{680.2}{32}{38}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries}{#1}
+        }
+      \ulfe_table_render:nn {#2}{#3}
+      \ULFEFooter{RedWhiteGray}
+    }
+  }
+\ExplSyntaxOff
+
+\newcommand{\ULFEMetricPairSlide}{%
+  \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{%
+    \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}%
+    \ULFEText{60}{110}{527.2}{32}{38}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries}{Kliknite, če želite dodati naslov}%
+    \ULFEText{60}{212}{397.5}{66}{74}{\ULFEColorStyleText{RedWhiteGray}}{\centering\bfseries}{Štev.}%
+    \ULFEText{509.2}{212}{390.8}{66}{74}{\ULFEColorStyleText{RedWhiteGray}}{\centering\bfseries}{Štev.}%
+    \ULFEText{67}{307}{390.5}{16}{17}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright}{Kliknite, če želite dodati besedilo}%
+    \ULFEText{516.2}{307}{383.8}{16}{17}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright}{Kliknite, če želite dodati besedilo}%
+    \ULFEFooter{RedWhiteGray}%
+  }%
+}
+
+\newcommand{\ULFEMetricTripleSlide}{%
+  \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{%
+    \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}%
+    \ULFEText{60}{110}{528}{32}{38}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries}{Kliknite, če želite dodati naslov}%
+    \ULFEText{67}{212}{239}{66}{74}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright\bfseries}{Štev.}%
+    \ULFEText{380.5}{212}{239}{66}{74}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright\bfseries}{Štev.}%
+    \ULFEText{694}{212}{206}{66}{74}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright\bfseries}{Štev.}%
+    \ULFEText{67}{307}{239}{16}{17}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright}{Kliknite, če želite dodati besedilo}%
+    \ULFEText{380.5}{307}{239}{16}{17}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright}{Kliknite, če želite dodati besedilo}%
+    \ULFEText{694}{307}{206}{16}{17}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright}{Kliknite, če želite dodati besedilo}%
+    \ULFEFooter{RedWhiteGray}%
+  }%
+}
+
+\newcommand{\ULFEMetricQuadSlide}{%
+  \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{%
+    \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}%
+    \ULFEText{67}{110}{520.8}{32}{38}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries}{Kliknite, če želite dodati naslov}%
+    \ULFEText{67.5}{232}{165.5}{48}{56}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright\bfseries}{Štev.}%
+    \ULFEText{290}{232}{165.5}{48}{56}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright\bfseries}{Štev.}%
+    \ULFEText{512.5}{232}{165.5}{48}{56}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright\bfseries}{Štev.}%
+    \ULFEText{735}{232}{165.5}{48}{56}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright\bfseries}{Štev.}%
+    \ULFEText{67}{306.5}{165.5}{16}{17}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright}{Kliknite, če želite\\dodati besedilo}%
+    \ULFEText{289.5}{306.5}{165.5}{16}{17}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright}{Kliknite, če želite\\dodati besedilo}%
+    \ULFEText{512}{306.5}{165.5}{16}{17}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright}{Kliknite, če želite\\dodati besedilo}%
+    \ULFEText{734.5}{306.5}{165.5}{16}{17}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright}{Kliknite, če želite\\dodati besedilo}%
+    \ULFEFooter{RedWhiteGray}%
+  }%
+}
+
+\ExplSyntaxOn
+\seq_new:N \l_ulfe_data_items_seq
+\seq_new:N \l_ulfe_data_pair_seq
+\tl_new:N \l_ulfe_data_label_a_tl
+\tl_new:N \l_ulfe_data_label_b_tl
+\tl_new:N \l_ulfe_data_label_c_tl
+\tl_new:N \l_ulfe_data_label_d_tl
+\tl_new:N \l_ulfe_data_left_tl
+\tl_new:N \l_ulfe_data_right_tl
+\tl_new:N \l_ulfe_data_value_tl
+\fp_new:N \l_ulfe_data_value_a_fp
+\fp_new:N \l_ulfe_data_value_b_fp
+\fp_new:N \l_ulfe_data_value_c_fp
+\fp_new:N \l_ulfe_data_value_d_fp
+\fp_new:N \l_ulfe_data_total_fp
+\fp_new:N \l_ulfe_data_row_a_fp
+\fp_new:N \l_ulfe_data_row_b_fp
+\fp_new:N \l_ulfe_data_x_fp
+\fp_new:N \l_ulfe_data_y_fp
+\fp_new:N \l_ulfe_data_w_fp
+\fp_new:N \l_ulfe_data_h_fp
+\fp_new:N \l_ulfe_data_gap_fp
+\fp_new:N \l_ulfe_data_split_fp
+\fp_new:N \l_ulfe_data_start_y_fp
+\int_new:N \l_ulfe_data_count_int
+\int_new:N \l_ulfe_data_font_int
+\int_new:N \l_ulfe_data_leading_int
+\int_new:N \l_ulfe_data_inset_x_int
+\int_new:N \l_ulfe_data_inset_y_int
+\tl_new:N \l_ulfe_data_color_tl
+
+\cs_new:Npn \ulfe_split_left_color:n #1
+  {
+    \int_case:nnF { \int_eval:n { \int_mod:nn {#1 - 1} {2} + 1 } }
+      {
+        {1}{ULFEBrandRed}
+        {2}{ULFEDataGrayDark}
+      }
+      {ULFEBrandRed}
+  }
+
+\cs_new:Npn \ulfe_split_right_color:n #1
+  {
+    \int_case:nnF { \int_eval:n { \int_mod:nn {#1 - 1} {2} + 1 } }
+      {
+        {1}{ULFECharcoal}
+        {2}{ULFEDataGrayMid}
+      }
+      {ULFECharcoal}
+  }
+
+\cs_new:Npn \ulfe_bar_color:n #1
+  {
+    \int_case:nnF { \int_eval:n { \int_mod:nn {#1 - 1} {4} + 1 } }
+      {
+        {1}{ULFEBrandRed}
+        {2}{ULFECharcoal}
+        {3}{ULFEDataGrayDark}
+        {4}{ULFEDataGrayMid}
+      }
+      {ULFEBrandRed}
+  }
+
+\cs_new_protected:Npn \ulfe_data_parse_pair:n #1
+  {
+    \seq_set_split:Nnn \l_ulfe_data_pair_seq {/} {#1}
+    \tl_set:Nx \l_ulfe_data_left_tl
+      { \tl_trim_spaces:n { \seq_item:Nn \l_ulfe_data_pair_seq {1} } }
+    \tl_set:Nx \l_ulfe_data_value_tl
+      { \tl_trim_spaces:n { \seq_item:Nn \l_ulfe_data_pair_seq {2} } }
+  }
+
+\cs_new_protected:Npn \ulfe_area_store:nn #1#2
+  {
+    \ulfe_data_parse_pair:n {#2}
+    \int_case:nn {#1}
+      {
+        {1}{
+          \tl_set:Nx \l_ulfe_data_label_a_tl { \tl_use:N \l_ulfe_data_left_tl }
+          \fp_set:Nn \l_ulfe_data_value_a_fp { \l_ulfe_data_value_tl }
+        }
+        {2}{
+          \tl_set:Nx \l_ulfe_data_label_b_tl { \tl_use:N \l_ulfe_data_left_tl }
+          \fp_set:Nn \l_ulfe_data_value_b_fp { \l_ulfe_data_value_tl }
+        }
+        {3}{
+          \tl_set:Nx \l_ulfe_data_label_c_tl { \tl_use:N \l_ulfe_data_left_tl }
+          \fp_set:Nn \l_ulfe_data_value_c_fp { \l_ulfe_data_value_tl }
+        }
+        {4}{
+          \tl_set:Nx \l_ulfe_data_label_d_tl { \tl_use:N \l_ulfe_data_left_tl }
+          \fp_set:Nn \l_ulfe_data_value_d_fp { \l_ulfe_data_value_tl }
+        }
+      }
+  }
+
+\cs_new_protected:Npn \ulfe_area_blocks_render:nn #1#2
+  {
+    \tl_clear:N \l_ulfe_data_label_a_tl
+    \tl_clear:N \l_ulfe_data_label_b_tl
+    \tl_clear:N \l_ulfe_data_label_c_tl
+    \tl_clear:N \l_ulfe_data_label_d_tl
+    \fp_set:Nn \l_ulfe_data_value_a_fp {0.25}
+    \fp_set:Nn \l_ulfe_data_value_b_fp {0.25}
+    \fp_set:Nn \l_ulfe_data_value_c_fp {0.25}
+    \fp_set:Nn \l_ulfe_data_value_d_fp {0.25}
+    \seq_set_split:Nnn \l_ulfe_data_items_seq {;} {#2}
+    \seq_map_indexed_inline:Nn \l_ulfe_data_items_seq
+      {
+        \int_compare:nNnF {##1} > {4}
+          { \tl_if_blank:nF {##2} { \ulfe_area_store:nn {##1} {##2} } }
+      }
+    \fp_set:Nn \l_ulfe_data_total_fp
+      {
+        \l_ulfe_data_value_a_fp + \l_ulfe_data_value_b_fp
+        + \l_ulfe_data_value_c_fp + \l_ulfe_data_value_d_fp
+      }
+    \fp_compare:nT { \l_ulfe_data_total_fp <= 0 }
+      {
+        \fp_set:Nn \l_ulfe_data_value_a_fp {1}
+        \fp_set:Nn \l_ulfe_data_value_b_fp {1}
+        \fp_set:Nn \l_ulfe_data_value_c_fp {1}
+        \fp_set:Nn \l_ulfe_data_value_d_fp {1}
+        \fp_set:Nn \l_ulfe_data_total_fp {4}
+      }
+    \fp_set:Nn \l_ulfe_data_row_a_fp
+      { \l_ulfe_data_value_a_fp + \l_ulfe_data_value_b_fp }
+    \fp_set:Nn \l_ulfe_data_row_b_fp
+      { \l_ulfe_data_value_c_fp + \l_ulfe_data_value_d_fp }
+    \fp_compare:nT { \l_ulfe_data_row_a_fp <= 0 }
+      { \fp_set:Nn \l_ulfe_data_row_a_fp {0.0001} }
+    \fp_compare:nT { \l_ulfe_data_row_b_fp <= 0 }
+      { \fp_set:Nn \l_ulfe_data_row_b_fp {0.0001} }
+    \fp_compare:nTF
+      {
+        min(
+          \l_ulfe_data_value_a_fp,
+          \l_ulfe_data_value_b_fp,
+          \l_ulfe_data_value_c_fp,
+          \l_ulfe_data_value_d_fp
+        ) / \l_ulfe_data_total_fp < 0.16
+      }
+      {
+        \int_set:Nn \l_ulfe_data_font_int {28}
+        \int_set:Nn \l_ulfe_data_leading_int {34}
+        \int_set:Nn \l_ulfe_data_inset_x_int {22}
+        \int_set:Nn \l_ulfe_data_inset_y_int {22}
+      }
+      {
+        \int_set:Nn \l_ulfe_data_font_int {48}
+        \int_set:Nn \l_ulfe_data_leading_int {56}
+        \int_set:Nn \l_ulfe_data_inset_x_int {34}
+        \int_set:Nn \l_ulfe_data_inset_y_int {31}
+      }
+    \ULFEDataBlockRectText{0}{96}{273}{444}{ULFEBrandRed}{\fontsize{18pt}{22pt}\selectfont\bfseries}{28}{34}{#1}
+    \ULFEDataBlockRectText
+      {273}{96}
+      { \fp_to_decimal:n { 687 * \l_ulfe_data_value_a_fp / \l_ulfe_data_row_a_fp } }
+      { \fp_to_decimal:n { 444 * \l_ulfe_data_row_a_fp / \l_ulfe_data_total_fp } }
+      {ULFECharcoal}{\fontsize{\int_use:N \l_ulfe_data_font_int pt}{\int_use:N \l_ulfe_data_leading_int pt}\selectfont\bfseries}{\int_use:N \l_ulfe_data_inset_x_int}{\int_use:N \l_ulfe_data_inset_y_int}{\tl_use:N \l_ulfe_data_label_a_tl}
+    \ULFEDataBlockRectText
+      { \fp_to_decimal:n { 273 + 687 * \l_ulfe_data_value_a_fp / \l_ulfe_data_row_a_fp } }
+      {96}
+      { \fp_to_decimal:n { 687 * \l_ulfe_data_value_b_fp / \l_ulfe_data_row_a_fp } }
+      { \fp_to_decimal:n { 444 * \l_ulfe_data_row_a_fp / \l_ulfe_data_total_fp } }
+      {ULFEDataGrayMid}{\fontsize{\int_use:N \l_ulfe_data_font_int pt}{\int_use:N \l_ulfe_data_leading_int pt}\selectfont\bfseries}{\int_use:N \l_ulfe_data_inset_x_int}{\int_use:N \l_ulfe_data_inset_y_int}{\tl_use:N \l_ulfe_data_label_b_tl}
+    \ULFEDataBlockRectText
+      {273}
+      { \fp_to_decimal:n { 96 + 444 * \l_ulfe_data_row_a_fp / \l_ulfe_data_total_fp } }
+      { \fp_to_decimal:n { 687 * \l_ulfe_data_value_c_fp / \l_ulfe_data_row_b_fp } }
+      { \fp_to_decimal:n { 444 * \l_ulfe_data_row_b_fp / \l_ulfe_data_total_fp } }
+      {ULFEDataGrayDark}{\fontsize{\int_use:N \l_ulfe_data_font_int pt}{\int_use:N \l_ulfe_data_leading_int pt}\selectfont\bfseries}{\int_use:N \l_ulfe_data_inset_x_int}{\int_use:N \l_ulfe_data_inset_y_int}{\tl_use:N \l_ulfe_data_label_c_tl}
+    \ULFEDataBlockRectText
+      { \fp_to_decimal:n { 273 + 687 * \l_ulfe_data_value_c_fp / \l_ulfe_data_row_b_fp } }
+      { \fp_to_decimal:n { 96 + 444 * \l_ulfe_data_row_a_fp / \l_ulfe_data_total_fp } }
+      { \fp_to_decimal:n { 687 * \l_ulfe_data_value_d_fp / \l_ulfe_data_row_b_fp } }
+      { \fp_to_decimal:n { 444 * \l_ulfe_data_row_b_fp / \l_ulfe_data_total_fp } }
+      {ULFEDataGrayLight}{\fontsize{\int_use:N \l_ulfe_data_font_int pt}{\int_use:N \l_ulfe_data_leading_int pt}\selectfont\bfseries}{\int_use:N \l_ulfe_data_inset_x_int}{\int_use:N \l_ulfe_data_inset_y_int}{\tl_use:N \l_ulfe_data_label_d_tl}
+  }
+
+\NewDocumentCommand{\ULFEAreaBlocksSlide}{+m +m}
+  {
+    \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{
+      \ulfe_area_blocks_render:nn {#1} {#2}
+      \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}
+      \ULFEFooter{RedWhiteGray}
+    }
+  }
+
+\cs_new_protected:Npn \ulfe_split_row_render:nn #1#2
+  {
+    \seq_set_split:Nnn \l_ulfe_data_pair_seq {/} {#2}
+    \tl_set:Nx \l_ulfe_data_left_tl
+      { \tl_trim_spaces:n { \seq_item:Nn \l_ulfe_data_pair_seq {1} } }
+    \tl_set:Nx \l_ulfe_data_right_tl
+      { \tl_trim_spaces:n { \seq_item:Nn \l_ulfe_data_pair_seq {2} } }
+    \tl_set:Nx \l_ulfe_data_value_tl
+      { \tl_trim_spaces:n { \seq_item:Nn \l_ulfe_data_pair_seq {3} } }
+    \fp_set:Nn \l_ulfe_data_split_fp { min(max(\l_ulfe_data_value_tl,0),1) }
+    \fp_set:Nn \l_ulfe_data_w_fp { 928 * \l_ulfe_data_split_fp }
+    \fp_set:Nn \l_ulfe_data_x_fp { \l_ulfe_data_w_fp + 32 }
+    \fp_set:Nn \l_ulfe_data_y_fp
+      { \l_ulfe_data_start_y_fp + (#1 - 1) * ( \l_ulfe_data_h_fp + \l_ulfe_data_gap_fp ) }
+    \int_compare:nT { \l_ulfe_data_count_int <= 2 }
+      {
+        \fp_compare:nT
+          { ( \l_ulfe_data_w_fp < 250 ) || ( 928 - \l_ulfe_data_w_fp < 250 ) }
+          {
+            \int_set:Nn \l_ulfe_data_font_int {28}
+            \int_set:Nn \l_ulfe_data_leading_int {34}
+            \int_set:Nn \l_ulfe_data_inset_x_int {18}
+            \int_set:Nn \l_ulfe_data_inset_y_int {18}
+          }
+      }
+    \tl_set:Nx \l_ulfe_data_color_tl { \ulfe_split_left_color:n {#1} }
+    \ULFEDataBlockRectText
+      {0}{ \fp_to_decimal:N \l_ulfe_data_y_fp }
+      { \fp_to_decimal:N \l_ulfe_data_w_fp }
+      { \fp_to_decimal:N \l_ulfe_data_h_fp }
+      { \tl_use:N \l_ulfe_data_color_tl }
+      { \fontsize{\int_use:N \l_ulfe_data_font_int pt}{\int_use:N \l_ulfe_data_leading_int pt}\selectfont\bfseries }
+      { \int_use:N \l_ulfe_data_inset_x_int }
+      { \int_use:N \l_ulfe_data_inset_y_int }
+      { \tl_use:N \l_ulfe_data_left_tl }
+    \tl_set:Nx \l_ulfe_data_color_tl { \ulfe_split_right_color:n {#1} }
+    \ULFEDataBlockRectText
+      { \fp_to_decimal:N \l_ulfe_data_x_fp }
+      { \fp_to_decimal:N \l_ulfe_data_y_fp }
+      { \fp_to_decimal:n { 928 - \l_ulfe_data_w_fp } }
+      { \fp_to_decimal:N \l_ulfe_data_h_fp }
+      { \tl_use:N \l_ulfe_data_color_tl }
+      { \fontsize{\int_use:N \l_ulfe_data_font_int pt}{\int_use:N \l_ulfe_data_leading_int pt}\selectfont\bfseries }
+      { \int_use:N \l_ulfe_data_inset_x_int }
+      { \int_use:N \l_ulfe_data_inset_y_int }
+      { \tl_use:N \l_ulfe_data_right_tl }
+  }
+
+\cs_new_protected:Npn \ulfe_split_rows_render:n #1
+  {
+    \seq_set_split:Nnn \l_ulfe_data_items_seq {;} {#1}
+    \int_set:Nn \l_ulfe_data_count_int
+      { \int_min:nn { \seq_count:N \l_ulfe_data_items_seq } {6} }
+    \int_compare:nTF { \l_ulfe_data_count_int <= 2 }
+      {
+        \fp_set:Nn \l_ulfe_data_h_fp {145.5}
+        \fp_set:Nn \l_ulfe_data_gap_fp {28.5}
+        \fp_set:Nn \l_ulfe_data_start_y_fp {163.5}
+        \int_set:Nn \l_ulfe_data_font_int {48}
+        \int_set:Nn \l_ulfe_data_leading_int {56}
+        \int_set:Nn \l_ulfe_data_inset_x_int {34}
+        \int_set:Nn \l_ulfe_data_inset_y_int {31}
+      }
+      {
+        \fp_set:Nn \l_ulfe_data_gap_fp {8}
+        \fp_set:Nn \l_ulfe_data_start_y_fp {190}
+        \fp_set:Nn \l_ulfe_data_h_fp
+          { ( 293 - ( \l_ulfe_data_count_int - 1 ) * \l_ulfe_data_gap_fp ) / \l_ulfe_data_count_int }
+        \int_compare:nTF { \l_ulfe_data_count_int <= 4 }
+          {
+            \int_set:Nn \l_ulfe_data_font_int {24}
+            \int_set:Nn \l_ulfe_data_leading_int {29}
+            \int_set:Nn \l_ulfe_data_inset_x_int {14}
+            \int_set:Nn \l_ulfe_data_inset_y_int {12}
+          }
+          {
+            \int_set:Nn \l_ulfe_data_font_int {13}
+            \int_set:Nn \l_ulfe_data_leading_int {16}
+            \int_set:Nn \l_ulfe_data_inset_x_int {8}
+            \int_set:Nn \l_ulfe_data_inset_y_int {7}
+          }
+      }
+    \seq_map_indexed_inline:Nn \l_ulfe_data_items_seq
+      {
+        \int_compare:nNnF {##1} > { \l_ulfe_data_count_int }
+          { \tl_if_blank:nF {##2} { \ulfe_split_row_render:nn {##1} {##2} } }
+      }
+  }
+
+\NewDocumentCommand{\ULFESplitRowsSlide}{m +m}
+  {
+    \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{
+      \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}
+      \ULFEText{67}{110}{900}{32}{38}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries\sloppy\emergencystretch=1em}{#1}
+      \ulfe_split_rows_render:n {#2}
+      \ULFEFooter{RedWhiteGray}
+    }
+  }
+
+\cs_new_protected:Npn \ulfe_vertical_bar_render:nn #1#2
+  {
+    \ulfe_data_parse_pair:n {#2}
+    \fp_set:Nn \l_ulfe_data_value_a_fp { min(max(\l_ulfe_data_value_tl,0),1) }
+    \fp_set:Nn \l_ulfe_data_gap_fp
+      { \int_compare:nTF { \l_ulfe_data_count_int <= 4 } {41.5} {41.5 * 4 / \l_ulfe_data_count_int} }
+    \fp_set:Nn \l_ulfe_data_w_fp
+      { (826.5 - ( \l_ulfe_data_count_int - 1 ) * \l_ulfe_data_gap_fp) / \l_ulfe_data_count_int }
+    \fp_set:Nn \l_ulfe_data_x_fp
+      { 57.5 + (#1 - 1) * ( \l_ulfe_data_w_fp + \l_ulfe_data_gap_fp ) }
+    \fp_set:Nn \l_ulfe_data_h_fp { 341.5 * \l_ulfe_data_value_a_fp }
+    \fp_set:Nn \l_ulfe_data_y_fp { 540 - \l_ulfe_data_h_fp }
+    \tl_set:Nx \l_ulfe_data_color_tl { \ulfe_bar_color:n {#1} }
+    \ULFEDataBlockRectText
+      { \fp_to_decimal:N \l_ulfe_data_x_fp }
+      { \fp_to_decimal:N \l_ulfe_data_y_fp }
+      { \fp_to_decimal:N \l_ulfe_data_w_fp }
+      { \fp_to_decimal:N \l_ulfe_data_h_fp }
+      { \tl_use:N \l_ulfe_data_color_tl }
+      { \fontsize{\int_use:N \l_ulfe_data_font_int pt}{\int_use:N \l_ulfe_data_leading_int pt}\selectfont\bfseries }
+      { \int_use:N \l_ulfe_data_inset_x_int }
+      { \int_use:N \l_ulfe_data_inset_y_int }
+      { \tl_use:N \l_ulfe_data_left_tl }
+  }
+
+\cs_new_protected:Npn \ulfe_vertical_bars_render:n #1
+  {
+    \seq_set_split:Nnn \l_ulfe_data_items_seq {;} {#1}
+    \int_set:Nn \l_ulfe_data_count_int
+      { \int_min:nn { \seq_count:N \l_ulfe_data_items_seq } {16} }
+    \int_compare:nTF { \l_ulfe_data_count_int <= 4 }
+      {
+        \int_set:Nn \l_ulfe_data_font_int {48}
+        \int_set:Nn \l_ulfe_data_leading_int {56}
+        \int_set:Nn \l_ulfe_data_inset_x_int {30}
+        \int_set:Nn \l_ulfe_data_inset_y_int {31}
+      }
+      {
+        \int_compare:nTF { \l_ulfe_data_count_int <= 8 }
+          {
+            \int_set:Nn \l_ulfe_data_font_int {20}
+            \int_set:Nn \l_ulfe_data_leading_int {24}
+            \int_set:Nn \l_ulfe_data_inset_x_int {10}
+            \int_set:Nn \l_ulfe_data_inset_y_int {15}
+          }
+          {
+            \int_set:Nn \l_ulfe_data_font_int {13}
+            \int_set:Nn \l_ulfe_data_leading_int {16}
+            \int_set:Nn \l_ulfe_data_inset_x_int {5}
+            \int_set:Nn \l_ulfe_data_inset_y_int {8}
+          }
+      }
+    \seq_map_indexed_inline:Nn \l_ulfe_data_items_seq
+      {
+        \int_compare:nNnF {##1} > { \l_ulfe_data_count_int }
+          { \tl_if_blank:nF {##2} { \ulfe_vertical_bar_render:nn {##1} {##2} } }
+      }
+  }
+
+\NewDocumentCommand{\ULFEVerticalBarsSlide}{m +m}
+  {
+    \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{
+      \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}
+      \ULFEText{67}{110}{900}{32}{38}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries\sloppy\emergencystretch=1em}{#1}
+      \ulfe_vertical_bars_render:n {#2}
+      \ULFEFooter{RedWhiteGray}
+    }
+  }
+
+\NewDocumentCommand{\ULFEBarDataSlide}{}{\ULFEAreaBlocksSlide
+  {Kliknite če želite dodati besedilo}
+  {Štev./0.26; Štev./0.26; Štev./0.24; Štev./0.24}}
+\NewDocumentCommand{\ULFEHorizontalDataSlide}{}{\ULFESplitRowsSlide
+  {Kliknite, če želite dodati naslov}
+  {Štev./Štev./0.45; Štev./Štev./0.57}}
+\NewDocumentCommand{\ULFEColumnDataSlide}{}{\ULFEVerticalBarsSlide
+  {Kliknite, če želite dodati naslov}
+  {Štev./1.0; Štev./0.54; Štev./0.92; Štev./0.74}}
+\ExplSyntaxOff
+
+\NewDocumentCommand{\ULFEFinalTextBlock}{+m +m}{%
+  \ULFEText{190.5}{206}{599.2}{44}{47}{ULFEWhite}{\raggedright\bfseries\sloppy\emergencystretch=1em}{#1}%
+  \ULFEText{190.5}{462.5}{303}{16}{19}{ULFEWhite}{\raggedright\sloppy\emergencystretch=1em}{#2}%
+}
+
+\NewDocumentCommand{\ULFEFinalGraySlide}{+m +m}{%
+  \ULFEFrame{\ULFEColorStyleBackground{Gray}}{%
+    \ULFETitleLineArt\ULFELeftLogo
+    \ULFEFinalTextBlock{#1}{#2}%
+    \ULFEFooter{Gray}%
+  }%
+}
+
+\NewDocumentCommand{\ULFEFinalRedSlide}{+m +m}{%
+  \ULFEFrame{\ULFEColorStyleBackground{Red}}{%
+    \ULFETitleLineArt\ULFELeftLogo
+    \ULFEFinalTextBlock{#1}{#2}%
+    \ULFEFooter{Red}%
+  }%
+}
+
+\NewDocumentCommand{\ULFEFinalPhotoSlide}{+m +m}{%
+  \ULFEFrame{\ULFEColorStyleBackground{Gray}}{%
+    \ULFEPhotoBackdrop\ULFELeftLogo
+    \ULFEFinalTextBlock{#1}{#2}%
+    \ULFEFooter{Gray}%
+  }%
+}
+
+\ExplSyntaxOn
+\seq_new:N \l_ulfe_pie_items_seq
+\seq_new:N \l_ulfe_pie_pair_seq
+\fp_new:N \l_ulfe_pie_start_fp
+\fp_new:N \l_ulfe_pie_end_fp
+\fp_new:N \l_ulfe_pie_mid_fp
+\fp_new:N \l_ulfe_pie_value_fp
+\int_new:N \l_ulfe_pie_count_int
+\int_new:N \l_ulfe_pie_rows_int
+\int_new:N \l_ulfe_pie_row_int
+\int_new:N \l_ulfe_pie_col_int
+\tl_new:N \l_ulfe_pie_label_tl
+\tl_new:N \l_ulfe_pie_value_tl
+\tl_new:N \l_ulfe_pie_color_tl
+
+\cs_new:Npn \ulfe_pie_color:n #1
+  {
+    \int_case:nnF { \int_eval:n { \int_mod:nn {#1 - 1} {8} + 1 } }
+      {
+        {1}{ULFEChartGrayDark}
+        {2}{ULFEChartGrayMedium}
+        {3}{ULFEChartGrayLight}
+        {4}{ULFEChartGrayPale}
+        {5}{ULFECharcoal}
+        {6}{ULFEChartGrayPale!62!ULFEWhite}
+        {7}{ULFEDataGrayDark}
+        {8}{ULFEDataGrayMid}
+      }
+      {ULFECharcoal}
+  }
+
+\cs_new_protected:Npn \ulfe_pie_parse_pair:n #1
+  {
+    \seq_set_split:Nnn \l_ulfe_pie_pair_seq {/} {#1}
+    \tl_set:Nx \l_ulfe_pie_label_tl
+      { \tl_trim_spaces:n { \seq_item:Nn \l_ulfe_pie_pair_seq {1} } }
+    \tl_set:Nx \l_ulfe_pie_value_tl
+      { \tl_trim_spaces:n { \seq_item:Nn \l_ulfe_pie_pair_seq {2} } }
+    \fp_set:Nn \l_ulfe_pie_value_fp { \l_ulfe_pie_value_tl }
+  }
+
+\cs_new_protected:Npn \ulfe_pie_chart:nnnnn #1#2#3#4#5
+  {
+    \seq_set_split:Nnn \l_ulfe_pie_items_seq {;} {#5}
+    \int_set:Nn \l_ulfe_pie_count_int { \seq_count:N \l_ulfe_pie_items_seq }
+    \int_set:Nn \l_ulfe_pie_rows_int
+      { \int_compare:nNnTF { \l_ulfe_pie_count_int } > {8} {8} { \l_ulfe_pie_count_int } }
+    \begin{tikzpicture}[remember~picture,overlay]
+      \begin{scope}[shift={([xshift=#1bp,yshift=-#2bp]current~page.north~west)},x=1bp,y=1bp]
+        \fp_set:Nn \l_ulfe_pie_start_fp {90}
+        \seq_map_indexed_inline:Nn \l_ulfe_pie_items_seq
+          {
+            \tl_if_blank:nF {##2}
+              {
+                \ulfe_pie_parse_pair:n {##2}
+                \tl_set:Nx \l_ulfe_pie_color_tl { \ulfe_pie_color:n {##1} }
+                \fp_set:Nn \l_ulfe_pie_end_fp
+                  { \l_ulfe_pie_start_fp - \l_ulfe_pie_value_fp * 3.6 }
+                \fp_set:Nn \l_ulfe_pie_mid_fp
+                  { ( \l_ulfe_pie_start_fp + \l_ulfe_pie_end_fp ) / 2 }
+                \edef\ULFEPieStartAngle{\fp_to_decimal:N \l_ulfe_pie_start_fp}
+                \edef\ULFEPieEndAngle{\fp_to_decimal:N \l_ulfe_pie_end_fp}
+                \edef\ULFEPieMidAngle{\fp_to_decimal:N \l_ulfe_pie_mid_fp}
+                \edef\ULFEPieColor{\l_ulfe_pie_color_tl}
+                \fp_compare:nTF { \l_ulfe_pie_value_fp >= 99.95 }
+                  {
+                    \ULFEPieFullCirclePath{\ULFEPieColor}{#3}
+                  }
+                  {
+                    \ULFEPieSlicePath{\ULFEPieColor}{\ULFEPieStartAngle}{\ULFEPieEndAngle}{#3}
+                  }
+                \ULFEPiePercentLabel{\ULFEPieMidAngle}{\l_ulfe_pie_value_tl}
+                \fp_set_eq:NN \l_ulfe_pie_start_fp \l_ulfe_pie_end_fp
+              }
+          }
+      \end{scope}
+      \begin{scope}[shift={([xshift=#4bp,yshift=-283bp]current~page.north~west)},x=1bp,y=-1bp]
+        \seq_map_indexed_inline:Nn \l_ulfe_pie_items_seq
+          {
+            \tl_if_blank:nF {##2}
+              {
+                \ulfe_pie_parse_pair:n {##2}
+                \tl_set:Nx \l_ulfe_pie_color_tl { \ulfe_pie_color:n {##1} }
+                \int_set:Nn \l_ulfe_pie_row_int
+                  { \int_mod:nn {##1 - 1} { \l_ulfe_pie_rows_int } }
+                \int_set:Nn \l_ulfe_pie_col_int
+                  { \int_div_truncate:nn {##1 - 1} { \l_ulfe_pie_rows_int } }
+                \edef\ULFEPieLegendX{\int_eval:n { \l_ulfe_pie_col_int * 137 }}
+                \edef\ULFEPieLegendY{\fp_eval:n { \l_ulfe_pie_row_int * 20.5 }}
+                \edef\ULFEPieColor{\l_ulfe_pie_color_tl}
+                \path[fill=\ULFEPieColor] (\ULFEPieLegendX,\ULFEPieLegendY)
+                  rectangle ++(9,9);
+                \node[
+                  anchor=west,
+                  inner~sep=0pt,
+                  text=ULFEChartInk,
+                  text~width=\int_compare:nNnTF { \l_ulfe_pie_count_int } > {8} {108bp} {190bp},
+                  align=left,
+                  font=\fontsize{\int_compare:nNnTF { \l_ulfe_pie_count_int } > {8} {13} {16}pt}
+                    {\int_compare:nNnTF { \l_ulfe_pie_count_int } > {8} {16} {19}pt}\selectfont
+                ] at (\fp_eval:n { \ULFEPieLegendX + 14 },\fp_eval:n { \ULFEPieLegendY + 4.5 })
+                  {\l_ulfe_pie_label_tl};
+              }
+          }
+      \end{scope}
+    \end{tikzpicture}
+  }
+
+% Native pie chart body from data.
+% Argument:
+%   #1 semicolon-separated legend/value pairs.
+% This draws only the chart/legend body at the imported slide-19 geometry. Use
+% \ULFEPieChartSlide for a complete slide with title, top logo, and footer.
+\NewDocumentCommand{\ULFEPieChartFromData}{m}
+  { \ulfe_pie_chart:nnnnn {348.5}{328.5}{118}{652}{#1} }
+
+% Native pie chart body for the chart-plus-bullets slide.
+% Argument:
+%   #1 semicolon-separated legend/value pairs.
+% This is the same data-driven chart renderer as slide 19, shifted left to keep
+% the imported slide-20 chart/legend geometry and leave room for right-side
+% text.
+\NewDocumentCommand{\ULFEPieChartBulletsFromData}{m}
+  { \ulfe_pie_chart:nnnnn {276.5}{328.5}{118}{507}{#1} }
+\ExplSyntaxOff
+
+\newcommand{\ULFEPieChartCore}[5]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \begin{scope}[shift={([xshift=#1bp,yshift=-#2bp]current page.north west)},x=1bp,y=1bp]
+      \fill[ULFECharcoal] (0,0) -- (90:#3) arc (90:270:#3) -- cycle;
+      \fill[ULFEChartGrayDark] (0,0) -- (90:#3) arc (90:45:#3) -- cycle;
+      \fill[ULFEChartGrayMedium] (0,0) -- (45:#3) arc (45:0:#3) -- cycle;
+      \fill[ULFEChartGrayLight] (0,0) -- (0:#3) arc (0:-45:#3) -- cycle;
+      \fill[ULFEChartGrayPale] (0,0) -- (-45:#3) arc (-45:-90:#3) -- cycle;
+      \fill[ULFEChartGrayPale!62!ULFEWhite] (0,0) -- (-90:#3) arc (-90:-180:#3) -- cycle;
+      \draw[ULFEWhite,line width=1.25bp] (0,0) -- (90:#3);
+      \draw[ULFEWhite,line width=1.25bp] (0,0) -- (45:#3);
+      \draw[ULFEWhite,line width=1.25bp] (0,0) -- (0:#3);
+      \draw[ULFEWhite,line width=1.25bp] (0,0) -- (-45:#3);
+      \draw[ULFEWhite,line width=1.25bp] (0,0) -- (-90:#3);
+      \draw[ULFEWhite,line width=1.25bp] (0,0) -- (-180:#3);
+    \end{scope}
+    \begin{scope}[shift={([xshift=#4bp,yshift=-#5bp]current page.north west)},x=1bp,y=-1bp]
+      \path[fill=ULFEChartGrayDark] (0,0) rectangle (9,9);
+      \path[fill=ULFEChartGrayMedium] (0,20.5) rectangle (9,29.5);
+      \path[fill=ULFEChartGrayLight] (0,41) rectangle (9,50);
+      \path[fill=ULFEChartGrayPale] (0,61.5) rectangle (9,70.5);
+      \path[fill=ULFECharcoal] (0,82) rectangle (9,91);
+      \node[anchor=west,inner sep=0pt,text=ULFEChartInk,font=\fontsize{16pt}{19pt}\selectfont] at (14,4.5) {1. metoda};
+      \node[anchor=west,inner sep=0pt,text=ULFEChartInk,font=\fontsize{16pt}{19pt}\selectfont] at (14,25) {2. metoda};
+      \node[anchor=west,inner sep=0pt,text=ULFEChartInk,font=\fontsize{16pt}{19pt}\selectfont] at (14,45.5) {3. metoda};
+      \node[anchor=west,inner sep=0pt,text=ULFEChartInk,font=\fontsize{16pt}{19pt}\selectfont] at (14,66) {4. metoda};
+      \node[anchor=west,inner sep=0pt,text=ULFEChartInk,font=\fontsize{16pt}{19pt}\selectfont] at (14,86.5) {5. metoda};
+    \end{scope}
+  \end{tikzpicture}%
+}
+
+\newcommand{\ULFEPieChartFull}{%
+  \ULFEPieChartCore{348.5}{328.5}{118}{652}{283}%
+  \ULFEText{172}{318.5}{65}{23}{27}{ULFEChartInk}{\centering\bfseries}{50 \%}%
+  \ULFEText{394}{191.5}{90}{23}{27}{ULFEChartInk}{\centering\bfseries}{12.5 \%}%
+  \ULFEText{463}{258.5}{90}{23}{27}{ULFEChartInk}{\centering\bfseries}{12.5 \%}%
+  \ULFEText{463}{379.5}{90}{23}{27}{ULFEChartInk}{\centering\bfseries}{12.5 \%}%
+  \ULFEText{394}{446}{90}{23}{27}{ULFEChartInk}{\centering\bfseries}{12.5 \%}%
+}
+
+\newcommand{\ULFEPieChartTextExample}{%
+  \ULFEPieChartCore{276.5}{328.5}{118}{507}{283}%
+  \ULFEText{99}{318.5}{65}{23}{27}{ULFEChartInk}{\centering\bfseries}{50 \%}%
+  \ULFEText{321.5}{191.5}{90}{23}{27}{ULFEChartInk}{\centering\bfseries}{12.5 \%}%
+  \ULFEText{390.5}{258.5}{90}{23}{27}{ULFEChartInk}{\centering\bfseries}{12.5 \%}%
+  \ULFEText{390.5}{379.5}{90}{23}{27}{ULFEChartInk}{\centering\bfseries}{12.5 \%}%
+  \ULFEText{321.5}{446}{90}{23}{27}{ULFEChartInk}{\centering\bfseries}{12.5 \%}%
+}
+
+\newcommand{\ULFEPieChartExample}{%
+  \ULFEPieChartFull%
+}
+
+% Public pie chart slide.
+% Arguments:
+%   #1 slide title
+%   #2 semicolon-separated legend/value pairs, for example:
+%      First method/20; Second method/30; Third method/50
+% Values are percentages. The style layer calculates slice angles, draws slices,
+% generates the legend, and prints bold percentage labels.
+\NewDocumentCommand{\ULFEPieChartSlide}{m m}{%
+  \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{%
+    \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}%
+    \ULFEText{73.5}{122.5}{680.2}{32}{38}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries}{#1}%
+    \ULFEPieChartFromData{#2}%
+    \ULFEFooter{RedWhiteGray}%
+  }%
+}
+
+% Public pie chart with bullets slide for slide 20.
+% Arguments:
+%   #1 slide title.
+%   #2 semicolon-separated legend/value pairs, for example:
+%      1. metoda/12.5; 2. metoda/12.5; 3. metoda/25; 4. metoda/50
+%   #3 semicolon-separated bullet items.
+% Behavior:
+%   The chart calculation, percentage labels, legend, title geometry, and
+%   right-side red bullet list are owned by the style layer. The title gets a
+%   wider header region than the imported placeholder so longer titles do not
+%   force font shrinking; long bullet items wrap inside the right text column
+%   without deck-side font or layout overrides.
+\NewDocumentCommand{\ULFEPieChartBulletsSlide}{m m +m}{%
+  \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{%
+    \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}%
+    \ULFEText{73.5}{122.5}{760}{32}{38}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries\sloppy\emergencystretch=1em}{#1}%
+    \ULFEPieChartBulletsFromData{#2}%
+    \ULFEText{623.3}{178}{272}{20}{26}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright\sloppy\emergencystretch=1em}{\ULFERedBulletItems{#3}}%
+    \ULFEFooter{RedWhiteGray}%
+  }%
+}
+
+\ExplSyntaxOn
+\seq_new:N \l_ulfe_grouped_bar_legend_seq
+\seq_new:N \l_ulfe_grouped_bar_groups_seq
+\seq_new:N \l_ulfe_grouped_bar_group_pair_seq
+\seq_new:N \l_ulfe_grouped_bar_values_seq
+\seq_new:N \l_ulfe_grouped_bar_match_seq
+\tl_new:N \l_ulfe_grouped_bar_group_tl
+\tl_new:N \l_ulfe_grouped_bar_name_tl
+\tl_new:N \l_ulfe_grouped_bar_values_tl
+\tl_new:N \l_ulfe_grouped_bar_value_tl
+\tl_new:N \l_ulfe_grouped_bar_label_tl
+\tl_new:N \l_ulfe_grouped_bar_color_tl
+\tl_new:N \l_ulfe_grouped_bar_value_font_tl
+\int_new:N \l_ulfe_grouped_bar_group_count_int
+\int_new:N \l_ulfe_grouped_bar_bar_count_int
+\int_new:N \l_ulfe_grouped_bar_group_index_int
+\fp_new:N \l_ulfe_grouped_bar_max_fp
+\fp_new:N \l_ulfe_grouped_bar_value_fp
+\fp_new:N \l_ulfe_grouped_bar_group_step_fp
+\fp_new:N \l_ulfe_grouped_bar_gap_fp
+\fp_new:N \l_ulfe_grouped_bar_width_fp
+\fp_new:N \l_ulfe_grouped_bar_total_width_fp
+\fp_new:N \l_ulfe_grouped_bar_group_left_fp
+\fp_new:N \l_ulfe_grouped_bar_x_fp
+\fp_new:N \l_ulfe_grouped_bar_height_fp
+\fp_new:N \l_ulfe_grouped_bar_top_fp
+\fp_new:N \l_ulfe_grouped_bar_legend_step_fp
+\fp_new:N \l_ulfe_grouped_bar_legend_label_width_fp
+
+\cs_new_protected:Npn \ulfe_grouped_bar_extract_value:n #1
+  {
+    \regex_extract_once:nnNTF
+      { [-+]? [0-9]+ ( \. [0-9]+ )? }
+      {#1}
+      \l_ulfe_grouped_bar_match_seq
+      {
+        \fp_set:Nn \l_ulfe_grouped_bar_value_fp
+          { \seq_item:Nn \l_ulfe_grouped_bar_match_seq {1} }
+      }
+      { \fp_zero:N \l_ulfe_grouped_bar_value_fp }
+  }
+
+\cs_new_protected:Npn \ulfe_grouped_bar_parse_group:n #1
+  {
+    \tl_set:Nn \l_ulfe_grouped_bar_group_tl {#1}
+    \tl_trim_spaces:N \l_ulfe_grouped_bar_group_tl
+    \seq_set_split:NnV \l_ulfe_grouped_bar_group_pair_seq {/}
+      \l_ulfe_grouped_bar_group_tl
+    \tl_set:Nx \l_ulfe_grouped_bar_name_tl
+      { \seq_item:Nn \l_ulfe_grouped_bar_group_pair_seq {1} }
+    \tl_set:Nx \l_ulfe_grouped_bar_values_tl
+      { \seq_item:Nn \l_ulfe_grouped_bar_group_pair_seq {2} }
+    \tl_trim_spaces:N \l_ulfe_grouped_bar_name_tl
+    \tl_trim_spaces:N \l_ulfe_grouped_bar_values_tl
+    \seq_set_split:NnV \l_ulfe_grouped_bar_values_seq {|}
+      \l_ulfe_grouped_bar_values_tl
+  }
+
+\cs_new_protected:Npn \ulfe_grouped_bar_prepare:nn #1#2
+  {
+    \seq_set_split:Nnn \l_ulfe_grouped_bar_legend_seq {|} {#1}
+    \seq_set_split:Nnn \l_ulfe_grouped_bar_groups_seq {;} {#2}
+    \int_zero:N \l_ulfe_grouped_bar_group_count_int
+    \int_set:Nn \l_ulfe_grouped_bar_bar_count_int
+      { \seq_count:N \l_ulfe_grouped_bar_legend_seq }
+    \fp_zero:N \l_ulfe_grouped_bar_max_fp
+    \seq_map_inline:Nn \l_ulfe_grouped_bar_groups_seq
+      {
+        \tl_set:Nn \l_ulfe_grouped_bar_group_tl {##1}
+        \tl_trim_spaces:N \l_ulfe_grouped_bar_group_tl
+        \tl_if_blank:VF \l_ulfe_grouped_bar_group_tl
+          {
+            \int_incr:N \l_ulfe_grouped_bar_group_count_int
+            \ulfe_grouped_bar_parse_group:n {##1}
+            \int_compare:nT
+              { \seq_count:N \l_ulfe_grouped_bar_values_seq > \l_ulfe_grouped_bar_bar_count_int }
+              {
+                \int_set:Nn \l_ulfe_grouped_bar_bar_count_int
+                  { \seq_count:N \l_ulfe_grouped_bar_values_seq }
+              }
+            \seq_map_inline:Nn \l_ulfe_grouped_bar_values_seq
+              {
+                \tl_set:Nn \l_ulfe_grouped_bar_value_tl {####1}
+                \tl_trim_spaces:N \l_ulfe_grouped_bar_value_tl
+                \exp_args:NV \ulfe_grouped_bar_extract_value:n
+                  \l_ulfe_grouped_bar_value_tl
+                \fp_compare:nT
+                  { \l_ulfe_grouped_bar_value_fp > \l_ulfe_grouped_bar_max_fp }
+                  { \fp_set_eq:NN \l_ulfe_grouped_bar_max_fp \l_ulfe_grouped_bar_value_fp }
+              }
+          }
+      }
+    \int_compare:nNnT \l_ulfe_grouped_bar_group_count_int < {1}
+      { \int_set:Nn \l_ulfe_grouped_bar_group_count_int {1} }
+    \int_compare:nNnT \l_ulfe_grouped_bar_bar_count_int < {1}
+      { \int_set:Nn \l_ulfe_grouped_bar_bar_count_int {1} }
+    \fp_compare:nT { \l_ulfe_grouped_bar_max_fp <= 0 }
+      { \fp_set:Nn \l_ulfe_grouped_bar_max_fp {1} }
+    \tl_set:Nn \l_ulfe_grouped_bar_value_font_tl
+      { \fontsize{13.5pt}{16pt}\selectfont }
+    \int_compare:nNnT \l_ulfe_grouped_bar_bar_count_int > {3}
+      {
+        \tl_set:Nn \l_ulfe_grouped_bar_value_font_tl
+          { \fontsize{11.5pt}{13.5pt}\selectfont }
+      }
+  }
+
+\cs_new_protected:Npn \ulfe_grouped_bar_set_color:n #1
+  {
+    \int_case:nnF { \int_mod:nn { #1 - 1 } {3} }
+      {
+        {0}{ \tl_set:Nn \l_ulfe_grouped_bar_color_tl {ULFEBrandRed} }
+        {1}{ \tl_set:Nn \l_ulfe_grouped_bar_color_tl {ULFECharcoal} }
+        {2}{ \tl_set:Nn \l_ulfe_grouped_bar_color_tl {ULFEChartGrayMedium} }
+      }
+      { \tl_set:Nn \l_ulfe_grouped_bar_color_tl {ULFEBrandRed} }
+  }
+
+\cs_new_protected:Npn \ulfe_grouped_bar_draw_group:nn #1#2
+  {
+    \ulfe_grouped_bar_parse_group:n {#2}
+    \fp_set:Nn \l_ulfe_grouped_bar_total_width_fp
+      {
+        min(
+          \l_ulfe_grouped_bar_group_step_fp * .62,
+          \l_ulfe_grouped_bar_bar_count_int * 35.5
+            + max(\l_ulfe_grouped_bar_bar_count_int - 1, 0)
+              * \l_ulfe_grouped_bar_gap_fp
+        )
+      }
+    \fp_set:Nn \l_ulfe_grouped_bar_width_fp
+      {
+        max(
+          5,
+          (\l_ulfe_grouped_bar_total_width_fp
+            - max(\l_ulfe_grouped_bar_bar_count_int - 1, 0)
+              * \l_ulfe_grouped_bar_gap_fp)
+          / \l_ulfe_grouped_bar_bar_count_int
+        )
+      }
+    \fp_set:Nn \l_ulfe_grouped_bar_group_left_fp
+      {
+        77 + (#1 - 1) * \l_ulfe_grouped_bar_group_step_fp
+        + (\l_ulfe_grouped_bar_group_step_fp - \l_ulfe_grouped_bar_total_width_fp) / 2
+      }
+    \seq_map_indexed_inline:Nn \l_ulfe_grouped_bar_values_seq
+      {
+        \tl_set:Nn \l_ulfe_grouped_bar_value_tl {##2}
+        \tl_trim_spaces:N \l_ulfe_grouped_bar_value_tl
+        \exp_args:NV \ulfe_grouped_bar_extract_value:n
+          \l_ulfe_grouped_bar_value_tl
+        \fp_set:Nn \l_ulfe_grouped_bar_height_fp
+          { 195.5 * \l_ulfe_grouped_bar_value_fp / \l_ulfe_grouped_bar_max_fp }
+        \fp_set:Nn \l_ulfe_grouped_bar_top_fp
+          { 410.5 - \l_ulfe_grouped_bar_height_fp }
+        \fp_set:Nn \l_ulfe_grouped_bar_x_fp
+          {
+            \l_ulfe_grouped_bar_group_left_fp
+            + (##1 - 1) * (\l_ulfe_grouped_bar_width_fp + \l_ulfe_grouped_bar_gap_fp)
+          }
+        \ulfe_grouped_bar_set_color:n {##1}
+        \path[fill=\l_ulfe_grouped_bar_color_tl]
+          ({\fp_use:N \l_ulfe_grouped_bar_x_fp},410.5)
+          rectangle
+          ({\fp_eval:n { \l_ulfe_grouped_bar_x_fp + \l_ulfe_grouped_bar_width_fp }},
+           {\fp_use:N \l_ulfe_grouped_bar_top_fp});
+        \node[
+          anchor=south,
+          inner~sep=0pt,
+          text=ULFEChartInk,
+          font=\l_ulfe_grouped_bar_value_font_tl,
+          align=center,
+          text~width=\fp_eval:n { max(34, min(70, \l_ulfe_grouped_bar_width_fp + 16)) }bp
+        ] at
+          ({\fp_eval:n { \l_ulfe_grouped_bar_x_fp + \l_ulfe_grouped_bar_width_fp / 2 }},
+           {\fp_eval:n { \l_ulfe_grouped_bar_top_fp - 6 }})
+          {\l_ulfe_grouped_bar_value_tl};
+      }
+    \node[
+      anchor=north,
+      inner~sep=0pt,
+      text=ULFECharcoal,
+      font=\fontsize{14pt}{17pt}\selectfont,
+      align=center,
+      text~width=\fp_eval:n { \l_ulfe_grouped_bar_group_step_fp * .78 }bp
+    ] at
+      ({\fp_eval:n {77 + (#1 - .5) * \l_ulfe_grouped_bar_group_step_fp}},416)
+      {\l_ulfe_grouped_bar_name_tl};
+  }
+
+\cs_new_protected:Npn \ulfe_grouped_bar_draw_legend:
+  {
+    \fp_set:Nn \l_ulfe_grouped_bar_legend_step_fp
+      { min(160, 807 / \l_ulfe_grouped_bar_bar_count_int) }
+    \fp_set:Nn \l_ulfe_grouped_bar_legend_label_width_fp
+      { max(42, \l_ulfe_grouped_bar_legend_step_fp - 17) }
+    \seq_map_indexed_inline:Nn \l_ulfe_grouped_bar_legend_seq
+      {
+        \tl_set:Nn \l_ulfe_grouped_bar_label_tl {##2}
+        \tl_trim_spaces:N \l_ulfe_grouped_bar_label_tl
+        \ulfe_grouped_bar_set_color:n {##1}
+        \path[fill=\l_ulfe_grouped_bar_color_tl]
+          ({\fp_eval:n {116.5 + (##1 - 1) * \l_ulfe_grouped_bar_legend_step_fp}},477.5)
+          rectangle
+          ({\fp_eval:n {123.5 + (##1 - 1) * \l_ulfe_grouped_bar_legend_step_fp}},484.5);
+        \node[
+          anchor=west,
+          inner~sep=0pt,
+          text=ULFECharcoal,
+          font=\fontsize{12pt}{14pt}\selectfont,
+          align=left,
+          text~width=\fp_use:N \l_ulfe_grouped_bar_legend_label_width_fp bp
+        ] at
+          ({\fp_eval:n {127 + (##1 - 1) * \l_ulfe_grouped_bar_legend_step_fp}},481)
+          {\l_ulfe_grouped_bar_label_tl};
+      }
+  }
+
+\cs_new_protected:Npn \ulfe_grouped_bar_chart:nn #1#2
+  {
+    \ulfe_grouped_bar_prepare:nn {#1}{#2}
+    \fp_set:Nn \l_ulfe_grouped_bar_group_step_fp
+      { 807 / \l_ulfe_grouped_bar_group_count_int }
+    \fp_set:Nn \l_ulfe_grouped_bar_gap_fp
+      { min(9.5, max(3, \l_ulfe_grouped_bar_group_step_fp * .047)) }
+    \begin{tikzpicture}[remember~picture,overlay]
+      \begin{scope}[shift={(current~page.north~west)},x=1bp,y=-1bp]
+        \draw[ULFEChartAxisRule,line~width=.4bp] (77,410.5) -- (884,410.5);
+        \int_zero:N \l_ulfe_grouped_bar_group_index_int
+        \seq_map_inline:Nn \l_ulfe_grouped_bar_groups_seq
+          {
+            \tl_set:Nn \l_ulfe_grouped_bar_group_tl {##1}
+            \tl_trim_spaces:N \l_ulfe_grouped_bar_group_tl
+            \tl_if_blank:VF \l_ulfe_grouped_bar_group_tl
+              {
+                \int_incr:N \l_ulfe_grouped_bar_group_index_int
+                \ulfe_grouped_bar_draw_group:nn
+                  { \l_ulfe_grouped_bar_group_index_int } {##1}
+              }
+          }
+        \ulfe_grouped_bar_draw_legend:
+      \end{scope}
+    \end{tikzpicture}
+  }
+
+% Public grouped bar chart slide.
+% Arguments:
+%   #1 slide title.
+%   #2 legend labels separated with "|", for example:
+%      2021/22 | 2022/23 | 2023/24
+%   #3 semicolon-separated group specs. Each group is:
+%      group name/value|value|value
+%      Example:
+%      prva stopnja/4.3 \%|2.4 \%|2 \%;
+%      druga stopnja/2.5 \%|4.4 \%|2 \%
+% Behavior:
+%   Values are printed exactly as supplied so units remain deck content. The
+%   leading numeric part of each value drives the bar height. The chart scales
+%   to the largest supplied value, supports variable group and bar counts, and
+%   repeats the imported red, charcoal, gray bar-color sequence for bars beyond
+%   the first three.
+\NewDocumentCommand{\ULFEGroupedBarChartSlide}{m m +m}
+  {
+    \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{%
+      \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}%
+      \ULFEText{73.5}{122.5}{760}{32}{38}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries\sloppy\emergencystretch=1em}{#1}%
+      \ulfe_grouped_bar_chart:nn {#2}{#3}%
+      \ULFEFooter{RedWhiteGray}%
+    }%
+  }
+\ExplSyntaxOff
+
+\newcommand{\ULFEChartSlide}[1]{%
+    \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{%
+    \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}%
+    \ULFEText{73.5}{122.5}{680.2}{32}{38}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries}{Kliknite, če želite dodati naslov}%
+    #1%
+    \ULFEFooter{RedWhiteGray}%
+  }%
+}
+
+\newcommand{\ULFEChartTextSlide}[1]{%
+    \ULFEFrame{\ULFEColorStyleCanvas{RedWhiteGray}}{%
+    \ULFETopLogo{\ULFEColorStyleTopLogo{RedWhiteGray}}%
+    \ULFEText{73.5}{122.5}{502}{32}{38}{\ULFEColorStyleTitle{RedWhiteGray}}{\raggedright\bfseries}{Kliknite, če želite dodati naslov}%
+    #1%
+    \ULFEText{623.3}{178}{272}{20}{26}{\ULFEColorStyleText{RedWhiteGray}}{\raggedright}{Kliknite, če želite dodati besedilo\\[18bp]Navajate lahko tudi po\\alinejah}%
+    \ULFEFooter{RedWhiteGray}%
+  }%
+}
+
+\newcommand{\ULFETableExample}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \foreach \y in {248.0,276.6,305.2,333.8,362.4,391.0}{%
+      \draw[ULFETableRule,line width=.8bp]
+        ([xshift=72bp,yshift=-\y bp]current page.north west) --
+        ([xshift=869.8bp,yshift=-\y bp]current page.north west);
+    }%
+  \end{tikzpicture}%
+  \ULFEText{206.8}{224.2}{397.1}{16}{19}{ULFECharcoal}{\raggedright\bfseries}{Plačilna skupina}%
+  \ULFEText{603.9}{224.2}{137.7}{16}{19}{ULFECharcoal}{\raggedright\bfseries}{Ženske}%
+  \ULFEText{741.6}{224.2}{128.2}{16}{19}{ULFECharcoal}{\raggedright\bfseries}{Moški}%
+  \ULFEText{206.8}{252.8}{397.1}{16}{19}{ULFECharcoal}{\raggedright}{D (pedagoška delovna mesta)}%
+  \ULFEText{603.9}{252.8}{137.7}{16}{19}{ULFECharcoal}{\raggedright}{25}%
+  \ULFEText{741.6}{252.8}{128.2}{16}{19}{ULFECharcoal}{\raggedright}{27}%
+  \ULFEText{206.8}{281.4}{397.1}{16}{19}{ULFECharcoal}{\raggedright}{E (delovna mesta za zdravstveno dejavnost)}%
+  \ULFEText{603.9}{281.4}{137.7}{16}{19}{ULFECharcoal}{\raggedright}{4}%
+  \ULFEText{741.6}{281.4}{128.2}{16}{19}{ULFECharcoal}{\raggedright}{2}%
+  \ULFEText{206.8}{310.0}{397.1}{16}{19}{ULFECharcoal}{\raggedright}{H (raziskovalna delovna mesta)}%
+  \ULFEText{603.9}{310.0}{137.7}{16}{19}{ULFECharcoal}{\raggedright}{66}%
+  \ULFEText{741.6}{310.0}{128.2}{16}{19}{ULFECharcoal}{\raggedright}{83}%
+  \ULFEText{206.8}{338.6}{397.1}{16}{19}{ULFECharcoal}{\raggedright}{J (spremljajoča delovna mesta)}%
+  \ULFEText{603.9}{338.6}{137.7}{16}{19}{ULFECharcoal}{\raggedright}{35}%
+  \ULFEText{741.6}{338.6}{128.2}{16}{19}{ULFECharcoal}{\raggedright}{9}%
+  \ULFEText{72.0}{367.2}{134.8}{16}{19}{ULFECharcoal}{\raggedright\bfseries}{Vsota}%
+  \ULFEText{603.9}{367.2}{137.7}{16}{19}{ULFECharcoal}{\raggedright\bfseries}{130}%
+  \ULFEText{741.6}{367.2}{128.2}{16}{19}{ULFECharcoal}{\raggedright\bfseries}{121}%
+  \ULFEText{72.0}{395.8}{134.8}{16}{19}{ULFEBrandRed}{\raggedright\bfseries}{Vsi skupaj}%
+  \ULFEText{603.9}{395.8}{137.7}{16}{19}{ULFEBrandRed}{\raggedright\bfseries}{251}%
+}
+
+\newcommand{\ULFEBarChartExample}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \begin{scope}[shift={(current page.north west)},x=1bp,y=-1bp]
+      \draw[ULFEChartAxisRule,line width=.4bp] (77,410.5) -- (884,410.5);
+      \path[fill=ULFEBrandRed] (115.5,410.5) rectangle (151.0,330.0);
+      \path[fill=ULFECharcoal] (160.5,410.5) rectangle (195.5,365.5);
+      \path[fill=ULFEChartGrayMedium] (205.0,410.5) rectangle (240.0,373.0);
+      \path[fill=ULFEBrandRed] (317.5,410.5) rectangle (352.5,363.5);
+      \path[fill=ULFECharcoal] (362.0,410.5) rectangle (397.5,328.0);
+      \path[fill=ULFEChartGrayMedium] (407.0,410.5) rectangle (442.0,373.0);
+      \path[fill=ULFEBrandRed] (519.0,410.5) rectangle (554.5,345.0);
+      \path[fill=ULFECharcoal] (564.0,410.5) rectangle (599.0,377.0);
+      \path[fill=ULFEChartGrayMedium] (608.5,410.5) rectangle (644.0,354.5);
+      \path[fill=ULFEBrandRed] (721.0,410.5) rectangle (756.0,215.0);
+      \path[fill=ULFECharcoal] (766.0,410.5) rectangle (801.0,249.0);
+      \path[fill=ULFEChartGrayMedium] (810.5,410.5) rectangle (845.5,279.0);
+      \path[fill=ULFEBrandRed] (116.5,477.5) rectangle (123.5,484.5);
+      \path[fill=ULFECharcoal] (203.5,477.5) rectangle (210.5,484.5);
+      \path[fill=ULFEChartGrayMedium] (290.5,477.5) rectangle (297.5,484.5);
+    \end{scope}
+  \end{tikzpicture}%
+  \ULFEText{96.5}{308.5}{70}{13.5}{16}{ULFEChartInk}{\centering}{4.3 \%}%
+  \ULFEText{141.0}{344.0}{70}{13.5}{16}{ULFEChartInk}{\centering}{2.4 \%}%
+  \ULFEText{187.5}{351.5}{70}{13.5}{16}{ULFEChartInk}{\centering}{2 \%}%
+  \ULFEText{299.5}{342.0}{70}{13.5}{16}{ULFEChartInk}{\centering}{2.5 \%}%
+  \ULFEText{343.5}{306.5}{70}{13.5}{16}{ULFEChartInk}{\centering}{4.4 \%}%
+  \ULFEText{389.5}{351.5}{70}{13.5}{16}{ULFEChartInk}{\centering}{2 \%}%
+  \ULFEText{501.0}{323.5}{70}{13.5}{16}{ULFEChartInk}{\centering}{3.5 \%}%
+  \ULFEText{546.5}{355.5}{70}{13.5}{16}{ULFEChartInk}{\centering}{1.8 \%}%
+  \ULFEText{592.0}{333.0}{70}{13.5}{16}{ULFEChartInk}{\centering}{3 \%}%
+  \ULFEText{699.0}{193.5}{80}{13.5}{16}{ULFEChartInk}{\centering}{10.4 \%}%
+  \ULFEText{744.0}{227.5}{80}{13.5}{16}{ULFEChartInk}{\centering}{8.6 \%}%
+  \ULFEText{791.0}{257.5}{70}{13.5}{16}{ULFEChartInk}{\centering}{7 \%}%
+  \ULFEText{103}{416}{150}{14}{17}{ULFECharcoal}{\centering}{prva stopnja}%
+  \ULFEText{305}{416}{150}{14}{17}{ULFECharcoal}{\centering}{druga stopnja}%
+  \ULFEText{506}{416}{150}{14}{17}{ULFECharcoal}{\centering}{tretja stopnja}%
+  \ULFEText{708}{416}{150}{14}{17}{ULFECharcoal}{\centering}{skupaj}%
+  \ULFEText{127}{476.5}{70}{12}{14}{ULFECharcoal}{\raggedright}{2021/22}%
+  \ULFEText{214}{476.5}{70}{12}{14}{ULFECharcoal}{\raggedright}{2022/23}%
+  \ULFEText{301}{476.5}{70}{12}{14}{ULFECharcoal}{\raggedright}{2023/24}%
+}

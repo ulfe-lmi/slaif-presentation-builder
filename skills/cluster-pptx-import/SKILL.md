@@ -45,6 +45,15 @@ nearby durable work directories before making assumptions.
 - Validate after each meaningful macro extraction by recompiling and rendering.
 - Compare the new render to the pre-clustering Beamer render first. Use the
   original PPTX render only as a regression guard when available.
+- Smoke tests are not complete until their rendered PNGs have been visually
+  inspected. Compilation, text extraction, PDF validation, and log scans are
+  necessary but never sufficient for smoke-test signoff. Look at the render,
+  including close crops when text fit, overlap, clipping, or spacing is being
+  tested, before reporting the smoke test as passed.
+- Contact sheets are useful for triage but are not sufficient for dense or
+  high-risk layouts. Also inspect full-size rendered pages, and use close crops
+  for the cases most likely to fail: maximum item counts, extreme split ratios,
+  narrow boxes, long titles, and wrapped labels.
 - Keep macro names semantic enough to be reusable, but do not invent a design
   system that is not supported by repeated evidence in the deck.
 - Use an existing completed showroom template as the model for the final
@@ -286,8 +295,13 @@ Validate title-template extraction with two checks:
 
 1. Recompile and pixel-compare the extracted title slide against the previous
    Beamer render.
-2. Compile a temporary smoke-test title slide with some empty fields and inspect
-   text extraction or the render to confirm no dangling delimiters appear.
+2. Compile a temporary smoke-test title slide with empty fields, longer fields,
+   and any other edge-case field combinations implied by the macro contract.
+   Render the smoke-test PDF to PNGs and visually inspect the rendered slides.
+   Text extraction may be used as a supporting check, but it does not replace
+   looking at the render. Confirm that typography, wrapping, horizontal extent,
+   clipping, field separation, and delimiters behave correctly before calling
+   the smoke test passed.
 
 ### 6. Cluster Complex Repeated Elements With User-Guided Semantics
 
@@ -322,6 +336,11 @@ For complex components:
 - compare exact output when preservation is intended
 - inspect visual quality when the user intentionally chooses a generalized rule
   over exact preservation
+- smoke-test both the default reconstruction values and adversarial values for
+  the macro contract, such as 1 item, the maximum supported item count, very long
+  labels, extreme numeric ratios, and color-cycle boundaries
+- keep production defaults visually close to the imported slide while testing
+  generalized edge cases in temporary smoke decks
 
 Good deck-side code should contain semantic data:
 
@@ -545,6 +564,19 @@ Keep visual constants centralized when they are truly shared:
 ```
 
 Do not centralize values that only look similar by coincidence.
+
+For long editable text in clustered layouts, prefer extending or using the
+available horizontal space before reducing font size. Do not make a macro shrink
+title or subtitle typography merely because a smoke-test title is longer than the
+imported placeholder; preserve the template's type scale unless the fixed visual
+container itself makes an adaptive fallback unavoidable.
+
+When implementing LaTeX-facing public macros, keep the deck-side API readable and
+within LaTeX's practical command-argument limits. Prefer key-value arguments,
+structured list arguments, or internal helper state over public commands with a
+large positional argument count. In parser implementations, copy parsed token
+values into durable per-item variables; do not alias reusable scratch token lists
+or scratch token variables when later loop iterations will overwrite them.
 
 ### Template State And Slide Chrome
 
