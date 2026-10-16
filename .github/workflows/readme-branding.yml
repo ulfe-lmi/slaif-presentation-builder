@@ -1,0 +1,44 @@
+name: README branding
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  readme-branding:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Validate repository-local README logo
+        run: |
+          python3 - <<'PYTHON'
+          import hashlib
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+
+          class Images(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.sources = []
+
+              def handle_starttag(self, tag, attrs):
+                  if tag == "img":
+                      self.sources.append(dict(attrs).get("src"))
+
+          parser = Images()
+          parser.feed(Path("README.md").read_text())
+          assert parser.sources, "README must contain the SLAIF logo"
+          source = parser.sources[0]
+          assert source and ":" not in source and not source.startswith("/"), "Logo must use a relative path"
+          asset = Path(source).resolve()
+          assert asset.is_relative_to(Path.cwd().resolve()), "Logo must be inside this repository"
+          data = asset.read_bytes()
+          assert ET.fromstring(data).tag == "{http://www.w3.org/2000/svg}svg", "Logo must be a valid SVG"
+          assert hashlib.sha256(data).hexdigest() == "3f810f1ef7fb327daf938a5302fe432e88be6a9df3d29c1b53da063cbd4d9b29", "Logo must match the official downloaded asset"
+          print("README logo resolves locally and matches the official SVG")
+          PYTHON
